@@ -1,5 +1,8 @@
 # Remote Patient Monitoring
 
+![Master Build Status](https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=master)
+![Dev Build Status](https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=dev)
+
 Real-time patient visualisation of vital signs with a simple easy to read UI.
 
 ### Vitals requirements:
