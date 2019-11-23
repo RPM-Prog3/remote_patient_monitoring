@@ -1,0 +1,38 @@
+
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: black;
+    -fx-create-symbols: false;
+}
+
+
+
+
+
+.chart-content {
+    -fx-padding: 30px;
+}
+
+.chart-title {
+    -fx-text-fill: #4682b4;
+    -fx-font-size: 1.6em;
+}
+
+.axis-label {
+    -fx-text-fill: transprent;
+}
+
+.chart-plot-background {
+    -fx-background-color: black;
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: null;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: null;
+}
+.chart-alternative-row-fill {
+    /*-fx-fill: #99bcfd;*/
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
