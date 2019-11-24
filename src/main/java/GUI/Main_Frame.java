@@ -3,6 +3,10 @@ package GUI;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Main_Frame {
 
@@ -20,10 +24,32 @@ public class Main_Frame {
         mainPanel = controller.getMainPanel();
 
         mainPage = new JFrame("Main Frame", gc);
+
         mainPage.setSize(main_width, main_height);
         mainPage.setVisible(true);
 
         mainPage.add(mainPanel);
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);  // This line closes the program when the frame is closed
+
+        System.out.println(mainPanel.getPreferredSize());
+        mainPanel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println(mainPanel.getPreferredSize());
+            }
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
     }
 }
+
