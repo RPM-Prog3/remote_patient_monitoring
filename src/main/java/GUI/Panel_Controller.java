@@ -1,11 +1,14 @@
 package GUI;
 
+import javafx.embed.swing.JFXPanel;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
 public class Panel_Controller {
-    private JPanel mainPanel, simulationPanel, tuningPanel, graphPanel, vitalsPanel;
+    private JPanel mainPanel, simulationPanel, tuningPanel, vitalsPanel;
+    private JFXPanel graphPanel;
+    private Overall_Graph graphs;
     private BP_Vitals BP_panel;
     private RR_Vitals RR_panel;
     private ECG_Vitals ECG_panel;
@@ -18,7 +21,8 @@ public class Panel_Controller {
         tuningPanel = new JPanel();
         simulationPanel = new JPanel();
         vitalsPanel = new JPanel();
-        graphPanel = new JPanel();
+        graphs = new Overall_Graph();
+        graphPanel = graphs.getGraphPanel();
 
         BP_panel = new BP_Vitals();
         RR_panel = new RR_Vitals();
