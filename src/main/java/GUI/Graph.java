@@ -9,8 +9,6 @@ import javafx.scene.chart.XYChart;
 
 
 public class Graph extends JFXPanel{
-    private int t_interval;
-    private float y_val;
     private JFXPanel graphpanel;
     private Scene scene;
 
@@ -30,11 +28,8 @@ public class Graph extends JFXPanel{
         chart.getData().add(function);
         //chart.setCreateSymbols(false);
 
-        //System.out.println(getClass());
-        //System.out.println(getClass().getClassLoader().getResource("/graph.css"));
-
+        chart.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/") + "/src/main/java/GUI/graph.css");
         //chart.getStylesheets().add("file:/H:/Year3/Prog3_proj/remote_patient_monitoring/src/main/java/GUI/graph.css");
-        //chart.setStyle("-fx-background-color: black;" + "-fx-grid-lines-invisible: hidden;");
 
         Platform.runLater(new Runnable() {
             @Override
