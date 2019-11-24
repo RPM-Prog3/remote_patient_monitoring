@@ -27,15 +27,15 @@ public class Main_Frame {
 
         mainPage.setSize(main_width, main_height);
         mainPage.setVisible(true);
+        mainPage.setResizable(true);
 
         mainPage.add(mainPanel);
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);  // This line closes the program when the frame is closed
 
-        System.out.println(mainPanel.getPreferredSize());
         mainPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(mainPanel.getPreferredSize());
+                System.out.println(mainPanel.getBounds());
             }
             @Override
             public void mousePressed(MouseEvent e) {
