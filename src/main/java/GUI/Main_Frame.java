@@ -3,8 +3,6 @@ package GUI;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,44 +10,30 @@ public class Main_Frame {
 
     static GraphicsConfiguration gc; // Class field containing config info
     private JFrame mainPage;
-    private JPanel mainPanel;
+    private JFXPanel mainPanel;
     private Panel_Controller controller;
-    private int main_width, main_height;
 
-    public Main_Frame(int main_width, int main_height) {
-        this.main_width = main_width;
-        this.main_height = main_height;
+    public Main_Frame() {
+        // Setting up the main frame
+        mainPage = new JFrame("Main Frame", gc);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        mainPage.setBounds(0,0,screenSize.width, screenSize.height);
+        mainPage.setVisible(true);
+        mainPage.setResizable(false);
 
-        controller = new Panel_Controller();
+        System.out.println("Main Frame Size : ");
+        System.out.println(mainPage.getSize());
+
+        // Setting up main panel
+        controller = new Panel_Controller(mainPage.getSize());
         mainPanel = controller.getMainPanel();
 
-        mainPage = new JFrame("Main Frame", gc);
-
-        mainPage.setSize(main_width, main_height);
-        mainPage.setVisible(true);
-
+        // Adding main panel to main frame
         mainPage.add(mainPanel);
-        mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);  // This line closes the program when the frame is closed
 
-        System.out.println(mainPanel.getPreferredSize());
-        mainPanel.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println(mainPanel.getPreferredSize());
-            }
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
+        // Closing program when when main frame is closed
+        mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
     }
 }
 
