@@ -3,34 +3,62 @@
 /*This looks at the panel overall*/
 .chart {
     -fx-padding: 10px;
-    /*-fx-background-color: black;*/
+    -fx-background-color: black;   /* This makes the panel black but not the background of the graph */
     -fx-create-symbols: false;
 }
 
+.chart-series-line {
+    -fx-stroke: red;
+}
+
+/* Works withe the title but there is no title so...*/
+/*.chart-title {*/
+/*    -fx-text-fill: red;*/
+/*    -fx-font-size: 1.6em;*/
+/*}*/
+
+/*it gets rid of the axis labels which is the axis title*/
+.axis-label {
+    -fx-text-fill: transparent;
+}
+
+/*makes the background of the plot itself black*/
+.chart-plot-background {
+    -fx-background-color: black;
+}
+
+/*These next two commands make the grid on the graph disappear */
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: transparent;
+}
+
+/*this plays with the axis, it is very important because you ca set many things*/
+/*you can set the tcks, the distance between the ticks etc. resource https://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#charts*/
+/*or even https://docs.oracle.com/javase/8/javafx/user-interface-tutorial/css-styles.htm*/
+.axis {
+    -fx-tick-labels-visible: false;
+    -fx-tick-mark-visible: false;     /* gets rid of the major ticks, the ones which are supposed to have the number */
+    -fx-minor-tick-visible: false;    /* gets also rid of all the resto of the minor ticks */
+    -fx-side: null;                   /* gets ride of the whole axis */
+}
+
+/*Works with the 0 line in the graph*/
+.chart-vertical-zero-line,
+.chart-horizontal-zero-line  {
+    -fx-stroke: transparent;
+}
+
+/*it basically squishes the graphs, bad, have to look into it*/
 /*.chart-content {*/
 /*    -fx-padding: 30px;*/
 /*}*/
 
-/*.chart-title {*/
-/*    -fx-text-fill: #4682b4;*/
-/*    -fx-font-size: 1.6em;*/
-/*}*/
-
-/*.axis-label {*/
-/*    -fx-text-fill: transprent;*/
-/*}*/
-
-/*.chart-plot-background {*/
-/*    -fx-background-color: black;*/
-/*}*/
-/*.chart-vertical-grid-lines {*/
-/*    -fx-stroke: null;*/
-/*}*/
-/*.chart-horizontal-grid-lines {*/
-/*    -fx-stroke: null;*/
-/*}*/
+/*plays with aternative rows of the background of the plot, but not useful to us I think*/
 /*.chart-alternative-row-fill {*/
-/*    !*-fx-fill: #99bcfd;*!*/
+/*    -fx-fill: #99bcfd;*/
 /*    -fx-stroke: transparent;*/
 /*    -fx-stroke-width: 0;*/
 /*}*/

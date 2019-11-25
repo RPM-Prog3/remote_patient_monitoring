@@ -13,12 +13,12 @@ public class Graph extends JFXPanel{
     private Scene scene;
 
     public Graph() {
+        graphpanel = new JFXPanel();
         NumberAxis xAxis = new NumberAxis("Values for X-Axis", 0, 3, 1);   //creating the axes
         NumberAxis yAxis = new NumberAxis("Values for Y-Axis", -2, 2, 1);
 
         LineChart<Number, Number> chart = new LineChart<Number, Number>(xAxis, yAxis); //creating the chart skeleton
         scene = new Scene(chart);
-        graphpanel = new JFXPanel();
         XYChart.Series function = new XYChart.Series();
 
         //function.setName("Trying out");
