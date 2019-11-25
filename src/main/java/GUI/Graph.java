@@ -28,7 +28,7 @@ public class Graph extends JFXPanel{
         chart.getData().add(function);
         //chart.setCreateSymbols(false);
 
-        chart.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/") + "/src/main/java/GUI/graph.css");
+        chart.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/graph.css");
         //chart.getStylesheets().add("file:/H:/Year3/Prog3_proj/remote_patient_monitoring/src/main/java/GUI/graph.css");
 
         Platform.runLater(new Runnable() {

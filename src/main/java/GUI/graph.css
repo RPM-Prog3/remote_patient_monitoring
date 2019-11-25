@@ -5,6 +5,7 @@
     -fx-padding: 10px;
     -fx-background-color: black;   /* This makes the panel black but not the background of the graph */
     -fx-create-symbols: false;
+    -fx-legend-visible: false;
 }
 
 .chart-series-line {
