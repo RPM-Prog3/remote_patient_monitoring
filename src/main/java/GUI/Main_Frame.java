@@ -16,16 +16,16 @@ public class Main_Frame {
     public Main_Frame() {
         // Setting up the main frame
         mainPage = new JFrame("Main Frame", gc);
-        mainPage.setVisible(true);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         mainPage.setBounds(0,0,screenSize.width, screenSize.height);
-        mainPage.setResizable(true);
+        mainPage.setVisible(true);
+        mainPage.setResizable(false);
 
-        System.out.println("cacca 1 : ");
-        System.out.println(mainPage.getPreferredSize());
+        System.out.println("Main Frame Size : ");
+        System.out.println(mainPage.getSize());
 
         // Setting up main panel
-        controller = new Panel_Controller(mainPage.getPreferredSize());
+        controller = new Panel_Controller(mainPage.getSize());
         mainPanel = controller.getMainPanel();
 
         // Adding main panel to main frame
@@ -34,26 +34,6 @@ public class Main_Frame {
         // Closing program when when main frame is closed
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        // Action Listener
-        mainPanel.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("Main Panel size: ");
-                System.out.println(mainPanel.getPreferredSize());
-            }
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
     }
 }
 

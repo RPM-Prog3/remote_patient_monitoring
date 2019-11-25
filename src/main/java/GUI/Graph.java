@@ -9,18 +9,16 @@ import javafx.scene.chart.XYChart;
 
 
 public class Graph extends JFXPanel{
-    private int t_interval;
-    private float y_val;
     private JFXPanel graphpanel;
     private Scene scene;
 
     public Graph() {
+        graphpanel = new JFXPanel();
         NumberAxis xAxis = new NumberAxis("Values for X-Axis", 0, 3, 1);   //creating the axes
         NumberAxis yAxis = new NumberAxis("Values for Y-Axis", -2, 2, 1);
 
         LineChart<Number, Number> chart = new LineChart<Number, Number>(xAxis, yAxis); //creating the chart skeleton
         scene = new Scene(chart);
-        graphpanel = new JFXPanel();
         XYChart.Series function = new XYChart.Series();
 
         //function.setName("Trying out");
@@ -30,11 +28,8 @@ public class Graph extends JFXPanel{
         chart.getData().add(function);
         //chart.setCreateSymbols(false);
 
-        //System.out.println(getClass());
-        //System.out.println(getClass().getClassLoader().getResource("/graph.css"));
-
+        chart.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/graph.css");
         //chart.getStylesheets().add("file:/H:/Year3/Prog3_proj/remote_patient_monitoring/src/main/java/GUI/graph.css");
-        //chart.setStyle("-fx-background-color: black;" + "-fx-grid-lines-invisible: hidden;");
 
         Platform.runLater(new Runnable() {
             @Override
