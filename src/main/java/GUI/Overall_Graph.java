@@ -7,21 +7,21 @@ import java.awt.*;
 
 public class Overall_Graph {
     private JFXPanel graph_panel;
-    private Graph graph1, graph2, graph3, graph4;
+    private Graph graphECG, graphBPress, graphResp, graphTemp;
 
     public Overall_Graph() {
         graph_panel = new JFXPanel();
         graph_panel.setLayout(new GridLayout(4, 1));
 
-        graph1 = new Graph();
-        graph2 = new Graph();
-        graph3 = new Graph();
-        graph4 = new Graph();
+        graphECG = new Graph("chart-ECG");
+        graphBPress = new Graph("chart-Pressure");
+        graphResp = new Graph("chart-Respiratory");
+        graphTemp = new Graph("chart-Temperature");
 
-        graph_panel.add(graph1.getGraph());
-        graph_panel.add(graph2.getGraph());
-        graph_panel.add(graph3.getGraph());
-        graph_panel.add(graph4.getGraph());
+        graph_panel.add(graphECG.getGraph());
+        graph_panel.add(graphBPress.getGraph());
+        graph_panel.add(graphResp.getGraph());
+        graph_panel.add(graphTemp.getGraph());
 
     }
 

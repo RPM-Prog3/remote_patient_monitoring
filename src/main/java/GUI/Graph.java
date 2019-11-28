@@ -12,7 +12,7 @@ public class Graph extends JFXPanel{
     private JFXPanel graphpanel;
     private Scene scene;
 
-    public Graph() {
+    public Graph(String colorGraph) {
         graphpanel = new JFXPanel();
         NumberAxis xAxis = new NumberAxis("Values for X-Axis", 0, 3, 1);   //creating the axes
         NumberAxis yAxis = new NumberAxis("Values for Y-Axis", -2, 2, 1);
@@ -28,6 +28,7 @@ public class Graph extends JFXPanel{
         chart.getData().add(function);
         //chart.setCreateSymbols(false);
 
+        chart.getStyleClass().add(colorGraph);
         chart.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/graph.css");
         //chart.getStylesheets().add("file:/H:/Year3/Prog3_proj/remote_patient_monitoring/src/main/java/GUI/graph.css");
 

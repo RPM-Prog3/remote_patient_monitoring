@@ -18,7 +18,7 @@ public abstract class Vital_Values_Display {
     protected Scene status_scene, value_scene, type_scene;
     protected Pane vital_type_pane;
 
-    public Vital_Values_Display(Dimension vitals_panel_dim){
+    public Vital_Values_Display(Dimension vitals_panel_dim, String colorLabels){
         // Instantiating different panels;
         sub_display = new JFXPanel();
         status = new JFXPanel();
@@ -63,8 +63,11 @@ public abstract class Vital_Values_Display {
         vital_value.setVisible(true);
 
         //Applying the css
+        status_msg.getStyleClass().add(colorLabels);
         status_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
+        vital_value.getStyleClass().add(colorLabels);
         value_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
+        vital_type.getStyleClass().add(colorLabels);
         type_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
 
         // Instantiating border object(s)
