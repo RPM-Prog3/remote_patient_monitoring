@@ -3,8 +3,11 @@ package GUI;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.TextAlignment;
 
 import javax.swing.*;
@@ -18,6 +21,7 @@ public abstract class Vital_Values_Display {
     protected Label status_msg, vital_type, vital_value;
     protected Border border;
     protected Scene status_scene, value_scene, type_scene;
+    protected Pane vital_type_pane;
 
     public Vital_Values_Display(){
         // Instantiating different panels;
@@ -26,18 +30,21 @@ public abstract class Vital_Values_Display {
         type = new JFXPanel();
         value = new JFXPanel();
         vitals_value_display = new JFXPanel();
+        vital_type_pane = new Pane();
 
         // Instantiating different labels
         status_msg = new Label();
         vital_type = new Label();
         vital_value = new Label();
         vital_type.setRotate(270);
-        vital_type.setAlignment(Pos.CENTER);
+       // vital_type.setAlignment(Pos.CENTER);
+        vital_type_pane.getChildren().add(vital_type);
+        vital_type.relocate(0,100);
 
         // Instantiating scenes for labels
         status_scene = new Scene(status_msg);
         value_scene = new Scene(vital_value);
-        type_scene = new Scene(vital_type);
+        type_scene = new Scene(vital_type_pane);
 
         // Setting Layouts of the main and sub panels
         sub_display.setLayout(new BorderLayout());
@@ -63,6 +70,12 @@ public abstract class Vital_Values_Display {
         status_msg.setVisible(true);
         vital_type.setVisible(true);
         vital_value.setVisible(true);
+
+        //Applying the css
+        status_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
+        value_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
+        type_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
+
 
         Platform.runLater (new Runnable() {
             @Override

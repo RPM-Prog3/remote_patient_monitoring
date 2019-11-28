@@ -1,0 +1,12 @@
+.label {
+    -fx-text-fill: red;
+    -fx-font: monospace;
+    -fx-alignment: center;
+}
+
+.root {
+    -fx-background-color: black;
+    -fx-border-color: green;
+    -fx-fit-to-height: true;
+    -fx-arc-width: true;
+}
