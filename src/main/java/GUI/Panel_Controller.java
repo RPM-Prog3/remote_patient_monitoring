@@ -4,8 +4,6 @@ import javafx.embed.swing.JFXPanel;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class Panel_Controller {
     private JFXPanel mainPanel, simulationPanel, tuningPanel, vitalsPanel;
@@ -17,7 +15,7 @@ public class Panel_Controller {
     private HR_Vitals HR_panel;
     private Border border;
     private int s_v_ratio_num, s_v_ratio_den, s_t_ratio_num, s_t_ratio_den;
-    private Dimension graph_panel_dim, simulation_panel_dim, main_panel_dim;
+    private Dimension graph_panel_dim, simulation_panel_dim, main_panel_dim, vitals_panel_dim;
 
     public Panel_Controller(Dimension main_panel_dim) {
         // Instantiating main panel and the several sub panels
@@ -29,6 +27,10 @@ public class Panel_Controller {
         graphPanel = graphs.getGraphPanel();
 
         this.main_panel_dim = main_panel_dim;
+        s_v_ratio_num = 8;
+        s_v_ratio_den = 10;
+        s_t_ratio_num = 8;
+        s_t_ratio_den = 10;
 
         // Setting the layout of the main panel and of the several sub panels
         mainPanel.setLayout(new BorderLayout());
@@ -43,6 +45,7 @@ public class Panel_Controller {
         vitalsPanel.setVisible(true);
         graphPanel.setVisible(true);
 
+        // Instantiating border object(s)
         border = BorderFactory.createLineBorder(Color.black);
 
         // Setting contours of the different panels
@@ -50,10 +53,14 @@ public class Panel_Controller {
         tuningPanel.setBorder(border);
         vitalsPanel.setBorder(border);
 
-        BP_panel = new BP_Vitals();
-        RR_panel = new RR_Vitals();
-        ECG_panel = new ECG_Vitals();
-        HR_panel = new HR_Vitals();
+        vitals_panel_dim = vitalsPanel.getSize();
+        vitals_panel_dim.width = (int)((main_panel_dim.width*(s_v_ratio_den - s_v_ratio_num))/ (s_v_ratio_den));
+        vitals_panel_dim.height = (int)((main_panel_dim.height*s_t_ratio_num)/(s_v_ratio_den*4));
+
+        BP_panel = new BP_Vitals(vitals_panel_dim);
+        RR_panel = new RR_Vitals(vitals_panel_dim);
+        ECG_panel = new ECG_Vitals(vitals_panel_dim);
+        HR_panel = new HR_Vitals(vitals_panel_dim);
 
         // Adding vital sign (BP, RR, HR, ECG) panels to vitalsPanel
         vitalsPanel.add(BP_panel.getVitalsPanel());
@@ -66,12 +73,9 @@ public class Panel_Controller {
         mainPanel.add(simulationPanel, BorderLayout.PAGE_START);
 
         // Setting dimensions and proportions of the panels
-        s_v_ratio_num = 8;
-        s_v_ratio_den = 10;
-
         simulation_panel_dim = simulationPanel.getSize();
         simulation_panel_dim.width = main_panel_dim.width;
-        simulation_panel_dim.height = (int)((main_panel_dim.height*8)/10);
+        simulation_panel_dim.height = (int)((main_panel_dim.height*s_t_ratio_num)/s_t_ratio_den);
         simulationPanel.setPreferredSize(simulation_panel_dim);
 
         graph_panel_dim = graphPanel.getPreferredSize();
@@ -82,7 +86,6 @@ public class Panel_Controller {
         // Adding the vitalsPanel and graphPanel to simulationPanel
         simulationPanel.add(graphPanel, BorderLayout.LINE_START);
         simulationPanel.add(vitalsPanel, BorderLayout.CENTER);
-
     }
 
     public JFXPanel getMainPanel() {
