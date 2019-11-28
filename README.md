@@ -6,9 +6,11 @@
 
 <p align="center">
 	<img src="https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=master"
-     		alt="Build Status"
-	<a href="https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=master">
-        	<img src="https://img.shields.io/circleci/project/github/badges/shields/master" alt="build status"></a>
+     		alt="Build Status">
+	<img src="https://img.shields.io/badge/Java-1.8.0__172-orange"
+     		alt="Java Version">
+	<img src="https://img.shields.io/github/repo-size/joearrowsmith/remote_patient_monitoring"
+     		alt="Github Repo Size">
 </p>
 
 
