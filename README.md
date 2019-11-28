@@ -31,3 +31,19 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 - [ ] Audio and email alarms
 - [ ] Audio indication of heart beat
 - [ ] A report generated of the average values recorded during a day, and when any abnormal signs happened
+
+---
+
+## Prototypes:
+
+### Simulation Branch:
+
+![Simulation Working Document](misc/simulation_dev_summary.jpg)
+
+### GUI Branch:
+
+
+### Examples from Industry:
+
+
+
