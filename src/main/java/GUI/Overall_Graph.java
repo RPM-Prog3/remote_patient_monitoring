@@ -23,6 +23,13 @@ public class Overall_Graph {
         graph_panel.add(graphResp.getGraph());
         graph_panel.add(graphTemp.getGraph());
 
+        graphECG.setGraph();
+        graphBPress.setGraph();
+        graphResp.setGraph();
+        graphTemp.setGraph();
+
+        graphECG.updateGraph();
+
     }
 
     public JFXPanel getGraphPanel() {
