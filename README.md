@@ -1,7 +1,7 @@
 # Remote Patient Monitoring
 
-![Master Build Status](https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=master)
-![Dev Build Status](https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=dev)
+Master -> ![Master Build Status](https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=master)
+Dev -> ![Dev Build Status](https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=dev)
 
 Real-time patient visualisation of vital signs with a simple easy to read UI.
 
@@ -31,3 +31,22 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 - [ ] Audio and email alarms
 - [ ] Audio indication of heart beat
 - [ ] A report generated of the average values recorded during a day, and when any abnormal signs happened
+
+---
+
+## Prototypes:
+
+### Simulation Branch:
+
+![Simulation Working Document](misc/simulation_dev_summary.jpg)
+
+### GUI Branch:
+
+
+### Examples from Industry:
+
+![Simulation Working Document](misc/ExampleOfGui_1.jpg)
+
+![Simulation Working Document](misc/ExampleOfGui_2.jpg)
+
+![Simulation Working Document](misc/ExampleOfGui_3.jpg)
