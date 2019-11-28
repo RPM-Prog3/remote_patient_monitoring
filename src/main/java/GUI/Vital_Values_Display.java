@@ -17,13 +17,13 @@ import java.awt.*;
 public abstract class Vital_Values_Display {
     protected JFXPanel sub_display, status, type, value, vitals_value_display;
     protected Dimension overall_display_dim, sub_display_dim, value_dim;
-    protected int proportion_num, proportion_den , proportion_2_num, proportion_2_den;
+    protected int sd_od_ratio_num, sd_od_ratio_den , v_sd_ratio_num, v_sd_ratio_den;
     protected Label status_msg, vital_type, vital_value;
     protected Border border;
     protected Scene status_scene, value_scene, type_scene;
     protected Pane vital_type_pane;
 
-    public Vital_Values_Display(){
+    public Vital_Values_Display(Dimension vitals_panel_dim){
         // Instantiating different panels;
         sub_display = new JFXPanel();
         status = new JFXPanel();
@@ -31,6 +31,13 @@ public abstract class Vital_Values_Display {
         value = new JFXPanel();
         vitals_value_display = new JFXPanel();
         vital_type_pane = new Pane();
+
+        // Setting aspect ration of th various panels
+        this.overall_display_dim = vitals_panel_dim;
+        sd_od_ratio_num = 8;
+        sd_od_ratio_den = 10;
+        v_sd_ratio_num = 8;
+        v_sd_ratio_den = 10;
 
         // Instantiating different labels
         status_msg = new Label();
@@ -49,22 +56,11 @@ public abstract class Vital_Values_Display {
         // Setting Layouts of the main and sub panels
         sub_display.setLayout(new BorderLayout());
 
-        // Adding sub panels to main panel to construct main panel
-        sub_display.add(value, BorderLayout.PAGE_START);
-        sub_display.add(status, BorderLayout.CENTER);
-
-        // Instantiating border object(s)
-        border = BorderFactory.createLineBorder(Color.black);
-
-        // Setting various panels to be visible and adding contours to them
+        // Setting various panels to be visible
         sub_display.setVisible(true);
-        sub_display.setBorder(border);
         status.setVisible(true);
-        status.setBorder(border);
         type.setVisible(true);
-        type.setBorder(border);
         value.setVisible(true);
-        value.setBorder(border);
 
         // Setting the various labels to be visible
         status_msg.setVisible(true);
@@ -75,6 +71,31 @@ public abstract class Vital_Values_Display {
         status_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
         value_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
         type_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
+
+        // Instantiating border object(s)
+        border = BorderFactory.createLineBorder(Color.black);
+
+        // Setting contours of the different panels
+        sub_display.setBorder(border);
+        status.setBorder(border);
+        type.setBorder(border);
+        value.setBorder(border);
+
+        // Adding sub panels to main panel to construct main panel
+        sub_display.add(value, BorderLayout.PAGE_START);
+        sub_display.add(status, BorderLayout.CENTER);
+
+        // sub display panel:
+        sub_display_dim = new Dimension();
+        sub_display_dim.height = overall_display_dim.height;
+        sub_display_dim.width = (int)((overall_display_dim.width * sd_od_ratio_num)/sd_od_ratio_den);
+        sub_display.setPreferredSize(sub_display_dim);
+
+        // value panel:
+        value_dim = new Dimension();
+        value_dim.width = sub_display_dim.width;
+        value_dim.height = (int)((overall_display_dim.height * v_sd_ratio_num)/v_sd_ratio_den);
+        value.setPreferredSize(value_dim);
 
 
         Platform.runLater (new Runnable() {
