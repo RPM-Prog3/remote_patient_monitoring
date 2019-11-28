@@ -1,9 +1,5 @@
 # Remote Patient Monitoring
 
-![Java](https://img.shields.io/badge/Java-1.8.0__172-orange)
-![GitHub repo size](https://img.shields.io/github/repo-size/joearrowsmith/remote_patient_monitoring) 
-![Master Build Status](https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=master)
-
 <p align="center">
 	<img src="https://travis-ci.com/Joearrowsmith/remote_patient_monitoring.svg?branch=master"
      		alt="Build Status">
