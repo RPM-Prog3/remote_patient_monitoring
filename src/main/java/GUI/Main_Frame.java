@@ -34,6 +34,17 @@ public class Main_Frame {
         // Closing program when when main frame is closed
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+
+        while (mainPage.isVisible()) {
+            int timer =0;
+            for (int i=0; i<=1000; i+=1){
+                timer += 1;
+                System.out.println(timer);
+            }
+            controller.updateController();
+            mainPanel = controller.getMainPanel();
+        }
+
     }
 }
 

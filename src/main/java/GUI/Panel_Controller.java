@@ -88,6 +88,11 @@ public class Panel_Controller {
         simulationPanel.add(vitalsPanel, BorderLayout.CENTER);
     }
 
+    public void updateController() {
+        graphs.updatePanel();
+        graphPanel = graphs.getGraphPanel();
+    }
+
     public JFXPanel getMainPanel() {
         return mainPanel;
     }

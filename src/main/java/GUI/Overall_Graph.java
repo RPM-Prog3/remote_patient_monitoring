@@ -28,8 +28,13 @@ public class Overall_Graph {
         graphResp.setGraph();
         graphTemp.setGraph();
 
-        graphECG.updateGraph();
+    }
 
+    public void updatePanel() {
+        graphECG.updateGraph();
+//        graphBPress.updateGraph();
+//        graphResp.updateGraph();
+//        graphTemp.updateGraph();
     }
 
     public JFXPanel getGraphPanel() {
