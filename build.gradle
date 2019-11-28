@@ -1,3 +1,33 @@
 plugins {
     id 'java'
+    id 'maven'
+    id 'scala'
+}
+
+task writeNewPom {
+    doLast {
+        pom {
+            project {
+                inceptionYear '2008'
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+            }
+        }.writeTo("$buildDir/newpom.xml")
+    }
+}
+
+repositories{
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.nd4j:nd4j-native:1.0.0-beta'
+    compile 'org.nd4j:nd4j-native:1.0.0-beta:windows-x86_64'
+    compile 'org.bytedeco.javacpp-presets:openblas:0.2.20-1.4.1'
+    compile 'org.bytedeco.javacpp-presets:openblas:0.2.20-1.4.1:windows-x86_64'
 }
