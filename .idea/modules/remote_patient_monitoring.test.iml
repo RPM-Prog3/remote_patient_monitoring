@@ -6,7 +6,10 @@
     <content url="file://$MODULE_DIR$/../../src/test" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: org.openjfx:javafx:11" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:13" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="remote_patient_monitoring.main" />
 </module>

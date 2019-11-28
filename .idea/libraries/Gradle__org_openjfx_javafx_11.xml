@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: org.openjfx:javafx:11">
-    <CLASSES>
-      <root url="file://$APPLICATION_HOME_DIR$/jbr/bin/Cannot resolve external dependency org.openjfx:javafx:11 because no repositories are defined." />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

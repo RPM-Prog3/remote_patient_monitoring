@@ -1,7 +1,20 @@
 plugins {
     id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
-    compile group: 'org.openjfx', name: 'javafx', version: '11', ext: 'pom'
+    testCompile "org.testfx:testfx-core:4.0.16-alpha"
+    testCompile "org.testfx:testfx-junit:4.0.15-alpha"
 }
