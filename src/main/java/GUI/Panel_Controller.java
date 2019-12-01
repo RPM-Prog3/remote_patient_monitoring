@@ -65,14 +65,14 @@ public class Panel_Controller {
         HR_panel = new HR_Vitals(sub_vitals_panel_dim);
 
         // Adding vital sign (BP, RR, HR, ECG) panels to vitalsPanel
-        vitalsPanel.add(BP_panel.getVitalsPanel());
-        BP_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
-        vitalsPanel.add(HR_panel.getVitalsPanel());
-        HR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
         vitalsPanel.add(ECG_panel.getVitalsPanel());
         ECG_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+        vitalsPanel.add(BP_panel.getVitalsPanel());
+        BP_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
         vitalsPanel.add(RR_panel.getVitalsPanel());
         RR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+        vitalsPanel.add(HR_panel.getVitalsPanel());
+        HR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
 
         // Adding the vitalsPanel and graphPanel to simulationPanel
         simulationPanel.add(graphPanel, BorderLayout.LINE_START);

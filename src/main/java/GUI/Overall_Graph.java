@@ -35,6 +35,12 @@ public class Overall_Graph {
 //        graphBPress.updateGraph();
 //        graphResp.updateGraph();
 //        graphTemp.updateGraph();
+//        int timer = 0;
+//        for (int i=0; i<=100000; i+=1){
+//            timer += 1;
+//            //System.out.println("ahahahahahahahahahahahahahahahahahahahhahahahahahhahahahahahahahahahahahahahahhaaha");
+//        }
+//       System.out.println("ahahahahahahahahahahahahahahahahahahahhahahahahahhahahahahahahahahahahahahahahhaaha");
     }
 
     public JFXPanel getGraphPanel() {
