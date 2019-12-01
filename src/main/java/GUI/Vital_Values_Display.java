@@ -2,14 +2,9 @@ package GUI;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.TextAlignment;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -23,7 +18,7 @@ public abstract class Vital_Values_Display {
     protected Scene status_scene, value_scene, type_scene;
     protected Pane vital_type_pane;
 
-    public Vital_Values_Display(Dimension vitals_panel_dim){
+    public Vital_Values_Display(Dimension vitals_panel_dim, String colorLabels){
         // Instantiating different panels;
         sub_display = new JFXPanel();
         status = new JFXPanel();
@@ -68,8 +63,11 @@ public abstract class Vital_Values_Display {
         vital_value.setVisible(true);
 
         //Applying the css
+        status_msg.getStyleClass().add(colorLabels);
         status_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
+        vital_value.getStyleClass().add(colorLabels);
         value_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
+        vital_type.getStyleClass().add(colorLabels);
         type_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/src/main/java/GUI/Scenes.css");
 
         // Instantiating border object(s)

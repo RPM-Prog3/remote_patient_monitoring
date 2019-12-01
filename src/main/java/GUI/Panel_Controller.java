@@ -93,26 +93,31 @@ public class Panel_Controller {
         main_panel_dim_ = main_panel_dim;
         simulation_panel_dim = simulationPanel.getSize();
         simulation_panel_dim.width = main_panel_dim_.width;
-        simulation_panel_dim.height = (int)((main_panel_dim_.height*s_t_ratio_num)/s_t_ratio_den);
+        simulation_panel_dim.height = (int) ((main_panel_dim_.height * s_t_ratio_num) / s_t_ratio_den);
         simulationPanel.setPreferredSize(simulation_panel_dim);
 
         // Graph panel:
         graph_panel_dim = graphPanel.getPreferredSize();
-        graph_panel_dim.width = (int)((simulation_panel_dim.width*s_v_ratio_num)/s_v_ratio_den);
+        graph_panel_dim.width = (int) ((simulation_panel_dim.width * s_v_ratio_num) / s_v_ratio_den);
         graph_panel_dim.height = simulation_panel_dim.height;
         graphPanel.setPreferredSize(graph_panel_dim);
 
         // Setting dimensions for the panels belonging to sub panels of the main panel
         sub_vitals_panel_dim = vitalsPanel.getSize();
-        sub_vitals_panel_dim.width = (int)((main_panel_dim_.width*(s_v_ratio_den - s_v_ratio_num))/(s_v_ratio_den));
-        sub_vitals_panel_dim.height = (int)((main_panel_dim_.height*s_t_ratio_num)/(s_v_ratio_den*4));
+        sub_vitals_panel_dim.width = (int) ((main_panel_dim_.width * (s_v_ratio_den - s_v_ratio_num)) / (s_v_ratio_den));
+        sub_vitals_panel_dim.height = (int) ((main_panel_dim_.height * s_t_ratio_num) / (s_v_ratio_den * 4));
 
         BP_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
         HR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
         ECG_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
         RR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+    }
 
+    public void updateController() {
+        graphs.updatePanel();
+        graphPanel = graphs.getGraphPanel();
     }
 }
+
 
 

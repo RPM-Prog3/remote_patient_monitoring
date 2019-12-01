@@ -8,8 +8,17 @@
     -fx-legend-visible: false;
 }
 
-.chart-series-line {
-    -fx-stroke: green;
+.chart-ECG .chart-series-line {
+    -fx-stroke: red;
+}
+.chart-Pressure .chart-series-line {
+    -fx-stroke: #48fb47;
+}
+.chart-Respiratory .chart-series-line {
+    -fx-stroke: blue;
+}
+.chart-Temperature .chart-series-line {
+    -fx-stroke: #ffff00;
 }
 
 /* Works withe the title but there is no title so...*/
