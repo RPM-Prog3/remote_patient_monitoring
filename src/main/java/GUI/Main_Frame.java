@@ -3,8 +3,7 @@ package GUI;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class Main_Frame {
 
@@ -13,19 +12,28 @@ public class Main_Frame {
     private JFXPanel mainPanel;
     private Panel_Controller controller;
 
-    public Main_Frame() {
+    public Main_Frame(){
         // Setting up the main frame
         mainPage = new JFrame("Main Frame", gc);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        mainPage.setBounds(0,0,screenSize.width, screenSize.height);
+        mainPage.setBounds(0, 0, screenSize.width, screenSize.height);
         mainPage.setVisible(true);
-        mainPage.setResizable(false);
+        mainPage.setResizable(true);
 
-        System.out.println("Main Frame Size : ");
-        System.out.println(mainPage.getSize());
+        mainPage.getContentPane().addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e){
+                Component c = (Component)e.getSource();
+                mainPage.setSize(mainPage.getSize());
+                controller.setPanelControllerSize(mainPage.getSize());
+                mainPage.revalidate();
+                mainPage.repaint();
+                mainPage.setTitle("W: " + c.getWidth() + "H: " + c.getHeight());
+            }
+        });
 
         // Setting up main panel
         controller = new Panel_Controller(mainPage.getSize());
+        controller.setPanelControllerSize(mainPage.getSize());
         mainPanel = controller.getMainPanel();
 
         // Adding main panel to main frame
@@ -33,7 +41,7 @@ public class Main_Frame {
 
         // Closing program when when main frame is closed
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
     }
 }
+
 

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import java.lang.*;
 
 
 public class Graph extends JFXPanel{
@@ -14,7 +15,7 @@ public class Graph extends JFXPanel{
 
     public Graph() {
         graphpanel = new JFXPanel();
-        NumberAxis xAxis = new NumberAxis("Values for X-Axis", 0, 3, 1);   //creating the axes
+        NumberAxis xAxis = new NumberAxis("Values for X-Axis", 0, 100, 1);   //creating the axes
         NumberAxis yAxis = new NumberAxis("Values for Y-Axis", -2, 2, 1);
 
         LineChart<Number, Number> chart = new LineChart<Number, Number>(xAxis, yAxis); //creating the chart skeleton
@@ -22,8 +23,8 @@ public class Graph extends JFXPanel{
         XYChart.Series function = new XYChart.Series();
 
         //function.setName("Trying out");
-        for (double i = 0; i <= 3; i += 0.1) {
-            function.getData().add(new XYChart.Data(i, (1.3 * i)-2));
+        for (double i = 0; i <= 100; i += 0.1) {
+            function.getData().add(new XYChart.Data(i, Math.sin(i)));
         }
         chart.getData().add(function);
         //chart.setCreateSymbols(false);

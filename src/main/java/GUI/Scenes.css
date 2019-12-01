@@ -6,7 +6,7 @@
 
 .root {
     -fx-background-color: black;
-    -fx-border-color: transparent;
+    -fx-border-color: green;
     -fx-fit-to-height: true;
     -fx-arc-width: true;
 }

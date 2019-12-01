@@ -9,7 +9,7 @@
 }
 
 .chart-series-line {
-    -fx-stroke: red;
+    -fx-stroke: green;
 }
 
 /* Works withe the title but there is no title so...*/
