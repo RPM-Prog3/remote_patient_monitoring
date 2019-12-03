@@ -1,5 +1,11 @@
 language: java
+addons:
+  apt:
+    packages:
+      - openjfx
 before_install:
+  - sudo apt update
+  - sudo apt install openjfx
   - chmod +x gradlew
 script:
   - ./gradlew build --info

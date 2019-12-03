@@ -1,0 +1,24 @@
+.label {
+    -fx-font: monospace;
+    -fx-alignment: center;
+}
+
+.label-ECG {
+    -fx-text-fill: red;
+}
+.label-Pressure {
+    -fx-text-fill: #48fb47;
+}
+.label-Respiratory {
+    -fx-text-fill: blue;
+}
+.label-Temperature {
+    -fx-text-fill: #ffff00;
+}
+
+.root {
+    -fx-background-color: black;
+    -fx-border-color: green;
+    -fx-fit-to-height: true;
+    -fx-arc-width: true;
+}
