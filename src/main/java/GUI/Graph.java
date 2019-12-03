@@ -49,7 +49,7 @@ public class Graph extends JFXPanel{
         //function.setName("Trying out");
         for (double i = 0; i <= 100; i += 0.1) {
 //            double x = elementList.get(i);
-            function.getData().add(new XYChart.Data<Number, Number>(i, Math.sin(i), 0));
+            function.getData().add(new XYChart.Data<Number, Number>(i, Math.sin(i)));
             point_pointer += 1;
         }
 
@@ -74,10 +74,10 @@ public class Graph extends JFXPanel{
     }
 
     public void updateGraph() {
-//        lowerbound += 1;
-//        upperbound += 1;
-//        xAxis.setLowerBound(lowerbound);
-//        xAxis.setUpperBound(upperbound);
+        lowerbound += 1;
+        upperbound += 1;
+        xAxis.setLowerBound(lowerbound);
+        xAxis.setUpperBound(upperbound);
 
 //        elementList.subList(0,10).clear();
 //        for (double i=0; i<1; i+=0.1){
@@ -97,18 +97,18 @@ public class Graph extends JFXPanel{
 //            point_pointer += 1;
 //        }
 //        function = temp_series;
+
 //       // System.out.println("before: " + function.getData().get(2));
 //        chart.setAnimated(false);
-//        function.getData().remove(0, 10);
-//       // System.out.println("after: " + function.getData().get(2));
-//        for (int i=0; i<10; i+=1) {
-//            double x = point_pointer*0.1;
-//            function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
-//            point_pointer += 1;
-//            //System.out.println(function.getData().size());
-//        }
+        function.getData().remove(0, 10);
+       // System.out.println("after: " + function.getData().get(2));
+        for (int i=0; i<10; i+=1) {
+            double x = point_pointer*0.1;
+            function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
+            point_pointer += 1;
+            //System.out.println(function.getData().size());
+        }
 //        chart.setAnimated(true);
-
 
     }
 

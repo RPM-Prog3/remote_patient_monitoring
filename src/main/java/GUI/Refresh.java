@@ -11,8 +11,12 @@ public class Refresh implements Runnable{
         try{
             //Thread.sleep(1000);
             while (1<2) {
+                System.out.println("adelante");
                 controller.updateController();
-                Thread.sleep(500);
+                System.out.println("beguante");
+                Thread.sleep(100);
+                System.out.println("caliente");
+//                System.gc();
             }
 
         }catch (Exception e) {System.out.println("casseruola");};
