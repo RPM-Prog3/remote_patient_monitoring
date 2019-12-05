@@ -76,35 +76,38 @@ public class PatientList {
 
         for (int i = 0; i < patientlist.size(); i++) {
             patientlist.get(i).setVisible(true);
-            System.out.println(patientlist.get(i).getClass().getName());
-        }
-        for (int i = 0; i < patientlist.size(); i++) {
             list_panel.add(patientlist.get(i));
         }
-        
+
         patient_counter = 0;
         show_vitals = new JButton();
         show_vitals.setVisible(true);
 
-        list_panel.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                patient_counter++;
-                show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
-            }
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
+        for (int i = 0; i < patientlist.size(); i++) {
+            patientlist.get(i).addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    patient_counter++;
+                    show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+        }
 
         show_vitals.addActionListener(new ActionListener() {
             @Override
