@@ -1,11 +1,13 @@
 package GUI;
 
-public class
-Refresh implements Runnable{
-    private Panel_Controller controller;
+import javafx.application.Application;
+import javafx.application.Platform;
 
-    public Refresh(Panel_Controller controller) {
-        this.controller = controller;
+public class Refresh implements Runnable{
+    private Graph graph;
+
+    public Refresh(Graph graph) {
+        this.graph =graph;
     }
 
     public void run() {
@@ -13,7 +15,7 @@ Refresh implements Runnable{
             //Thread.sleep(1000);
             while (1<2) {
                 //System.out.println("adelante");
-                controller.updateController();
+                graph.updateGraph();
                 //System.out.println("beguante");
                 Thread.sleep(50);
                 //System.out.println("caliente");

@@ -74,6 +74,12 @@ public class Graph extends JFXPanel {
     }
 
     public void updateGraph() {
+        Platform.runLater(() ->{
+            updateTheGraph();
+        });
+    }
+
+    public void updateTheGraph() {
         lowerbound += 1;
         upperbound += 1;
         xAxis.setLowerBound(lowerbound);
