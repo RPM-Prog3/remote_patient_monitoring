@@ -77,7 +77,6 @@ public class Graph extends JFXPanel {
             function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
             point_pointer += 1;
         }
-
     }
 
     public JFXPanel getGraph() {
