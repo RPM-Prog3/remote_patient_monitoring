@@ -79,8 +79,9 @@ public class Panel_Controller {
         simulationPanel.add(vitalsPanel, BorderLayout.CENTER);
 
         // Adding simulationPanel and tuningPanel the main panel
-        mainPanel.add(tuningPanel, BorderLayout.PAGE_END);
         mainPanel.add(simulationPanel, BorderLayout.PAGE_START);
+        mainPanel.add(tuningPanel, BorderLayout.PAGE_END);
+
     }
 
     public JFXPanel getMainPanel() {
