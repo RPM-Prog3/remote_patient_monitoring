@@ -99,7 +99,7 @@ public class Graph extends JFXPanel {
 //        function = temp_series;
 
 //       // System.out.println("before: " + function.getData().get(2));
-//        chart.setAnimated(false);
+        chart.setAnimated(false);
         function.getData().remove(0, 10);
         //System.out.println("after: " + function.getData().get(2));
         for (int i=0; i<10; i+=1) {
@@ -108,12 +108,12 @@ public class Graph extends JFXPanel {
             point_pointer += 1;
         //System.out.println(function.getData().size());
     }
-        graphpanel.repaint();
+//        graphpanel.repaint();
 //        chart.setAnimated(true);
 
 
 //        double x = point_pointer * 0.1;
-//        function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
+//        function.getData().add(new XYChart.Data<>(x, Math.sin(x)));
 //        point_pointer +=1;
 //        x +=0.1;
 //        function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
@@ -142,7 +142,6 @@ public class Graph extends JFXPanel {
 //        x +=0.1;
 //        function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
 //        point_pointer +=1;
-//        x +=0.1;
 
 
     }

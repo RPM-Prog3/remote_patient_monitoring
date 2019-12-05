@@ -15,7 +15,7 @@ Refresh implements Runnable{
                 //System.out.println("adelante");
                 controller.updateController();
                 //System.out.println("beguante");
-                Thread.sleep(100);
+                Thread.sleep(50);
                 //System.out.println("caliente");
 //                System.gc();
             }
