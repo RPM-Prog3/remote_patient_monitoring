@@ -14,14 +14,10 @@ public class Refresh implements Runnable{
         try{
             //Thread.sleep(1000);
             while (1<2) {
-                //System.out.println("adelante");
                 graph.updateGraph();
-                //System.out.println("beguante");
                 Thread.sleep(50);
-                //System.out.println("caliente");
-//                System.gc();
             }
 
-        }catch (Exception e) {System.out.println("casseruola");};
+        }catch (Exception e) {};
     }
 }
