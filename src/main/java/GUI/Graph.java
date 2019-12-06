@@ -15,7 +15,8 @@ public class Graph extends JFXPanel {
     private NumberAxis xAxis, yAxis;
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
-    private int lowerbound, upperbound, point_pointer;
+    private int point_pointer;
+    private double lowerbound, upperbound;
 
     public Graph(String colorGraph) {
         point_pointer = 0;  //This looks at which index must be added next
@@ -64,15 +65,15 @@ public class Graph extends JFXPanel {
     }
 
     private void updateTheGraph() {
-        lowerbound += 1;
-        upperbound += 1;
+        lowerbound += 1.5;
+        upperbound += 1.5;
         xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
 
         chart.setAnimated(false);
-        function.getData().remove(0, 10);
+        function.getData().remove(0, 15);
 
-        for (int i=0; i<10; i+=1) {
+        for (int i=0; i<15; i+=1) {
             double x = point_pointer*0.1;
             function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
             point_pointer += 1;

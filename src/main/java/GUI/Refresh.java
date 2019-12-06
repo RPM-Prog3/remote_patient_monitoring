@@ -15,7 +15,7 @@ public class Refresh implements Runnable{
             //Thread.sleep(1000);
             while (1<2) {
                 graph.updateGraph();
-                Thread.sleep(50);
+                Thread.sleep(100);
             }
 
         }catch (Exception e) {};
