@@ -239,7 +239,7 @@ public class PatientList {
     }
 
     public Connection connect_DB(){
-        String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
+        String dbUrl = "jdbc:postgresql://146.169.185.47:5432/postgres";
         try {
             // Registers the driver
             Class.forName("org.postgresql.Driver");
