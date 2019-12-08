@@ -53,7 +53,7 @@
     /*-fx-tick-labels-visible: false;   /* gets rid of the numbers of tht ticks */
     /*-fx-tick-mark-visible: false;     /* gets rid of the major ticks, the ones which are supposed to have the number */
     /*-fx-minor-tick-visible: false;    /* gets also rid of all the rest of the minor ticks */
-    -fx-side: null;                   /* gets ride of the whole axis */
+    /*-fx-side: default;                   /* gets ride of the whole axis */
 }
 
 /*Works with the 0 line in the graph*/

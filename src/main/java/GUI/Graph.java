@@ -21,27 +21,27 @@ public class Graph extends JFXPanel {
     private double lowerbound, upperbound;
 
     //used for axis
-    private int tick;
+    private double tick;
 
     public Graph(String colorGraph) {
         point_pointer = 0;  //This looks at which index must be added next
-        lowerbound = 0;
-        upperbound = 100;
-        tick = 10;
+        lowerbound = 0.5;
+        upperbound = 100.5;
+        tick = 10.5;
 
         graphpanel = new JFXPanel();
-        xAxis = new NumberAxis("Values for X-Axis", lowerbound, upperbound, tick);   //creating the axes
+        xAxis = new NumberAxis("Time", lowerbound, upperbound, tick);   //creating the axes
+        System.out.println("sunshine!");
         yAxis = new NumberAxis("Values for Y-Axis", -2, 2, 1);
 
         //Paying with the axis values
-//        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis,"lullibi","dB"));
         xAxis.setTickLabelFormatter(new StringConverter<Number>() {
             @Override
             public String toString(Number number) {
-                //System.out.println(number);
+                System.out.println(number);
                 for(int i=0; i<=(upperbound-lowerbound)/10; i+=1){
                     if (number.doubleValue() == lowerbound + i*tick)
-                        return Double.toString(-(upperbound-lowerbound) + i*tick);
+                        return Integer.toString((int)(-(upperbound-lowerbound) + i*tick)) + "s";
                 }
                 return null;
             }
@@ -72,6 +72,7 @@ public class Graph extends JFXPanel {
             @Override
             public void run() {
                 setTheScene(graphpanel, scene);
+                System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
             }
         });
     }
@@ -101,8 +102,7 @@ public class Graph extends JFXPanel {
         upperbound += 1.5;
         xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
-//        xAxis.setAnimated(true);
-
+        System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
 
         function.getData().remove(0, 15);
 
