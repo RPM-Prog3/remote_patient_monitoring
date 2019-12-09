@@ -15,16 +15,16 @@ public class ECG {
         array = DaubechiesWavelet.ReturnDaub();
     }
 
-    public void addNoise(double mean, double variance)
+    public void addNoise(double[] input_array, double mean, double variance)
     {
-        int len = array.length;
+        int len = input_array.length;
 
         for (int i = 0; i < len; i++)
         {
             Random r = new Random();
             double noise = r.nextGaussian() * Math.sqrt(variance) + mean;
 
-            array[i] += noise;
+            input_array[i] += noise;
         }
     }
 
@@ -40,6 +40,7 @@ public class ECG {
 //            for (int ii=0; ii<30; ii+=1){
 //                System.out.println(concatenated[i+ii]);
 //            }
+        addNoise(concatenated, 0, 0.001);
 
         return concatenated;
     }
