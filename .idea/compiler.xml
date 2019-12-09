@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="remote_patient_monitoring.main" target="11" />
       <module name="remote_patient_monitoring.test" target="11" />
+      <module name="repos.remote_patient_monitoring.main" target="11" />
+      <module name="repos.remote_patient_monitoring.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

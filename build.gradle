@@ -1,3 +1,21 @@
 plugins {
     id 'java'
+    id 'maven'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing']
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    testCompile "org.testfx:testfx-core:4.0.16-alpha"
+    testCompile "org.testfx:testfx-junit:4.0.15-alpha"
+    runtimeOnly group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
 }

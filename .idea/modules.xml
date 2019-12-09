@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/remote_patient_monitoring.iml" filepath="$PROJECT_DIR$/.idea/remote_patient_monitoring.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/remote_patient_monitoring.main.iml" filepath="$PROJECT_DIR$/.idea/modules/remote_patient_monitoring.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/remote_patient_monitoring.test.iml" filepath="$PROJECT_DIR$/.idea/modules/remote_patient_monitoring.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repos.remote_patient_monitoring.main.iml" filepath="$PROJECT_DIR$/.idea/modules/repos.remote_patient_monitoring.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repos.remote_patient_monitoring.test.iml" filepath="$PROJECT_DIR$/.idea/modules/repos.remote_patient_monitoring.test.iml" />
     </modules>
   </component>
 </project>
