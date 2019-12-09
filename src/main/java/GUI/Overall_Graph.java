@@ -1,5 +1,6 @@
 package GUI;
 
+import Temperature_Sim.RandomWalk;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 
@@ -11,7 +12,12 @@ public class Overall_Graph {
     private Graph graphECG, graphBPress, graphResp, graphTemp;  //These are the four different graphs
     private Thread refreshing1,refreshing2, refreshing3, refreshing4;  //These creates four different threads
 
+    private RandomWalk data_Temp;
+
     public Overall_Graph() {
+        data_Temp = new RandomWalk();
+
+//        System.out.println(data_Temp.getPoints()[5]);
 
         double[] sin_array = new double[13000];
         int index_counter = 0;
@@ -33,7 +39,7 @@ public class Overall_Graph {
         graph_panel.add(graphResp.getGraph());
         graph_panel.add(graphTemp.getGraph());
 
-        graphECG.setGraph(sin_array);
+        graphECG.setGraph(data_Temp.getPoints());
         graphBPress.setGraph(sin_array);
         graphResp.setGraph(sin_array);
         graphTemp.setGraph(sin_array);
