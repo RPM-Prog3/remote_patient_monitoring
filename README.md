@@ -66,3 +66,4 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 ![Simulation Working Document](misc/ExampleOfGui_2.jpg)
 
 ![Simulation Working Document](misc/ExampleOfGui_3.jpg)
+
