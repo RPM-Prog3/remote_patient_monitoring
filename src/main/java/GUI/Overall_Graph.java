@@ -16,19 +16,19 @@ public class Overall_Graph {
         graph_panel.setLayout(new GridLayout(4, 1));
 
         graphECG = new Graph("chart-ECG");
-//        graphBPress = new Graph("chart-Pressure");
-//        graphResp = new Graph("chart-Respiratory");
-//        graphTemp = new Graph("chart-Temperature");
+        graphBPress = new Graph("chart-Pressure");
+        graphResp = new Graph("chart-Respiratory");
+        graphTemp = new Graph("chart-Temperature");
 
         graph_panel.add(graphECG.getGraph());
-//        graph_panel.add(graphBPress.getGraph());
-//        graph_panel.add(graphResp.getGraph());
-//        graph_panel.add(graphTemp.getGraph());
+        graph_panel.add(graphBPress.getGraph());
+        graph_panel.add(graphResp.getGraph());
+        graph_panel.add(graphTemp.getGraph());
 
         graphECG.setGraph();
-//        graphBPress.setGraph();
-//        graphResp.setGraph();
-//        graphTemp.setGraph();
+        graphBPress.setGraph();
+        graphResp.setGraph();
+        graphTemp.setGraph();
 
     }
 
