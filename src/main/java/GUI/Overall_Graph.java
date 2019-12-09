@@ -19,7 +19,6 @@ public class Overall_Graph {
     public Overall_Graph() {
         data_Temp = new RandomWalk();
 
-
 //        System.out.println(data_Temp.getPoints()[5]);
 
         double[] sin_array = new double[13000];
