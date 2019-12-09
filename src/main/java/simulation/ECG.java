@@ -35,6 +35,4 @@ public class ECG {
     public double[] Simulate() {
         return array;
     }
-
-
 }
