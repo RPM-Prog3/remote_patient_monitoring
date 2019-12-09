@@ -21,7 +21,6 @@ public class Graph extends JFXPanel {
     private double lowerbound, upperbound;
 
     //used for axis
-    private int tick_counter;
     private double tick;
     static final double ROUNDING_VALUE = 0.00001;
 
@@ -30,29 +29,18 @@ public class Graph extends JFXPanel {
         lowerbound = 0;
         upperbound = 100;
         tick = 10;
-        tick_counter = 0;
 
         graphpanel = new JFXPanel();
         xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
-        System.out.println("sunshine!");
         yAxis = new NumberAxis("Values for Y-Axis", -2, 2, 1);
 
         //Paying with the axis values
         xAxis.setTickLabelFormatter(new StringConverter<Number>() {
             @Override
             public String toString(Number number) {
-//                System.out.println("number");
                 for(int i=0; i<=(int)((upperbound-lowerbound)/tick); i+=1){
-//                    System.out.println("gaaaaaa"+ (number.doubleValue()));
-//                    System.out.println("gaaaaaa"+ (number.doubleValue()-(tick_counter+1)*ROUNDING_VALUE));
-//                    System.out.println(lowerbound + i * tick);
-//                    if (number.doubleValue()-(tick_counter+1)*ROUNDING_VALUE == lowerbound + i*tick) {
-                    if (number.intValue() == (int)(lowerbound + i*tick)) {
-                        tick_counter += 1;
-                        if (tick_counter == (int)((upperbound-lowerbound)/tick))
-                            tick_counter = 0;
+                    if (number.intValue() == (int)(lowerbound + i*tick))
                         return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
-                    }
                 }
                 return null;
             }
@@ -70,7 +58,7 @@ public class Graph extends JFXPanel {
 
     public void setGraph() {
         //function.setName("Trying out");
-        for (double i = 0; i <= 0; i += 0.1) {
+        for (double i = 0; i <= 100; i += 0.1) {
             function.getData().add(new XYChart.Data<Number, Number>(i, Math.sin(i)));
             point_pointer += 1;
         }
@@ -83,7 +71,6 @@ public class Graph extends JFXPanel {
             @Override
             public void run() {
                 setTheScene(graphpanel, scene);
-//                System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
             }
         });
     }
@@ -113,7 +100,6 @@ public class Graph extends JFXPanel {
         upperbound += 1.5;
         xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
-//        System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
 
         function.getData().remove(0, 15);
 
