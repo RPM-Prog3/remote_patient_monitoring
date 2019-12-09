@@ -15,14 +15,15 @@ public class Graph extends JFXPanel {
     private String colorGraph;
 
     private NumberAxis xAxis, yAxis;
+    private double tick;
+    static final double ROUNDING_VALUE = 0.00001;
+    private double lowerbound, upperbound;
+
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
     private int point_pointer;
-    private double lowerbound, upperbound;
+    private double[] data_points;
 
-    //used for axis
-    private double tick;
-    static final double ROUNDING_VALUE = 0.00001;
 
     public Graph(String colorGraph) {
         point_pointer = 0;  //This looks at which index must be added next
@@ -56,10 +57,15 @@ public class Graph extends JFXPanel {
         this.colorGraph = colorGraph;
     }
 
-    public void setGraph() {
+    public void setGraph(double[] input_data) {
         //function.setName("Trying out");
+//        for (double i = 0; i <= 100; i += 0.1) {
+//            function.getData().add(new XYChart.Data<Number, Number>(i, Math.sin(i)));
+//            point_pointer += 1;
+//        }
+        data_points = input_data;
         for (double i = 0; i <= 100; i += 0.1) {
-            function.getData().add(new XYChart.Data<Number, Number>(i, Math.sin(i)));
+            function.getData().add(new XYChart.Data<Number, Number>(i, data_points[point_pointer]));
             point_pointer += 1;
         }
 
@@ -89,9 +95,14 @@ public class Graph extends JFXPanel {
     private void updateTheGraph() {
         chart.setAnimated(false);
 
+//        for (int i=0; i<15; i+=1) {
+//            double x = point_pointer*0.1;
+//            function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
+//            point_pointer += 1;
+//        }
         for (int i=0; i<15; i+=1) {
             double x = point_pointer*0.1;
-            function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
+            function.getData().add(new XYChart.Data<Number, Number>(x, data_points[point_pointer]));
             point_pointer += 1;
         }
 
