@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.util.StringConverter;
+import javafx.util.converter.NumberStringConverter;
 
 public class Graph extends JFXPanel {
     private JFXPanel graphpanel;
@@ -15,16 +17,37 @@ public class Graph extends JFXPanel {
     private NumberAxis xAxis, yAxis;
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
-    private int lowerbound, upperbound, point_pointer;
+    private int point_pointer;
+    private double lowerbound, upperbound;
+
+    //used for axis
+    private double tick;
+    static final double ROUNDING_VALUE = 0.00001;
 
     public Graph(String colorGraph) {
         point_pointer = 0;  //This looks at which index must be added next
         lowerbound = 0;
         upperbound = 100;
+        tick = 10;
 
         graphpanel = new JFXPanel();
-        xAxis = new NumberAxis("Values for X-Axis", lowerbound, upperbound, 1);   //creating the axes
+        xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
         yAxis = new NumberAxis("Values for Y-Axis", -2, 2, 1);
+
+        //Paying with the axis values
+        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
+            @Override
+            public String toString(Number number) {
+                for(int i=0; i<=(int)((upperbound-lowerbound)/tick); i+=1){
+                    if (number.intValue() == (int)(lowerbound + i*tick))
+                        return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
+                }
+                return null;
+            }
+
+            @Override
+            public Number fromString(String s) { return null; }
+        });
 
         chart = new LineChart<Number, Number>(xAxis, yAxis); //creating the chart skeleton
         scene = new Scene(chart);
@@ -64,19 +87,22 @@ public class Graph extends JFXPanel {
     }
 
     private void updateTheGraph() {
-        lowerbound += 1;
-        upperbound += 1;
-        xAxis.setLowerBound(lowerbound);
-        xAxis.setUpperBound(upperbound);
-
         chart.setAnimated(false);
-        function.getData().remove(0, 10);
 
-        for (int i=0; i<10; i+=1) {
+        for (int i=0; i<15; i+=1) {
             double x = point_pointer*0.1;
             function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
             point_pointer += 1;
         }
+
+        xAxis.setAnimated(false);
+        lowerbound += 1.5;
+        upperbound += 1.5;
+        xAxis.setLowerBound(lowerbound);
+        xAxis.setUpperBound(upperbound);
+
+        function.getData().remove(0, 15);
+
     }
 
     public JFXPanel getGraph() {

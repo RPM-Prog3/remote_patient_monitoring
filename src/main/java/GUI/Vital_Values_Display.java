@@ -2,6 +2,7 @@ package GUI;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -39,7 +40,7 @@ public abstract class Vital_Values_Display {
         vital_type = new Label();
         vital_value = new Label();
         vital_type.setRotate(270);
-       // vital_type.setAlignment(Pos.CENTER);
+        vital_type.setAlignment(Pos.CENTER);
         vital_type_pane.getChildren().add(vital_type);
         vital_type.relocate(0,100);
 
