@@ -3,6 +3,7 @@ package GUI;
 import Temperature_Sim.RandomWalk;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import simulation.ECG;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +14,11 @@ public class Overall_Graph {
     private Thread refreshing1,refreshing2, refreshing3, refreshing4;  //These creates four different threads
 
     private RandomWalk data_Temp;
+    private ECG ecgdata = new ECG();
 
     public Overall_Graph() {
         data_Temp = new RandomWalk();
+
 
 //        System.out.println(data_Temp.getPoints()[5]);
 
@@ -40,7 +43,7 @@ public class Overall_Graph {
         graph_panel.add(graphTemp.getGraph());
 
         graphECG.setGraph(data_Temp.getPoints());
-        graphBPress.setGraph(sin_array);
+        graphBPress.setGraph(ecgdata.Simulate());
         graphResp.setGraph(sin_array);
         graphTemp.setGraph(sin_array);
 
