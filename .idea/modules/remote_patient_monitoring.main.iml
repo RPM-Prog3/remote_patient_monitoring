@@ -8,6 +8,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" name="Gradle: org.nd4j:nd4j-native:1.0.0-beta" level="project" />
     <orderEntry type="library" name="Gradle: org.nd4j:nd4j-native:windows-x86_64:1.0.0-beta" level="project" />
     <orderEntry type="library" name="Gradle: org.bytedeco.javacpp-presets:openblas:0.2.20-1.4.1" level="project" />
@@ -36,5 +37,16 @@
     <orderEntry type="library" name="Gradle: joda-time:joda-time:2.2" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.4" level="project" />
+=======
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:win:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:win:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:13" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: postgresql:postgresql:9.1-901-1.jdbc4" level="project" />
+>>>>>>> 7aed8b37457f296f6c068f67dedf8a669eb99e25
   </component>
 </module>
