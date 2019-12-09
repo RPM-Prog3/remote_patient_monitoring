@@ -13,7 +13,7 @@ public class Main_Frame {
     private JFXPanel mainPanel;
     private Panel_Controller controller;
 
-    public Main_Frame(){
+    public Main_Frame() {
         // Setting up the main frame
         mainPage = new JFrame("Main Frame", gc);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -22,8 +22,8 @@ public class Main_Frame {
         mainPage.setResizable(true);
 
         mainPage.getContentPane().addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent e){
-                Component c = (Component)e.getSource();
+            public void componentResized(ComponentEvent e) {
+                Component c = (Component) e.getSource();
                 mainPage.setSize(mainPage.getSize());
                 controller.setPanelControllerSize(mainPage.getSize());
                 mainPage.revalidate();
@@ -45,17 +45,6 @@ public class Main_Frame {
 
         controller.updateController();
 
-//        refreshing = new Thread (new Refresh (controller));
-//        refreshing.start();
-//        while (mainPage.isVisible()) {
-//            int timer =0;
-//            for (int i=0; i<=1000; i+=1){
-//                timer += 1;
-//                System.out.println(timer);
-//            }
-//            controller.updateController();
-//            mainPanel = controller.getMainPanel();
-//        }
     }
 }
 

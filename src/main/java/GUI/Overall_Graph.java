@@ -16,7 +16,6 @@ public class Overall_Graph {
         double[] sin_array = new double[13000];
         int index_counter = 0;
         for (double i = 0; i < 1299.9; i += 0.1) {
-            System.out.println(index_counter);
             sin_array[index_counter] = Math.sin(i);
             index_counter += 1;
         }

@@ -58,11 +58,7 @@ public class Graph extends JFXPanel {
     }
 
     public void setGraph(double[] input_data) {
-        //function.setName("Trying out");
-//        for (double i = 0; i <= 100; i += 0.1) {
-//            function.getData().add(new XYChart.Data<Number, Number>(i, Math.sin(i)));
-//            point_pointer += 1;
-//        }
+
         data_points = input_data;
         for (double i = 0; i <= 100; i += 0.1) {
             function.getData().add(new XYChart.Data<Number, Number>(i, data_points[point_pointer]));
@@ -95,11 +91,6 @@ public class Graph extends JFXPanel {
     private void updateTheGraph() {
         chart.setAnimated(false);
 
-//        for (int i=0; i<15; i+=1) {
-//            double x = point_pointer*0.1;
-//            function.getData().add(new XYChart.Data<Number, Number>(x, Math.sin(x)));
-//            point_pointer += 1;
-//        }
         for (int i=0; i<15; i+=1) {
             double x = point_pointer*0.1;
             function.getData().add(new XYChart.Data<Number, Number>(x, data_points[point_pointer]));
