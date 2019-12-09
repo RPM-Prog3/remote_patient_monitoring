@@ -1,13 +1,15 @@
 package GUI;
 
+import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Overall_Graph {
-    private JFXPanel graph_panel;
-    private Graph graphECG, graphBPress, graphResp, graphTemp;
+    private JFXPanel graph_panel;  //Overall panel with the four graphs
+    private Graph graphECG, graphBPress, graphResp, graphTemp;  //These are the four different graphs
+    private Thread refreshing1,refreshing2, refreshing3, refreshing4;  //These creates four different threads
 
     public Overall_Graph() {
         graph_panel = new JFXPanel();
@@ -31,10 +33,22 @@ public class Overall_Graph {
     }
 
     public void updatePanel() {
-        graphECG.updateGraph();
-//        graphBPress.updateGraph();
-//        graphResp.updateGraph();
-//        graphTemp.updateGraph();
+        //Running four separate threads, one for each graph
+        refreshing1 = new Thread (new Refresh (graphECG));
+        refreshing2 = new Thread (new Refresh (graphBPress));
+        refreshing3 = new Thread (new Refresh (graphResp));
+        refreshing4 = new Thread (new Refresh (graphTemp));
+
+        //This makes sure that the program doesn't have to wait for each thread to be run
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run () {
+                refreshing1.start();
+                refreshing2.start();
+                refreshing3.start();
+                refreshing4.start();
+            }
+        });
     }
 
     public JFXPanel getGraphPanel() {

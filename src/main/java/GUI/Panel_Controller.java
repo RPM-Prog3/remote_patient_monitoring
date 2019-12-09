@@ -26,6 +26,7 @@ public class Panel_Controller {
         graphs = new Overall_Graph();
         graphPanel = graphs.getGraphPanel();
 
+
         this.main_panel_dim_ = main_panel_dim;
         s_v_ratio_num = 8; //simulation panel to vitals panel numerator value of ratio (in width)
         s_v_ratio_den = 10; //simulation panel to vitals panel denominator value of ratio (in width)
@@ -65,14 +66,14 @@ public class Panel_Controller {
         HR_panel = new HR_Vitals(sub_vitals_panel_dim);
 
         // Adding vital sign (BP, RR, HR, ECG) panels to vitalsPanel
-        vitalsPanel.add(BP_panel.getVitalsPanel());
-        BP_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
-        vitalsPanel.add(HR_panel.getVitalsPanel());
-        HR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
         vitalsPanel.add(ECG_panel.getVitalsPanel());
         ECG_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+        vitalsPanel.add(BP_panel.getVitalsPanel());
+        BP_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
         vitalsPanel.add(RR_panel.getVitalsPanel());
         RR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+        vitalsPanel.add(HR_panel.getVitalsPanel());
+        HR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
 
         // Adding the vitalsPanel and graphPanel to simulationPanel
         simulationPanel.add(graphPanel, BorderLayout.LINE_START);

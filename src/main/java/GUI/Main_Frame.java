@@ -8,6 +8,7 @@ import java.awt.event.*;
 public class Main_Frame {
 
     static GraphicsConfiguration gc; // Class field containing config info
+//    private Thread refreshing;
     private JFrame mainPage;
     private JFXPanel mainPanel;
     private Panel_Controller controller;
@@ -42,15 +43,19 @@ public class Main_Frame {
         // Closing program when when main frame is closed
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        while (mainPage.isVisible()) {
-            int timer =0;
-            for (int i=0; i<=1000; i+=1){
-                timer += 1;
-                System.out.println(timer);
-            }
-            controller.updateController();
-            mainPanel = controller.getMainPanel();
-        }
+        controller.updateController();
+
+//        refreshing = new Thread (new Refresh (controller));
+//        refreshing.start();
+//        while (mainPage.isVisible()) {
+//            int timer =0;
+//            for (int i=0; i<=1000; i+=1){
+//                timer += 1;
+//                System.out.println(timer);
+//            }
+//            controller.updateController();
+//            mainPanel = controller.getMainPanel();
+//        }
     }
 }
 

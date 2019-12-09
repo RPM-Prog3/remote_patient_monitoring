@@ -20,20 +20,21 @@ public class PatientList {
     private String new_name, new_lastname, new_email, new_cellnum, new_dateOfbirth;
     private JOptionPane error_message, success_message;
     private boolean status;
-    private int patient_counter, nOfpatients;
+    private int patient_counter, nOfpatients, start_idx;
     private ArrayList<JCheckBox> patientlist;
     private Border border;
+    private JScrollPane scrollPane;
 
     public PatientList(){
-
         list = new JFrame("List of Patients", gc);
         list.setSize(1000,700);
-        list.setVisible(true);
-        list.setResizable(false);
 
         mainpanel = new JPanel(new BorderLayout());
         mainpanel.setVisible(true);
 
+        // Setting up a button that when pressed it prompts the user to a page where
+        // the details of a new patients can be typed. The new patient, upon confirmation
+        // of the validity of the details inserted is inserted in the database
         add_patient = new JButton("Add Patient");
         add_patient.setVisible(true);
         add_patient.addActionListener(new ActionListener() {
@@ -47,68 +48,25 @@ public class PatientList {
             }
         });
 
+        // Creating an array containing many JCheckBox objects each containing the information
+        // i.e. first and last name of each patient in the database
         patientlist = new ArrayList<JCheckBox>();
-        nOfpatients = 0;
-        Connection conn = connect_DB();
-        try {
-            Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = s.executeQuery("SELECT * FROM patient_info");
-            rs = s.executeQuery("SELECT COUNT(*) FROM patient_info");
-            // get the number of rows from the result set
-            rs.next();
-            nOfpatients = rs.getInt(1);
-            System.out.println(nOfpatients);
-            rs = s.executeQuery("SELECT givenname, familyname FROM patient_info WHERE id >= 1");
+        nOfpatients = getnOfpatients();
 
-            while(rs.next()){
-                System.out.println(rs.getString("givenname")+" "+ rs.getString("familyname"));
-                patientlist.add(new JCheckBox(rs.getString("givenname")+" "+ rs.getString("familyname")));
-            }
-            rs.close();
-            s.close();
-            conn.close();
-        }
-        catch (Exception e){
-        }
-
+        // Setting up the panel that displays the patients such that it has as many rows as
+        // the number of patients in the database
         list_panel = new JPanel(new GridLayout(nOfpatients,1));
         list_panel.setVisible(true);
 
-        for (int i = 0; i < patientlist.size(); i++) {
-            patientlist.get(i).setVisible(true);
-            list_panel.add(patientlist.get(i));
-        }
+        // Adding each of the objects (patient) to the panel that will display them.
+        createList();
 
         patient_counter = 0;
         show_vitals = new JButton();
         show_vitals.setVisible(true);
 
-        for (int i = 0; i < patientlist.size(); i++) {
-            patientlist.get(i).addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    patient_counter++;
-                    show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                }
-            });
-        }
-
+        // Adding ActionListener to the "show_vitals" button so that when pressed it will show
+        // as many GUIs as selected by the user.
         show_vitals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,10 +76,12 @@ public class PatientList {
             }
         });
 
+        // Constructing main panel
         mainpanel.add(BorderLayout.PAGE_START, add_patient);
         mainpanel.add(BorderLayout.CENTER, list_panel);
         mainpanel.add(BorderLayout.PAGE_END, show_vitals);
         list.add(mainpanel);
+        showList();
     }
 
     public void AddPatient() throws SQLException {
@@ -204,41 +164,27 @@ public class PatientList {
                 new_cellnum = cellnum_in.getText();
                 new_dateOfbirth = dateOfbirth_in.getText();
 
-                System.out.println("step");
                 error_message = new JOptionPane();
                 success_message = new JOptionPane();
 
                 // Connecting the Database:
                 Connection conn = connect_DB();
-
-                System.out.println(conn);
-                System.out.println(new_name);
-
                 try {
                     Statement s = conn.createStatement();
-                    System.out.println("step 2");
                     String sqlStr = String.format("insert into patient_info (familyname, givenname, dofbirth, email, phonenumber) values('%s', '%s', '%s', '%s', '%s');", new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum);
                     s.executeUpdate (sqlStr);
-                    System.out.println("EXECUTED");
                     success_message.showMessageDialog(new_patient, "Patient Successfully Added", "information", JOptionPane.INFORMATION_MESSAGE);
-                    status = true;
-                    getStatus();
+                    updateList();
+                    showList();
                     s.close();
                     conn.close();
                     new_patient.setVisible(false);
                 }
                 catch (Exception e){
-                    System.out.println(e);
                     error_message.showMessageDialog(new_patient,"Unable to add Patient","Error Message", JOptionPane.ERROR_MESSAGE);
-                    status = false;
-                    getStatus();
                 }
             }
         });
-    }
-
-    public boolean getStatus(){
-        return status;
     }
 
     public Connection connect_DB(){
@@ -256,5 +202,116 @@ public class PatientList {
             e.printStackTrace();
         }
         return conn;
+    }
+
+    public ArrayList<JCheckBox> getPatientsInfo(){
+        nOfpatients = 0;
+        // Connecting to the Database
+        Connection conn = connect_DB();
+        try {
+            Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = s.executeQuery("SELECT * FROM patient_info");
+            ResultSet rs2 = s.executeQuery("SELECT * FROM patient_info");
+            rs = s.executeQuery("SELECT COUNT(*) FROM patient_info");
+            // Get the number of rows from the result set
+            rs.next();
+            nOfpatients = rs.getInt(1);
+            System.out.println(status);
+            //if (status != true) {
+            rs = s.executeQuery("SELECT givenname, familyname FROM patient_info WHERE id >= 1");
+                //SELECT givenname, familyname FROM my_table ORDER BY id DESC LIMIT 1;
+
+            while (rs.next()) {
+                if (status != true) {
+                    System.out.println(rs.getString("givenname") + " " + rs.getString("familyname"));
+                    patientlist.add(new JCheckBox(rs.getString("givenname") + " " + rs.getString("familyname")));
+                }
+                else {
+                    rs.last();
+                    System.out.println(rs.getString("givenname") + " " + rs.getString("familyname"));
+                    patientlist.add(new JCheckBox(rs.getString("givenname") + " " + rs.getString("familyname")));
+
+                }
+            }
+            //}
+            /*else {
+                System.out.println("cacca");
+                System.out.println("Number of patients: " + nOfpatients);
+                String stmt = "SELECT givenname, familyname FROM my_table ORDER BY id DESC LIMIT 1;";
+                System.out.println(stmt);
+                rs2 = s.executeQuery(stmt);
+                System.out.println(rs2.getString("givenname") + " " + rs2.getString("familyname"));
+                patientlist.add(new JCheckBox(rs2.getString("givenname") + " " + rs2.getString("familyname")));
+            }*/
+            rs.close();
+            s.close();
+            conn.close();
+        }
+        catch (Exception e){
+            System.out.println("NOT EXECUTED");
+        }
+        return patientlist;
+    }
+
+    public int getnOfpatients (){
+        Connection conn = connect_DB();
+        try {
+            Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = s.executeQuery("SELECT * FROM patient_info");
+            rs = s.executeQuery("SELECT COUNT(*) FROM patient_info");
+            // Get the number of rows from the result set
+            rs.next();
+            nOfpatients = rs.getInt(1);
+            rs.close();
+            s.close();
+            conn.close();
+        }
+        catch (Exception e){
+        }
+        return nOfpatients;
+    }
+
+    public void updateList(){
+        status = true;
+        patientlist = getPatientsInfo();
+        System.out.println("List size " + patientlist.size());
+        patientlist.get(patientlist.size()-1).setVisible(true);
+        list_panel.add(patientlist.get(patientlist.size()-1));
+    }
+
+    public void createList(){
+        status = false;
+        patientlist = getPatientsInfo();
+        System.out.println(patientlist.size());
+        for (int i = 0 ; i < patientlist.size(); i++) {
+            patientlist.get(i).setVisible(true);
+            list_panel.add(patientlist.get(i));
+        }
+        selectPatient();
+    }
+
+    public void selectPatient(){
+        for (int i = 0; i < patientlist.size(); i++) {
+            patientlist.get(i).addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
+                    boolean selected = abstractButton.getModel().isSelected();
+                    if (selected){
+                        patient_counter++;
+                        show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
+                    }
+                    else if(!selected && patient_counter > 0){
+                        patient_counter --;
+                        show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
+                    }
+                }
+            });
+        }
+    }
+
+    public void showList(){
+        list.setResizable(false);
+        list.setVisible(true);
     }
 }
