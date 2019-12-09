@@ -21,7 +21,7 @@ public class Graph extends JFXPanel {
 
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
-    private int point_pointer;
+    private int num_points_changed, point_pointer;
     private double delta;
     private double[] data_points;
 
@@ -30,8 +30,10 @@ public class Graph extends JFXPanel {
         point_pointer = 0;  //This looks at which index must be added next
         lowerbound = 0;
         upperbound = 100;
-        delta = 1;
         tick = 10;
+
+        delta = 0.1;
+        num_points_changed = 15;
 
         graphpanel = new JFXPanel();
         xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
@@ -94,19 +96,19 @@ public class Graph extends JFXPanel {
     private void updateTheGraph() {
         chart.setAnimated(false);
 
-        for (int i=0; i<15; i+=1) {
+        for (int i=0; i<num_points_changed; i+=1) {
             double x = point_pointer*delta;
             function.getData().add(new XYChart.Data<Number, Number>(x, data_points[point_pointer]));
             point_pointer += 1;
         }
 
         xAxis.setAnimated(false);
-        lowerbound += 15;
-        upperbound += 15;
+        lowerbound += num_points_changed*delta;
+        upperbound += num_points_changed*delta;
         xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
 
-        function.getData().remove(0, 15);
+        function.getData().remove(0, num_points_changed);
 
     }
 
