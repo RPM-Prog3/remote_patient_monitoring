@@ -33,7 +33,7 @@ public class Graph extends JFXPanel {
         tick = 10;
 
         delta = 0.1;
-        num_points_changed = 15;
+        num_points_changed = 1;
 
         graphpanel = new JFXPanel();
         xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
@@ -108,6 +108,10 @@ public class Graph extends JFXPanel {
         upperbound += num_points_changed*delta;
         xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
+
+        System.out.println("lower"+lowerbound);
+        System.out.println("upper"+upperbound);
+        System.out.println("rouned:                  " + (int)((upperbound-lowerbound)/tick) + "\n");
 
         function.getData().remove(0, num_points_changed);
 
