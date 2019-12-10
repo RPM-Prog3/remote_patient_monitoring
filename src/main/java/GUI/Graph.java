@@ -46,7 +46,7 @@ public class Graph extends JFXPanel {
         xAxis.setTickLabelFormatter(new StringConverter<Number>() {
             @Override
             public String toString(Number number) {
-                for(int i=0; i<=(int)((upperbound-lowerbound)*10)/tick; i+=1){
+                for(int i=0; i<=((int)(upperbound)-(int)(lowerbound))/tick; i+=1){
                     if (number.intValue() == (int)(lowerbound + i*tick))
                         return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
                 }
@@ -113,7 +113,7 @@ public class Graph extends JFXPanel {
 
         System.out.println("lower"+lowerbound);
         System.out.println("upper"+upperbound);
-        System.out.println("rouned:                  " + (int)((upperbound-lowerbound)*10) + "\n");
+        System.out.println("rouned:                  " + ((int)(upperbound)-(int)(lowerbound)) + "\n");
 
         function.getData().remove(0, num_points_changed);
 
