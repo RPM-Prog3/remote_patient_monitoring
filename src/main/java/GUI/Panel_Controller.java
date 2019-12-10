@@ -26,6 +26,7 @@ public class Panel_Controller {
         graphs = new Overall_Graph();
         graphPanel = graphs.getGraphPanel();
 
+
         this.main_panel_dim_ = main_panel_dim;
         s_v_ratio_num = 8; //simulation panel to vitals panel numerator value of ratio (in width)
         s_v_ratio_den = 10; //simulation panel to vitals panel denominator value of ratio (in width)
