@@ -7,7 +7,7 @@ public class Refresh implements Runnable{
     private Graph graph;
 
     public Refresh(Graph graph) {
-        this.graph =graph;
+        this.graph = graph;
     }
 
     public void run() {
@@ -15,7 +15,7 @@ public class Refresh implements Runnable{
             //Thread.sleep(1000);
             while (1<2) {
                 graph.updateGraph();
-                Thread.sleep(50);
+                Thread.sleep(150);
             }
 
         }catch (Exception e) {};

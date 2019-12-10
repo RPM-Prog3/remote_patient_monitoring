@@ -31,19 +31,19 @@ public class Overall_Graph {
         graph_panel = new JFXPanel();
         graph_panel.setLayout(new GridLayout(4, 1));
 
-//        graphECG = new Graph("chart-ECG");
-//        graphBPress = new Graph("chart-Pressure");
-//        graphResp = new Graph("chart-Respiratory");
+        graphECG = new Graph("chart-ECG");
+        graphBPress = new Graph("chart-Pressure");
+        graphResp = new Graph("chart-Respiratory");
         graphTemp = new Graph("chart-Temperature");
 
-//        graph_panel.add(graphECG.getGraph());
-//        graph_panel.add(graphBPress.getGraph());
-//        graph_panel.add(graphResp.getGraph());
+        graph_panel.add(graphECG.getGraph());
+        graph_panel.add(graphBPress.getGraph());
+        graph_panel.add(graphResp.getGraph());
         graph_panel.add(graphTemp.getGraph());
 
-//        graphECG.setGraph(data_Temp.getPoints());
-//        graphBPress.setGraph(ecgdata.Simulate());
-//        graphResp.setGraph(sin_array);
+        graphECG.setGraph(data_Temp.getPoints());
+        graphBPress.setGraph(ecgdata.Simulate());
+        graphResp.setGraph(sin_array);
         graphTemp.setGraph(sin_array);
 
     }

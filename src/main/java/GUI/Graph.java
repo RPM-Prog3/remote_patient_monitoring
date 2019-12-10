@@ -35,7 +35,7 @@ public class Graph extends JFXPanel {
         tick = 10;
 
         delta = 0.1;
-        num_points_changed = 1;
+        num_points_changed = 15;
 
         graphpanel = new JFXPanel();
         xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
@@ -46,7 +46,7 @@ public class Graph extends JFXPanel {
         xAxis.setTickLabelFormatter(new StringConverter<Number>() {
             @Override
             public String toString(Number number) {
-                for(int i=0; i<=((int)(upperbound)-(int)(lowerbound))/tick; i+=1){
+                for(int i=0; i<=(int)((upperbound - lowerbound))/tick; i+=1){
                     if (number.intValue() == (int)(lowerbound + i*tick))
                         return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
                 }
@@ -110,10 +110,6 @@ public class Graph extends JFXPanel {
         upperbound += num_points_changed*delta;
         xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
-
-        System.out.println("lower"+lowerbound);
-        System.out.println("upper"+upperbound);
-        System.out.println("rouned:                  " + ((int)(upperbound)-(int)(lowerbound)) + "\n");
 
         function.getData().remove(0, num_points_changed);
 
