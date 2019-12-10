@@ -11,7 +11,7 @@ import java.awt.*;
 
 public abstract class Vital_Values_Display {
     protected JFXPanel sub_display, status, type, value, vitals_value_display;
-    protected Dimension overall_display_dim, sub_display_dim, value_dim;
+    protected Dimension overall_display_dim, sub_display_dim, value_dim, type_dim;
     protected int sd_od_ratio_num, sd_od_ratio_den , v_sd_ratio_num, v_sd_ratio_den;
     protected Label status_msg, vital_type, vital_value;
     protected Border border;
@@ -83,19 +83,6 @@ public abstract class Vital_Values_Display {
         sub_display.add(value, BorderLayout.PAGE_START);
         sub_display.add(status, BorderLayout.CENTER);
 
-        // sub display panel:
-        sub_display_dim = new Dimension();
-        sub_display_dim.height = overall_display_dim.height;
-        sub_display_dim.width = (int)((overall_display_dim.width * sd_od_ratio_num)/sd_od_ratio_den);
-        sub_display.setPreferredSize(sub_display_dim);
-
-        // value panel:
-        value_dim = new Dimension();
-        value_dim.width = sub_display_dim.width;
-        value_dim.height = (int)((overall_display_dim.height * v_sd_ratio_num)/v_sd_ratio_den);
-        value.setPreferredSize(value_dim);
-
-
         Platform.runLater (new Runnable() {
             @Override
             public void run() { settingPanels(status, value, type, status_scene, value_scene, type_scene);}
@@ -118,5 +105,28 @@ public abstract class Vital_Values_Display {
         return vitals_value_display;
     }
 
+    public void setVitals_value_displaySize(Dimension vitals_panel_dim){
+        // Setting dimensions and proportions of the panels
+        overall_display_dim = vitals_panel_dim;
+
+        // sub display panel:
+        sub_display_dim = new Dimension();
+        sub_display_dim.height = overall_display_dim.height;
+        sub_display_dim.width = (int)((overall_display_dim.width * (sd_od_ratio_den - sd_od_ratio_num))/sd_od_ratio_den);
+        sub_display.setPreferredSize(sub_display_dim);
+
+        // value panel:
+        value_dim = new Dimension();
+        value_dim.width = sub_display_dim.width;
+        value_dim.height = (int)((overall_display_dim.height * v_sd_ratio_num)/v_sd_ratio_den);
+        value.setPreferredSize(value_dim);
+
+        // Setting maximum size for vital type labels
+        type_dim = new Dimension();
+        type_dim.height = overall_display_dim.height;
+        type_dim.width = (int)((overall_display_dim.width * sd_od_ratio_num)/sd_od_ratio_den);
+        vital_type.setMaxSize(type_dim.width/7, type_dim.height/7);
+        vital_type.setMinSize(type_dim.width/7, type_dim.height/7);
+    }
 }
 
