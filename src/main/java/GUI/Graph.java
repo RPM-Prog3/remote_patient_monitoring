@@ -15,7 +15,7 @@ public class Graph extends JFXPanel {
     private String colorGraph;
 
     private NumberAxis xAxis, yAxis;
-    private double tick;
+    private int tick;
     static final double ROUNDING_VALUE = 0.00001;
     private double lowerbound, upperbound;
 
@@ -24,6 +24,8 @@ public class Graph extends JFXPanel {
     private int num_points_changed, point_pointer;
     private double delta;
     private double[] data_points;
+
+    private int roundedNumTicks;
 
 
     public Graph(String colorGraph) {
@@ -44,7 +46,7 @@ public class Graph extends JFXPanel {
         xAxis.setTickLabelFormatter(new StringConverter<Number>() {
             @Override
             public String toString(Number number) {
-                for(int i=0; i<=(int)((upperbound-lowerbound)/tick); i+=1){
+                for(int i=0; i<=(int)((upperbound-lowerbound)*10)/tick; i+=1){
                     if (number.intValue() == (int)(lowerbound + i*tick))
                         return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
                 }
@@ -111,9 +113,13 @@ public class Graph extends JFXPanel {
 
         System.out.println("lower"+lowerbound);
         System.out.println("upper"+upperbound);
-        System.out.println("rouned:                  " + (int)((upperbound-lowerbound)/tick) + "\n");
+        System.out.println("rouned:                  " + (int)((upperbound-lowerbound)*10) + "\n");
 
         function.getData().remove(0, num_points_changed);
+
+    }
+
+    private void RoundNumTicks(){
 
     }
 
