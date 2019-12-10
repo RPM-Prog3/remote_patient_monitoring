@@ -2,7 +2,6 @@ package GUI;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -39,10 +38,10 @@ public abstract class Vital_Values_Display {
         status_msg = new Label();
         vital_type = new Label();
         vital_value = new Label();
-        //vital_type.setRotate(270);
-        //vital_type.setAlignment(Pos.CENTER);
+        vital_type.setRotate(270);
+       // vital_type.setAlignment(Pos.CENTER);
         vital_type_pane.getChildren().add(vital_type);
-        //vital_type.relocate(0,100);
+        vital_type.relocate(0,100);
 
         // Instantiating scenes for labels
         status_scene = new Scene(status_msg);
@@ -126,8 +125,8 @@ public abstract class Vital_Values_Display {
         type_dim = new Dimension();
         type_dim.height = overall_display_dim.height;
         type_dim.width = (int)((overall_display_dim.width * sd_od_ratio_num)/sd_od_ratio_den);
-        vital_type.setMaxSize(type_dim.width/7, type_dim.height);
-        vital_type.setMinSize(type_dim.width/7, type_dim.height);
+        vital_type.setMaxSize(type_dim.width/7, type_dim.height/7);
+        vital_type.setMinSize(type_dim.width/7, type_dim.height/7);
     }
 }
 

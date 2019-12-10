@@ -66,6 +66,11 @@ public class Graph extends JFXPanel {
 
         data_points = input_data;
 
+        for (int i = 0; i<100; i+=1)
+            for (int ii=0; ii<30; ii+=1){
+                System.out.println(data_points[i+ii]);
+            }
+
         for (double i = 0; i <= 50; i += delta) {
             function.getData().add(new XYChart.Data<Number, Number>(i, data_points[point_pointer]));
             point_pointer += 1;

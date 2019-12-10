@@ -87,5 +87,16 @@ public class UserLogIn {
             }
         });
     }
+
+    // Shows list of all the patient in the database
+    public void showList() {
+    }
+
+    // Updates list when patient is added
+    public void updateList(){
+        //boolean status = getStatus();
+        //if status == true{
+            // update table
+        }
 }
 
