@@ -10,4 +10,8 @@ public class RR_Vitals extends Vital_Values_Display{
         super.vital_type.setText("R\nR");
         super.vital_value.setText("VALUE");
     }
+
+    protected void Set_Displayed_Value(){
+
+    }
 }

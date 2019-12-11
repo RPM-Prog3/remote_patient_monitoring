@@ -129,5 +129,8 @@ public abstract class Vital_Values_Display {
         vital_type.setMaxSize(type_dim.width/7, type_dim.height);
         vital_type.setMinSize(type_dim.width/7, type_dim.height);
     }
+
+    abstract protected void Set_Displayed_Value();
+
 }
 

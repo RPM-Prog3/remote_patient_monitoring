@@ -10,4 +10,8 @@ public class HR_Vitals extends Vital_Values_Display {
         super.vital_type.setText("H\nR");
         super.vital_value.setText("VALUE");
     }
+
+    protected void Set_Displayed_Value(){
+
+    }
 }
