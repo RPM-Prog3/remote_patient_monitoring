@@ -8,10 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:13" level="project" />
-    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:win:13" level="project" />
