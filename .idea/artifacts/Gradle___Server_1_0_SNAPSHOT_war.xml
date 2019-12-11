@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Gradle : Server-1.0-SNAPSHOT.war">
+    <output-path>$PROJECT_DIR$/Server/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$/Server" />
+    </properties>
+    <root id="archive" name="Server-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Gradle : Server-1.0-SNAPSHOT.war (exploded)" />
+    </root>
+  </artifact>
+</component>

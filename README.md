@@ -27,7 +27,7 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
   - [ ] Warning
   - [ ] Urgent
 - [ ] A permanent record (database) to be kept of average values for every minute during a day and also instances when there have been abnormal signs
-- [ ] A tunable simulation of the vital signs and ECG for the system to display:
+- [ ] A tunable App.simulation of the vital signs and ECG for the system to display:
   - [ ] Simulate a normal patient
   - [ ] Simulate a patient who has abnormal vital signs
   
@@ -55,9 +55,9 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 
 ![Patient Management Database](misc/patients_log_management.jpg)
 
-### GUI Branch:
+### App.GUI Branch:
 
-![Current GUI version](misc/current_gui.jpg)
+![Current App.GUI version](misc/current_gui.jpg)
 
 ### Examples from Industry:
 
