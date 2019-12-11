@@ -33,20 +33,32 @@ public class ECG {
         DaubechiesWavelet.SetOrder(n);
     }
 
-    public double[] Simulate() {
-        PadZeros();
-        addNoise(concatenated, 0, 0.001);
+    public double[] Simulate(int ecg_type) {
+
+        if (ecg_type == 0) {
+            PadZeros(146);
+            addNoise(concatenated, 0, 0.001);
+        }
+        else if (ecg_type == 1){
+            PadZeros(72);
+            addNoise(concatenated, 0, 0.001);
+        }
+        else if (ecg_type == -1){
+            PadZeros(218);
+            addNoise(concatenated,0,0.001);
+        }
+        else {
+            throw new IllegalArgumentException("ECG type must be -1, 0 or 1");
+        }
 
         return concatenated;
     }
 
-    private void PadZeros(){
-        int low = 140;
-        int high = 152;
-        int target_mean = (low + high)/2;
+    private void PadZeros(int target_mean){
+        int high = target_mean + 6;
 
         int step;
-        int pos = 146;
+        int pos = target_mean;
         int diff;
         float normalized_diff;
         int point_pointer = 0;
@@ -67,7 +79,7 @@ public class ECG {
                     step = Math.round(step*(1-Math.abs(normalized_diff)));
                 pos += step;
             }
-            
+
             int ii;
             for (ii = 0; ii < pos+20; ii += 1) {
                 if (ii < 20)

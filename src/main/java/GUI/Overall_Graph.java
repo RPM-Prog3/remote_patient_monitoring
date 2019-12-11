@@ -51,7 +51,7 @@ public class Overall_Graph {
 //        graph_panel.add(graphTemp.getGraph());
 
 //        graphECG.setGraph(data_Temp.getPoints());
-        graphBPress.setGraph(ecgdata.Simulate());
+        graphBPress.setGraph(ecgdata.Simulate(1));
 //        graphResp.setGraph(sin_array);
 //        graphTemp.setGraph(sin_array);
 
