@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.application.Platform;
 import simulation.BPM;
 import simulation.Value_Counter;
 
@@ -19,6 +20,8 @@ public class ECG_Vitals extends Vital_Values_Display {
     }
 
     public void Set_Displayed_Value(){
-        super.vital_value.setText(String.valueOf(val_counter.Index_Difference()/0.5));
+        Platform.runLater(() ->{
+            super.vital_value.setText(String.valueOf((int)(60/(val_counter.Index_Difference()*0.006))));
+        });
     }
 }

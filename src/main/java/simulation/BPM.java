@@ -1,5 +1,7 @@
 package simulation;
 
+import javafx.application.Platform;
+
 public class BPM extends Value_Counter{
     private int[] peak_idx;
     private boolean if_ok;

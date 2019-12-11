@@ -74,8 +74,6 @@ public class Panel_Controller {
         graphPanel.setLayout(new GridLayout(4, 1));
         graphPanel.setVisible(true);
 
-
-
         // Adding vital sign (BP, RR, HR, ECG) panels to vitalsPanel
         vitalsPanel.add(ECG_panel.getVitalsPanel());
         ECG_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
