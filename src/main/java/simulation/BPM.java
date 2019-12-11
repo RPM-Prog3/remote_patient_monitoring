@@ -15,12 +15,12 @@ public class BPM extends Value_Counter{
     }
 
     public void Count_bpm(double val, int index){
-        if (if_ok==false && val>0.4) {
+        if (!if_ok && val>=0.4) {
             peak_idx[which] = index;
             if_ok = true;
             which += 1;
         }
-        else if (if_ok==true && val<0.4)
+        else if (if_ok && val<0.4)
             if_ok = false;
 
         if (which == 2){

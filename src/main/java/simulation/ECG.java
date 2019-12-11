@@ -47,28 +47,46 @@ public class ECG {
 
     private void PadZeros(){
         //double[] zero_padding = new double[10];
-        int low = 144;
-        int high = 148;
+        int low = 140;
+        int high = 152;
+        int target_mean = (low + high)/2;
         int noisy_idx = 146;
 
-        concatenated = new double[100*high];
+        int step;
+        int pos = 146;
+        int diff;
+        float normalized_diff;
+
+        concatenated = new double[300*high];
         Random r = new Random();
 
         for (int i = 0; i<100; i+=1) {
 
-            if (r.nextInt(3) == 2)
-            {
-                noisy_idx = r.nextInt(high-low) + low;
-            }
+            //if (r.nextInt(3) == 2)
+            //{
 
-            for (int ii = 0; ii < noisy_idx; ii += 1) {
+                step = r.nextInt(13) - 6;
+//                System.out.println(step);
+                diff = pos - target_mean;
+                normalized_diff = (float)diff/(high-target_mean);
+                if (Math.abs(normalized_diff) >= 1)
+                    step *= -(int)(Math.signum(step)*Math.signum(normalized_diff));
+                else
+                    step = Math.round(step*(1-Math.abs(normalized_diff)));
+                pos += step;
+                System.out.println(pos);
+           // }
+
+            for (int ii = 0; ii < pos+20; ii += 1) {
                 if (ii < 20)
-                    concatenated[i*noisy_idx + ii] = array[ii];
+                    concatenated[i*(pos+20) + ii] = array[ii];
 //                System.out.println(concatenated[i+ii]);
                 if (ii >= 20)
-                    concatenated[i*noisy_idx + ii] = 0;
+                    concatenated[i*(pos+20) + ii] = 0;
             }
         }
+
+        System.out.println("\n\n\n");
 
 
 //        array = ArrayUtils.addAll
