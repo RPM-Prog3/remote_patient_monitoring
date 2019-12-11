@@ -49,13 +49,17 @@ public class ECG {
         //double[] zero_padding = new double[10];
         int low = 144;
         int high = 148;
+        int noisy_idx = 146;
 
         concatenated = new double[100*high];
         Random r = new Random();
 
         for (int i = 0; i<100; i+=1) {
 
-            int noisy_idx = r.nextInt(high-low) + low;
+            if (r.nextInt(3) == 2)
+            {
+                noisy_idx = r.nextInt(high-low) + low;
+            }
 
             for (int ii = 0; ii < noisy_idx; ii += 1) {
                 if (ii < 20)
