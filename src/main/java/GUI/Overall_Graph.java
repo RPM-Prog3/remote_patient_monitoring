@@ -59,20 +59,19 @@ public class Overall_Graph {
 
     public void updatePanel() {
         //Running four separate threads, one for each graph
-        refreshing1 = new Thread (new Refresh (graphECG));
-        refreshing2 = new Thread (new Refresh (graphBPress));
-        ecg_vit.Set_Displayed_Value();
-        refreshing3 = new Thread (new Refresh (graphResp));
-        refreshing4 = new Thread (new Refresh (graphTemp));
+//        refreshing1 = new Thread (new Refresh (graphECG));
+        refreshing2 = new Thread (new Refresh (graphBPress, ecg_vit));
+//        refreshing3 = new Thread (new Refresh (graphResp));
+//        refreshing4 = new Thread (new Refresh (graphTemp));
 
         //This makes sure that the program doesn't have to wait for each thread to be run
         Platform.runLater(new Runnable() {
             @Override
             public void run () {
-                refreshing1.start();
+//                refreshing1.start();
                 refreshing2.start();
-                refreshing3.start();
-                refreshing4.start();
+//                refreshing3.start();
+//                refreshing4.start();
             }
         });
     }
