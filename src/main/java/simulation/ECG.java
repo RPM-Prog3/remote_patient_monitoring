@@ -47,15 +47,22 @@ public class ECG {
 
     private void PadZeros(){
         //double[] zero_padding = new double[10];
-        concatenated = new double[3000];
+        int low = 144;
+        int high = 148;
+
+        concatenated = new double[100*high];
+        Random r = new Random();
 
         for (int i = 0; i<100; i+=1) {
-            for (int ii = 0; ii < 30; ii += 1) {
+
+            int noisy_idx = r.nextInt(high-low) + low;
+
+            for (int ii = 0; ii < noisy_idx; ii += 1) {
                 if (ii < 20)
-                    concatenated[i*30 + ii] = array[ii];
+                    concatenated[i*noisy_idx + ii] = array[ii];
 //                System.out.println(concatenated[i+ii]);
                 if (ii >= 20)
-                    concatenated[i*30 + ii] = 0;
+                    concatenated[i*noisy_idx + ii] = 0;
             }
         }
 

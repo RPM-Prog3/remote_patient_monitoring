@@ -38,15 +38,15 @@ public class Graph extends JFXPanel {
         tick = 10;
 
         delta = 0.1;
-        num_points_changed = 15;
+        num_points_changed = 1;
         RoundNumTicks();
 
         val_counter = obj;
 
         graphpanel = new JFXPanel();
         xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
-//        yAxis = new NumberAxis("Values for Y-Axis", 35, 40, 1);
-        yAxis = new NumberAxis();
+        yAxis = new NumberAxis("Values for Y-Axis", -1, 1, 1);
+//        yAxis = new NumberAxis();
 
         //Paying with the axis values
         xAxis.setTickLabelFormatter(new StringConverter<Number>() {
