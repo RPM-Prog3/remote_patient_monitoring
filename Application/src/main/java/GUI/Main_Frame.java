@@ -8,7 +8,7 @@ import java.awt.event.*;
 public class Main_Frame {
 
     static GraphicsConfiguration gc; // Class field containing config info
-//    private Thread refreshing;
+    //    private Thread refreshing;
     private JFrame mainPage;
     private JFXPanel mainPanel;
     private Panel_Controller controller;
@@ -47,5 +47,3 @@ public class Main_Frame {
 
     }
 }
-
-
