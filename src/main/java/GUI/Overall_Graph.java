@@ -1,6 +1,5 @@
 package GUI;
 
-import Temperature_Sim.RandomWalk;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import simulation.BPM;
@@ -15,15 +14,11 @@ public class Overall_Graph {
     private Graph graphECG, graphBPress, graphResp, graphTemp;  //These are the four different graphs
     private Thread refreshing1,refreshing2, refreshing3, refreshing4;  //These creates four different threads
 
-    private RandomWalk data_Temp;
-
     private ECG ecgdata;
     private ECG_Vitals ecg_vit;
     private Value_Counter bpm_obj;
 
     public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input) {
-        data_Temp = new RandomWalk();
-
         ecgdata = new ECG();
         ecg_vit = ecg_vit_input;
         bpm_obj = ecg_obj_input;
@@ -41,7 +36,7 @@ public class Overall_Graph {
         graph_panel.setLayout(new GridLayout(4, 1));
 
 //        graphECG = new Graph("chart-ECG");
-        graphBPress = new Graph("chart-Pressure", bpm_obj);
+        graphBPress = new Graph("chart-Pressure", bpm_obj, 0.006, 5);
 //        graphResp = new Graph("chart-Respiratory");
 //        graphTemp = new Graph("chart-Temperature");
 
@@ -51,7 +46,7 @@ public class Overall_Graph {
 //        graph_panel.add(graphTemp.getGraph());
 
 //        graphECG.setGraph(data_Temp.getPoints());
-        graphBPress.setGraph(ecgdata.Simulate(1));
+        graphBPress.setGraph(ecgdata.Simulate(0));
 //        graphResp.setGraph(sin_array);
 //        graphTemp.setGraph(sin_array);
 
