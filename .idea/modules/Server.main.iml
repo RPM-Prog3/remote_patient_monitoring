@@ -6,34 +6,13 @@
         <webroots>
           <root url="file://$MODULE_DIR$/../../Server/src/main/webapp" relative="/" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/META-INF" relative="/META-INF" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/META-INF/maven" relative="/META-INF/maven" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/META-INF/maven/com.google.code.gson" relative="/META-INF/maven/com.google.code.gson" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/META-INF/maven/com.google.code.gson/gson" relative="/META-INF/maven/com.google.code.gson/gson" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com" relative="/com" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google" relative="/com/google" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson" relative="/com/google/gson" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/annotations" relative="/com/google/gson/annotations" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/internal" relative="/com/google/gson/internal" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/internal/bind" relative="/com/google/gson/internal/bind" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/internal/bind/util" relative="/com/google/gson/internal/bind/util" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/reflect" relative="/com/google/gson/reflect" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/stream" relative="/com/google/gson/stream" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/META-INF" relative="/META-INF" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/META-INF/maven" relative="/META-INF/maven" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/META-INF/maven/javax.servlet" relative="/META-INF/maven/javax.servlet" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/META-INF/maven/javax.servlet/javax.servlet-api" relative="/META-INF/maven/javax.servlet/javax.servlet-api" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/javax" relative="/javax" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/javax/servlet" relative="/javax/servlet" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/javax/servlet/annotation" relative="/javax/servlet/annotation" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/javax/servlet/descriptor" relative="/javax/servlet/descriptor" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/javax/servlet/http" relative="/javax/servlet/http" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.websocket-api-1.0.jar_151af79ddbd2cc24c6fb4a11a7eb69d3/META-INF" relative="/META-INF" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.websocket-api-1.0.jar_151af79ddbd2cc24c6fb4a11a7eb69d3/META-INF/maven" relative="/META-INF/maven" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.websocket-api-1.0.jar_151af79ddbd2cc24c6fb4a11a7eb69d3/META-INF/maven/javax.websocket" relative="/META-INF/maven/javax.websocket" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.websocket-api-1.0.jar_151af79ddbd2cc24c6fb4a11a7eb69d3/META-INF/maven/javax.websocket/javax.websocket-api" relative="/META-INF/maven/javax.websocket/javax.websocket-api" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.websocket-api-1.0.jar_151af79ddbd2cc24c6fb4a11a7eb69d3/javax" relative="/javax" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.websocket-api-1.0.jar_151af79ddbd2cc24c6fb4a11a7eb69d3/javax/websocket" relative="/javax/websocket" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.websocket-api-1.0.jar_151af79ddbd2cc24c6fb4a11a7eb69d3/javax/websocket/server" relative="/javax/websocket/server" />
+          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/postgresql-9.1-901-1.jdbc4.jar_73190be59291ccc99767efb898d4ad81/META-INF" relative="/META-INF" />
+          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/postgresql-9.1-901-1.jdbc4.jar_73190be59291ccc99767efb898d4ad81/org" relative="/org" />
         </webroots>
       </configuration>
     </facet>
@@ -49,5 +28,6 @@
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.websocket:javax.websocket-api:1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: postgresql:postgresql:9.1-901-1.jdbc4" level="project" />
   </component>
 </module>
