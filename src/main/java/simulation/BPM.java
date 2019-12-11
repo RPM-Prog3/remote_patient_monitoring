@@ -1,7 +1,5 @@
 package simulation;
 
-import javafx.application.Platform;
-
 public class BPM extends Value_Counter{
     private int[] peak_idx;
     private boolean if_ok;
@@ -27,7 +25,6 @@ public class BPM extends Value_Counter{
             diff_samples = peak_idx[1] - peak_idx[0];
             peak_idx[0] = peak_idx[1];
             which = 1;
-            System.out.println(diff_samples);
         }
     }
 

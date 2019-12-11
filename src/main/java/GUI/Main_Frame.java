@@ -43,7 +43,7 @@ public class Main_Frame {
         // Closing program when when main frame is closed
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        //controller.updateController();
+        controller.updateController();
 
     }
 }
