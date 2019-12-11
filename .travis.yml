@@ -15,7 +15,12 @@ jobs:
   include:
     - stage:
       name: "Test App Build"
-      script: bash ./Scripts/app_build.sh; echo "HIIIIIIIII";
+      script:
+        - bash ./Scripts/app_build.sh;
+        - echo "HIIIIIIIII";
+        - echo $PWD
     - stage:
       name: "Test Server Build"
-      script: bash ./Scripts/server_build.sh
+      script:
+        - bash ./Scripts/server_build.sh
+        - echo $PWD
