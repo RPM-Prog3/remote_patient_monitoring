@@ -16,7 +16,7 @@ public class Graph extends JFXPanel {
     private String colorGraph;
 
     private NumberAxis xAxis, yAxis;
-    private int tick;
+    private float tick;
     static final double ROUNDING_VALUE = 0.00001;
     private float lowerbound, upperbound;
 
@@ -38,10 +38,10 @@ public class Graph extends JFXPanel {
         delta = sample_period;
         lowerbound = 0;
         upperbound = time_shown;
-        tick = 10;
+        tick = upperbound/5;
 
         num_points_changed = 1;
-        RoundNumTicks();
+        //RoundNumTicks();
 
         val_counter = obj;
 
@@ -51,19 +51,19 @@ public class Graph extends JFXPanel {
 //        yAxis = new NumberAxis();
 
         //Paying with the axis values
-//        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
-//            @Override
-//            public String toString(Number number) {
-//                for(int i=0; i<=roundedNumTicks; i+=1){
-//                    if (number.intValue() == (int)(lowerbound + i*tick))
-//                        return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            public Number fromString(String s) { return null; }
-//        });
+        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
+            @Override
+            public String toString(Number number) {
+                for(int i=0; i<=(int)((upperbound-lowerbound)/tick); i+=1){
+                    if (number.intValue() == (int)(lowerbound + i*tick))
+                        return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
+                }
+                return null;
+            }
+
+            @Override
+            public Number fromString(String s) { return null; }
+        });
 
         chart = new LineChart<Number, Number>(xAxis, yAxis); //creating the chart skeleton
         scene = new Scene(chart);
@@ -128,7 +128,7 @@ public class Graph extends JFXPanel {
         upperbound += num_points_changed*delta;
         xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
-        RoundNumTicks();
+        //RoundNumTicks();
 
 //        System.out.println("lower"+lowerbound);
 //        System.out.println("upper"+upperbound);
@@ -138,20 +138,20 @@ public class Graph extends JFXPanel {
 
     }
 
-    private void RoundNumTicks(){
-        roundedNumTicks = 0;
-        if (lowerbound-(int)lowerbound >= 0.5)
-            roundedNumTicks += (int)lowerbound + 1;
-        else
-            roundedNumTicks += (int)lowerbound;
-
-        if (upperbound-(int)upperbound >= 0.5)
-            roundedNumTicks += (int)upperbound + 1;
-        else
-            roundedNumTicks += (int)upperbound;
-
-        roundedNumTicks = roundedNumTicks/tick;
-    }
+//    private void RoundNumTicks(){
+//        roundedNumTicks = 0;
+//        if (lowerbound-(int)lowerbound >= 0.5)
+//            roundedNumTicks += (int)lowerbound + 1;
+//        else
+//            roundedNumTicks += (int)lowerbound;
+//
+//        if (upperbound-(int)upperbound >= 0.5)
+//            roundedNumTicks += (int)upperbound + 1;
+//        else
+//            roundedNumTicks += (int)upperbound;
+//
+//        roundedNumTicks = roundedNumTicks/tick;
+//    }
 
     public JFXPanel getGraph() {
         return graphpanel;
