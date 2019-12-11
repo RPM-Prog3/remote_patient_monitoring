@@ -41,7 +41,7 @@ public class Overall_Graph {
         graph_panel.setLayout(new GridLayout(4, 1));
 
 //        graphECG = new Graph("chart-ECG");
-        graphBPress = new Graph("chart-Pressure", bpm_obj);
+        graphBPress = new Graph("chart-Pressure", bpm_obj, 0.006, 5);
 //        graphResp = new Graph("chart-Respiratory");
 //        graphTemp = new Graph("chart-Temperature");
 
