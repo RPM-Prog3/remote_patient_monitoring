@@ -1,14 +1,3 @@
-#language: java
-#
-#script:
-#  - chmod +x Application/app_build.sh
-#  - cd Application/
-#  - ./app_build.sh
-#  - cd ..
-#  - chmod +x Server/server_build.sh
-#  - cd Server/
-#  - ./server_build.sh
-
 language: java
 
 jobs:
@@ -16,11 +5,12 @@ jobs:
     - stage:
       name: "Test App Build"
       script:
+        - chmod +x Scripts/app_build.sh
         - bash ./Scripts/app_build.sh;
-        - echo "HIIIIIIIII";
-        - echo $PWD
+        - echo "Completed App Build";
     - stage:
       name: "Test Server Build"
       script:
+        - chmod +x Scripts/server_build.sh
         - bash ./Scripts/server_build.sh
-        - echo $PWD
+        - echo "Completed Server Build"
