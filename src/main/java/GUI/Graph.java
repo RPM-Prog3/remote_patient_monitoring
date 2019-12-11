@@ -18,11 +18,11 @@ public class Graph extends JFXPanel {
     private NumberAxis xAxis, yAxis;
     private int tick;
     static final double ROUNDING_VALUE = 0.00001;
-    private double lowerbound, upperbound;
+    private float lowerbound, upperbound;
 
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
-    private int num_points_changed, point_pointer;
+    private int num_points_changed, point_pointer, series_pointer;
     private double delta;
     private double[] data_points;
 
@@ -31,13 +31,15 @@ public class Graph extends JFXPanel {
     private Value_Counter val_counter;
 
 
-    public Graph(String colorGraph, Value_Counter obj) {
-        point_pointer = 0;  //This looks at which index must be added next
+    public Graph(String colorGraph, Value_Counter obj, double sample_period, float time_shown) {
+        series_pointer = 0; //This looks at whcih point in the series to add next
+        point_pointer = 0;  //This looks at which index in the input data must be added next
+
+        delta = sample_period;
         lowerbound = 0;
-        upperbound = 50;
+        upperbound = time_shown;
         tick = 10;
 
-        delta = 0.1;
         num_points_changed = 1;
         RoundNumTicks();
 
@@ -49,19 +51,19 @@ public class Graph extends JFXPanel {
 //        yAxis = new NumberAxis();
 
         //Paying with the axis values
-        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
-            @Override
-            public String toString(Number number) {
-                for(int i=0; i<=roundedNumTicks; i+=1){
-                    if (number.intValue() == (int)(lowerbound + i*tick))
-                        return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
-                }
-                return null;
-            }
-
-            @Override
-            public Number fromString(String s) { return null; }
-        });
+//        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
+//            @Override
+//            public String toString(Number number) {
+//                for(int i=0; i<=roundedNumTicks; i+=1){
+//                    if (number.intValue() == (int)(lowerbound + i*tick))
+//                        return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            public Number fromString(String s) { return null; }
+//        });
 
         chart = new LineChart<Number, Number>(xAxis, yAxis); //creating the chart skeleton
         scene = new Scene(chart);
@@ -74,11 +76,18 @@ public class Graph extends JFXPanel {
 
         data_points = input_data;
 
-        for (double i = 0; i <= 50; i += delta) {
-            function.getData().add(new XYChart.Data<Number, Number>(i, data_points[point_pointer]));
-            val_counter.Count_bpm(data_points[point_pointer], point_pointer);
-            point_pointer += 1;
+//        for (double i = 0; i <= 5; i += delta) {
+//            function.getData().add(new XYChart.Data<Number, Number>(i, data_points[point_pointer]));
+//            val_counter.Count_bpm(data_points[point_pointer], point_pointer);
+//            point_pointer += 1;
+//        }
+
+        for (double i = 0; i <= 5; i += delta) {
+            function.getData().add(new XYChart.Data<Number, Number>(i, 0));
+            series_pointer += 1;
         }
+
+        System.out.println(point_pointer);
 
         chart.getData().add(function);
         chart.getStyleClass().add(colorGraph);
@@ -107,10 +116,11 @@ public class Graph extends JFXPanel {
         chart.setAnimated(false);
 
         for (int i=0; i<num_points_changed; i+=1) {
-            double x = point_pointer*delta;
+            double x = series_pointer*delta;
             function.getData().add(new XYChart.Data<Number, Number>(x, data_points[point_pointer]));
             val_counter.Count_bpm(data_points[point_pointer], point_pointer);
             point_pointer += 1;
+            series_pointer += 1;
         }
 
         xAxis.setAnimated(false);
