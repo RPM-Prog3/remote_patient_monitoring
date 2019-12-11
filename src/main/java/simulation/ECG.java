@@ -50,6 +50,9 @@ public class ECG {
         int low = 144;
         int high = 148;
         int noisy_idx = 146;
+        int target_mean = 146;
+        int step = 1;
+        int adjustment = 2;
 
         concatenated = new double[100*high];
         Random r = new Random();
@@ -58,7 +61,21 @@ public class ECG {
 
             if (r.nextInt(3) == 2)
             {
-                noisy_idx = r.nextInt(high-low) + low;
+                if (r.nextBoolean() == true)
+                {
+                    step = r.nextInt(5) + target_mean;
+                }
+                else
+                {
+                    step = -(r.nextInt(5) + target_mean);
+                }
+
+                int next_idx = noisy_idx + step;
+                int diff = next_idx - target_mean;
+                adjustment = (int)(Math.signum(diff)) * step;
+
+
+                //noisy_idx = r.nextInt(high-low) + low;
             }
 
             for (int ii = 0; ii < noisy_idx; ii += 1) {
