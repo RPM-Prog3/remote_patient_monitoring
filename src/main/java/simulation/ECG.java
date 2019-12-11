@@ -36,11 +36,7 @@ public class ECG {
     public double[] Simulate() {
         PadZeros();
 
-//        for (int i = 0; i<100; i+=1)
-//            for (int ii=0; ii<30; ii+=1){
-//                System.out.println(concatenated[i+ii]);
-//            }
-        addNoise(concatenated, 0, 0.001);
+        //addNoise(concatenated, 0, 0.001);
 
         return concatenated;
     }
@@ -78,7 +74,7 @@ public class ECG {
                 System.out.println(pos);
            // }
 
-            for (int ii = 0; ii < pos+20; ii += 1) {
+            for (int ii = 0; ii < (pos+20); ii += 1) {
                 if (ii < 20)
                     concatenated[i*(pos+20) + ii] = array[ii];
 //                System.out.println(concatenated[i+ii]);
