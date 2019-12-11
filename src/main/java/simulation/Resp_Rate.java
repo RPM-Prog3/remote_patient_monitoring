@@ -10,7 +10,7 @@ public class Resp_Rate {
     double resp_variance;
     double random_threshold;
     int period;
-    int counter;
+    double counter;
     Random r;
 
     public Resp_Rate(double target_mean_resp_rate, double resp_variance, double random_threshold, int period){
@@ -19,7 +19,7 @@ public class Resp_Rate {
         this.random_threshold = random_threshold;
         this.period = period;
         counter = 0;
-        Random r = new Random();
+        r = new Random();
     }
 
     public Resp_Rate(double target_mean_resp_rate, double resp_variance, double random_threshold, int period, int array_size){
@@ -29,15 +29,15 @@ public class Resp_Rate {
         this.random_threshold = random_threshold;
         this.period = period;
         counter = 0;
-        Random r = new Random();
+        r = new Random();
     }
 
     public double get_next_value(){
-        counter += 1;
-        double sin = Math.sin(counter / period);
+        counter += 1 + Math.abs(r.nextGaussian() * resp_variance);
+        double sin = Math.sin(counter / period) * 20;
         if (sin < random_threshold){
             counter -= Math.abs(r.nextGaussian() * resp_variance);
-            sin = Math.sin(counter / period);
+            sin = Math.sin(counter / period) * 20;
         }
         return sin + target_mean_resp_rate;
     }
@@ -49,6 +49,7 @@ public class Resp_Rate {
     }
 
     public double[] get_array(){
+        fill_array();
         return array;
     }
 }
