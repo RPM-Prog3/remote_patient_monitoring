@@ -8,6 +8,7 @@ public class BPM extends Value_Counter{
 
     public BPM(){
         peak_idx = new int[2];
+        diff_samples = 100000;
         if_ok = false;
         which = 0;
     }
