@@ -15,10 +15,21 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 ### Vitals requirements:
 
 - [ ] Body temperature
-- [ ] Heart rate
+  - [ ] Current temperature
+  - [x] Normal
+  - [ ] Abnormal
 - [ ] Respiratory rate
+  - [ ] Current rate
+  - [x] Normal
+  - [ ] Abnormal
 - [ ] Blood pressure
+  - [ ] Max & min pressure
+  - [x] Normal
+  - [ ] Abnormal
 - [ ] ECG
+  - [x] BPM (HR)
+  - [x] Normal
+  - [ ] Abnormal
 
 ### Feature requirements:
 
@@ -55,9 +66,6 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 
 ![Patient Management Database](misc/patients_log_management.jpg)
 
-### App.GUI Branch:
-
-![Current App.GUI version](misc/current_gui.jpg)
 
 ### Examples from Industry:
 
@@ -66,3 +74,13 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 ![Simulation Working Document](misc/ExampleOfGui_2.jpg)
 
 ![Simulation Working Document](misc/ExampleOfGui_3.jpg)
+
+### Our Progress:
+
+#### First GUI:
+
+![First GUI version](misc/first_gui.jpg)
+
+#### GUI with custom signals:
+
+![GUI with signals version](misc/gui_with_custom_signals.png)
