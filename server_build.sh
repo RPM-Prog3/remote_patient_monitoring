@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ev
 echo "Running for server"
-cd $PWD
+echo $PWD
 cd Server/
 sudo apt update
 chmod +x gradlew

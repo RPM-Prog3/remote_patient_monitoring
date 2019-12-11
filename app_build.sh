@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ev
 echo "Running for application"
-cd $PWD
+echo $PWD
 cd Application/
 sudo apt update
 sudo apt install openjfx
