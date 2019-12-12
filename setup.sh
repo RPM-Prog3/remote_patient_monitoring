@@ -21,7 +21,7 @@ else
   then
     read -p "Enter the IP of the server: " ip
   else
-    ip="SERVER_IP_HERE"
+    ip="YOUR_VARIABLE_HERE"
   fi
 fi
 
@@ -48,8 +48,8 @@ then
       read -p "Enter your database password: " db_password
     fi
   else
-    db_user_name="YOUR_USER_NAME_HERE"
-    db_password="YOUR_PASSWORD_HERE"
+    db_user_name="YOUR_VARIABLE_HERE"
+    db_password="YOUR_VARIABLE_HERE"
   fi
 
   echo "-----------------------------------------------"
@@ -68,7 +68,7 @@ then
       read -p "Enter the custom database name: " db_name
     fi
   else
-    db_name="YOUR_DATABASE_NAME_HERE"
+    db_name="YOUR_VARIABLE_HERE"
   fi
 
   echo "-----------------------------------------------"

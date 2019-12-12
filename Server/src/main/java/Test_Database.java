@@ -1,7 +1,5 @@
 import Database.Manage_Patient_Db;
-import Setup.ReadPropertyFile;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 

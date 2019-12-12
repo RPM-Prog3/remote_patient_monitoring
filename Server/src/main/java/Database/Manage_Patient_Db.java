@@ -1,12 +1,10 @@
 package Database;
 
-import Setup.ReadPropertyFile;
+import Setup.Read_Property_File;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 public class Manage_Patient_Db {
     private String db_name;
@@ -16,7 +14,7 @@ public class Manage_Patient_Db {
 
     public Manage_Patient_Db() throws IOException, SQLException {
         table_name = "patients";
-        ReadPropertyFile rpf = new ReadPropertyFile();
+        Read_Property_File rpf = new Read_Property_File();
 
         // variables for the users database
         db_name = rpf.get_db_name();
