@@ -1,8 +1,7 @@
 package GUI;
 
 import javafx.embed.swing.JFXPanel;
-import simulation.BPM;
-import simulation.Value_Counter;
+import simulation.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -21,10 +20,16 @@ public class Panel_Controller {
     private Dimension graph_panel_dim, simulation_panel_dim, main_panel_dim_, sub_vitals_panel_dim;
 
     private BPM bpm_counter;
+    private Pressure_Counting press_counter;
+    private Respiration_Counting resp_counter;
+    private Temperature_Counting temp_counter;
 
     public Panel_Controller(Dimension main_panel_dim) {
         // Instantiating objects to display value
         bpm_counter = new BPM();
+        press_counter = new Pressure_Counting();
+        resp_counter = new Respiration_Counting();
+        temp_counter = new Temperature_Counting();
 
         // Instantiating main panel and the several sub panels
         mainPanel = new JFXPanel();
@@ -63,13 +68,13 @@ public class Panel_Controller {
         sub_vitals_panel_dim.width = (int)((main_panel_dim_.width*(s_v_ratio_den - s_v_ratio_num))/(s_v_ratio_den));
         sub_vitals_panel_dim.height = (int)((main_panel_dim_.height*s_t_ratio_num)/(s_v_ratio_den*4));
 
-        BP_panel = new BP_Vitals(sub_vitals_panel_dim);
-        RR_panel = new RR_Vitals(sub_vitals_panel_dim);
+        BP_panel = new BP_Vitals(sub_vitals_panel_dim, press_counter);
+        RR_panel = new RR_Vitals(sub_vitals_panel_dim, resp_counter);
         ECG_panel = new ECG_Vitals(sub_vitals_panel_dim, bpm_counter);
-        HR_panel = new HR_Vitals(sub_vitals_panel_dim);
+        HR_panel = new HR_Vitals(sub_vitals_panel_dim, temp_counter);
 
         // Instantiating graph panel
-        graphs = new Overall_Graph(bpm_counter, ECG_panel, HR_panel, BP_panel, RR_panel);
+        graphs = new Overall_Graph(bpm_counter, ECG_panel, temp_counter, HR_panel,press_counter, BP_panel, resp_counter, RR_panel);
         graphPanel = graphs.getGraphPanel();
         graphPanel.setLayout(new GridLayout(4, 1));
         graphPanel.setVisible(true);
