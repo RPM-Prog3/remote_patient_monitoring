@@ -11,15 +11,19 @@ import java.io.PrintWriter;
 public class Server_Main extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
-            IOException {
-        resp.getWriter().write("We provide live App.simulation of patient's vital signs for monitoring!");
-        req.getServletPath();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Do get - sends to app");
+        resp.getWriter().write("We provide live simulation of patient's vital signs for monitoring!");
+        String serv_path = req.getServletPath();
+        System.out.println(serv_path);
+        System.out.println(req);
+        System.out.println(resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
-            IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Do post - app sends to server");
+        System.out.println(req);
+        System.out.println(resp);
     }
-
 }

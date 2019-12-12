@@ -11,7 +11,7 @@ import java.util.Properties;
 public class ReadPropertyFile {
     Properties prop;
 
-    public ReadPropertyFile() throws IOException {
+    public ReadPropertyFile(String config_path) throws IOException {
         // Resource to setup properties: https://medium.com/@sonaldwivedi/how-to-read-config-properties-file-in-java-6a501dc96b25
         prop = new Properties();
         String config_path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Server/config.properties";
