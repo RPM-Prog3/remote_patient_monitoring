@@ -13,6 +13,8 @@ public class BPM extends Value_Counter{
         which = 0;
     }
 
+    public void Current_Temp(double val){}
+
     public void Count_bpm(double val, int index){
         if (!if_ok && val>=0.4) {
             peak_idx[which] = index;
