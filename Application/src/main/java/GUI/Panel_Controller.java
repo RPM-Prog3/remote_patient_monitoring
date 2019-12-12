@@ -123,10 +123,10 @@ public class Panel_Controller {
         sub_vitals_panel_dim.width = (int) ((main_panel_dim_.width * (s_v_ratio_den - s_v_ratio_num)) / (s_v_ratio_den));
         sub_vitals_panel_dim.height = (int) ((main_panel_dim_.height * s_t_ratio_num) / (s_v_ratio_den * 4));
 
-        BP_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
-        HR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
-        ECG_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
-        RR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+//        BP_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+//        HR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+//        ECG_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
+//        RR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
     }
 
     public void updateController() {

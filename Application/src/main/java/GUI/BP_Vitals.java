@@ -11,7 +11,7 @@ public class BP_Vitals extends Vital_Values_Display {
     public BP_Vitals(Dimension vitals_panel_dim, Pressure_Counting obj){
         super(vitals_panel_dim, "label-Pressure");
         super.status_msg.setText("STABLE");
-        super.vital_type.setText("B\nP");
+        super.vital_type.setText("BP");
         super.vital_value.setText("VALUE");
 
         press_val_counter = obj;

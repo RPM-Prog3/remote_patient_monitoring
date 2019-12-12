@@ -13,7 +13,7 @@ public class ECG_Vitals extends Vital_Values_Display {
     public ECG_Vitals(Dimension vitals_panel_dim, BPM obj){
         super(vitals_panel_dim, "label-ECG");
         super.status_msg.setText("STABLE");
-        super.vital_type.setText("E\nC\nG");
+        super.vital_type.setText("ECG");
         super.vital_value.setText("VALUE");
 
         ecg_val_counter = obj;

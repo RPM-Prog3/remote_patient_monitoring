@@ -68,7 +68,7 @@ public class ECG {
 
         for (int i = 0; i<100; i+=1) {
 
-            if (r.nextInt(3) == 2)
+            if (r.nextInt(2) == 0)
             {
                 step = r.nextInt(13) - 6;
                 diff = pos - target_mean;
