@@ -12,12 +12,16 @@ public class Refresh implements Runnable{
         this.ecg_vit = ecg_vit;
     }
 
+    public Refresh(Graph graph) {
+        this.graph =graph;
+    }
+
     public void run() {
         try{
             //Thread.sleep(1000);
             while (1<2) {
                 graph.updateGraph();
-                ecg_vit.Set_Displayed_Value();
+                //ecg_vit.Set_Displayed_Value();
                 Thread.sleep(6);
             }
 

@@ -47,6 +47,7 @@ public class Blood_Pressure {
     }
 
     public double[] get_array(){
+        fill_array();
         return array;
     }
 }

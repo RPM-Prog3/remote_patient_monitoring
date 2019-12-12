@@ -2,7 +2,7 @@ package simulation;
 
 import java.util.Random;
 
-public class Body_Temp {
+public class Body_Temp{
 
     double []array;
     double mean_temp;
@@ -30,6 +30,8 @@ public class Body_Temp {
     }
 
     public double[] get_array(){
+        fill_array();
         return array;
     }
+
 }

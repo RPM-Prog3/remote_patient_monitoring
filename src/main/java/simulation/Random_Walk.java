@@ -15,7 +15,7 @@ public class Random_Walk {
         this.pos = target_mean;
         this.sigma = sigma;
         this.adjustment_speed = adjustment_speed;
-        Random r = new Random();
+        r = new Random();
     }
 
     private double sample_gaussian(double mean, double sigma){

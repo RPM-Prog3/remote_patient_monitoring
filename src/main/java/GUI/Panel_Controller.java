@@ -69,7 +69,7 @@ public class Panel_Controller {
         HR_panel = new HR_Vitals(sub_vitals_panel_dim);
 
         // Instantiating graph panel
-        graphs = new Overall_Graph(bpm_counter, ECG_panel);
+        graphs = new Overall_Graph(bpm_counter, ECG_panel, HR_panel, BP_panel, RR_panel);
         graphPanel = graphs.getGraphPanel();
         graphPanel.setLayout(new GridLayout(4, 1));
         graphPanel.setVisible(true);
