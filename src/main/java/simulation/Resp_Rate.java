@@ -49,6 +49,7 @@ public class Resp_Rate {
     }
 
     public double[] get_array(){
+        fill_array();
         return array;
     }
 }
