@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ECG_Vitals extends Vital_Values_Display {
-    private BPM val_counter;
+    private BPM ecg_val_counter;
 
     public ECG_Vitals(Dimension vitals_panel_dim, BPM obj){
         super(vitals_panel_dim, "label-ECG");
@@ -16,12 +16,12 @@ public class ECG_Vitals extends Vital_Values_Display {
         super.vital_type.setText("E\nC\nG");
         super.vital_value.setText("VALUE");
 
-        val_counter = obj;
+        ecg_val_counter = obj;
     }
 
     public void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf((int)(60/(val_counter.Index_Difference()*0.006))));
+            super.vital_value.setText(String.valueOf((int)(60/(ecg_val_counter.Index_Difference()*0.006))));
         });
     }
 }

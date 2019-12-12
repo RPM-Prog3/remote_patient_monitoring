@@ -49,48 +49,7 @@ public class Graph extends JFXPanel {
 
         graphpanel = new JFXPanel();
         xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
-        yAxis = new NumberAxis("Values for Y-Axis", -1, 1, 1);
-//        yAxis = new NumberAxis();
-
-        //Paying with the axis values
-        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
-            @Override
-            public String toString(Number number) {
-                for(int i=0; i<=(int)((upperbound-lowerbound)/tick); i+=1){
-                    if (number.intValue() == (int)(lowerbound + i*tick))
-                        return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
-                }
-                return null;
-            }
-
-            @Override
-            public Number fromString(String s) { return null; }
-        });
-
-        chart = new LineChart<Number, Number>(xAxis, yAxis); //creating the chart skeleton
-        scene = new Scene(chart);
-        function = new XYChart.Series<Number, Number>();
-
-        this.colorGraph = colorGraph;
-    }
-
-    public Graph(String colorGraph, double sample_period, float time_shown) {
-        series_pointer = 0; //This looks at whcih point in the series to add next
-        point_pointer = 0;  //This looks at which index in the input data must be added next
-
-        delta = sample_period;
-        lowerbound = 0;
-        upperbound = time_shown;
-        tick = upperbound/5;
-
-        num_points_changed = 1;
-        //RoundNumTicks();
-
-        val_counter = new BPM();
-
-        graphpanel = new JFXPanel();
-        xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
-        //yAxis = new NumberAxis("Values for Y-Axis", 48, 52, 1);
+//        yAxis = new NumberAxis("Values for Y-Axis", -1, 1, 1);
         yAxis = new NumberAxis();
 
         //Paying with the axis values

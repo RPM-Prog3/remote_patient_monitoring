@@ -9,4 +9,6 @@ public abstract class Value_Counter {
 
     public abstract int Index_Difference();
 
+    public abstract double Double_Value();
+
 }
