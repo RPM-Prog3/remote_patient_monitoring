@@ -1,10 +1,16 @@
 language: java
 
-script:
-  - chmod +x Application/app_build.sh
-  - cd Application/
-  - ./app_build.sh
-  - cd ..
-  - chmod +x Server/server_build.sh
-  - cd Server/
-  - ./server_build.sh
+jobs:
+  include:
+    - stage:
+      name: "Test App Build"
+      script:
+        - chmod +x Scripts/app_build.sh
+        - bash ./Scripts/app_build.sh;
+        - echo "Completed App Build";
+    - stage:
+      name: "Test Server Build"
+      script:
+        - chmod +x Scripts/server_build.sh
+        - bash ./Scripts/server_build.sh
+        - echo "Completed Server Build"

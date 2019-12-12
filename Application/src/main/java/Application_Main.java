@@ -1,6 +1,6 @@
 import GUI.Main_Frame;
 
-public class Applicatiion_Main {
+public class Application_Main {
     public static void main(String[] args) {
 
         //UserLogIn welcome = new UserLogIn();

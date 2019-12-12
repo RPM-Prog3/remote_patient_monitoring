@@ -1,6 +1,9 @@
 package GUI;
 
 import javafx.embed.swing.JFXPanel;
+import simulation.BPM;
+import simulation.Value_Counter;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -17,26 +20,27 @@ public class Panel_Controller {
     private int s_v_ratio_num, s_v_ratio_den, s_t_ratio_num, s_t_ratio_den;
     private Dimension graph_panel_dim, simulation_panel_dim, main_panel_dim_, sub_vitals_panel_dim;
 
+    private BPM bpm_counter;
+
     public Panel_Controller(Dimension main_panel_dim) {
+        // Instantiating objects to display value
+        bpm_counter = new BPM();
+
         // Instantiating main panel and the several sub panels
         mainPanel = new JFXPanel();
         tuningPanel = new JFXPanel();
         simulationPanel = new JFXPanel();
         vitalsPanel = new JFXPanel();
-        graphs = new Overall_Graph();
-        graphPanel = graphs.getGraphPanel();
-
 
         this.main_panel_dim_ = main_panel_dim;
-        s_v_ratio_num = 8; //App.simulation panel to vitals panel numerator value of ratio (in width)
-        s_v_ratio_den = 10; //App.simulation panel to vitals panel denominator value of ratio (in width)
-        s_t_ratio_num = 8; //App.simulation panel to tuning  panel numerator value of ratio (in height)
-        s_t_ratio_den = 10; //App.simulation panel to tuning panel denominator value of ratio (in height)
+        s_v_ratio_num = 8; //simulation panel to vitals panel numerator value of ratio (in width)
+        s_v_ratio_den = 10; //simulation panel to vitals panel denominator value of ratio (in width)
+        s_t_ratio_num = 8; //simulation panel to tuning  panel numerator value of ratio (in height)
+        s_t_ratio_den = 10; //simulation panel to tuning panel denominator value of ratio (in height)
 
         // Setting the layout of the main panel and of the several sub panels
         mainPanel.setLayout(new BorderLayout());
         simulationPanel.setLayout(new BorderLayout());
-        graphPanel.setLayout(new GridLayout(4, 1));
         vitalsPanel.setLayout(new GridLayout(4, 1));
 
         // Making the various visible
@@ -44,7 +48,6 @@ public class Panel_Controller {
         tuningPanel.setVisible(true);
         simulationPanel.setVisible(true);
         vitalsPanel.setVisible(true);
-        graphPanel.setVisible(true);
 
         // Instantiating border object(s)
         border = BorderFactory.createLineBorder(Color.black);
@@ -62,8 +65,14 @@ public class Panel_Controller {
 
         BP_panel = new BP_Vitals(sub_vitals_panel_dim);
         RR_panel = new RR_Vitals(sub_vitals_panel_dim);
-        ECG_panel = new ECG_Vitals(sub_vitals_panel_dim);
+        ECG_panel = new ECG_Vitals(sub_vitals_panel_dim, bpm_counter);
         HR_panel = new HR_Vitals(sub_vitals_panel_dim);
+
+        // Instantiating graph panel
+        graphs = new Overall_Graph(bpm_counter, ECG_panel, HR_panel, BP_panel, RR_panel);
+        graphPanel = graphs.getGraphPanel();
+        graphPanel.setLayout(new GridLayout(4, 1));
+        graphPanel.setVisible(true);
 
         // Adding vital sign (BP, RR, HR, ECG) panels to vitalsPanel
         vitalsPanel.add(ECG_panel.getVitalsPanel());
@@ -120,6 +129,3 @@ public class Panel_Controller {
         graphPanel = graphs.getGraphPanel();
     }
 }
-
-
-

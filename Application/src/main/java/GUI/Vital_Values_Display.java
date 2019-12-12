@@ -2,6 +2,7 @@ package GUI;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -64,11 +65,18 @@ public abstract class Vital_Values_Display {
 
         //Applying the css
         status_msg.getStyleClass().add(colorLabels);
-        status_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/GUI/Scenes.css");
+
+        System.out.println(System.getProperty("user.dir").toString());
+
+        String style_location = "file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/GUI/Scenes.css";
+
+        System.out.println(style_location);
+
+        status_scene.getStylesheets().add(style_location);
         vital_value.getStyleClass().add(colorLabels);
-        value_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/GUI/Scenes.css");
+        value_scene.getStylesheets().add(style_location);
         vital_type.getStyleClass().add(colorLabels);
-        type_scene.getStylesheets().add("file:/" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/GUI/Scenes.css");
+        type_scene.getStylesheets().add(style_location);
 
         // Instantiating border object(s)
         border = BorderFactory.createLineBorder(Color.black);
@@ -128,5 +136,7 @@ public abstract class Vital_Values_Display {
         vital_type.setMaxSize(type_dim.width/7, type_dim.height);
         vital_type.setMinSize(type_dim.width/7, type_dim.height);
     }
-}
 
+    abstract protected void Set_Displayed_Value();
+
+}
