@@ -32,4 +32,6 @@ public class BPM extends Value_Counter{
     public int Index_Difference(){
         return diff_samples;
     }
+
+    public double Double_Value(){ return 0; }
 }
