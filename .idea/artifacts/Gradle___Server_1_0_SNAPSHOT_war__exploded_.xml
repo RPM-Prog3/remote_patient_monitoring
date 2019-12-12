@@ -1,0 +1,26 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Gradle : Server-1.0-SNAPSHOT.war (exploded)">
+    <output-path>$PROJECT_DIR$/Server/build/libs/exploded/Server-1.0-SNAPSHOT.war</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$/Server">
+        <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/Server/build/libs/exploded/Server-1.0-SNAPSHOT.war/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="Server.main/web/Web Gradle : Server-1.0-SNAPSHOT.war" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Server.main" />
+          <element id="dir-copy" path="$PROJECT_DIR$/Server/build/resources/main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: com.google.code.gson:gson:2.7" />
+          <element id="library" level="project" name="Gradle: postgresql:postgresql:9.1-901-1.jdbc4" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
