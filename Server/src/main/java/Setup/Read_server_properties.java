@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class Read_server_properties extends Read_Property_File {
 
-    public Read_server_properties(String db_config_path) throws IOException {
-        super(db_config_path);
+    public Read_server_properties(String server_config_path) throws IOException {
+        super(server_config_path);
     }
 
     public String get_server_ip() {

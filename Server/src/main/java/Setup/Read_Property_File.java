@@ -43,4 +43,8 @@ public class Read_Property_File {
             }
         }
     }
+
+    public static String get_user_dir(){
+        return System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20");
+    }
 }

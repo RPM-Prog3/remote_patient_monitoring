@@ -1,6 +1,6 @@
 package Database;
 
-import Setup.Read_Property_File;
+import Setup.Read_db_properties;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,8 +13,12 @@ public class Manage_Patient_Db {
     private String user_name, password;
 
     public Manage_Patient_Db() throws IOException, SQLException {
+
+        String user_dir = Read_db_properties.get_user_dir();
+        String db_config_path = user_dir + "/Server/db_config.properties";
+
         table_name = "patients";
-        Read_Property_File rpf = new Read_Property_File();
+        Read_db_properties rpf = new Read_db_properties(db_config_path);
 
         // variables for the users database
         db_name = rpf.get_db_name();
