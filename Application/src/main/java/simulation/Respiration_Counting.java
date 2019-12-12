@@ -6,6 +6,8 @@ public class Respiration_Counting extends Value_Counter {
 
     }
 
+    public void Current_Temp(double val){}
+
     public void Count_bpm(double val, int index){}
 
     public int Index_Difference(){ return 0; }

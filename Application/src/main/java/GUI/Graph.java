@@ -51,6 +51,7 @@ public class Graph extends JFXPanel {
         xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
 //        yAxis = new NumberAxis("Values for Y-Axis", -1, 1, 1);
         yAxis = new NumberAxis();
+        yAxis.setForceZeroInRange(false);
 
         //Paying with the axis values
         xAxis.setTickLabelFormatter(new StringConverter<Number>() {
@@ -121,6 +122,7 @@ public class Graph extends JFXPanel {
             double x = series_pointer*delta;
             function.getData().add(new XYChart.Data<Number, Number>(x, data_points[point_pointer]));
             val_counter.Count_bpm(data_points[point_pointer], point_pointer);
+            val_counter.Current_Temp(data_points[point_pointer]);
             point_pointer += 1;
             series_pointer += 1;
         }
