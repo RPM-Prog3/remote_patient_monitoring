@@ -37,7 +37,6 @@ public class Read_Property_File {
     protected void check_config_not_unedited() throws IllegalArgumentException {
         Set<String> keys = prop.stringPropertyNames();
         for (String key : keys) {
-            System.out.println(key + " : " + prop.getProperty(key));
             if (prop.getProperty(key).equals("YOUR_VARIABLE_HERE")){
                 throw new IllegalArgumentException(String.format("%s has not be changed in %s. Please change this.", key, config_path));
             }

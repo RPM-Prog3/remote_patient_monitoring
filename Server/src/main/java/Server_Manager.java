@@ -12,7 +12,7 @@ public class Server_Manager {
         server_ip = server_prop.get_server_ip();
     }
 
-    public void recieve_patient_from_client(){
+    public void receive_patient_from_client(){
 
     }
 

@@ -13,19 +13,39 @@ read -p "Is this computer hosting the server or a client (regular app)? [Write y
 
 if [ "${hosting}" = y ]
 then
-  ip="localhost"
+  ip="127.0.0.1"
+
+  read -p "Do you want to use the default port? [Write y to use default port]: " default_port
+  if [ "${default_port}" = "y" ]
+    then
+      server_port="8080"
+    else
+      read -p "Enter the port of the server: " server_port
+    fi
 else
-  read -p "Do you want to set the server IP now? [Write y to set IP now]: " set_ip_now
+  read -p "Do you want to set the server details now? [Write y to set now]: " set_ip_now
 
   if [ "${set_ip_now}" = "y" ]
   then
     read -p "Enter the IP of the server: " ip
+
+    read -p "Do you want to use the default port? [Write y to use default port]: " default_port
+
+    if [ "${default_port}" = "y" ]
+    then
+      server_port="8080"
+    else
+      read -p "Enter the port of the server: " server_port
+    fi
+
   else
     ip="YOUR_VARIABLE_HERE"
+    server_port="YOUR_VARIABLE_HERE"
   fi
 fi
 
 echo "server_ip=${ip}" >> server_config.properties
+echo "server_port=${server_port}" >> server_config.properties
 echo "Server config setup done."
 
 if [ "${hosting}" = y ]
