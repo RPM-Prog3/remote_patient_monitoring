@@ -7,10 +7,10 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Application.main" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:linux:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:linux:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:linux:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:13" level="project" />
-    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:linux:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:linux:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:linux:13" level="project" />
