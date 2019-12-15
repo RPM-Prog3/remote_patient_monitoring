@@ -1,6 +1,6 @@
 import Data.Patient;
 import Data.User;
-import Database.Manage_User_Db;
+import Database.Manage_User_db;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -79,7 +79,7 @@ public class Run_Server extends HttpServlet {
             Gson gson = new Gson();
             User u = gson.fromJson(reqBody, User.class);
             u.print_username();
-            Manage_User_Db user_db = new Manage_User_Db();
+            Manage_User_db user_db = new Manage_User_db();
             boolean valid_user = user_db.find_user(u);
             if (valid_user){
                 System.out.println("valid user");
