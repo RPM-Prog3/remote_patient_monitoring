@@ -1,11 +1,4 @@
-import Database.Manage_Patient_Db;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
 import java.sql.SQLException;
 
 public class Test_Database {

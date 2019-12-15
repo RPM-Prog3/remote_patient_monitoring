@@ -3,7 +3,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -12,8 +11,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns={""},loadOnStartup = 1)
-public class Server_Main extends HttpServlet {
+@WebServlet(
+        name = "remote_patient_monitoring_server",
+        description = "remote_patient_monitoring_server",
+        urlPatterns = {
+                "/rpm",
+                "/rpm/add_patient"
+                }
+        )
+public class Run_Server extends HttpServlet {
+
+    public Run_Server() {
+        print_datetime();
+        System.out.println("Starting server");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,8 +34,22 @@ public class Server_Main extends HttpServlet {
         String server_path = req.getServletPath();
         String method = req.getMethod();
 
-        resp.setContentType("text/html");
-        resp.setCharacterEncoding("UTF-8");
+        String reqBody = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+
+        System.out.println(server_path);
+        System.out.println(method);
+        System.out.println(reqBody);
+
+        if (server_path.equals("/rpm/add_patient")){
+            String familyname = req.getParameter("familyname");
+            String givenname = req.getParameter("givenname");
+            String dofbirth = req.getParameter("dofbirth");
+            String email = req.getParameter("email");
+            String phonenumber = req.getParameter("phonenumber");
+
+            System.out.println(String.format("%s, %s, %s, %s, %s", familyname, givenname, dofbirth, email, phonenumber));
+            
+        }
 
         PrintWriter writer = resp.getWriter();
         writer.append("Hello get");
@@ -35,6 +60,11 @@ public class Server_Main extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         print_datetime();
         System.out.println("Do post - sent to server");
+
+
+        String orderNumber = req.getParameter("testString");
+        System.out.println(orderNumber);
+        resp.getWriter().print(orderNumber);
 
 //        String reqBody= req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 //        resp.setContentType("text/html");
