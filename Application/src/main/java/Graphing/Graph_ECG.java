@@ -12,7 +12,7 @@ public class Graph_ECG extends Graph {
     }
 
     protected void Get_Next_Value(){
-        data_point = ecgdata.get_next_value();
+        data_point = ecgdata.get_next_value(0);
     }
 
     protected void Monitoring_Value(){
