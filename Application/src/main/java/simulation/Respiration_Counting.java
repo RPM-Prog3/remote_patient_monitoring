@@ -16,12 +16,12 @@ public class Respiration_Counting extends Value_Counter{
     public void Current_Temp(double val){}
 
     public void Count_bpm(double val, int index){
-        if (!if_ok && val>=55) {
+        if (!if_ok && val>=60) {
             peak_idx[which] = index;
             if_ok = true;
             which += 1;
         }
-        else if (if_ok && val<55)
+        else if (if_ok && val<60)
             if_ok = false;
 
         if (which == 2){
