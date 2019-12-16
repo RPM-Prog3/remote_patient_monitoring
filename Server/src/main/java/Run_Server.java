@@ -153,15 +153,18 @@ public class Run_Server extends HttpServlet {
     }
 
     private boolean check_valid_user(User u){
+
+
         boolean valid_user = true;
-//        boolean valid_user = false;
-//        try {
-//            // valid_user = user_db.find_user(u); not implemented yet
-//            valid_user = true;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-        if (valid_user){
+        //boolean valid_user = false;
+        try {
+            boolean b = user_db.find_user(u);
+            System.out.println(String.format("Is this user %s in: %b", u.get_username(), b));
+            //valid_user = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (valid_user) {
             System.out.println("valid user");
         } else {
             System.out.println("invalid user");

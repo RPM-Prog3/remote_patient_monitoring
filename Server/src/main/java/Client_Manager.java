@@ -121,8 +121,18 @@ public class Client_Manager {
         try (OutputStream outputStream = conn.getOutputStream()) {
             outputStream.write(body, 0, body.length);
         }
-        BufferedReader bufferedReader = new BufferedReader(new
-                InputStreamReader(conn.getInputStream(), "utf-8"));
+        System.out.println("bad boi 1");
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new
+                    InputStreamReader(conn.getInputStream(), "utf-8"));
+        } catch (Exception e){
+            System.out.println("bad boi 1.5");
+            e.printStackTrace();
+            conn.getErrorStream();
+        }
+
+        System.out.println("bad boi 2");
         // Read the body of the response
 //        while ((response = bufferedReader.readLine()) != null) {
 //            System.out.println(response);

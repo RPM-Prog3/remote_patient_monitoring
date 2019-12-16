@@ -1,7 +1,9 @@
 package Database;
 
+import Data.Patient;
 import Data.User;
 
+import com.google.gson.Gson;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
@@ -45,17 +47,25 @@ public class Manage_User_db extends Manage_db {
         return execute_query_with_gson(sql_get_users, exception_msg, rs_strings);
     }
 
-//    public boolean find_user(User check_user) throws SQLException {
-//        ResultSet rs = get_users_resultSet();
-//        while (rs.next()){
-//            String rs_un = rs.getString("username");
-//            String rs_pw = rs.getString("password");
-//            if (check_user.get_username().equals(rs_un) && check_user.get_password().equals(rs_pw)){
-//                rs.close();
-//                return true;
-//            }
-//        }
-//        rs.close();
-//        return false;
-//    }
+    public boolean find_user(User check_user) throws SQLException {
+        System.out.println("finding user");
+        String users = get_users();
+        System.out.println(users);
+        Gson gson = new Gson();
+
+        String[][] users_arr = gson.fromJson(users, String[][].class);
+
+        for (int i = 0; i < users_arr.length; i++){
+//            System.out.println(users_arr[i][0]);
+//            System.out.println(check_user.get_username());
+//            System.out.println("---");
+//            System.out.println(users_arr[i][1]);
+//            System.out.println(check_user.get_password());
+//            System.out.println("---");
+            if (users_arr[i][0].equals(check_user.get_username()) & users_arr[i][1].equals(check_user.get_password())){
+                return true;
+            }
+        }
+        return false;
+    }
 }
