@@ -26,7 +26,9 @@ import java.util.stream.Collectors;
                 "/rpm",
                 "/rpm/login",
                 "/rpm/add_patient",
-                "/rpm/request_patients"
+                "/rpm/add_user",
+                "/rpm/request_patients",
+                "/rpm/request_users"
                 }
         )
 public class Run_Server extends HttpServlet {
@@ -51,15 +53,6 @@ public class Run_Server extends HttpServlet {
             print_datetime();
             System.out.println("Do get");
         }
-
-//        String server_path = req.getServletPath();
-//        String method = req.getMethod();
-//
-//        String reqBody = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-//        System.out.println(String.format("Request body: %s",reqBody));
-//
-//        System.out.println(server_path);
-//        System.out.println(method);
 
         PrintWriter writer = resp.getWriter();
         writer.append("Get needs to be implemented still");
@@ -91,6 +84,28 @@ public class Run_Server extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("failed to add patient");
+                success = false;
+            }
+        } else if (server_path.equals("/rpm/add_user")){
+            Gson gson = new Gson();
+            User u = gson.fromJson(reqBody, User.class);
+            u.print_username();
+            try{
+                user_db.add_user(u);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("failed to add user");
+                success = false;
+            }
+        } else if (server_path.equals("/rpm/request_users")){
+            Gson gson = new Gson();
+            System.out.println(reqBody);
+            try {
+                String json_users_string = user_db.get_users();
+                System.out.println(json_users_string);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("failed to get users");
                 success = false;
             }
         } else if (server_path.equals("/rpm/request_patients")) {
@@ -131,12 +146,14 @@ public class Run_Server extends HttpServlet {
     }
 
     private boolean check_valid_user(User u){
-        boolean valid_user = false;
-        try {
-            valid_user = user_db.find_user(u);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        boolean valid_user = true;
+//        boolean valid_user = false;
+//        try {
+//            // valid_user = user_db.find_user(u); not implemented yet
+//            valid_user = true;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         if (valid_user){
             System.out.println("valid user");
         } else {

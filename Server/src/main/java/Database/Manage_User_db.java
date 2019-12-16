@@ -1,7 +1,10 @@
 package Database;
 
+import Data.Patient;
 import Data.User;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
@@ -27,7 +30,7 @@ public class Manage_User_db extends Manage_db {
     }
 
     public void add_user(String username, String password) throws SQLException {
-        String sql_add_user = String.format("insert into %s (username, password) values('%s', '%s')",
+        String sql_add_user = String.format("insert into %s (username, password) values('%s', '%s');",
                 table_name, username, password);
         String exception_msg = String.format("Unable to add user to database - table: %s - %s",
                 db_url, table_name);
@@ -38,23 +41,45 @@ public class Manage_User_db extends Manage_db {
         throw new NotImplementedException();
     }
 
-    public ResultSet get_users_resultSet() throws SQLException {
+    public String get_users() throws SQLException {
         String sql_get_users = String.format("SELECT * FROM %s WHERE id >= 1", table_name);
         String exception_msg = String.format("Unable to get users from %s", table_name);
-        return execute_query(sql_get_users, exception_msg);
+        ResultSet query_rs = execute_query(sql_get_users, exception_msg);
+        String[][] users_string_arr = get_users_string_arr(query_rs);
+        Gson gson = new GsonBuilder().create();
+        return gson.toJson(get_users_string_arr(query_rs));
     }
 
-    public boolean find_user(User check_user) throws SQLException {
-        ResultSet rs = get_users_resultSet();
-        while (rs.next()){
-            String rs_un = rs.getString("username");
-            String rs_pw = rs.getString("password");
-            if (check_user.get_username().equals(rs_un) && check_user.get_password().equals(rs_pw)){
-                rs.close();
-                return true;
-            }
+    private String[][] get_users_string_arr(ResultSet rs) throws SQLException {
+        // Used to get size of result set https://stackoverflow.com/questions/192078/how-do-i-get-the-size-of-a-java-sql-resultset
+        int last_row = 0;
+        if (rs.last()) {
+            last_row = rs.getRow();
+            rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
         }
-        rs.close();
-        return false;
+        String[][] users_string_arr = new String[last_row][];
+        int row_count = 0;
+        while (rs.next()) {
+            String username = rs.getString("username");
+            String password = rs.getString("password");
+            String[] current_user = {username, password};
+            users_string_arr[row_count] = current_user;
+            row_count += 1;
+        }
+        return users_string_arr;
     }
+
+//    public boolean find_user(User check_user) throws SQLException {
+//        ResultSet rs = get_users_resultSet();
+//        while (rs.next()){
+//            String rs_un = rs.getString("username");
+//            String rs_pw = rs.getString("password");
+//            if (check_user.get_username().equals(rs_un) && check_user.get_password().equals(rs_pw)){
+//                rs.close();
+//                return true;
+//            }
+//        }
+//        rs.close();
+//        return false;
+//    }
 }
