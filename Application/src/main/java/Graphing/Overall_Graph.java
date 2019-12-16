@@ -57,20 +57,20 @@ public class Overall_Graph {
         graph_panel = new JFXPanel();
         graph_panel.setLayout(new GridLayout(4, 1));
 
-        graphECG = new Graph_ECG("chart-ECG", bpm_obj, 0.006, 5);
-        graphBPress = new Graph_Pressure("chart-Pressure", press_counting_obj, 0.006, 5);
-        graphResp = new Graph_Respiration("chart-Respiratory", resp_counting_obj, 0.006, 5);
-        graphTemp = new Graph_Temperature("chart-Temperature", temp_counting_obj, 0.006, 5);  //bpm object shouldn't be there
+        graphECG = new Graph_ECG("chart-ECG", bpm_obj, 0.006, 5, ecgdata);
+        graphBPress = new Graph_Pressure("chart-Pressure", press_counting_obj, 0.006, 5, pressuredata);
+        graphResp = new Graph_Respiration("chart-Respiratory", resp_counting_obj, 0.006, 5, respdata);
+        graphTemp = new Graph_Temperature("chart-Temperature", temp_counting_obj, 0.006, 5, tempdata);  //bpm object shouldn't be there
 
         graph_panel.add(graphECG.getGraph());
         graph_panel.add(graphBPress.getGraph());
         graph_panel.add(graphResp.getGraph());
         graph_panel.add(graphTemp.getGraph());
 
-        graphECG.setGraph(ecgdata.Simulate(0));
-        graphBPress.setGraph(pressuredata.get_array());
-        graphResp.setGraph(respdata.get_array());
-        graphTemp.setGraph(tempdata.get_array());
+        graphECG.setGraph();
+        graphBPress.setGraph();
+        graphResp.setGraph();
+        graphTemp.setGraph();
         //System.out.println(Arrays.toString(respdata.get_array()));
 
     }

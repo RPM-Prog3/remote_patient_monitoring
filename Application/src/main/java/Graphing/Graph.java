@@ -27,7 +27,7 @@ public abstract class Graph extends JFXPanel {
     private int num_points_changed, series_pointer;
     protected int point_pointer;
     private double delta;
-    protected double[] data_points;
+    protected double data_point;
 
     private int roundedNumTicks;
 
@@ -35,7 +35,7 @@ public abstract class Graph extends JFXPanel {
 
 
     public Graph(String colorGraph, Value_Counter obj, double sample_period, float time_shown) {
-        series_pointer = 0; //This looks at whcih point in the series to add next
+        series_pointer = 0; //This looks at which point in the series to add next
         point_pointer = 0;  //This looks at which index in the input data must be added next
 
         delta = sample_period;
@@ -76,9 +76,7 @@ public abstract class Graph extends JFXPanel {
         this.colorGraph = colorGraph;
     }
 
-    public void setGraph(double[] input_data) {
-
-        data_points = input_data;
+    public void setGraph() {
 
 //        for (double i = 0; i <= 5; i += delta) {
 //            function.getData().add(new XYChart.Data<Number, Number>(i, data_points[point_pointer]));
@@ -121,7 +119,8 @@ public abstract class Graph extends JFXPanel {
 
         for (int i=0; i<num_points_changed; i+=1) {
             double x = series_pointer*delta;
-            function.getData().add(new XYChart.Data<Number, Number>(x, data_points[point_pointer]));
+            Get_Next_Value();
+            function.getData().add(new XYChart.Data<Number, Number>(x, data_point));
             Monitoring_Value();
             point_pointer += 1;
             series_pointer += 1;
@@ -156,6 +155,8 @@ public abstract class Graph extends JFXPanel {
 //
 //        roundedNumTicks = roundedNumTicks/tick;
 //    }
+
+    protected abstract void Get_Next_Value();
 
     protected abstract void Monitoring_Value();
 
