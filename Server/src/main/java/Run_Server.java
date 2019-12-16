@@ -73,75 +73,84 @@ public class Run_Server extends HttpServlet {
 
 
         String server_path = req.getServletPath();
-        boolean success = true;
 
-        if (server_path.equals("/rpm/add_patient")) {
-            Gson gson = new Gson();
-            Patient p = gson.fromJson(reqBody, Patient.class);
-            p.print_patient_details();
-            try {
-                patient_db.add_patient(p);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("failed to add patient");
-                success = false;
-            }
-        } else if (server_path.equals("/rpm/add_user")){
-            Gson gson = new Gson();
-            User u = gson.fromJson(reqBody, User.class);
-            u.print_username();
-            try{
-                user_db.add_user(u);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("failed to add user");
-                success = false;
-            }
-        } else if (server_path.equals("/rpm/request_users")){
-            Gson gson = new Gson();
-            System.out.println(reqBody);
-            try {
-                String users_json = user_db.get_users();
-                System.out.println(users_json);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("failed to get users");
-                success = false;
-            }
-        } else if (server_path.equals("/rpm/request_patients")) {
-            Gson gson = new Gson();
-            User u = gson.fromJson(reqBody, User.class);
-            if (check_valid_user(u)){
+        Messenger messenger = new Messenger();
+        messenger.set_success(true);
+
+        switch (server_path) {
+            case "/rpm/add_patient": {
+                Gson gson = new Gson();
+                Patient p = gson.fromJson(reqBody, Patient.class);
+                p.print_patient_details();
                 try {
-                    String patients_json = patient_db.get_patients();
-                    System.out.println(patients_json);
+                    patient_db.add_patient(p);
                 } catch (SQLException e) {
-                    success = false;
                     e.printStackTrace();
+                    System.out.println("failed to add patient");
+                    messenger.set_success(false);
                 }
-            } else {
-                success = false;
-                req.setAttribute("error", "Unknown user, please try again.");
+                break;
             }
-
-        } else if (server_path.equals("/rpm/login")){
-            // Used login backend code as inspiration: https://stackoverflow.com/questions/2349633/doget-and-dopost-in-servlets
-            Gson gson = new Gson();
-            User u = gson.fromJson(reqBody, User.class);
-
-            boolean valid_user  = check_valid_user(u);
-            if (!valid_user) {
-                success = false;
-                req.setAttribute("error", "Unknown user, please try again.");
+            case "/rpm/add_user": {
+                Gson gson = new Gson();
+                User u = gson.fromJson(reqBody, User.class);
+                try {
+                    user_db.add_user(u);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("failed to add user");
+                    messenger.set_success(false);
+                }
+                break;
+            }
+            case "/rpm/request_users": {
+                Gson gson = new Gson();
+                try {
+                    String users_json = user_db.get_users();
+                    messenger.set_message(users_json);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("failed to get users");
+                    messenger.set_success(false);
+                }
+                break;
+            }
+            case "/rpm/request_patients": {
+                Gson gson = new Gson();
+                User u = gson.fromJson(reqBody, User.class);
+                if (check_valid_user(u)) {
+                    try {
+                        String patients_json = patient_db.get_patients();
+                        messenger.set_message(patients_json);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        messenger.set_success(false);
+                    }
+                } else {
+                    req.setAttribute("error", "Unknown user, please try again.");
+                    messenger.set_success(false);
+                }
+                break;
+            }
+            case "/rpm/login": {
+                // Used login backend code as inspiration: https://stackoverflow.com/questions/2349633/doget-and-dopost-in-servlets
+                Gson gson = new Gson();
+                User u = gson.fromJson(reqBody, User.class);
+                boolean valid_user = check_valid_user(u);
+                if (!valid_user) {
+                    req.setAttribute("error", "Unknown user, please try again.");
+                    messenger.set_success(false);
+                }
+                break;
             }
         }
         if (debug) {
-            System.out.println(String.format("Success: %b", success));
+            System.out.println(String.format("Success: %b", messenger.get_success()));
         }
-        if (success) {
-            resp.getWriter().write("Client successfully sent information");
+        if (messenger.get_success()) {
+            resp.getWriter().write(String.format("Success for action: %s", server_path));
         } else {
-            resp.getWriter().write("Error occurred.");
+            resp.getWriter().write(String.format("Failure for action: %s", server_path));
         }
     }
 
@@ -167,5 +176,33 @@ public class Run_Server extends HttpServlet {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String strDate = dateFormat.format(date);
         System.out.println("Current time: " + strDate);
+    }
+}
+
+class Messenger {
+    private boolean success;
+    private String message;
+
+    public Messenger(){}
+
+    public Messenger(boolean success, String message){
+        this.success = success;
+        this.message = message;
+    }
+
+    public String get_message(){
+        return message;
+    }
+
+    public boolean get_success(){
+        return success;
+    }
+
+    public void set_message(String message){
+        this.message = message;
+    }
+
+    public void set_success(Boolean success){
+        this.success = success;
     }
 }

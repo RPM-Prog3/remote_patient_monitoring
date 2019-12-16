@@ -45,9 +45,7 @@ public class Manage_User_db extends Manage_db {
         String sql_get_users = String.format("SELECT * FROM %s WHERE id >= 1", table_name);
         String exception_msg = String.format("Unable to get users from %s", table_name);
         String[] rs_strings = {"username", "password"};
-        String gson_string_arr = execute_query_with_gson(sql_get_users, exception_msg, rs_strings);
-        System.out.println(gson_string_arr);
-        return gson_string_arr;
+        return execute_query_with_gson(sql_get_users, exception_msg, rs_strings);
     }
 
 //    public boolean find_user(User check_user) throws SQLException {

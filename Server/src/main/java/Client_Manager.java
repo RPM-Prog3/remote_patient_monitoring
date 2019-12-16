@@ -28,34 +28,34 @@ public class Client_Manager {
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 
-//    public void request_patients_from_server() throws IOException {
-//        String need_to_login = "";
-//        String url = String.format("%s/request_patients", get_url());
-//        make_post_request(url, need_to_login);
-//    }
+    public void get_patients_from_patients_db() throws IOException {
+        String need_to_login = "";
+        String url = String.format("%s/request_patients", get_url());
+        make_post_request(url, need_to_login);
+    }
 
-    public void send_patient_to_add_patient_db(String familyname, String givenname,
+    public void send_patient_to_add_patients_db(String familyname, String givenname,
                                             String dofbirth, String email,
                                             String phonenumber) throws IOException {
         Patient p = new Patient(familyname, givenname, dofbirth, email, phonenumber);
-        send_patient_to_add_patient_db(p);
+        send_patient_to_add_patients_db(p);
     }
 
-    public void send_patient_to_add_patient_db(Patient p) throws IOException {
+    public void send_patient_to_add_patients_db(Patient p) throws IOException {
         Gson p_gson = new Gson();
         String p_json_string = p_gson.toJson(p);
         String url = String.format("%s/add_patient", get_url());
         make_post_request(url, p_json_string);
     }
 
-    public void send_user_to_add_user_db(User u) throws IOException {
+    public void send_user_to_add_users_db(User u) throws IOException {
         Gson u_gson = new Gson();
         String u_json_string = u_gson.toJson(u);
         String url = String.format("%s/add_user", get_url());
         make_post_request(url, u_json_string);
     }
 
-    public void get_users_from_user_db() throws IOException {
+    public void get_users_from_users_db() throws IOException {
         String need_to_login = "";
         String url = String.format("%s/request_users", get_url());
         make_post_request(url, need_to_login);

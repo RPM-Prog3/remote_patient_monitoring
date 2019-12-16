@@ -102,14 +102,10 @@ public class Manage_db {
             last_row = rs.getRow();
             rs.beforeFirst();
         }
-        System.out.println(last_row);
         int row_count = 0;
-        System.out.println(row_count);
-        String[][] string_arr = new String[last_row][];
+        String[][] string_arr = new String[last_row][rs_strings.length];
         while (rs.next()){
-            System.out.println(row_count);
             for (int i = 0; i < rs_strings.length; i++){
-                System.out.println(rs_strings[i]);
                 string_arr[row_count][i] = rs.getString(rs_strings[i]);
             }
             row_count += 1;

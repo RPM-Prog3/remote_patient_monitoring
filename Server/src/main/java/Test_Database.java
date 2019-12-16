@@ -13,19 +13,18 @@ public class Test_Database {
         User current_user = new User("Joe", "1234");
         User current_user_2 = new User("Joe12", "1234");
 
-//        cm.request_patients_from_server();
+        cm.get_patients_from_patients_db();
         System.out.println("-----------------");
-        cm.send_patient_to_add_patient_db("Arrow", "joea", "10", "ja", "1234");
+        cm.send_patient_to_add_patients_db("Arrow", "joea", "10", "ja", "1234");
         System.out.println("-----------------");
         cm.send_user_to_login(current_user);
         System.out.println("-----------------");
-        cm.get_users_from_user_db();
+        cm.get_users_from_users_db();
         System.out.println("-----------------");
-        System.out.println("Adding users");
-        cm.send_user_to_add_user_db(current_user);
-        cm.send_user_to_add_user_db(current_user_2);
+        cm.send_user_to_add_users_db(current_user);
+        cm.send_user_to_add_users_db(current_user_2);
         System.out.println("-----------------");
-        cm.get_users_from_user_db();
+        cm.get_users_from_users_db();
         System.out.println("-----------------");
         System.out.println("Done");
     }
