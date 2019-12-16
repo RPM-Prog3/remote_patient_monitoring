@@ -14,7 +14,8 @@ public class Manage_db {
 
     public Manage_db() throws IOException, SQLException {
         String user_dir = Read_db_properties.get_user_dir();
-        String db_config_path = user_dir + "/Server/db_config.properties";
+        System.out.println(user_dir);
+        String db_config_path = user_dir + "/db_config.properties";
 
         Read_db_properties rpf = new Read_db_properties(db_config_path);
 
@@ -30,7 +31,6 @@ public class Manage_db {
     protected void init_table(String table_name, String sql_create_table) throws SQLException {
         Connection db_conn = get_db_connection();
         boolean table_exists = check_table_exists(db_conn, table_name);
-        System.out.println(table_exists);
         if (!table_exists){
             create_table(db_conn, table_name, sql_create_table);
         }

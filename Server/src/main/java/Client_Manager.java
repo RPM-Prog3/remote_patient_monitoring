@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.rmi.server.ExportException;
+import java.sql.ResultSet;
 
 public class Client_Manager {
     String server_ip;
@@ -17,7 +18,9 @@ public class Client_Manager {
 
     public Client_Manager() throws IOException {
         String user_dir = Read_server_properties.get_user_dir();
+        System.out.println(user_dir);
         String server_config_path = user_dir + "/Server/server_config.properties";
+        System.out.println(server_config_path);
         Read_server_properties server_prop = new Read_server_properties(server_config_path);
         server_ip = server_prop.get_server_ip();
         server_port = server_prop.get_server_port();
@@ -27,30 +30,32 @@ public class Client_Manager {
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 
-    public void request_patients_from_server() throws IOException {
-        make_get_request(get_url());
-    }
+//    public ResultSet request_patients_from_server() throws IOException {
+//        String need_to_login = "";
+//        String url = String.format("%s/request_patients", get_url());
+//        make_post_request(url, need_to_login);
+//    }
 
-    public void send_patient_to_server(String familyname, String givenname,
-                                       String dofbirth, String email,
-                                       String phonenumber) throws IOException {
+    public void send_patient_to_add_patient_db(String familyname, String givenname,
+                                            String dofbirth, String email,
+                                            String phonenumber) throws IOException {
         Patient p = new Patient(familyname, givenname, dofbirth, email, phonenumber);
-        send_patient_to_server(p);
+        send_patient_to_add_patient_db(p);
     }
 
-    public void send_patient_to_server(Patient p) throws IOException {
+    public void send_patient_to_add_patient_db(Patient p) throws IOException {
         Gson p_gson = new Gson();
         String p_json_string = p_gson.toJson(p);
         String url = String.format("%s/add_patient", get_url());
         make_post_request(url, p_json_string);
     }
 
-    public void send_user_to_server(String username, String password) throws IOException {
+    public void send_user_to_login(String username, String password) throws IOException {
         User u = new User(username, password);
-        send_user_to_server(u);
+        send_user_to_login(u);
     }
 
-    public void send_user_to_server(User u) throws IOException {
+    public void send_user_to_login(User u) throws IOException {
         Gson u_json = new Gson();
         String u_json_string = u_json.toJson(u);
         String url = String.format("%s/login", get_url());

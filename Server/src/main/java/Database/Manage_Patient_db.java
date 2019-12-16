@@ -51,4 +51,10 @@ public class Manage_Patient_db extends Manage_db {
         String exception_msg = String.format("Unable to get patients from %s", table_name);
         return execute_query(sql_get_patients, exception_msg);
     }
+
+    public void print_rs(ResultSet rs) throws SQLException {
+        while (rs.next()){
+            System.out.println(String.format("%s,%s", rs.getString("familyname"), rs.getString("givenname")));
+        }
+    }
 }

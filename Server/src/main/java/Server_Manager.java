@@ -7,6 +7,7 @@ public class Server_Manager {
 
     public Server_Manager() throws IOException {
         String user_dir = Read_server_properties.get_user_dir();
+        System.out.println(user_dir);
         String server_config_path = user_dir + "/Server/server_config.properties";
         Read_server_properties server_prop = new Read_server_properties(server_config_path);
         server_ip = server_prop.get_server_ip();

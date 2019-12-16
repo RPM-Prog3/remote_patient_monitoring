@@ -15,7 +15,7 @@ public class Manage_User_db extends Manage_db {
         String sql_create_table = String.format("create table %s (\n" +
                 "   id SERIAL PRIMARY KEY,\n" +
                 "   username varchar(128) NOT NULL,\n" +
-                "   password varchar(128) NOT NULL,\n" +
+                "   password varchar(128) NOT NULL\n" +
                 ");", table_name);
         init_table(table_name, sql_create_table);
     }
