@@ -15,26 +15,27 @@ public class Refresh implements Runnable{
     }
 
     public void run(){
-        if (isUpdating)
-            try{
+        if (isUpdating) {
+            try {
 
-                while (1<2) {
+                while (1 < 2) {
                     graph.updateGraph();
                     vital.Set_Displayed_Value();
                     Thread.sleep(6);
                 }
 
-            }catch (Exception e) {};
+            } catch (Exception e) {};
+        }
+        else {
+            try {
 
-        if(!isUpdating)
-            try{
-
-                while (1<2) {
+                while (1 < 2) {
                     graph.stopUpdating();
                     Thread.sleep(6);
                 }
 
-            }catch (Exception e) {};
+            } catch (Exception e) {};
+        }
 
     }
 
