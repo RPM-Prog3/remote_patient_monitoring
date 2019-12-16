@@ -27,7 +27,7 @@ public class Overall_Graph {
 
     public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input,Temperature_Counting temp_counting_obj_input, HR_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
         //Temperature
-        tempdata = new Body_Temp(37, 0.01, 0.5, 300000);
+        tempdata = new Body_Temp(37, 0.01, 0.5);
         temp_vit = temp_vit_input;
         temp_counting_obj = temp_counting_obj_input;
 
@@ -37,12 +37,12 @@ public class Overall_Graph {
         bpm_obj = ecg_obj_input;
 
         //Pressure
-        pressuredata = new Blood_Pressure(300000);
+        pressuredata = new Blood_Pressure();
         pressure_vit = pressure_vit_input;
         press_counting_obj = press_counting_obj_input;
 
         //Respiratory
-        respdata = new Resp_Rate(50, 2.0, -0.95, 20, 300000);
+        respdata = new Resp_Rate(50, 2.0, -0.95, 20);
         resp_vit = resp_vit_input;
         resp_counting_obj = resp_counting_obj_input;
 
