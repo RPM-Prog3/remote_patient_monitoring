@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -79,16 +80,19 @@ public class Run_Server extends HttpServlet {
             Gson gson = new Gson();
             User u = gson.fromJson(reqBody, User.class);
             u.print_username();
-            Manage_User_db user_db = new Manage_User_db();
+            Manage_User_db user_db = null;
+            try {
+                user_db = new Manage_User_db();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             boolean valid_user = user_db.find_user(u);
             if (valid_user){
                 System.out.println("valid user");
-//                resp.sendRedirect("/rpm");
             } else {
                 System.out.println("invalid user");
                 req.setAttribute("error", "Unknown user, please try again.");
             }
-
         }
     }
 
