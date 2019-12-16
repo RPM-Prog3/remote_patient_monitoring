@@ -147,11 +147,9 @@ public class Run_Server extends HttpServlet {
         if (debug) {
             System.out.println(String.format("Success: %b", messenger.get_success()));
         }
-        if (messenger.get_success()) {
-            resp.getWriter().write(String.format("Success for action: %s", server_path));
-        } else {
-            resp.getWriter().write(String.format("Failure for action: %s", server_path));
-        }
+        Gson messenger_gson = new Gson();
+        String messenger_json_string = messenger_gson.toJson(messenger);
+        resp.getWriter().write(messenger_json_string);
     }
 
     private boolean check_valid_user(User u){
@@ -179,30 +177,3 @@ public class Run_Server extends HttpServlet {
     }
 }
 
-class Messenger {
-    private boolean success;
-    private String message;
-
-    public Messenger(){}
-
-    public Messenger(boolean success, String message){
-        this.success = success;
-        this.message = message;
-    }
-
-    public String get_message(){
-        return message;
-    }
-
-    public boolean get_success(){
-        return success;
-    }
-
-    public void set_message(String message){
-        this.message = message;
-    }
-
-    public void set_success(Boolean success){
-        this.success = success;
-    }
-}

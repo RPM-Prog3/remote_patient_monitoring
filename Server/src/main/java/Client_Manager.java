@@ -28,49 +28,54 @@ public class Client_Manager {
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 
-    public void get_patients_from_patients_db() throws IOException {
+    public Messenger get_patients_from_patients_db() throws IOException {
         String need_to_login = "";
         String url = String.format("%s/request_patients", get_url());
-        make_post_request(url, need_to_login);
+        return get_post_messenger(url, need_to_login);
     }
 
-    public void send_patient_to_add_patients_db(String familyname, String givenname,
+    public Messenger send_patient_to_add_patients_db(String familyname, String givenname,
                                             String dofbirth, String email,
                                             String phonenumber) throws IOException {
         Patient p = new Patient(familyname, givenname, dofbirth, email, phonenumber);
-        send_patient_to_add_patients_db(p);
+        return send_patient_to_add_patients_db(p);
     }
 
-    public void send_patient_to_add_patients_db(Patient p) throws IOException {
+    public Messenger send_patient_to_add_patients_db(Patient p) throws IOException {
         Gson p_gson = new Gson();
         String p_json_string = p_gson.toJson(p);
         String url = String.format("%s/add_patient", get_url());
-        make_post_request(url, p_json_string);
+        return get_post_messenger(url, p_json_string);
     }
 
-    public void send_user_to_add_users_db(User u) throws IOException {
+    public Messenger send_user_to_add_users_db(String username, String password, String email) throws IOException {
+        User u = new User(username, password, email);
+        return send_user_to_login(u);
+    }
+
+    public Messenger send_user_to_add_users_db(User u) throws IOException {
         Gson u_gson = new Gson();
         String u_json_string = u_gson.toJson(u);
         String url = String.format("%s/add_user", get_url());
-        make_post_request(url, u_json_string);
+        return get_post_messenger(url, u_json_string);
     }
 
-    public void get_users_from_users_db() throws IOException {
+    public Messenger get_users_from_users_db() throws IOException {
         String need_to_login = "";
         String url = String.format("%s/request_users", get_url());
-        make_post_request(url, need_to_login);
+        return get_post_messenger(url, need_to_login);
     }
 
-    public void send_user_to_login(String username, String password) throws IOException {
+    public Messenger send_user_to_login(String username, String password) throws IOException {
         User u = new User(username, password);
-        send_user_to_login(u);
+        return send_user_to_login(u);
     }
 
-    public void send_user_to_login(User u) throws IOException {
+    public Messenger send_user_to_login(User u) throws IOException {
         Gson u_json = new Gson();
         String u_json_string = u_json.toJson(u);
         String url = String.format("%s/login", get_url());
-        make_post_request(url, u_json_string);
+        return get_post_messenger(url, u_json_string);
     }
 
     private void make_get_request(String url) throws IOException {
@@ -94,7 +99,13 @@ public class Client_Manager {
         }
     }
 
-    private void make_post_request(String url, String message) throws IOException {
+    private Messenger get_post_messenger(String url, String message) throws IOException {
+        String response = make_post_request(url, message);
+        Gson gson = new Gson();
+        return gson.fromJson(response, Messenger.class);
+    }
+
+    private String make_post_request(String url, String message) throws IOException {
         // Set up the body data
         byte[] body = message.getBytes(StandardCharsets.UTF_8);
         URL myURL = new URL(url);
@@ -112,11 +123,12 @@ public class Client_Manager {
         }
         BufferedReader bufferedReader = new BufferedReader(new
                 InputStreamReader(conn.getInputStream(), "utf-8"));
-        String inputLine;
         // Read the body of the response
-        while ((inputLine = bufferedReader.readLine()) != null) {
-            System.out.println(inputLine);
-        }
+//        while ((response = bufferedReader.readLine()) != null) {
+//            System.out.println(response);
+//        }
+        String response = bufferedReader.readLine();
         bufferedReader.close();
+        return response;
     }
 }
