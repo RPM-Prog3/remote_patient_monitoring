@@ -39,7 +39,7 @@ public class Manage_Patient_db extends Manage_db {
                 table_name, family_name, given_name, date_of_birth, email, phone_number);
         String exception_msg = String.format("Unable to add patient to database - table: %s - %s",
                 db_url, table_name);
-        execute_query(sql_add_patient, exception_msg);
+        execute_update(sql_add_patient, exception_msg);
     }
 
     private void remove_patient(Patient p){

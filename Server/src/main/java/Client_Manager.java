@@ -9,8 +9,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.rmi.server.ExportException;
-import java.sql.ResultSet;
 
 public class Client_Manager {
     String server_ip;
@@ -30,7 +28,7 @@ public class Client_Manager {
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 
-//    public ResultSet request_patients_from_server() throws IOException {
+//    public void request_patients_from_server() throws IOException {
 //        String need_to_login = "";
 //        String url = String.format("%s/request_patients", get_url());
 //        make_post_request(url, need_to_login);
@@ -48,6 +46,19 @@ public class Client_Manager {
         String p_json_string = p_gson.toJson(p);
         String url = String.format("%s/add_patient", get_url());
         make_post_request(url, p_json_string);
+    }
+
+    public void send_user_to_add_user_db(User u) throws IOException {
+        Gson u_gson = new Gson();
+        String u_json_string = u_gson.toJson(u);
+        String url = String.format("%s/add_user", get_url());
+        make_post_request(url, u_json_string);
+    }
+
+    public void get_users_from_user_db() throws IOException {
+        String need_to_login = "";
+        String url = String.format("%s/request_users", get_url());
+        make_post_request(url, need_to_login);
     }
 
     public void send_user_to_login(String username, String password) throws IOException {
