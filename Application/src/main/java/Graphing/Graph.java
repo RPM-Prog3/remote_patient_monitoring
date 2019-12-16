@@ -1,4 +1,4 @@
-package GUI;
+package Graphing;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -12,7 +12,7 @@ import simulation.BPM;
 import simulation.ECG;
 import simulation.Value_Counter;
 
-public class Graph extends JFXPanel {
+public abstract class Graph extends JFXPanel {
     private JFXPanel graphpanel;
     private Scene scene;
     private String colorGraph;
@@ -24,13 +24,14 @@ public class Graph extends JFXPanel {
 
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
-    private int num_points_changed, point_pointer, series_pointer;
+    private int num_points_changed, series_pointer;
+    protected int point_pointer;
     private double delta;
-    private double[] data_points;
+    protected double[] data_points;
 
     private int roundedNumTicks;
 
-    private Value_Counter val_counter;
+    protected Value_Counter val_counter;
 
 
     public Graph(String colorGraph, Value_Counter obj, double sample_period, float time_shown) {
@@ -94,7 +95,7 @@ public class Graph extends JFXPanel {
 
         chart.getData().add(function);
         chart.getStyleClass().add(colorGraph);
-        chart.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/GUI/graph.css");
+        chart.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/Graphing/graph.css");
 
         Platform.runLater(new Runnable() {
             @Override
@@ -121,8 +122,7 @@ public class Graph extends JFXPanel {
         for (int i=0; i<num_points_changed; i+=1) {
             double x = series_pointer*delta;
             function.getData().add(new XYChart.Data<Number, Number>(x, data_points[point_pointer]));
-            val_counter.Count_bpm(data_points[point_pointer], point_pointer);
-            val_counter.Current_Temp(data_points[point_pointer]);
+            Monitoring_Value();
             point_pointer += 1;
             series_pointer += 1;
         }
@@ -156,6 +156,8 @@ public class Graph extends JFXPanel {
 //
 //        roundedNumTicks = roundedNumTicks/tick;
 //    }
+
+    protected abstract void Monitoring_Value();
 
     public JFXPanel getGraph() {
         return graphpanel;

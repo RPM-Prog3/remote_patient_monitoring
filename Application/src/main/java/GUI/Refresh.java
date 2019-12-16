@@ -1,7 +1,7 @@
 package GUI;
 
-import javafx.application.Application;
-import javafx.application.Platform;
+import GUI.Vital_Values_Display;
+import Graphing.Graph;
 
 public class Refresh implements Runnable{
     private Graph graph;
@@ -11,10 +11,6 @@ public class Refresh implements Runnable{
         this.graph = graph;
         this.vital = vital;
     }
-
-//    public Refresh(Graph graph) {
-//        this.graph =graph;
-//    }
 
     public void run() {
         try{

@@ -1,5 +1,6 @@
 package GUI;
 
+import Graphing.Overall_Graph;
 import javafx.embed.swing.JFXPanel;
 import simulation.*;
 

@@ -1,12 +1,11 @@
-package GUI;
+package Graphing;
 
+import GUI.*;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import simulation.*;
 
-import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 public class Overall_Graph {
     private JFXPanel graph_panel;  //Overall panel with the four graphs
@@ -58,10 +57,10 @@ public class Overall_Graph {
         graph_panel = new JFXPanel();
         graph_panel.setLayout(new GridLayout(4, 1));
 
-        graphECG = new Graph("chart-ECG", bpm_obj, 0.006, 5);
-        graphBPress = new Graph("chart-Pressure", press_counting_obj, 0.006, 5);
-        graphResp = new Graph("chart-Respiratory", resp_counting_obj, 0.006, 5);
-        graphTemp = new Graph("chart-Temperature", temp_counting_obj, 0.006, 5);  //bpm object shouldn't be there
+        graphECG = new Graph_ECG("chart-ECG", bpm_obj, 0.006, 5);
+        graphBPress = new Graph_Pressure("chart-Pressure", press_counting_obj, 0.006, 5);
+        graphResp = new Graph_Respiration("chart-Respiratory", resp_counting_obj, 0.006, 5);
+        graphTemp = new Graph_Temperature("chart-Temperature", temp_counting_obj, 0.006, 5);  //bpm object shouldn't be there
 
         graph_panel.add(graphECG.getGraph());
         graph_panel.add(graphBPress.getGraph());
@@ -78,7 +77,7 @@ public class Overall_Graph {
 
     public void updatePanel() {
         //Running four separate threads, one for each graph
-        refreshing1 = new Thread (new Refresh (graphECG, ecg_vit));
+        refreshing1 = new Thread (new Refresh(graphECG, ecg_vit));
         refreshing2 = new Thread (new Refresh (graphBPress, pressure_vit));
         refreshing3 = new Thread (new Refresh (graphResp, resp_vit));
         refreshing4 = new Thread (new Refresh (graphTemp, temp_vit));
