@@ -19,7 +19,7 @@ public class RR_Vitals extends Vital_Values_Display{
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf((int)(resp_val_counter.Double_Value())));
+            super.vital_value.setText(String.valueOf((int)(60/(resp_val_counter.Index_Difference()*0.006))) + " breaths/min");
         });
     }
 }
