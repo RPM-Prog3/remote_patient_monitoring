@@ -1,6 +1,5 @@
 package Database;
 
-import Data.Patient;
 import Data.User;
 
 import com.google.gson.Gson;
@@ -52,7 +51,6 @@ public class Manage_User_db extends Manage_db {
         String users = get_users();
         System.out.println(users);
         Gson gson = new Gson();
-
         String[][] users_arr = gson.fromJson(users, String[][].class);
 
         for (int i = 0; i < users_arr.length; i++){
