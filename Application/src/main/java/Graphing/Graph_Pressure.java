@@ -16,6 +16,6 @@ public class Graph_Pressure extends Graph {
     }
 
     protected void Monitoring_Value(){
-
+        super.val_counter.Pressure_Values(super.data_point);
     }
 }
