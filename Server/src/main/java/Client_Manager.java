@@ -50,7 +50,7 @@ public class Client_Manager {
 
     public Messenger send_user_to_add_users_db(String username, String password, String email) throws IOException {
         User u = new User(username, password, email);
-        return send_user_to_login(u);
+        return send_user_to_add_users_db(u);
     }
 
     public Messenger send_user_to_add_users_db(User u) throws IOException {

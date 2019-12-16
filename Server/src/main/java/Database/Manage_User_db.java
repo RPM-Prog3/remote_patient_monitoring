@@ -1,10 +1,7 @@
 package Database;
 
-import Data.Patient;
 import Data.User;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
