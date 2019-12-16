@@ -1,6 +1,8 @@
 package Database;
 
 import Setup.Read_db_properties;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -64,20 +66,55 @@ public class Manage_db {
         conn.close();
     }
 
-    protected ResultSet execute_query(String sql_query, String exception_msg) throws SQLException {
+    protected String execute_query_with_gson(String sql_query, String exception_msg, String[] rs_strings) throws SQLException {
+        String[][] string_arr = execute_query(sql_query, exception_msg, rs_strings);
+        return convert_string_arr_to_gson(string_arr);
+    }
+
+    protected String convert_string_arr_to_gson(String[][] string_arr){
+        Gson gson = new GsonBuilder().create();
+        return gson.toJson(string_arr);
+    }
+
+    protected String[][] execute_query(String sql_query, String exception_msg, String[] rs_strings) throws SQLException {
         assert table_init : "table_init has not been ran";
         Connection conn = get_db_connection();
         ResultSet rs;
+        String[][] string_arr;
         try {
             Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             rs = s.executeQuery(sql_query);
+            string_arr = get_string_arr_from_rs(rs, rs_strings);
             s.close();
         } catch (Exception e) {
+            System.out.println("Failed to convert rs to string array. Check rs_strings are correct.");
             e.printStackTrace();
             throw new SQLException(exception_msg);
         }
         conn.close();
-        return rs;
+        return string_arr;
+    }
+
+    private String[][] get_string_arr_from_rs(ResultSet rs, String[] rs_strings) throws SQLException {
+        // Used to get size of result set https://stackoverflow.com/questions/192078/how-do-i-get-the-size-of-a-java-sql-resultset
+        int last_row = 0;
+        if (rs.last()){
+            last_row = rs.getRow();
+            rs.beforeFirst();
+        }
+        System.out.println(last_row);
+        int row_count = 0;
+        System.out.println(row_count);
+        String[][] string_arr = new String[last_row][];
+        while (rs.next()){
+            System.out.println(row_count);
+            for (int i = 0; i < rs_strings.length; i++){
+                System.out.println(rs_strings[i]);
+                string_arr[row_count][i] = rs.getString(rs_strings[i]);
+            }
+            row_count += 1;
+        }
+        return string_arr;
     }
 
     private boolean check_table_exists(Connection conn, String table_name) throws SQLException {

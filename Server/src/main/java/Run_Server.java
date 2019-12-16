@@ -101,8 +101,8 @@ public class Run_Server extends HttpServlet {
             Gson gson = new Gson();
             System.out.println(reqBody);
             try {
-                String json_users_string = user_db.get_users();
-                System.out.println(json_users_string);
+                String users_json = user_db.get_users();
+                System.out.println(users_json);
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("failed to get users");
@@ -113,8 +113,8 @@ public class Run_Server extends HttpServlet {
             User u = gson.fromJson(reqBody, User.class);
             if (check_valid_user(u)){
                 try {
-                    ResultSet rs = patient_db.get_patients_resultSet();
-                    patient_db.print_rs(rs);
+                    String patients_json = patient_db.get_patients();
+                    System.out.println(patients_json);
                 } catch (SQLException e) {
                     success = false;
                     e.printStackTrace();
