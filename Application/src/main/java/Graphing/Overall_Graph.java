@@ -10,8 +10,10 @@ import java.awt.*;
 public class Overall_Graph {
     private JFXPanel graph_panel;  //Overall panel with the four graphs
     private Graph graphECG, graphBPress, graphResp, graphTemp;  //These are the four different graphs
-    private Thread refreshing1,refreshing2, refreshing3, refreshing4;  //These creates four different threads
     private Value_Counter bpm_obj, press_counting_obj, resp_counting_obj, temp_counting_obj;
+
+    private Refresh refreshing1,refreshing2, refreshing3, refreshing4;
+    private Thread thread_ecg, thread_press, thread_resp, thread_temp;  //These creates four different threads
 
     private ECG ecgdata;
     private ECG_Vitals ecg_vit;
@@ -26,6 +28,7 @@ public class Overall_Graph {
     private RR_Vitals resp_vit;
 
     public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input,Temperature_Counting temp_counting_obj_input, HR_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
+
         //Temperature
         tempdata = new Body_Temp(37, 0.01, 0.5);
         temp_vit = temp_vit_input;
@@ -46,14 +49,6 @@ public class Overall_Graph {
         resp_vit = resp_vit_input;
         resp_counting_obj = resp_counting_obj_input;
 
-        //Just a sine used for check up and debugging, don't need it
-//        double[] sin_array = new double[13000];
-//        int index_counter = 0;
-//        for (double i = 0; i < 1299.9; i += 0.1) {
-//            sin_array[index_counter] = Math.sin(i);
-//            index_counter += 1;
-//        }
-
         graph_panel = new JFXPanel();
         graph_panel.setLayout(new GridLayout(4, 1));
 
@@ -71,25 +66,42 @@ public class Overall_Graph {
         graphBPress.setGraph();
         graphResp.setGraph();
         graphTemp.setGraph();
-        //System.out.println(Arrays.toString(respdata.get_array()));
+
+        //Instantiating the thread sub-class
+        refreshing1 = new Refresh (graphECG, ecg_vit);
+        refreshing2 = new Refresh (graphBPress, pressure_vit);
+        refreshing3 = new Refresh (graphResp, resp_vit);
+        refreshing4 = new Refresh (graphTemp, temp_vit);
 
     }
 
     public void updatePanel() {
         //Running four separate threads, one for each graph
-        refreshing1 = new Thread (new Refresh(graphECG, ecg_vit));
-        refreshing2 = new Thread (new Refresh (graphBPress, pressure_vit));
-        refreshing3 = new Thread (new Refresh (graphResp, resp_vit));
-        refreshing4 = new Thread (new Refresh (graphTemp, temp_vit));
+        thread_ecg = new Thread(refreshing1);
+        thread_press = new Thread(refreshing2);
+        thread_resp = new Thread(refreshing3);
+        thread_temp = new Thread(refreshing4);
 
         //This makes sure that the program doesn't have to wait for each thread to be run
         Platform.runLater(new Runnable() {
             @Override
             public void run () {
-                refreshing1.start();
-                refreshing2.start();
-                refreshing3.start();
-                refreshing4.start();
+                thread_ecg.start();
+                thread_press.start();
+                thread_resp.start();
+                thread_temp.start();
+            }
+        });
+    }
+
+    public void stopUpdating(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run () {
+                refreshing1.switchRun();
+                refreshing2.switchRun();
+                refreshing3.switchRun();
+                refreshing4.switchRun();
             }
         });
     }

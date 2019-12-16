@@ -141,6 +141,17 @@ public abstract class Graph extends JFXPanel {
 
     }
 
+    public void stopUpdating(){
+        for (int i=0; i<num_points_changed; i+=1) {
+            double x = series_pointer*delta;
+            Get_Next_Value();
+            function.getData().add(new XYChart.Data<Number, Number>(x, data_point));
+            Monitoring_Value();
+            point_pointer += 1;
+            series_pointer += 1;
+        }
+    }
+
 //    private void RoundNumTicks(){
 //        roundedNumTicks = 0;
 //        if (lowerbound-(int)lowerbound >= 0.5)
