@@ -12,10 +12,13 @@ public class Panel_Controller {
     private JFXPanel mainPanel, simulationPanel, tuningPanel, vitalsPanel;
     private JFXPanel graphPanel;
     private Overall_Graph graphs;
+    private Tuning_Panel tunings;
+
     private BP_Vitals BP_panel;
     private RR_Vitals RR_panel;
     private ECG_Vitals ECG_panel;
     private HR_Vitals HR_panel;
+
     private Border border;
     private int s_v_ratio_num, s_v_ratio_den, s_t_ratio_num, s_t_ratio_den;
     private Dimension graph_panel_dim, simulation_panel_dim, main_panel_dim_, sub_vitals_panel_dim;
@@ -74,11 +77,15 @@ public class Panel_Controller {
         ECG_panel = new ECG_Vitals(sub_vitals_panel_dim, bpm_counter);
         HR_panel = new HR_Vitals(sub_vitals_panel_dim, temp_counter);
 
-        // Instantiating graph panel
+        // Instantiating graphs and Setting graphPanel
         graphs = new Overall_Graph(bpm_counter, ECG_panel, temp_counter, HR_panel,press_counter, BP_panel, resp_counter, RR_panel);
         graphPanel = graphs.getGraphPanel();
         graphPanel.setLayout(new GridLayout(4, 1));
         graphPanel.setVisible(true);
+
+        // Instantiating tunings and Setting tuningPanel
+        tunings = new Tuning_Panel(graphs);
+        tuningPanel = tunings.getTuningPanel();
 
         // Adding vital sign (BP, RR, HR, ECG) panels to vitalsPanel
         vitalsPanel.add(ECG_panel.getVitalsPanel());
@@ -96,7 +103,7 @@ public class Panel_Controller {
 
         // Adding simulationPanel and tuningPanel the main panel
         mainPanel.add(simulationPanel, BorderLayout.PAGE_START);
-        mainPanel.add(tuningPanel, BorderLayout.PAGE_END);
+        mainPanel.add(tuningPanel, BorderLayout.CENTER);
 
     }
 
@@ -130,8 +137,8 @@ public class Panel_Controller {
 //        RR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
     }
 
-    public void updateController() {
-        graphs.updatePanel();
-        graphPanel = graphs.getGraphPanel();
+    public void startSimulation() {
+        graphs.simulate();
+//        graphPanel = graphs.getGraphPanel();
     }
 }

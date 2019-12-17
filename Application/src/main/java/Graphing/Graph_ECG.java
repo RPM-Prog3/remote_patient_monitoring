@@ -16,6 +16,6 @@ public class Graph_ECG extends Graph {
     }
 
     protected void Monitoring_Value(){
-        super.val_counter.Count_bpm(super.data_point, super.point_pointer);
+        super.val_counter.Count_bpm(super.data_point, super.series_pointer);
     }
 }

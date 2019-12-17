@@ -75,7 +75,7 @@ public class Overall_Graph {
 
     }
 
-    public void updatePanel() {
+    public void simulate() {
         //Running four separate threads, one for each graph
         thread_ecg = new Thread(refreshing1);
         thread_press = new Thread(refreshing2);
@@ -94,7 +94,7 @@ public class Overall_Graph {
         });
     }
 
-    public void stopUpdating(){
+    public void switchStopStart(){
         Platform.runLater(new Runnable() {
             @Override
             public void run () {
