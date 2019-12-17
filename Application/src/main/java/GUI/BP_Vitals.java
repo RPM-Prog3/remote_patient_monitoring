@@ -19,7 +19,7 @@ public class BP_Vitals extends Vital_Values_Display {
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf((int)(press_val_counter.Double_Value())));
+            super.vital_value.setText(String.valueOf(press_val_counter.Max_Min()[0]) + "/" + String.valueOf(press_val_counter.Max_Min()[1]));
         });
     }
 }

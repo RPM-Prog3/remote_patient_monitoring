@@ -1,12 +1,11 @@
-package GUI;
+package Graphing;
 
+import GUI.*;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import simulation.*;
 
-import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 public class Overall_Graph {
     private JFXPanel graph_panel;  //Overall panel with the four graphs
@@ -28,7 +27,7 @@ public class Overall_Graph {
 
     public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input,Temperature_Counting temp_counting_obj_input, HR_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
         //Temperature
-        tempdata = new Body_Temp(37, 0.01, 0.5, 300000);
+        tempdata = new Body_Temp(37, 0.01, 0.5);
         temp_vit = temp_vit_input;
         temp_counting_obj = temp_counting_obj_input;
 
@@ -38,12 +37,12 @@ public class Overall_Graph {
         bpm_obj = ecg_obj_input;
 
         //Pressure
-        pressuredata = new Blood_Pressure(300000);
+        pressuredata = new Blood_Pressure();
         pressure_vit = pressure_vit_input;
         press_counting_obj = press_counting_obj_input;
 
         //Respiratory
-        respdata = new Resp_Rate(50, 2.0, -0.95, 20, 300000);
+        respdata = new Resp_Rate(50, 2.0, -0.95, 20);
         resp_vit = resp_vit_input;
         resp_counting_obj = resp_counting_obj_input;
 
@@ -58,27 +57,27 @@ public class Overall_Graph {
         graph_panel = new JFXPanel();
         graph_panel.setLayout(new GridLayout(4, 1));
 
-        graphECG = new Graph("chart-ECG", bpm_obj, 0.006, 5);
-        graphBPress = new Graph("chart-Pressure", press_counting_obj, 0.006, 5);
-        graphResp = new Graph("chart-Respiratory", resp_counting_obj, 0.006, 5);
-        graphTemp = new Graph("chart-Temperature", temp_counting_obj, 0.006, 5);  //bpm object shouldn't be there
+        graphECG = new Graph_ECG("chart-ECG", bpm_obj, 0.006, 5, ecgdata);
+        graphBPress = new Graph_Pressure("chart-Pressure", press_counting_obj, 0.006, 5, pressuredata);
+        graphResp = new Graph_Respiration("chart-Respiratory", resp_counting_obj, 0.006, 5, respdata);
+        graphTemp = new Graph_Temperature("chart-Temperature", temp_counting_obj, 0.006, 5, tempdata);  //bpm object shouldn't be there
 
         graph_panel.add(graphECG.getGraph());
         graph_panel.add(graphBPress.getGraph());
         graph_panel.add(graphResp.getGraph());
         graph_panel.add(graphTemp.getGraph());
 
-        graphECG.setGraph(ecgdata.Simulate(0));
-        graphBPress.setGraph(pressuredata.get_array());
-        graphResp.setGraph(respdata.get_array());
-        graphTemp.setGraph(tempdata.get_array());
+        graphECG.setGraph();
+        graphBPress.setGraph();
+        graphResp.setGraph();
+        graphTemp.setGraph();
         //System.out.println(Arrays.toString(respdata.get_array()));
 
     }
 
     public void updatePanel() {
         //Running four separate threads, one for each graph
-        refreshing1 = new Thread (new Refresh (graphECG, ecg_vit));
+        refreshing1 = new Thread (new Refresh(graphECG, ecg_vit));
         refreshing2 = new Thread (new Refresh (graphBPress, pressure_vit));
         refreshing3 = new Thread (new Refresh (graphResp, resp_vit));
         refreshing4 = new Thread (new Refresh (graphTemp, temp_vit));

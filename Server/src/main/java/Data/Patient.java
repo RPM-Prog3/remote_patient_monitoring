@@ -19,4 +19,24 @@ public class Patient implements Serializable {
     public void print_patient_details(){
         System.out.println(String.format("%s, %s, %s, %s, %s", familyname, givenname, dofbirth, email, phonenumber));
     }
+
+    public String get_familyname(){
+        return familyname;
+    }
+
+    public String get_givenname(){
+        return givenname;
+    }
+
+    public String get_dofbirth(){
+        return dofbirth;
+    }
+
+    public String get_email(){
+        return email;
+    }
+
+    public String get_phonenumber(){
+        return phonenumber;
+    }
 }

@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.rmi.server.ExportException;
 
 public class Client_Manager {
     String server_ip;
@@ -17,7 +16,9 @@ public class Client_Manager {
 
     public Client_Manager() throws IOException {
         String user_dir = Read_server_properties.get_user_dir();
+        System.out.println(user_dir);
         String server_config_path = user_dir + "/Server/server_config.properties";
+        System.out.println(server_config_path);
         Read_server_properties server_prop = new Read_server_properties(server_config_path);
         server_ip = server_prop.get_server_ip();
         server_port = server_prop.get_server_port();
@@ -27,34 +28,57 @@ public class Client_Manager {
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 
-    public void request_patients_from_server() throws IOException {
-        make_get_request(get_url());
+    //public Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {
+    public Server_Messenger get_patients_from_patients_db() throws IOException {
+        String need_to_login = "";
+        String url = String.format("%s/request_patients", get_url());
+        return get_post_messenger(url, need_to_login);
     }
 
-    public void send_patient_to_server(String familyname, String givenname,
-                                       String dofbirth, String email,
-                                       String phonenumber) throws IOException {
+    //public Server_Messenger send_patient_to_add_patients_db(User login_user, String familyname, String givenname,
+    public Server_Messenger send_patient_to_add_patients_db(String familyname, String givenname,
+                                                            String dofbirth, String email,
+                                                            String phonenumber) throws IOException {
         Patient p = new Patient(familyname, givenname, dofbirth, email, phonenumber);
-        send_patient_to_server(p);
+        return send_patient_to_add_patients_db(p);
     }
 
-    public void send_patient_to_server(Patient p) throws IOException {
+    //public Server_Messenger send_patient_to_add_patients_db(User login_user, Patient p) throws IOException {
+    public Server_Messenger send_patient_to_add_patients_db(Patient p) throws IOException {
         Gson p_gson = new Gson();
         String p_json_string = p_gson.toJson(p);
         String url = String.format("%s/add_patient", get_url());
-        make_post_request(url, p_json_string);
+        return get_post_messenger(url, p_json_string);
     }
 
-    public void send_user_to_server(String username, String password) throws IOException {
+    public Server_Messenger send_user_to_add_users_db(String username, String password, String email) throws IOException {
+        User u = new User(username, password, email);
+        return send_user_to_add_users_db(u);
+    }
+
+    public Server_Messenger send_user_to_add_users_db(User u) throws IOException {
+        Gson u_gson = new Gson();
+        String u_json_string = u_gson.toJson(u);
+        String url = String.format("%s/add_user", get_url());
+        return get_post_messenger(url, u_json_string);
+    }
+
+    public Server_Messenger get_users_from_users_db() throws IOException {
+        String need_to_login = "";
+        String url = String.format("%s/request_users", get_url());
+        return get_post_messenger(url, need_to_login);
+    }
+
+    public Server_Messenger send_user_to_login(String username, String password) throws IOException {
         User u = new User(username, password);
-        send_user_to_server(u);
+        return send_user_to_login(u);
     }
 
-    public void send_user_to_server(User u) throws IOException {
+    public Server_Messenger send_user_to_login(User u) throws IOException {
         Gson u_json = new Gson();
         String u_json_string = u_json.toJson(u);
         String url = String.format("%s/login", get_url());
-        make_post_request(url, u_json_string);
+        return get_post_messenger(url, u_json_string);
     }
 
     private void make_get_request(String url) throws IOException {
@@ -78,7 +102,13 @@ public class Client_Manager {
         }
     }
 
-    private void make_post_request(String url, String message) throws IOException {
+    private Server_Messenger get_post_messenger(String url, String message) throws IOException {
+        String response = make_post_request(url, message);
+        Gson gson = new Gson();
+        return gson.fromJson(response, Server_Messenger.class);
+    }
+
+    private String make_post_request(String url, String message) throws IOException {
         // Set up the body data
         byte[] body = message.getBytes(StandardCharsets.UTF_8);
         URL myURL = new URL(url);
@@ -94,13 +124,21 @@ public class Client_Manager {
         try (OutputStream outputStream = conn.getOutputStream()) {
             outputStream.write(body, 0, body.length);
         }
-        BufferedReader bufferedReader = new BufferedReader(new
-                InputStreamReader(conn.getInputStream(), "utf-8"));
-        String inputLine;
-        // Read the body of the response
-        while ((inputLine = bufferedReader.readLine()) != null) {
-            System.out.println(inputLine);
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new
+                    InputStreamReader(conn.getInputStream(), "utf-8"));
+        } catch (Exception e){
+
+            e.printStackTrace();
+            conn.getErrorStream();
         }
+        // Read the body of the response
+//        while ((response = bufferedReader.readLine()) != null) {
+//            System.out.println(response);
+//        }
+        String response = bufferedReader.readLine();
         bufferedReader.close();
+        return response;
     }
 }

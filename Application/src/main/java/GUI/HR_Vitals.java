@@ -11,7 +11,7 @@ public class HR_Vitals extends Vital_Values_Display {
     public HR_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj){
         super(vitals_panel_dim, "label-Temperature");
         super.status_msg.setText("STABLE");
-        super.vital_type.setText("HR");
+        super.vital_type.setText("TEMP");
         super.vital_value.setText("VALUE");
 
         temp_val_counter = obj;

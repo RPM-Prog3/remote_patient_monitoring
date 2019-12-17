@@ -4,6 +4,8 @@ public class Temperature_Counting extends Value_Counter {
     private double avrg_temp, temp_displayed;
     private int temp_counter;
 
+    public void Pressure_Values(double val){}
+
     public Temperature_Counting(){
         temp_counter = 0;
         temp_displayed = 0;
@@ -28,4 +30,6 @@ public class Temperature_Counting extends Value_Counter {
     public double Double_Value(){
         return temp_displayed/166;
     }
+
+    public int[] Max_Min(){ return null;}
 }
