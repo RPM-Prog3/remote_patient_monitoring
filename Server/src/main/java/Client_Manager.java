@@ -28,50 +28,53 @@ public class Client_Manager {
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 
-    public Messenger get_patients_from_patients_db() throws IOException {
+    //public Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {
+    public Server_Messenger get_patients_from_patients_db() throws IOException {
         String need_to_login = "";
         String url = String.format("%s/request_patients", get_url());
         return get_post_messenger(url, need_to_login);
     }
 
-    public Messenger send_patient_to_add_patients_db(String familyname, String givenname,
-                                            String dofbirth, String email,
-                                            String phonenumber) throws IOException {
+    //public Server_Messenger send_patient_to_add_patients_db(User login_user, String familyname, String givenname,
+    public Server_Messenger send_patient_to_add_patients_db(String familyname, String givenname,
+                                                            String dofbirth, String email,
+                                                            String phonenumber) throws IOException {
         Patient p = new Patient(familyname, givenname, dofbirth, email, phonenumber);
         return send_patient_to_add_patients_db(p);
     }
 
-    public Messenger send_patient_to_add_patients_db(Patient p) throws IOException {
+    //public Server_Messenger send_patient_to_add_patients_db(User login_user, Patient p) throws IOException {
+    public Server_Messenger send_patient_to_add_patients_db(Patient p) throws IOException {
         Gson p_gson = new Gson();
         String p_json_string = p_gson.toJson(p);
         String url = String.format("%s/add_patient", get_url());
         return get_post_messenger(url, p_json_string);
     }
 
-    public Messenger send_user_to_add_users_db(String username, String password, String email) throws IOException {
+    public Server_Messenger send_user_to_add_users_db(String username, String password, String email) throws IOException {
         User u = new User(username, password, email);
         return send_user_to_add_users_db(u);
     }
 
-    public Messenger send_user_to_add_users_db(User u) throws IOException {
+    public Server_Messenger send_user_to_add_users_db(User u) throws IOException {
         Gson u_gson = new Gson();
         String u_json_string = u_gson.toJson(u);
         String url = String.format("%s/add_user", get_url());
         return get_post_messenger(url, u_json_string);
     }
 
-    public Messenger get_users_from_users_db() throws IOException {
+    public Server_Messenger get_users_from_users_db() throws IOException {
         String need_to_login = "";
         String url = String.format("%s/request_users", get_url());
         return get_post_messenger(url, need_to_login);
     }
 
-    public Messenger send_user_to_login(String username, String password) throws IOException {
+    public Server_Messenger send_user_to_login(String username, String password) throws IOException {
         User u = new User(username, password);
         return send_user_to_login(u);
     }
 
-    public Messenger send_user_to_login(User u) throws IOException {
+    public Server_Messenger send_user_to_login(User u) throws IOException {
         Gson u_json = new Gson();
         String u_json_string = u_json.toJson(u);
         String url = String.format("%s/login", get_url());
@@ -99,10 +102,10 @@ public class Client_Manager {
         }
     }
 
-    private Messenger get_post_messenger(String url, String message) throws IOException {
+    private Server_Messenger get_post_messenger(String url, String message) throws IOException {
         String response = make_post_request(url, message);
         Gson gson = new Gson();
-        return gson.fromJson(response, Messenger.class);
+        return gson.fromJson(response, Server_Messenger.class);
     }
 
     private String make_post_request(String url, String message) throws IOException {
@@ -121,18 +124,15 @@ public class Client_Manager {
         try (OutputStream outputStream = conn.getOutputStream()) {
             outputStream.write(body, 0, body.length);
         }
-        System.out.println("bad boi 1");
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new
                     InputStreamReader(conn.getInputStream(), "utf-8"));
         } catch (Exception e){
-            System.out.println("bad boi 1.5");
+
             e.printStackTrace();
             conn.getErrorStream();
         }
-
-        System.out.println("bad boi 2");
         // Read the body of the response
 //        while ((response = bufferedReader.readLine()) != null) {
 //            System.out.println(response);

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -74,7 +73,7 @@ public class Run_Server extends HttpServlet {
 
         String server_path = req.getServletPath();
 
-        Messenger messenger = new Messenger();
+        Server_Messenger messenger = new Server_Messenger();
         messenger.set_success(true);
 
         switch (server_path) {
@@ -105,6 +104,8 @@ public class Run_Server extends HttpServlet {
             }
             case "/rpm/request_users": {
                 Gson gson = new Gson();
+                User u = gson.fromJson(reqBody, User.class);
+
                 try {
                     String users_json = user_db.get_users();
                     messenger.set_message(users_json);
@@ -118,7 +119,10 @@ public class Run_Server extends HttpServlet {
             case "/rpm/request_patients": {
                 Gson gson = new Gson();
                 User u = gson.fromJson(reqBody, User.class);
-                if (check_valid_user(u)) {
+
+                //if (check_valid_user(u)) {
+
+                if (true){
                     try {
                         String patients_json = patient_db.get_patients();
                         messenger.set_message(patients_json);
