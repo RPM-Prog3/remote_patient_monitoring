@@ -5,13 +5,16 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
+import javafx.util.StringConverter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 public class Tuning_Panel{
     private JFXPanel tuning_panel;
@@ -19,6 +22,7 @@ public class Tuning_Panel{
     private Scene tuning_scene;
 
     private Button switch_graph_motion;
+    private Slider timeWindow;
 
     private Overall_Graph graphs_panel;
 
@@ -31,6 +35,8 @@ public class Tuning_Panel{
         tuning_scene = new Scene(gpane);
 
         switch_graph_motion = new Button("Stop Graph");
+        timeWindow = new Slider();
+
         graphs_panel = obj;
 
         Platform.runLater (new Runnable() {
@@ -43,9 +49,44 @@ public class Tuning_Panel{
     private void setPanel(){
         actionPerformed(switch_graph_motion, "stop_or_start_graph");
         switch_graph_motion.setVisible(true);
-        gpane.add(switch_graph_motion, 0, 0);
-        tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css");
 
+        timeWindow.setMin(5);
+        timeWindow.setMax(60);
+        timeWindow.setValue(5);
+        timeWindow.setShowTickLabels(true);
+        timeWindow.setShowTickMarks(false);
+        timeWindow.setMajorTickUnit(1);
+        timeWindow.setLabelFormatter(new StringConverter<Double>() {
+            @Override
+            public String toString(Double aDouble) {
+                if (aDouble == 20 || aDouble == 40 || aDouble == 5 || aDouble == 60)
+                    return Integer.toString((int)aDouble.doubleValue()) ;
+                else
+                    return null;
+            }
+
+            @Override
+            public Double fromString(String s) {
+                return null;
+            }
+        });
+        timeWindow.valueProperty().addListener((obs, oldval, newval) -> {
+            if (oldval.intValue() < 13)
+                timeWindow.setValue(5);
+            else if (oldval.intValue()<30)
+                timeWindow.setValue(20);
+            else if (oldval.intValue()<50)
+                timeWindow.setValue(40);
+            else
+                timeWindow.setValue(60);
+            graphs_panel.changeTimeWindow((int)timeWindow.getValue());
+        });
+//        slider.setMinorTickCount(5);
+//        timeWindow.setBlockIncrement(10);
+
+        gpane.add(switch_graph_motion, 0, 0);
+        gpane.add(timeWindow, 1, 0);
+        tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css");
         tuning_panel.setScene(tuning_scene);
     }
 

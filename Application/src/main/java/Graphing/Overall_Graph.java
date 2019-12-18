@@ -94,6 +94,13 @@ public class Overall_Graph {
 //        });
     }
 
+    public void changeTimeWindow(int val){
+        graphECG.changeTimeWindow(val);
+        graphBPress.changeTimeWindow(val);
+        graphResp.changeTimeWindow(val);
+        graphTemp.changeTimeWindow(val);
+    }
+
     public JFXPanel getGraphPanel() {
         return graph_panel;
     }

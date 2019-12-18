@@ -31,7 +31,7 @@ public abstract class Graph extends JFXPanel {
     protected Value_Counter val_counter;
 
 
-    public Graph(String colorGraph, Value_Counter obj, double sample_period, float time_shown) {
+    public Graph(String colorGraph, Value_Counter obj, double sample_period, int time_shown) {
         series_pointer = 0; //This looks at which point in the series to add next
         numberOfPoints = 0; //How many points in the series
         points_added_whileStopped = 0;  //How many points added in the backend when the graph has stopped moving
@@ -71,7 +71,7 @@ public abstract class Graph extends JFXPanel {
             public String toString(Number number) {
                 int which_tick = (int)Math.round(number.doubleValue() - lowerbound);
 
-                return Integer.toString(which_tick - (int)time_shown);
+                return Integer.toString(which_tick - time_shown);
             }
 
             @Override
@@ -134,6 +134,12 @@ public abstract class Graph extends JFXPanel {
         });
     }
 
+    public void changeTimeWindow(int val){
+        Platform.runLater(() ->{
+            changeTheTimeWindow(val);
+        });
+    }
+
     private void updateTheGraph() {
         chart.setAnimated(false);
 
@@ -185,6 +191,11 @@ public abstract class Graph extends JFXPanel {
         function.getData().remove(0, points_added_whileStopped);
         points_added_whileStopped = 0;
         System.out.println("albicocca");
+    }
+
+    private void changeTheTimeWindow(int new_time_shown){
+        lowerbound = upperbound - new_time_shown;
+        xAxis.setLowerBound(lowerbound);
     }
 
 //    private void RoundNumTicks(){
