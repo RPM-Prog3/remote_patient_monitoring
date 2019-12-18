@@ -6,7 +6,7 @@ import Graphing.Graph;
 public class Refresh implements Runnable{
     private Graph graph;
     private Vital_Values_Display vital;
-    private boolean isUpdating, haveToRestart, whenToRestart;
+    private volatile boolean isUpdating, haveToRestart, whenToRestart;
 
     public Refresh(Graph graph, Vital_Values_Display vital) {
         this.graph = graph;
@@ -39,6 +39,7 @@ public class Refresh implements Runnable{
     }
 
     public void switchRun(){
+        System.out.println("seeee");
         isUpdating = !isUpdating;
         haveToRestart = !whenToRestart;
         whenToRestart = !whenToRestart;

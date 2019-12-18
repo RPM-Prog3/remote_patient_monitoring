@@ -110,6 +110,12 @@ public abstract class Graph extends JFXPanel {
         });
     }
 
+    public void stopUpdating(){
+        Platform.runLater(() ->{
+            stopTheUpdate();
+        });
+    }
+
     public void restartUpdating(){
         Platform.runLater(() ->{
             restartTheUpdate();
@@ -148,7 +154,7 @@ public abstract class Graph extends JFXPanel {
 
     }
 
-    public void stopUpdating(){
+    private void stopTheUpdate(){
         for (int i=0; i<num_points_changed; i+=1) {
             double x = series_pointer*delta;
             Get_Next_Value();
@@ -162,9 +168,11 @@ public abstract class Graph extends JFXPanel {
     private void restartTheUpdate(){
         lowerbound += points_added_whileStopped*delta;
         upperbound += points_added_whileStopped*delta;
-        xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
+        xAxis.setLowerBound(lowerbound);
+        function.getData().remove(0, points_added_whileStopped);
         points_added_whileStopped = 0;
+        System.out.println("albicocca");
     }
 
 //    private void RoundNumTicks(){
