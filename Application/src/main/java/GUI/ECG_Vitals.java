@@ -24,7 +24,7 @@ public class ECG_Vitals extends Vital_Values_Display {
 
     public void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf((int)(60/(ecg_val_counter.Index_Difference()*0.006))));
+            super.vital_value.setText(String.valueOf((int)(60/(ecg_val_counter.Index_Difference()*0.006))) + " bpm");
         });
     }
 }

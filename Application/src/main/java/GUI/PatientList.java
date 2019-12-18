@@ -1,6 +1,7 @@
-package GUI;
+/*package GUI;
 
 import server.Client_Manager;
+import server.Server_Messenger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -54,10 +55,10 @@ public class PatientList {
         // Creating an array containing many JCheckBox objects each containing the information
         // i.e. first and last name of each patient in the database
         patientlist = new ArrayList<JCheckBox>();
-        nOfpatients = getnOfpatients();
 
         // Setting up the panel that displays the patients such that it has as many rows as
         // the number of patients in the database
+        nOfpatients = getnOfpatients();
         list_panel = new JPanel(new GridLayout(nOfpatients, 1));
         list_panel.setVisible(true);
 
@@ -180,7 +181,7 @@ public class PatientList {
                 }
 
                 try {
-                    manager.send_patient_to_add_patient_db(new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum);
+                    manager.send_patient_to_add_patients_db(new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum);
                     success_message.showMessageDialog(new_patient, "Patient Successfully Added", "information", JOptionPane.INFORMATION_MESSAGE);
                     updateList();
                     showList();
@@ -194,6 +195,7 @@ public class PatientList {
 
     public ArrayList<JCheckBox> getPatientsInfo() {
         nOfpatients = 0;
+        Server_Messenger messenger = new Server_Messenger();
 
         // Connecting to the Server:
         try {
@@ -205,7 +207,9 @@ public class PatientList {
         }
 
         try {
-
+            messenger = manager.get_patients_from_patients_db();
+            boolean success = messenger.get_success();
+            String output = messenger.get_message();
 
         } catch (Exception e) {
             System.out.println("NOT EXECUTED");
@@ -274,4 +278,4 @@ public class PatientList {
         list.setResizable(false);
         list.setVisible(true);
     }
-}
+}*/

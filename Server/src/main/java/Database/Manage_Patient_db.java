@@ -39,22 +39,17 @@ public class Manage_Patient_db extends Manage_db {
                 table_name, family_name, given_name, date_of_birth, email, phone_number);
         String exception_msg = String.format("Unable to add patient to database - table: %s - %s",
                 db_url, table_name);
-        execute_query(sql_add_patient, exception_msg);
+        execute_update(sql_add_patient, exception_msg);
     }
 
     private void remove_patient(Patient p){
         throw new NotImplementedException();
     }
 
-    public ResultSet get_patients_resultSet() throws SQLException {
+    public String get_patients() throws SQLException {
         String sql_get_patients = String.format("SELECT * FROM %s WHERE id >= 1", table_name);
         String exception_msg = String.format("Unable to get patients from %s", table_name);
-        return execute_query(sql_get_patients, exception_msg);
-    }
-
-    public void print_rs(ResultSet rs) throws SQLException {
-        while (rs.next()){
-            System.out.println(String.format("%s,%s", rs.getString("familyname"), rs.getString("givenname")));
-        }
+        String[] rs_strings = {"familyname", "givenname", "dofbirth", "email", "phonenumber"};
+        return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
     }
 }

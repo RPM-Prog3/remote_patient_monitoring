@@ -13,6 +13,8 @@ public class BPM extends Value_Counter{
         which = 0;
     }
 
+    public void Pressure_Values(double val){}
+
     public void Current_Temp(double val){}
 
     public void Count_bpm(double val, int index){
@@ -36,4 +38,6 @@ public class BPM extends Value_Counter{
     }
 
     public double Double_Value(){ return 0; }
+
+    public int[] Max_Min(){ return null;}
 }
