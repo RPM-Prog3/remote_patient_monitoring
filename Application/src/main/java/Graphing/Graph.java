@@ -21,7 +21,7 @@ public abstract class Graph extends JFXPanel {
 
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
-    private int num_points_changed, numberOfPoints, points_added_whileStopped;
+    private int num_points_changed, numberOfPoints, points_added_whileStopped, windowSize;
     protected int series_pointer;
     private double delta;
     protected double data_point;
@@ -39,7 +39,8 @@ public abstract class Graph extends JFXPanel {
         delta = sample_period;
         lowerbound = 0;
         upperbound = time_shown;
-        tick = upperbound/5;
+        windowSize = time_shown;
+        tick = windowSize/5;
 
         num_points_changed = 1;
         //RoundNumTicks();
@@ -47,7 +48,7 @@ public abstract class Graph extends JFXPanel {
         val_counter = obj;
 
         graphpanel = new JFXPanel();
-        xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
+        xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, tick+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
 //        yAxis = new NumberAxis("Values for Y-Axis", -1, 1, 1);
         yAxis = new NumberAxis();
         yAxis.setForceZeroInRange(false);
@@ -71,7 +72,7 @@ public abstract class Graph extends JFXPanel {
             public String toString(Number number) {
                 int which_tick = (int)Math.round(number.doubleValue() - lowerbound);
 
-                return Integer.toString(which_tick - time_shown);
+                return Integer.toString(which_tick - windowSize);
             }
 
             @Override
@@ -196,6 +197,9 @@ public abstract class Graph extends JFXPanel {
     private void changeTheTimeWindow(int new_time_shown){
         lowerbound = upperbound - new_time_shown;
         xAxis.setLowerBound(lowerbound);
+        windowSize = new_time_shown;
+        tick = new_time_shown/5;
+        xAxis.setTickUnit(tick+ROUNDING_VALUE);
     }
 
 //    private void RoundNumTicks(){
