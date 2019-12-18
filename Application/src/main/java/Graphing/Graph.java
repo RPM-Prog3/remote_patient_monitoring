@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.util.StringConverter;
 import simulation.Value_Counter;
 
 public abstract class Graph extends JFXPanel {
@@ -65,6 +66,17 @@ public abstract class Graph extends JFXPanel {
 //            @Override
 //            public Number fromString(String s) { return null; }
 //        });
+        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
+            @Override
+            public String toString(Number number) {
+                int which_tick = (int)Math.round(number.doubleValue() - lowerbound);
+
+                return Integer.toString(which_tick - (int)time_shown);
+            }
+
+            @Override
+            public Number fromString(String s) { return null; }
+        });
 
         chart = new LineChart<Number, Number>(xAxis, yAxis); //creating the chart skeleton
         scene = new Scene(chart);
