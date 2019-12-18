@@ -68,28 +68,28 @@ public class Overall_Graph {
         graphTemp.setGraph();
 
         //Instantiating the thread sub-class
-        refreshing1 = new Refresh (graphECG, ecg_vit);
-        refreshing2 = new Refresh (graphBPress, pressure_vit);
-        refreshing3 = new Refresh (graphResp, resp_vit);
-        refreshing4 = new Refresh (graphTemp, temp_vit);
+        refreshing1 = new Refresh (graphECG, graphBPress, graphResp, graphTemp, ecg_vit);
+//        refreshing2 = new Refresh (graphBPress, pressure_vit);
+//        refreshing3 = new Refresh (graphResp, resp_vit);
+//        refreshing4 = new Refresh (graphTemp, temp_vit);
 
     }
 
     public void simulate() {
         //Running four separate threads, one for each graph
         thread_ecg = new Thread(refreshing1);
-        thread_press = new Thread(refreshing2);
-        thread_resp = new Thread(refreshing3);
-        thread_temp = new Thread(refreshing4);
+//        thread_press = new Thread(refreshing2);
+//        thread_resp = new Thread(refreshing3);
+//        thread_temp = new Thread(refreshing4);
 
         //This makes sure that the program doesn't have to wait for each thread to be run
         Platform.runLater(new Runnable() {
             @Override
             public void run () {
                 thread_ecg.start();
-                thread_press.start();
-                thread_resp.start();
-                thread_temp.start();
+//                thread_press.start();
+//                thread_resp.start();
+//                thread_temp.start();
             }
         });
     }
@@ -99,9 +99,9 @@ public class Overall_Graph {
             @Override
             public void run () {
                 refreshing1.switchRun();
-                refreshing2.switchRun();
-                refreshing3.switchRun();
-                refreshing4.switchRun();
+//                refreshing2.switchRun();
+//                refreshing3.switchRun();
+//                refreshing4.switchRun();
             }
         });
     }
