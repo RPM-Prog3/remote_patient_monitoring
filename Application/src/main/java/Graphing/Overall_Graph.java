@@ -12,8 +12,8 @@ public class Overall_Graph {
     private Graph graphECG, graphBPress, graphResp, graphTemp;  //These are the four different graphs
     private Value_Counter bpm_obj, press_counting_obj, resp_counting_obj, temp_counting_obj;
 
-    private Refresh refreshing1,refreshing2, refreshing3, refreshing4;
-    private Thread thread_ecg, thread_press, thread_resp, thread_temp;  //These creates four different threads
+    private Refresh refreshing;
+    private Thread thread_graphs;  //These creates a different thread for the graphs
 
     private ECG ecgdata;
     private ECG_Vitals ecg_vit;
@@ -68,42 +68,30 @@ public class Overall_Graph {
         graphTemp.setGraph();
 
         //Instantiating the thread sub-class
-        refreshing1 = new Refresh (graphECG, graphBPress, graphResp, graphTemp, ecg_vit);
-//        refreshing2 = new Refresh (graphBPress, pressure_vit);
-//        refreshing3 = new Refresh (graphResp, resp_vit);
-//        refreshing4 = new Refresh (graphTemp, temp_vit);
+        refreshing = new Refresh (graphECG, graphBPress, graphResp, graphTemp, ecg_vit, pressure_vit, resp_vit, temp_vit);
 
     }
 
     public void simulate() {
-        //Running four separate threads, one for each graph
-        thread_ecg = new Thread(refreshing1);
-//        thread_press = new Thread(refreshing2);
-//        thread_resp = new Thread(refreshing3);
-//        thread_temp = new Thread(refreshing4);
+        //Running the four graphs on a separate thread
+        thread_graphs = new Thread(refreshing);
 
         //This makes sure that the program doesn't have to wait for each thread to be run
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run () {
-                thread_ecg.start();
-//                thread_press.start();
-//                thread_resp.start();
-//                thread_temp.start();
-            }
-        });
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run () {
+                thread_graphs.start();
+//            }
+//        });
     }
 
     public void switchStopStart(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run () {
-                refreshing1.switchRun();
-//                refreshing2.switchRun();
-//                refreshing3.switchRun();
-//                refreshing4.switchRun();
-            }
-        });
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run () {
+                refreshing.switchRun();
+//            }
+//        });
     }
 
     public JFXPanel getGraphPanel() {
