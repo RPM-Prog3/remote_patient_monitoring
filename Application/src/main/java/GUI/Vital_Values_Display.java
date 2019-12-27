@@ -64,14 +64,8 @@ public abstract class Vital_Values_Display {
 
 
         //Applying the css
+        String style_location = "file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css";
         status_msg.getStyleClass().add(colorLabels);
-
-        System.out.println(System.getProperty("user.dir").toString());
-
-        String style_location = "file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/GUI/Scenes.css";
-
-        System.out.println(style_location);
-
         status_scene.getStylesheets().add(style_location);
         vital_value.getStyleClass().add(colorLabels);
         value_scene.getStylesheets().add(style_location);

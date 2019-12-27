@@ -7,9 +7,6 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.util.StringConverter;
-import javafx.util.converter.NumberStringConverter;
-import simulation.BPM;
-import simulation.ECG;
 import simulation.Value_Counter;
 
 public abstract class Graph extends JFXPanel {
@@ -24,8 +21,8 @@ public abstract class Graph extends JFXPanel {
 
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
-    private int num_points_changed, series_pointer;
-    protected int point_pointer;
+    private int num_points_changed, numberOfPoints, points_added_whileStopped, windowSize;
+    protected int series_pointer;
     private double delta;
     protected double data_point;
 
@@ -34,14 +31,16 @@ public abstract class Graph extends JFXPanel {
     protected Value_Counter val_counter;
 
 
-    public Graph(String colorGraph, Value_Counter obj, double sample_period, float time_shown) {
+    public Graph(String colorGraph, Value_Counter obj, double sample_period, int time_shown) {
         series_pointer = 0; //This looks at which point in the series to add next
-        point_pointer = 0;  //This looks at which index in the input data must be added next
+        numberOfPoints = 0; //How many points in the series
+        points_added_whileStopped = 0;  //How many points added in the backend when the graph has stopped moving
 
         delta = sample_period;
         lowerbound = 0;
         upperbound = time_shown;
-        tick = upperbound/5;
+        windowSize = time_shown;
+        tick = windowSize/5;
 
         num_points_changed = 1;
         //RoundNumTicks();
@@ -49,20 +48,31 @@ public abstract class Graph extends JFXPanel {
         val_counter = obj;
 
         graphpanel = new JFXPanel();
-        xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, upperbound+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
+        xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, tick+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
 //        yAxis = new NumberAxis("Values for Y-Axis", -1, 1, 1);
         yAxis = new NumberAxis();
         yAxis.setForceZeroInRange(false);
 
         //Paying with the axis values
+//        xAxis.setTickLabelFormatter(new StringConverter<Number>() {
+//            @Override
+//            public String toString(Number number) {
+//                for(int i=0; i<=(int)((upperbound-lowerbound)/tick); i+=1){
+//                    if (number.intValue() == (int)(lowerbound + i*tick))
+//                        return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            public Number fromString(String s) { return null; }
+//        });
         xAxis.setTickLabelFormatter(new StringConverter<Number>() {
             @Override
             public String toString(Number number) {
-                for(int i=0; i<=(int)((upperbound-lowerbound)/tick); i+=1){
-                    if (number.intValue() == (int)(lowerbound + i*tick))
-                        return Integer.toString((int) (-(upperbound - lowerbound) + i * tick)) + "s";
-                }
-                return null;
+                int which_tick = (int)Math.round(number.doubleValue() - lowerbound);
+
+                return Integer.toString(which_tick - windowSize);
             }
 
             @Override
@@ -84,16 +94,15 @@ public abstract class Graph extends JFXPanel {
 //            point_pointer += 1;
 //        }
 
-        for (double i = 0; i <= 5; i += delta) {
+        for (double i = 0; i <= upperbound; i += delta) {
             function.getData().add(new XYChart.Data<Number, Number>(i, 0));
             series_pointer += 1;
+            numberOfPoints += 1;
         }
-
-        System.out.println(point_pointer);
 
         chart.getData().add(function);
         chart.getStyleClass().add(colorGraph);
-        chart.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/Graphing/graph.css");
+        chart.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/graph.css");
 
         Platform.runLater(new Runnable() {
             @Override
@@ -114,6 +123,24 @@ public abstract class Graph extends JFXPanel {
         });
     }
 
+    public void stopUpdating(){
+        Platform.runLater(() ->{
+            stopTheUpdate();
+        });
+    }
+
+    public void restartUpdating(){
+        Platform.runLater(() ->{
+            restartTheUpdate();
+        });
+    }
+
+    public void changeTimeWindow(int val){
+        Platform.runLater(() ->{
+            changeTheTimeWindow(val);
+        });
+    }
+
     private void updateTheGraph() {
         chart.setAnimated(false);
 
@@ -122,9 +149,10 @@ public abstract class Graph extends JFXPanel {
             Get_Next_Value();
             function.getData().add(new XYChart.Data<Number, Number>(x, data_point));
             Monitoring_Value();
-            point_pointer += 1;
             series_pointer += 1;
+            numberOfPoints += 1;
         }
+//        System.out.println(function.getData().size());
 
         xAxis.setAnimated(false);
         lowerbound += num_points_changed*delta;
@@ -137,8 +165,41 @@ public abstract class Graph extends JFXPanel {
 //        System.out.println("upper"+upperbound);
 //        System.out.println("rouned:                  " + ((int)(upperbound)-(int)(lowerbound)) + "\n");
 
-        function.getData().remove(0, num_points_changed);
+        if (numberOfPoints > (int)(60/0.006)) {
+            function.getData().remove(0, num_points_changed);
+//          System.out.println(function.getData().size());
+            numberOfPoints -= 1;
+        }
 
+    }
+
+    private void stopTheUpdate(){
+        for (int i=0; i<num_points_changed; i+=1) {
+            double x = series_pointer*delta;
+            Get_Next_Value();
+            function.getData().add(new XYChart.Data<Number, Number>(x, data_point));
+            Monitoring_Value();
+            series_pointer += 1;
+            points_added_whileStopped += 1;
+        }
+    }
+
+    private void restartTheUpdate(){
+        lowerbound += points_added_whileStopped*delta;
+        upperbound += points_added_whileStopped*delta;
+        xAxis.setUpperBound(upperbound);
+        xAxis.setLowerBound(lowerbound);
+        function.getData().remove(0, points_added_whileStopped);
+        points_added_whileStopped = 0;
+        System.out.println("albicocca");
+    }
+
+    private void changeTheTimeWindow(int new_time_shown){
+        lowerbound = upperbound - new_time_shown;
+        xAxis.setLowerBound(lowerbound);
+        windowSize = new_time_shown;
+        tick = new_time_shown/5;
+        xAxis.setTickUnit(tick+ROUNDING_VALUE);
     }
 
 //    private void RoundNumTicks(){
