@@ -61,6 +61,7 @@ public abstract class Vital_Values_Display {
         vital_type.setVisible(true);
         vital_value.setVisible(true);
         units_label.setVisible(true);
+        units_label.setTextAlignment(TextAlignment.RIGHT);
 
 
         //Applying the css
@@ -74,17 +75,17 @@ public abstract class Vital_Values_Display {
         units_label.getStyleClass().add(colorLabels);
         units_scene.getStylesheets().add(style_location);
 
-        // Instantiating border object(s)
+        /*// Instantiating border object(s)
         border = BorderFactory.createLineBorder(Color.black);
 
         // Setting contours of the different panels
         status.setBorder(border);
         type.setBorder(border);
-        value.setBorder(border);
+        value.setBorder(border);*/
 
         // Setting labels font
         status_font = new javafx.scene.text.Font("Arial", 15);
-        type_font = new javafx.scene.text.Font("Arial", 9);
+        type_font = new javafx.scene.text.Font("Arial", 20);
         value_font = new javafx.scene.text.Font("Arial", 50);
         units_font = new javafx.scene.text.Font("Arial", 20);
         status_msg.setFont(status_font);

@@ -1,6 +1,6 @@
 .label {
     /*-fx-font: monospace;*/
-    -fx-alignment: center;
+    /*-fx-alignment: center;*/
 }
 
 .label-ECG {
@@ -18,7 +18,8 @@
 
 .root {
     -fx-background-color: black;
-    -fx-border-color: green;
+    -fx-border-color: black;
+    -fx-border-visible: false;
     -fx-fit-to-height: true;
     -fx-arc-width: true;
 }
