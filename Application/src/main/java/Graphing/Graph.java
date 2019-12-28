@@ -22,11 +22,10 @@ public abstract class Graph extends JFXPanel {
     private LineChart<Number, Number> chart;
     private XYChart.Series<Number, Number> function;
     private int num_points_changed, numberOfPoints, points_added_whileStopped, windowSize;
+    private int pointsThreshold, pointsDeleted;
     protected int series_pointer;
     private double delta;
     protected double data_point;
-
-    private int roundedNumTicks;
 
     protected Value_Counter val_counter;
 
@@ -36,6 +35,9 @@ public abstract class Graph extends JFXPanel {
         numberOfPoints = 0; //How many points in the series
         points_added_whileStopped = 0;  //How many points added in the backend when the graph has stopped moving
 
+        pointsThreshold = (int)(60/sample_period);  //When to start deleting points
+        pointsDeleted = 1;  //After how many points to delete once the threshold has been passed
+
         delta = sample_period;
         lowerbound = 0;
         upperbound = time_shown;
@@ -43,7 +45,6 @@ public abstract class Graph extends JFXPanel {
         tick = windowSize/5;
 
         num_points_changed = 1;
-        //RoundNumTicks();
 
         val_counter = obj;
 
@@ -94,11 +95,16 @@ public abstract class Graph extends JFXPanel {
 //            point_pointer += 1;
 //        }
 
-        for (double i = 0; i <= upperbound; i += delta) {
-            function.getData().add(new XYChart.Data<Number, Number>(i, 0));
-            series_pointer += 1;
-            numberOfPoints += 1;
-        }
+        function.getData().add(new XYChart.Data<Number, Number>(-60, 0));
+        function.getData().add(new XYChart.Data<Number, Number>(upperbound, 0));
+        series_pointer += upperbound/delta + 1;
+        numberOfPoints += 2;
+
+//        for (double i = 0; i <= upperbound; i += delta) {
+////            function.getData().add(new XYChart.Data<Number, Number>(i, 0));
+//            series_pointer += 1;
+//            numberOfPoints += 1;
+//        }
 
         chart.getData().add(function);
         chart.getStyleClass().add(colorGraph);
@@ -159,16 +165,16 @@ public abstract class Graph extends JFXPanel {
         upperbound += num_points_changed*delta;
         xAxis.setLowerBound(lowerbound);
         xAxis.setUpperBound(upperbound);
-        //RoundNumTicks();
 
 //        System.out.println("lower"+lowerbound);
 //        System.out.println("upper"+upperbound);
 //        System.out.println("rouned:                  " + ((int)(upperbound)-(int)(lowerbound)) + "\n");
 
-        if (numberOfPoints > (int)(60/0.006)) {
-            function.getData().remove(0, num_points_changed);
-//          System.out.println(function.getData().size());
-            numberOfPoints -= 1;
+        if (numberOfPoints > pointsThreshold + pointsDeleted) {
+            function.getData().remove(0, pointsDeleted);
+            System.out.println(function.getData().size());
+            numberOfPoints -= pointsDeleted;
+            pointsDeleted = 15;
         }
 
     }
@@ -180,6 +186,7 @@ public abstract class Graph extends JFXPanel {
             function.getData().add(new XYChart.Data<Number, Number>(x, data_point));
             Monitoring_Value();
             series_pointer += 1;
+            numberOfPoints += 1;
             points_added_whileStopped += 1;
         }
     }
@@ -189,7 +196,10 @@ public abstract class Graph extends JFXPanel {
         upperbound += points_added_whileStopped*delta;
         xAxis.setUpperBound(upperbound);
         xAxis.setLowerBound(lowerbound);
-        function.getData().remove(0, points_added_whileStopped);
+        if (numberOfPoints > pointsThreshold){
+            function.getData().remove(0, points_added_whileStopped);
+            numberOfPoints -= points_added_whileStopped;
+        }
         points_added_whileStopped = 0;
         System.out.println("albicocca");
     }
@@ -201,21 +211,6 @@ public abstract class Graph extends JFXPanel {
         tick = new_time_shown/5;
         xAxis.setTickUnit(tick+ROUNDING_VALUE);
     }
-
-//    private void RoundNumTicks(){
-//        roundedNumTicks = 0;
-//        if (lowerbound-(int)lowerbound >= 0.5)
-//            roundedNumTicks += (int)lowerbound + 1;
-//        else
-//            roundedNumTicks += (int)lowerbound;
-//
-//        if (upperbound-(int)upperbound >= 0.5)
-//            roundedNumTicks += (int)upperbound + 1;
-//        else
-//            roundedNumTicks += (int)upperbound;
-//
-//        roundedNumTicks = roundedNumTicks/tick;
-//    }
 
     protected abstract void Get_Next_Value();
 

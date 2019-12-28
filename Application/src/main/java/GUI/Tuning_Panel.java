@@ -71,15 +71,17 @@ public class Tuning_Panel{
             }
         });
         timeWindow.valueProperty().addListener((obs, oldval, newval) -> {
-            if (oldval.intValue() < 13)
-                timeWindow.setValue(5);
-            else if (oldval.intValue()<30)
-                timeWindow.setValue(20);
-            else if (oldval.intValue()<50)
-                timeWindow.setValue(40);
-            else
-                timeWindow.setValue(60);
-            graphs_panel.changeTimeWindow((int)timeWindow.getValue());
+            if (oldval!=newval) {
+                if (oldval.intValue() < 13)
+                    timeWindow.setValue(5);
+                else if (oldval.intValue() < 30)
+                    timeWindow.setValue(20);
+                else if (oldval.intValue() < 50)
+                    timeWindow.setValue(40);
+                else
+                    timeWindow.setValue(60);
+                graphs_panel.changeTimeWindow((int) timeWindow.getValue());
+            }
         });
 //        slider.setMinorTickCount(5);
 //        timeWindow.setBlockIncrement(10);
