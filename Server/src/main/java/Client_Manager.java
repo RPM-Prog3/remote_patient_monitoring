@@ -1,4 +1,5 @@
 import Data.Patient;
+import Data.Patient_Value;
 import Data.User;
 import Setup.Read_server_properties;
 import com.google.gson.Gson;
@@ -26,6 +27,13 @@ public class Client_Manager {
 
     private String get_url(){
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
+    }
+
+    public Server_Messenger send_patient_value_to_pv_db(Patient_Value pv) throws IOException {
+        Gson pv_gson = new Gson();
+        String pv_json_string = pv_gson.toJson(pv);
+        String url = String.format("%s/add_patient_value", get_url());
+        return get_post_messenger(url, pv_json_string);
     }
 
     //public Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {

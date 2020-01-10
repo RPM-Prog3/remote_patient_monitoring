@@ -1,5 +1,7 @@
 import Data.Patient;
+import Data.Patient_Value;
 import Data.User;
+import Database.Manage_Patient_Values_db;
 import Database.Manage_Patient_db;
 import Database.Manage_User_db;
 import com.google.gson.Gson;
@@ -33,6 +35,7 @@ import java.util.stream.Collectors;
 public class Run_Server extends HttpServlet {
     Manage_User_db user_db;
     Manage_Patient_db patient_db;
+    Manage_Patient_Values_db patient_values_db;
     boolean debug = true;
 
 
@@ -89,6 +92,18 @@ public class Run_Server extends HttpServlet {
                     messenger.set_success(false);
                 }
                 break;
+            }
+            case "/rpm/add_patient_value": {
+                Gson gson = new Gson();
+                Patient_Value pv = gson.fromJson(reqBody, Patient_Value.class);
+                pv.print_values();
+                try {
+                    patient_values_db.add_patient_value(pv);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("failed to add patient values");
+                    messenger.set_success(false);
+                }
             }
             case "/rpm/add_user": {
                 Gson gson = new Gson();
