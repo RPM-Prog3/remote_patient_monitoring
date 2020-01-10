@@ -1,6 +1,7 @@
 package GUI;
 
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import simulation.BPM;
 import simulation.Value_Counter;
 
@@ -15,6 +16,8 @@ public class ECG_Vitals extends Vital_Values_Display {
         super.status_msg.setText("STABLE");
         super.vital_type.setText("ECG");
         super.vital_value.setText("VALUE");
+        super.units_label.setText("BPM");
+        super.units_label.setAlignment(Pos.CENTER_RIGHT);
 
         ecg_val_counter = obj;
     }

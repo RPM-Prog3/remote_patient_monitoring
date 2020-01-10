@@ -1,14 +1,16 @@
+package server;
 
 import Data.Patient;
 import Data.User;
-import Setup.Read_server_properties;
 import com.google.gson.Gson;
+import setup.Read_server_properties;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class Client_Manager {

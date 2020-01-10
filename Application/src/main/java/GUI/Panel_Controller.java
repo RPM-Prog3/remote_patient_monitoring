@@ -59,12 +59,12 @@ public class Panel_Controller {
         vitalsPanel.setVisible(true);
 
         // Instantiating border object(s)
-        border = BorderFactory.createLineBorder(Color.black);
+        //border = BorderFactory.createLineBorder(Color.black);
 
         // Setting contours of the different panels
-        simulationPanel.setBorder(border);
-        tuningPanel.setBorder(border);
-        vitalsPanel.setBorder(border);
+        //simulationPanel.setBorder(border);
+        //tuningPanel.setBorder(border);
+        //vitalsPanel.setBorder(border);
 
         // Calculating the size of the sub panels of vitals panel that will contain the values
         // of the vital signs. This is then fed into the constructor of the various vital signs classes.

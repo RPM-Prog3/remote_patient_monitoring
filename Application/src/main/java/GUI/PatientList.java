@@ -1,12 +1,17 @@
-package GUI;
+/*package GUI;
+
+import server.Client_Manager;
+import server.Server_Messenger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+
 
 public class PatientList {
     static GraphicsConfiguration gc; // Class field containing config info
@@ -22,6 +27,7 @@ public class PatientList {
     private ArrayList<JCheckBox> patientlist;
     private Border border;
     private JScrollPane scrollPane;
+    private Client_Manager manager;
 
     public PatientList() {
         list = new JFrame("List of Patients", gc);
@@ -49,10 +55,10 @@ public class PatientList {
         // Creating an array containing many JCheckBox objects each containing the information
         // i.e. first and last name of each patient in the database
         patientlist = new ArrayList<JCheckBox>();
-        nOfpatients = getnOfpatients();
 
         // Setting up the panel that displays the patients such that it has as many rows as
         // the number of patients in the database
+        nOfpatients = getnOfpatients();
         list_panel = new JPanel(new GridLayout(nOfpatients, 1));
         list_panel.setVisible(true);
 
@@ -165,18 +171,20 @@ public class PatientList {
                 error_message = new JOptionPane();
                 success_message = new JOptionPane();
 
-                // Connecting the Database:
-                Connection conn = connect_DB();
+                // Connecting to the Server:
                 try {
-                    Statement s = conn.createStatement();
-                    String sqlStr = String.format("insert into patients (familyname, givenname, dofbirth, email, phonenumber) values('%s', '%s', '%s', '%s', '%s');", new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum);
-                    s.executeUpdate(sqlStr);
+                    Client_Manager manager = new Client_Manager();
+                    System.out.println("Connection Successful");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Unable to Connect");
+                }
+
+                try {
+                    manager.send_patient_to_add_patients_db(new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum);
                     success_message.showMessageDialog(new_patient, "Patient Successfully Added", "information", JOptionPane.INFORMATION_MESSAGE);
                     updateList();
                     showList();
-                    System.out.println(list_panel.getLayout());
-                    s.close();
-                    conn.close();
                     new_patient.setVisible(false);
                 } catch (Exception e) {
                     error_message.showMessageDialog(new_patient, "Unable to add Patient", "Error Message", JOptionPane.ERROR_MESSAGE);
@@ -185,49 +193,24 @@ public class PatientList {
         });
     }
 
-    public Connection connect_DB() {
-        String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
-        try {
-            // Registers the driver
-            Class.forName("org.postgresql.Driver");
-        } catch (Exception e) {
-
-        }
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(dbUrl, "postgres", "admin");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
-
     public ArrayList<JCheckBox> getPatientsInfo() {
         nOfpatients = 0;
-        // Connecting to the Database
-        Connection conn = connect_DB();
-        try {
-            Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = s.executeQuery("SELECT * FROM patients");
-            ResultSet rs2 = s.executeQuery("SELECT * FROM patients");
-            rs = s.executeQuery("SELECT COUNT(*) FROM patients");
-            // Get the number of rows from the result set
-            rs.next();
-            nOfpatients = rs.getInt(1);
-            System.out.println(status);
-            rs = s.executeQuery("SELECT givenname, familyname FROM patients WHERE id >= 1");
+        Server_Messenger messenger = new Server_Messenger();
 
-            while (rs.next()) {
-                if (status != true) {
-                    patientlist.add(new JCheckBox(rs.getString("givenname") + " " + rs.getString("familyname")));
-                } else {
-                    rs.last();
-                    patientlist.add(new JCheckBox(rs.getString("givenname") + " " + rs.getString("familyname")));
-                }
-            }
-            rs.close();
-            s.close();
-            conn.close();
+        // Connecting to the Server:
+        try {
+            Client_Manager manager = new Client_Manager();
+            System.out.println("Connection Successful");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unable to Connect");
+        }
+
+        try {
+            messenger = manager.get_patients_from_patients_db();
+            boolean success = messenger.get_success();
+            String output = messenger.get_message();
+
         } catch (Exception e) {
             System.out.println("NOT EXECUTED");
         }
@@ -295,4 +278,4 @@ public class PatientList {
         list.setResizable(false);
         list.setVisible(true);
     }
-}
+}*/

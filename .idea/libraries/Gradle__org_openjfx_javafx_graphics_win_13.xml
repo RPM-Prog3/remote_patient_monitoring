@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="Gradle: org.openjfx:javafx-graphics:linux:13">
+  <library name="Gradle: org.openjfx:javafx-graphics:win:13">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/13/d853d12684f60037dfeea1a47e61396e0febfdfd/javafx-graphics-13-linux.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/13/bbcbc616702a086567585183efcb0ab8eb22a66b/javafx-graphics-13-win.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

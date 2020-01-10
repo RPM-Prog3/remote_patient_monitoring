@@ -18,6 +18,7 @@ import java.util.Hashtable;
 
 public class Tuning_Panel{
     private JFXPanel tuning_panel;
+    private javafx.scene.control.Label time_axis_label;
     private GridPane gpane;
     private Scene tuning_scene;
 
@@ -36,6 +37,8 @@ public class Tuning_Panel{
 
         switch_graph_motion = new Button("Stop Graph");
         timeWindow = new Slider();
+        time_axis_label = new javafx.scene.control.Label();
+        time_axis_label.setText("Slider to change window size");
 
         graphs_panel = obj;
 
@@ -87,7 +90,8 @@ public class Tuning_Panel{
 //        timeWindow.setBlockIncrement(10);
 
         gpane.add(switch_graph_motion, 0, 0);
-        gpane.add(timeWindow, 1, 0);
+        gpane.add(time_axis_label, 0,1);
+        gpane.add(timeWindow, 0, 2);
         tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css");
         tuning_panel.setScene(tuning_scene);
     }

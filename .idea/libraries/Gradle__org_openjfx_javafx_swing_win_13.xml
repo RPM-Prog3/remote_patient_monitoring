@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="Gradle: org.openjfx:javafx-swing:linux:13">
+  <library name="Gradle: org.openjfx:javafx-swing:win:13">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-swing/13/6fd1a7229849d3b2b6b6e44e29d263383d39ff10/javafx-swing-13-linux.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-swing/13/a8531f7b83595165b8307a40b2854b72d001ccd5/javafx-swing-13-win.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

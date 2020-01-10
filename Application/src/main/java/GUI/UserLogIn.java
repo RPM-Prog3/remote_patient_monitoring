@@ -14,7 +14,7 @@ public class UserLogIn {
     private JTextField WelcomeText, user_name_input;
     private JTextField password_input;
     private JOptionPane error_message;
-    private PatientList listOfPatients;
+    //private PatientList listOfPatients;
 
     public UserLogIn() {
         WelcomePage = new JFrame();
@@ -76,7 +76,7 @@ public class UserLogIn {
                 error_message = new JOptionPane();
                 if (userName.trim().equals("admin") && password.trim().equals("admin")) {
                     // Here we want to open the list of patients along with their details
-                    listOfPatients = new PatientList();
+                    //listOfPatients = new PatientList();
                     WelcomePage.setVisible(false);
                 }
                 else {

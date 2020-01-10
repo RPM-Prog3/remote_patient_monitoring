@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="Gradle: org.openjfx:javafx-controls:linux:13">
+  <library name="Gradle: org.openjfx:javafx-controls:win:13">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/13/bcedf8eb6e11c2a7908b3126004d41274f6334f3/javafx-controls-13-linux.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/13/7524fd4ab57de51637adb0e99f0220a1ae0ae4dd/javafx-controls-13-win.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,10 +1,8 @@
 package Database;
 
-import Data.Patient;
 import Data.User;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
@@ -44,42 +42,28 @@ public class Manage_User_db extends Manage_db {
     public String get_users() throws SQLException {
         String sql_get_users = String.format("SELECT * FROM %s WHERE id >= 1", table_name);
         String exception_msg = String.format("Unable to get users from %s", table_name);
-        ResultSet query_rs = execute_query(sql_get_users, exception_msg);
-        String[][] users_string_arr = get_users_string_arr(query_rs);
-        Gson gson = new GsonBuilder().create();
-        return gson.toJson(get_users_string_arr(query_rs));
+        String[] rs_strings = {"username", "password"};
+        return execute_query_with_gson(sql_get_users, exception_msg, rs_strings);
     }
 
-    private String[][] get_users_string_arr(ResultSet rs) throws SQLException {
-        // Used to get size of result set https://stackoverflow.com/questions/192078/how-do-i-get-the-size-of-a-java-sql-resultset
-        int last_row = 0;
-        if (rs.last()) {
-            last_row = rs.getRow();
-            rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
-        }
-        String[][] users_string_arr = new String[last_row][];
-        int row_count = 0;
-        while (rs.next()) {
-            String username = rs.getString("username");
-            String password = rs.getString("password");
-            String[] current_user = {username, password};
-            users_string_arr[row_count] = current_user;
-            row_count += 1;
-        }
-        return users_string_arr;
-    }
+    public boolean find_user(User check_user) throws SQLException {
+        System.out.println("finding user");
+        String users = get_users();
+        System.out.println(users);
+        Gson gson = new Gson();
+        String[][] users_arr = gson.fromJson(users, String[][].class);
 
-//    public boolean find_user(User check_user) throws SQLException {
-//        ResultSet rs = get_users_resultSet();
-//        while (rs.next()){
-//            String rs_un = rs.getString("username");
-//            String rs_pw = rs.getString("password");
-//            if (check_user.get_username().equals(rs_un) && check_user.get_password().equals(rs_pw)){
-//                rs.close();
-//                return true;
-//            }
-//        }
-//        rs.close();
-//        return false;
-//    }
+        for (int i = 0; i < users_arr.length; i++){
+//            System.out.println(users_arr[i][0]);
+//            System.out.println(check_user.get_username());
+//            System.out.println("---");
+//            System.out.println(users_arr[i][1]);
+//            System.out.println(check_user.get_password());
+//            System.out.println("---");
+            if (users_arr[i][0].equals(check_user.get_username()) & users_arr[i][1].equals(check_user.get_password())){
+                return true;
+            }
+        }
+        return false;
+    }
 }
