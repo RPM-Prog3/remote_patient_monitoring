@@ -6,12 +6,12 @@ public class ECG {
     private double[] array; //array of one heartbeat
     private double new_value;
     private int val_position, number_zeros;
-
+    private int order = 10;
     /**
      * Constructor Class. Initialise ECG simulation parameters to default values
      */
     public ECG() {
-        int order = 10;
+        //int order = 10;
         DaubechiesWavelet.SetOrder(order);
         array = DaubechiesWavelet.ReturnDaub();
         val_position = 0;
@@ -49,25 +49,30 @@ public class ECG {
     }
 
     public double get_next_value(int ecg_type){
+        int n_points = order * 2;
+
         if (ecg_type == 0)
-            ecg_type = 146;
+            ecg_type = 166 - n_points;
+            //ecg_type = 146;
         else if (ecg_type == 1)
-            ecg_type = 72;
+            ecg_type = 92 - n_points;
+            //ecg_type = 72;
         else if (ecg_type == -1)
-            ecg_type =218;
+            ecg_type = 218 - n_points;
+            //ecg_type =218;
         else
             throw new IllegalArgumentException("ECG type must be -1, 0 or 1");
 
         if (val_position == 0)
             number_zeros = PadZeros(ecg_type);
 
-        if (val_position < 20)
+        if (val_position < n_points)
             new_value = array[val_position];
-        else if (val_position < number_zeros+20)
+        else if (val_position < number_zeros+n_points)
             new_value = 0;
 
         val_position += 1;
-        if (val_position ==  number_zeros+20)
+        if (val_position ==  number_zeros+n_points)
             val_position = 0;
 
         return addNoise(new_value, 0, 0.001);
