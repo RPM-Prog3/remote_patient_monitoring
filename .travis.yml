@@ -1,18 +1,16 @@
 language: java
-addons:
-  apt:
-    packages:
-      - openjfx
-before_install:
-  - sudo apt update
-  - sudo apt install openjfx
-  - chmod +x gradlew
-script:
-  - ./gradlew build --info
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+
+jobs:
+  include:
+    - stage:
+      name: "Test App Build"
+      script:
+        - chmod +x Scripts/app_build.sh
+        - bash ./Scripts/app_build.sh;
+        - echo "Completed App Build";
+    - stage:
+      name: "Test Server Build"
+      script:
+        - chmod +x Scripts/server_build.sh
+        - bash ./Scripts/server_build.sh
+        - echo "Completed Server Build"
