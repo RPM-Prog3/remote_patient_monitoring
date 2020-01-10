@@ -17,8 +17,8 @@
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:13" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-junit:4.0.15-alpha" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-core:4.0.16-alpha" level="project" />
-    <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: postgresql:postgresql:9.1-901-1.jdbc4" level="project" />
+    <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Gradle: org.assertj:assertj-core:3.13.2" level="project" />
   </component>
