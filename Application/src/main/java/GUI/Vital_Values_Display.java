@@ -75,14 +75,6 @@ public abstract class Vital_Values_Display {
         units_label.getStyleClass().add(colorLabels);
         units_scene.getStylesheets().add(style_location);
 
-        /*// Instantiating border object(s)
-        border = BorderFactory.createLineBorder(Color.black);
-
-        // Setting contours of the different panels
-        status.setBorder(border);
-        type.setBorder(border);
-        value.setBorder(border);*/
-
         // Setting labels font
         status_font = new javafx.scene.text.Font("Arial", 15);
         type_font = new javafx.scene.text.Font("Arial", 20);

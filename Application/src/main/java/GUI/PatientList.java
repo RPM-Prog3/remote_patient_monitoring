@@ -1,4 +1,4 @@
-/*package GUI;
+package GUI;
 
 import server.Client_Manager;
 import server.Server_Messenger;
@@ -205,12 +205,10 @@ public class PatientList {
             e.printStackTrace();
             System.out.println("Unable to Connect");
         }
-
         try {
             messenger = manager.get_patients_from_patients_db();
             boolean success = messenger.get_success();
             String output = messenger.get_message();
-
         } catch (Exception e) {
             System.out.println("NOT EXECUTED");
         }
@@ -278,4 +276,4 @@ public class PatientList {
         list.setResizable(false);
         list.setVisible(true);
     }
-}*/
+}

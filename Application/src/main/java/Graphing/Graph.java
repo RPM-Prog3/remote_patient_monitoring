@@ -174,7 +174,7 @@ public abstract class Graph extends JFXPanel {
             function.getData().remove(0, pointsDeleted);
             System.out.println(function.getData().size());
             numberOfPoints -= pointsDeleted;
-            pointsDeleted = 15;
+            pointsDeleted = 30;
         }
 
     }
