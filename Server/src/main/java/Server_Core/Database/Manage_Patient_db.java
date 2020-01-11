@@ -1,4 +1,4 @@
-package Server_Main.Database;
+package Server_Core.Database;
 
 import Application_Tester.Data.Patient;
 

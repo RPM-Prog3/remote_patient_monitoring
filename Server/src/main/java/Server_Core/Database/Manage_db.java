@@ -1,4 +1,4 @@
-package Server_Main.Database;
+package Server_Core.Database;
 
 import Application_Tester.Setup.Read_db_properties;
 import com.google.gson.Gson;

@@ -7,13 +7,13 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Application.main" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:13" level="project" />
-    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:13" level="project" />
-    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:linux:13" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:13" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-junit:4.0.15-alpha" level="project" />
     <orderEntry type="library" name="Gradle: org.testfx:testfx-core:4.0.16-alpha" level="project" />

@@ -1,4 +1,4 @@
-package Server_Main.Messenger;
+package Server_Core.Messenger;
 
 public class Client_Messenger {
 }

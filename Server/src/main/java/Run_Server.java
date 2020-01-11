@@ -1,11 +1,9 @@
-package Server_Main;
-
 import Application_Tester.Data.Patient;
 import Application_Tester.Data.Patient_Value;
 import Application_Tester.Data.User;
-import Server_Main.Database.Manage_Patient_Values_db;
-import Server_Main.Database.Manage_Patient_db;
-import Server_Main.Database.Manage_User_db;
+import Server_Core.Database.Manage_Patient_Values_db;
+import Server_Core.Database.Manage_Patient_db;
+import Server_Core.Database.Manage_User_db;
 import Application_Tester.Messenger.Server_Messenger;
 import com.google.gson.Gson;
 
@@ -14,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @WebServlet(
@@ -61,9 +62,23 @@ public class Run_Server extends HttpServlet {
             System.out.println("Do get");
         }
 
-        PrintWriter writer = resp.getWriter();
-        writer.append("Get needs to be implemented still");
+        String uri = req.getRequestURI();
 
+        System.out.println(uri);
+
+        PrintWriter writer = resp.getWriter();
+        switch (uri) {
+            case "/Server/rpm": {
+                writer.println("rpm page home page, redirect to here after login. If not logged in then redirect to login page.");
+                write_file("main_page.txt", writer);
+                break;
+            }
+            case "/Server/rpm/login": {
+                writer.println("login page");
+                write_file("login_page.txt", writer);
+                break;
+            }
+        }
     }
 
     @Override
@@ -200,6 +215,21 @@ public class Run_Server extends HttpServlet {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String strDate = dateFormat.format(date);
         System.out.println("Current time: " + strDate);
+    }
+
+    private void write_file(String file_name, PrintWriter writer){
+        try {
+            String file_path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/web_app/" + file_name;
+
+            FileInputStream input_stream = new FileInputStream(file_path);
+            Scanner scan = new Scanner(input_stream);
+            while(scan.hasNextLine()){
+                writer.println(scan.nextLine());
+            }
+            scan.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
 
