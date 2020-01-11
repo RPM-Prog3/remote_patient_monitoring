@@ -8,6 +8,7 @@ public class ECG {
     private int val_position, number_zeros;
     private int order = 10;
     private double target_mean = 0.5;
+    double counter = 0;
 
     /**
      * Constructor Class. Initialise ECG simulation parameters to default values
@@ -56,15 +57,16 @@ public class ECG {
 
         if (ecg_type == 0)
             target_mean = 166 - n_points;
-            //ecg_type = 146;
         else if (ecg_type == 1)
             target_mean = 92 - n_points;
-            //ecg_type = 72;
         else if (ecg_type == -1)
             target_mean = 218 - n_points;
-            //ecg_type =218;
+        else if (ecg_type == -2)
+            target_mean = 244 - n_points;
+        else if (ecg_type == 2)
+            target_mean = 66 - n_points;
         else
-            throw new IllegalArgumentException("ECG type must be -1, 0 or 1");
+            throw new IllegalArgumentException("ECG type must be -2, -1, 0, 1, or 2");
 
         set_new_value(target_mean, n_points);
         //ventricular_fibrillation();
@@ -87,7 +89,13 @@ public class ECG {
     }
 
     private void ventricular_fibrillation(){
-        new_value += sample_next_step(0, 0.001);
+        Random r = new Random();
+
+        double amplitude = 0.5 + r.nextGaussian() * 0.1;
+        double period = 4 + r.nextGaussian() * 0.01 ;
+        new_value = amplitude*Math.sin(period*Math.toRadians(counter));
+        //new_value += sample_next_step(0, 0.1);
+        counter++;
     }
 
     private double sample_next_step(double mean, double sigma ){
