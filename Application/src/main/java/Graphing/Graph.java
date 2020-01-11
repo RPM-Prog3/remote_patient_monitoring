@@ -217,7 +217,7 @@ public abstract class Graph extends JFXPanel {
         xAxis.setTickUnit(tick+ROUNDING_VALUE);
     }
 
-    public void changeECGtype (int newType){ }
+    public abstract void changeAbnormality (int newType);
 
     protected abstract void Get_Next_Value();
 
