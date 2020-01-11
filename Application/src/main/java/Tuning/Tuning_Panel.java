@@ -43,28 +43,28 @@ public class Tuning_Panel{
         abnormalities_menu = new Button("Select Abnormalities");
         patient_record = new Button("View Patient record");
 
-        timeWindow = new Sliding("time_window", graphs_panel);
+        timeWindow = new Sliding("time_window", graphs_panel, 0);
         time_axis_label = new javafx.scene.control.Label();
         time_axis_label.setText("Time");
 
+        BPMregulation = new Sliding("abnormality", graphs_panel, 1);
         BPM_label = new javafx.scene.control.Label();
         BPM_label.setText("BPM");
-        TEMP_label = new javafx.scene.control.Label();
-        TEMP_label.setText("\u00B0" + "C");
+
+        BPRegulation = new Sliding ("abnormality", graphs_panel, 2);
         BP_label = new javafx.scene.control.Label();
         BP_label.setText("mmHg");
+
+        RRateRegulation = new Sliding("abnormality", graphs_panel, 3);
         RR_label = new javafx.scene.control.Label();
         RR_label.setText("Breaths/Min");
 
+        TempRegulation = new Sliding("abnormality", graphs_panel, 4);
+        TEMP_label = new javafx.scene.control.Label();
+        TEMP_label.setText("\u00B0" + "C");
+
         padding_label = new javafx.scene.control.Label();
         padding_label.setText("\t \t \t");
-
-
-        BPMregulation = new Sliding("abnormality", graphs_panel);
-        TempRegulation = new Sliding("abnormality", graphs_panel);
-        BPRegulation = new Sliding ("abnormality", graphs_panel);
-        RRateRegulation = new Sliding("abnormality", graphs_panel);
-
 
         tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Tune.css");
 
@@ -82,14 +82,19 @@ public class Tuning_Panel{
         gpane.add(padding_label, 0,1);
         gpane.add(time_axis_label, 2,0);
         gpane.add(timeWindow, 2, 2);
+
         gpane.add(BPM_label, 4, 0);
         gpane.add(BPMregulation, 4, 2);
+
         gpane.add(BP_label, 6,0);
         gpane.add(BPRegulation, 6,2);
+
         gpane.add(RR_label,8,0);
         gpane.add(RRateRegulation, 8,2);
+
         gpane.add(TEMP_label, 10,0);
         gpane.add(TempRegulation, 10,2);
+
         gpane.add(abnormalities_menu, 12,1);
         gpane.add(patient_record, 12,2);
 

@@ -101,8 +101,15 @@ public class Overall_Graph {
         graphTemp.changeTimeWindow(val);
     }
 
-    public void changeECGAbnormality(int newType){
-        graphECG.changeAbnormality(newType);
+    public void changeECGAbnormality(int newType, int which_vital){
+        if (which_vital == 1)
+            graphECG.changeAbnormality(newType);
+        if (which_vital == 2)
+            graphBPress.changeAbnormality(newType);
+        if (which_vital == 3)
+            graphResp.changeAbnormality(newType);
+        if (which_vital == 4)
+            graphTemp.changeAbnormality(newType);
     }
 
     public JFXPanel getGraphPanel() {

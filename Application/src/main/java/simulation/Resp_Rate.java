@@ -22,6 +22,7 @@ public class Resp_Rate {
         r = new Random();
     }
 
+    /**
     public Resp_Rate(double target_mean_resp_rate, double resp_variance, double random_threshold, int period, int array_size){
         array = new double[array_size];
         this.target_mean_resp_rate = target_mean_resp_rate;
@@ -31,7 +32,8 @@ public class Resp_Rate {
         counter = 0;
         r = new Random();
     }
-
+    */
+    
     public double get_next_value(int resp_speed){
 
         if (Math.abs(resp_speed) > 2){
