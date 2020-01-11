@@ -7,6 +7,8 @@ public class ECG {
     private double new_value;
     private int val_position, number_zeros;
     private int order = 10;
+    private double target_mean = 0.5;
+
     /**
      * Constructor Class. Initialise ECG simulation parameters to default values
      */
@@ -65,6 +67,7 @@ public class ECG {
             throw new IllegalArgumentException("ECG type must be -1, 0 or 1");
 
         set_new_value(target_mean, n_points);
+        //ventricular_fibrillation();
 
         return addNoise(new_value, 0, 0.001);
     }
@@ -82,4 +85,22 @@ public class ECG {
         if (val_position ==  number_zeros+n_pts)
             val_position = 0;
     }
+
+    private void ventricular_fibrillation(){
+        new_value += sample_next_step(0, 0.001);
+    }
+
+    private double sample_next_step(double mean, double sigma ){
+        Random r = new Random();
+
+        double step = r.nextGaussian() * sigma + mean;
+        double est_next_pos = new_value + step;
+        double diff = est_next_pos - target_mean;
+        double adjustment = Math.signum(diff) * step;
+        if (adjustment > 0){
+            step *= 0.5;
+        }
+        return step;
+    }
+
 }
