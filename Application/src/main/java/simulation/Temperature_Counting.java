@@ -13,14 +13,14 @@ public class Temperature_Counting extends Value_Counter {
     }
 
     public void Current_Temp(double val){
+        temp_counter += 1;
         if (temp_counter <= 166)
             avrg_temp += val;
         if (temp_counter == 167){
             temp_displayed = avrg_temp;
-            temp_counter = -1;
-            avrg_temp = 0;
+            temp_counter = 1;
+            avrg_temp = val;
         }
-        temp_counter += 1;
     }
 
     public void Count_bpm(double val, int index){}

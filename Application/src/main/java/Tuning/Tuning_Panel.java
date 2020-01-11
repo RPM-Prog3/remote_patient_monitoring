@@ -25,7 +25,7 @@ public class Tuning_Panel{
     private Scene tuning_scene;
 
     private Button switch_graph_motion;
-    private Sliding timeWindow, BPMregulation;
+    private Sliding timeWindow, BPMregulation, BreathsRegulation;
 
     private Overall_Graph graphs_panel;
 
@@ -45,6 +45,7 @@ public class Tuning_Panel{
         time_axis_label.setText("Time");
 
         BPMregulation = new Sliding("abnormality", graphs_panel);
+//        BreathsRegulation = new Sliding("abnormality", graphs_panel);
 
         tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Tune.css");
 
@@ -62,6 +63,7 @@ public class Tuning_Panel{
         gpane.add(time_axis_label, 0,1);
         gpane.add(timeWindow, 0, 2);
         gpane.add(BPMregulation, 2, 0);
+//        gpane.add(BreathsRegulation, 2, 2);
         tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css");
         tuning_panel.setScene(tuning_scene);
     }
