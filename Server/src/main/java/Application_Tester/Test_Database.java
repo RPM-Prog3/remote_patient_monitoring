@@ -46,11 +46,11 @@ public class Test_Database {
         System.out.println(msg_test_3.get_success());
         System.out.println("-----------------");
         System.out.println("Test 3");
-        msg_test_3 = cm.send_user_to_add_users_db("Joe", "1234", "ja");
+        msg_test_3 = cm.send_user_to_add_users_db("Joe", "1234", "ja", false);
         System.out.println(msg_test_3.get_success());
         System.out.println("-----------------");
         System.out.println("Test 3");
-        msg_test_3 = cm.send_user_to_add_users_db("Lapo", "4321", "lp");
+        msg_test_3 = cm.send_user_to_add_users_db("Lapo", "4321", "lp", false);
         System.out.println(msg_test_3.get_success());
         System.out.println("-----------------");
         System.out.println("Test 3");

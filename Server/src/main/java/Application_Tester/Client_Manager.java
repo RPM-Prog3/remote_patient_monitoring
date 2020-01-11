@@ -62,8 +62,8 @@ public class Client_Manager {
         return get_post_messenger(url, p_json_string);
     }
 
-    public Server_Messenger send_user_to_add_users_db(String username, String password, String email) throws IOException {
-        User u = new User(username, password, email);
+    public Server_Messenger send_user_to_add_users_db(String username, String password, String email, boolean admin_status) throws IOException {
+        User u = new User(username, password, email, admin_status);
         return send_user_to_add_users_db(u);
     }
 

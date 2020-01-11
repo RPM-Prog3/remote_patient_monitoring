@@ -54,12 +54,6 @@ public class Manage_User_db extends Manage_db {
         String[][] users_arr = gson.fromJson(users, String[][].class);
 
         for (int i = 0; i < users_arr.length; i++){
-//            System.out.println(users_arr[i][0]);
-//            System.out.println(check_user.get_username());
-//            System.out.println("---");
-//            System.out.println(users_arr[i][1]);
-//            System.out.println(check_user.get_password());
-//            System.out.println("---");
             if (users_arr[i][0].equals(check_user.get_username()) & users_arr[i][1].equals(check_user.get_password())){
                 return true;
             }

@@ -64,8 +64,6 @@ public class Run_Server extends HttpServlet {
 
         String uri = req.getRequestURI();
 
-        System.out.println(uri);
-
         PrintWriter writer = resp.getWriter();
         switch (uri) {
             case "/Server/rpm": {
