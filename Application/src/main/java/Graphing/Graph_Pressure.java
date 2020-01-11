@@ -1,5 +1,7 @@
 package Graphing;
 
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import simulation.Blood_Pressure;
 import simulation.Value_Counter;
 
@@ -13,6 +15,16 @@ public class Graph_Pressure extends Graph {
 
     public void changeAbnormality(int newType) {
 
+    }
+
+    protected void scaling(int size, NumberAxis yAxis, int windowSize){
+        if ((size-2) <= windowSize/0.006)
+            yAxis.setAutoRanging(true);
+        else {
+            yAxis.setAutoRanging(false);
+            yAxis.setLowerBound(70);
+            yAxis.setUpperBound(130);
+        }
     }
 
     protected void Get_Next_Value(){
