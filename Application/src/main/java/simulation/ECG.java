@@ -85,7 +85,7 @@ public class ECG {
 
         set_new_value(target_mean, n_points);
 
-        return addNoise(new_value, 0, 0.0001);
+        return addNoise(new_value, 0, 0.001);
     }
 
     private void set_new_value(int target_mean, int n_pts){
