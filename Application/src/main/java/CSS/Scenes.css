@@ -29,6 +29,25 @@
     -fx-alignment: center;
 }
 
+.label-status{
+    -fx-text-fill: -textColor;
+    -fx-background-color: -backColor;
+}
+
+.label-status-warning{
+    /*-fx-text-fill: black;*/
+    /*-fx-background-color: -colorOfVital;*/
+    -textColor: black;
+    -backColor: -colorOfVital;
+}
+
+.label-status-stable{
+    /*-fx-text-fill: -colorOfVital;*/
+    /*-fx-background-color: black;*/
+    -textColor: -colorOfVital;
+    -backColor: black;
+}
+
 .label-units {
     -fx-text-fill: black;
     -fx-background-color: -colorOfVital;
