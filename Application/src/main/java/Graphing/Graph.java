@@ -203,7 +203,6 @@ public abstract class Graph extends JFXPanel {
             numberOfPoints -= points_added_whileStopped;
         }
         points_added_whileStopped = 0;
-        System.out.println("albicocca");
     }
 
     private void changeTheTimeWindow(int new_time_shown){
