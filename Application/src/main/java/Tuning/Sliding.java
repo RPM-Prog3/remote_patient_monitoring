@@ -53,7 +53,7 @@ public class Sliding extends Slider {
         setMin(-50);
         setMax(50);
         setValue(0);
-        setShowTickLabels(true);
+        setShowTickLabels(false);
         setShowTickMarks(false);
         setMajorTickUnit(1);
 
@@ -94,7 +94,34 @@ public class Sliding extends Slider {
     }
 
     private void setActionAbnormality() {
+        valueProperty().addListener((obs, oldval, newval) -> {
+            int abnormalityValue;
 
+            if (oldval!=newval) {
+                if (newval.intValue() < -37) {
+                    setValue(-50);
+                    abnormalityValue = -2;
+                }
+                else if (newval.intValue() < -12){
+                    setValue(-25);
+                    abnormalityValue = -1;
+                }
+
+                else if (newval.intValue() < 13) {
+                    setValue(0);
+                    abnormalityValue = -0;
+                }
+                else if (newval.intValue() < 37) {
+                    setValue(25);
+                    abnormalityValue = 1;
+                }
+                else {
+                    setValue(50);
+                    abnormalityValue = 2;
+                }
+                graphs_panel.changeTimeWindow();
+            }
+        });
     }
 
 }
