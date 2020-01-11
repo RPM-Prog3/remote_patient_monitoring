@@ -1,4 +1,4 @@
-package Server_Core.Messenger;
+package Application_Tester.Messenger;
 
 import Application_Tester.Data.User;
 import com.google.gson.Gson;
@@ -18,16 +18,16 @@ public class Client_Messenger {
         this.user_login = user_login;
     }
 
-    private String get_request_message(){
+    public String get_request_message(){
         return request_message;
     }
 
-    private User get_user_login(){
+    public User get_user_login(){
         Gson gson = new Gson();
         return gson.fromJson(user_login, User.class);
     }
 
-    private String get_user_login_gson(){
+    public String get_user_login_gson(){
         return user_login;
     }
 }

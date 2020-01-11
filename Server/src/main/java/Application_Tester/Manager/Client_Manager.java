@@ -3,6 +3,7 @@ package Application_Tester.Manager;
 import Application_Tester.Data.Patient;
 import Application_Tester.Data.Patient_Value;
 import Application_Tester.Data.User;
+import Application_Tester.Messenger.Client_Messenger;
 import Application_Tester.Messenger.Server_Messenger;
 import Application_Tester.Setup.Read_server_properties;
 import com.google.gson.Gson;
@@ -30,52 +31,52 @@ public class Client_Manager {
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 
-    public Server_Messenger send_patient_value_to_pv_db(Patient_Value pv) throws IOException {
-        Gson pv_gson = new Gson();
-        String pv_json_string = pv_gson.toJson(pv);
+    public Server_Messenger send_patient_value_to_pv_db(Patient_Value pv, User login_user) throws IOException {
         String url = String.format("%s/add_patient_value", get_url());
-        return get_post_messenger(url, pv_json_string);
+        Gson gson = new Gson();
+        String pv_json_string = gson.toJson(pv);
+        String json_msg = get_json_msg(pv_json_string, login_user);
+        return get_post_messenger(url, json_msg);
     }
 
-    //public Application_Tester.Messenger.Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {
-    public Server_Messenger get_patients_from_patients_db() throws IOException {
-        String need_to_login = "";
+    public Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {
         String url = String.format("%s/request_patients", get_url());
-        return get_post_messenger(url, need_to_login);
+        String json_msg = get_json_msg("", login_user);
+        return get_post_messenger(url, json_msg);
     }
 
-    //public Application_Tester.Messenger.Server_Messenger send_patient_to_add_patients_db(User login_user, String familyname, String givenname,
     public Server_Messenger send_patient_to_add_patients_db(String familyname, String givenname,
                                                             String dofbirth, String email,
-                                                            String phonenumber) throws IOException {
+                                                            String phonenumber, User login_user) throws IOException {
         Patient p = new Patient(familyname, givenname, dofbirth, email, phonenumber);
-        return send_patient_to_add_patients_db(p);
+        return send_patient_to_add_patients_db(p, login_user);
     }
 
-    //public Application_Tester.Messenger.Server_Messenger send_patient_to_add_patients_db(User login_user, Patient p) throws IOException {
-    public Server_Messenger send_patient_to_add_patients_db(Patient p) throws IOException {
-        Gson p_gson = new Gson();
-        String p_json_string = p_gson.toJson(p);
+    public Server_Messenger send_patient_to_add_patients_db(Patient p, User login_user) throws IOException {
         String url = String.format("%s/add_patient", get_url());
-        return get_post_messenger(url, p_json_string);
+        Gson gson = new Gson();
+        String p_json_string = gson.toJson(p);
+        String json_msg = get_json_msg(p_json_string, login_user);
+        return get_post_messenger(url, json_msg);
     }
 
-    public Server_Messenger send_user_to_add_users_db(String username, String password, String email, boolean admin_status) throws IOException {
+    public Server_Messenger send_user_to_add_users_db(String username, String password, String email, boolean admin_status, User login_user) throws IOException {
         User u = new User(username, password, email, admin_status);
-        return send_user_to_add_users_db(u);
+        return send_user_to_add_users_db(u, login_user);
     }
 
-    public Server_Messenger send_user_to_add_users_db(User u) throws IOException {
-        Gson u_gson = new Gson();
-        String u_json_string = u_gson.toJson(u);
+    public Server_Messenger send_user_to_add_users_db(User u, User login_user) throws IOException {
         String url = String.format("%s/add_user", get_url());
-        return get_post_messenger(url, u_json_string);
+        Gson gson = new Gson();
+        String u_json_string = gson.toJson(u);
+        String json_msg = get_json_msg(u_json_string, login_user);
+        return get_post_messenger(url, json_msg);
     }
 
-    public Server_Messenger get_users_from_users_db() throws IOException {
-        String need_to_login = "";
+    public Server_Messenger get_users_from_users_db(User login_user) throws IOException {
         String url = String.format("%s/request_users", get_url());
-        return get_post_messenger(url, need_to_login);
+        String json_msg = get_json_msg("", login_user);
+        return get_post_messenger(url, json_msg);
     }
 
     public Server_Messenger send_user_to_login(String username, String password) throws IOException {
@@ -84,10 +85,17 @@ public class Client_Manager {
     }
 
     public Server_Messenger send_user_to_login(User u) throws IOException {
-        Gson u_json = new Gson();
-        String u_json_string = u_json.toJson(u);
         String url = String.format("%s/login", get_url());
-        return get_post_messenger(url, u_json_string);
+        String json_msg = get_json_msg("", u);
+        return get_post_messenger(url, json_msg);
+    }
+
+    private String get_json_msg(String req_msg, User login_user){
+        // Combines the request message and login user into a single json to send to the server
+        Gson gson = new Gson();
+        login_user.print_user();
+        Client_Messenger messenger = new Client_Messenger(req_msg, login_user);
+        return gson.toJson(messenger);
     }
 
     private void make_get_request(String url) throws IOException {

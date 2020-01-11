@@ -1,6 +1,9 @@
 package Application_Tester.Messenger;
 
 public class Server_Messenger {
+    /* The message the servers send to the client saying if it
+    has been successfully sent and executed and the message recieved. */
+
     private boolean success;
     private String message;
 
