@@ -65,15 +65,7 @@ public abstract class Vital_Values_Display {
 
 
         //Applying the css
-        String style_location = "file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css";
-        status_msg.getStyleClass().add(colorLabels);
-        status_scene.getStylesheets().add(style_location);
-        vital_value.getStyleClass().add(colorLabels);
-        value_scene.getStylesheets().add(style_location);
-        vital_type.getStyleClass().add(colorLabels);
-        type_scene.getStylesheets().add(style_location);
-        units_label.getStyleClass().add(colorLabels);
-        units_scene.getStylesheets().add(style_location);
+        applyCSS(colorLabels);
 
         // Setting labels font
         status_font = new javafx.scene.text.Font("Arial", 15);
@@ -122,6 +114,25 @@ public abstract class Vital_Values_Display {
         type_dim = new Dimension();
         type_dim.height = (int)((overall_display_dim.height* sd_od_ratio_num)/sd_od_ratio_den); ;
         type_dim.width = overall_display_dim.width;
+    }
+
+    private void applyCSS(String colorLabels){
+        String style_location = "file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css";
+
+        status_msg.getStyleClass().add(colorLabels);
+        vital_value.getStyleClass().add(colorLabels);
+        vital_type.getStyleClass().add(colorLabels);
+        units_label.getStyleClass().add(colorLabels);
+
+        status_msg.getStyleClass().add("label-status");
+        vital_value.getStyleClass().add("label-value");
+//        vital_type.getStyleClass().add(colorLabels);
+        units_label.getStyleClass().add("label-units");
+
+        status_scene.getStylesheets().add(style_location);
+        value_scene.getStylesheets().add(style_location);
+        type_scene.getStylesheets().add(style_location);
+        units_scene.getStylesheets().add(style_location);
     }
 
     abstract protected void Set_Displayed_Value();

@@ -1,4 +1,4 @@
-package GUI;
+/*package GUI;
 
 import com.google.gson.Gson;
 import server.Client_Manager;
@@ -294,4 +294,4 @@ public class PatientList {
             System.out.println("Unable to Connect");
         }
     }
-}
+}*/
