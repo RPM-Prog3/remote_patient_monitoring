@@ -1,4 +1,5 @@
 import Data.User;
+import com.google.gson.Gson;
 import server.Client_Manager;
 import server.Server_Messenger;
 
@@ -10,6 +11,7 @@ public class Test_Database {
     public static void main(String[] args) throws IOException {
 
         Client_Manager cm = new Client_Manager();
+        Gson gson = new Gson();
 
         User login_user = new User("Joe", "1234");
 
@@ -17,8 +19,12 @@ public class Test_Database {
         System.out.println("Test 1");
         Server_Messenger msg_test_1;
         msg_test_1 = cm.get_patients_from_patients_db();
+        String output = msg_test_1.get_message();
         System.out.println(msg_test_1.get_message());
         System.out.println(msg_test_1.get_success());
+        String[][] patients = gson.fromJson(output, String[][].class);
+        int size = patients.length;
+        System.out.println(size);
         System.out.println("-----------------");
         System.out.println("Test 1");
         msg_test_1 = cm.send_patient_to_add_patients_db("Arrow", "joea", "10", "ja", "1234");
