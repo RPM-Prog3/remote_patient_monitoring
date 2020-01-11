@@ -13,21 +13,18 @@ public class Blinking implements Runnable {
     public void run(){
         try{
             int i = 0;
-            boolean a = false;
-            while(i<10){
-//                System.out.println(status.getStyleClass().get(0));
-                if(a == true)
+            boolean blinking_boolean = false;
+            while(1<2){
+                if(blinking_boolean)
                     status.getStyleClass().remove(4);
                 status.getStyleClass().add("label-status-warning");
-                System.out.println(status.getStyleClass().get(4));
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 status.getStyleClass().remove(4);
                 status.getStyleClass().add("label-status-stable");
-                System.out.println(status.getStyleClass().get(4));
-
-                a = true;
-                i += 1;
+                Thread.sleep(1000);
+                blinking_boolean = true;
             }
+
         }catch (Exception e) {};
     }
 }
