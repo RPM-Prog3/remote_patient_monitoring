@@ -21,14 +21,14 @@ public class Manage_Patient_Values_db extends Manage_db{
                 "   body_temp real NOT NULL,\n" +
                 "   blood_pressure_upper int,\n" +
                 "   blood_pressure_lower int,\n" +
-                "   abnormality varchar(256) NOT NULL, \n" +
+                "   abnormality varchar(256) NOT NULL\n" +
                 ");", table_name);
         init_table(table_name, sql_create_table);
     }
 
     public void add_patient_value(Patient_Value pv) throws SQLException {
         int patient_id = pv.get_patient_id();
-        LocalDateTime time = pv.get_time();
+        String time = pv.get_time();
         int bpm = pv.get_bpm();
         int resp_rate = pv.get_resp_rate();
         double body_temp = pv.get_body_temp();
@@ -40,7 +40,7 @@ public class Manage_Patient_Values_db extends Manage_db{
                 bp_upper, bp_lower, abnormality);
     }
 
-    private void add_patient_value(int patient_id, LocalDateTime time,
+    private void add_patient_value(int patient_id, String time,
                                    int bpm, int resp_rate, double body_temp,
                                    int bp_upper, int bp_lower, String abnormality) throws SQLException{
         String sql_add_pv = String.format("insert into %s " +
@@ -55,5 +55,4 @@ public class Manage_Patient_Values_db extends Manage_db{
     public void remove_patient_value(Patient_Value pv) {
         throw new NotImplementedException();
     }
-
 }

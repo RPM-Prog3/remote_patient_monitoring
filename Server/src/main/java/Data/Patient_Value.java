@@ -1,14 +1,42 @@
 package Data;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Patient_Value {
-    private LocalDateTime time;
+    static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
     private int patient_id, bpm, resp_rate, blood_pressure_upper, blood_pressure_lower;
     private double body_temp;
-    private String abnormality;
+    private String time, abnormality;
 
     public Patient_Value(int patient_id, LocalDateTime time,
+                         int bpm, int resp_rate, double body_temp,
+                         int blood_pressure_upper, int blood_pressure_lower,
+                         String abnormality){
+        this.patient_id = patient_id;
+        this.time = time.format(formatter);
+        this.bpm = bpm;
+        this.resp_rate = resp_rate;
+        this.body_temp = body_temp;
+        this.blood_pressure_upper = blood_pressure_upper;
+        this.blood_pressure_lower = blood_pressure_lower;
+        this.abnormality = abnormality;
+    }
+
+    public Patient_Value(int patient_id, LocalDateTime time,
+                         int bpm, int resp_rate, double body_temp,
+                         int blood_pressure_upper, int blood_pressure_lower){
+        this.patient_id = patient_id;
+        this.time = time.format(formatter);
+        this.bpm = bpm;
+        this.resp_rate = resp_rate;
+        this.body_temp = body_temp;
+        this.blood_pressure_upper = blood_pressure_upper;
+        this.blood_pressure_lower = blood_pressure_lower;
+        this.abnormality = "";
+    }
+
+    public Patient_Value(int patient_id, String time,
                          int bpm, int resp_rate, double body_temp,
                          int blood_pressure_upper, int blood_pressure_lower,
                          String abnormality){
@@ -22,7 +50,7 @@ public class Patient_Value {
         this.abnormality = abnormality;
     }
 
-    public Patient_Value(int patient_id, LocalDateTime time,
+    public Patient_Value(int patient_id, String time,
                          int bpm, int resp_rate, double body_temp,
                          int blood_pressure_upper, int blood_pressure_lower){
         this.patient_id = patient_id;
@@ -35,13 +63,16 @@ public class Patient_Value {
         this.abnormality = "";
     }
 
-    public void print_patient
+    public void print_values(){
+        System.out.println(String.format("%s, %s, %s, %s, %s, %s, %s",
+                patient_id, time, bpm, resp_rate, body_temp, blood_pressure_upper, blood_pressure_lower, abnormality));
+    }
 
     public int get_patient_id(){
         return patient_id;
     }
 
-    public LocalDateTime get_time(){
+    public String get_time(){
         return time;
     }
 

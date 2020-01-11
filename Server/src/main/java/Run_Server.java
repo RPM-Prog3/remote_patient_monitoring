@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
                 "/rpm",
                 "/rpm/login",
                 "/rpm/add_patient",
+                "/rpm/add_patient_value",
                 "/rpm/add_user",
                 "/rpm/request_patients",
                 "/rpm/request_users"
@@ -43,6 +44,7 @@ public class Run_Server extends HttpServlet {
         print_datetime();
         user_db = new Manage_User_db();
         patient_db = new Manage_Patient_db();
+        patient_values_db = new Manage_Patient_Values_db();
         if (debug) {
             System.out.println("Starting server");
         }
@@ -73,7 +75,6 @@ public class Run_Server extends HttpServlet {
         System.out.println(String.format("reqBody: %s", reqBody));
         resp.setContentType("text/html");
 
-
         String server_path = req.getServletPath();
 
         Server_Messenger messenger = new Server_Messenger();
@@ -103,7 +104,7 @@ public class Run_Server extends HttpServlet {
                     e.printStackTrace();
                     System.out.println("failed to add patient values");
                     messenger.set_success(false);
-                }
+                } 
             }
             case "/rpm/add_user": {
                 Gson gson = new Gson();

@@ -67,7 +67,7 @@ public class Test_Database {
         LocalDateTime now = LocalDateTime.now();
         Patient_Value pv = new Patient_Value(1, now,
                 60, 20, 37.2,
-                180, 90);
+                180, 90, "");
         msg_test_5 = cm.send_patient_value_to_pv_db(pv);
         System.out.println(msg_test_5.get_success());
         System.out.println("-----------------");
