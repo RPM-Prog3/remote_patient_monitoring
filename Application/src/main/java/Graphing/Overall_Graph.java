@@ -100,6 +100,10 @@ public class Overall_Graph {
         graphTemp.changeTimeWindow(val);
     }
 
+    public void changeECGAbnormality(int newType){
+        graphECG.changeECGtype(newType);
+    }
+
     public JFXPanel getGraphPanel() {
         return graph_panel;
     }

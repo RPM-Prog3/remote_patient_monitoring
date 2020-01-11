@@ -119,7 +119,7 @@ public class Sliding extends Slider {
                     setValue(50);
                     abnormalityValue = 2;
                 }
-                graphs_panel.changeTimeWindow();
+                graphs_panel.changeECGAbnormality(abnormalityValue);
             }
         });
     }
