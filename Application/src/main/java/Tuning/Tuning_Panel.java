@@ -30,6 +30,7 @@ public class Tuning_Panel{
 
     public Tuning_Panel(Overall_Graph obj){
         // Instantiating and setting the Grid pane that will contain all the tuning pieces
+        graphs_panel = obj;
         gpane = new GridPane();
         gpane.setPadding(new Insets(10, 10, 10, 10));  //this sets the distance from the borders of the grid we want to create
 
@@ -41,8 +42,6 @@ public class Tuning_Panel{
         timeWindow = new Sliding("time_window", graphs_panel);
         time_axis_label = new javafx.scene.control.Label();
         time_axis_label.setText("Time");
-
-        graphs_panel = obj;
 
         Platform.runLater (new Runnable() {
             @Override
