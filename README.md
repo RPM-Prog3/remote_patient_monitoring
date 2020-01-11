@@ -14,22 +14,22 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 
 ### Vitals requirements:
 
-- [ ] Body temperature
-  - [ ] Current temperature
+- [x] Body temperature
+  - [x] Current temperature
   - [x] Normal
-  - [ ] Abnormal
-- [ ] Respiratory rate
-  - [ ] Current rate
+  - [x] Abnormal
+- [x] Respiratory rate
+  - [x] Current rate
   - [x] Normal
-  - [ ] Abnormal
-- [ ] Blood pressure
-  - [ ] Max & min pressure
+  - [x] Abnormal
+- [x] Blood pressure
+  - [x] Max & min pressure
   - [x] Normal
-  - [ ] Abnormal
-- [ ] ECG
+  - [x] Abnormal
+- [x] ECG
   - [x] BPM (HR)
   - [x] Normal
-  - [ ] Abnormal
+  - [x] Abnormal
 
 ### Feature requirements:
 
@@ -38,9 +38,9 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
   - [ ] Warning
   - [ ] Urgent
 - [ ] A permanent record (database) to be kept of average values for every minute during a day and also instances when there have been abnormal signs
-- [ ] A tunable App.simulation of the vital signs and ECG for the system to display:
-  - [ ] Simulate a normal patient
-  - [ ] Simulate a patient who has abnormal vital signs
+- [x] A tunable App.simulation of the vital signs and ECG for the system to display:
+  - [x] Simulate a normal patient
+  - [x] Simulate a patient who has abnormal vital signs
   
   
 ### Feature desirables:
