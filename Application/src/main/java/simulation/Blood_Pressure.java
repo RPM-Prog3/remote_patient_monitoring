@@ -15,7 +15,6 @@ public class Blood_Pressure {
         period = 100;
     }
 
-
     public Blood_Pressure(int array_size){
         array = new double[array_size];
         t1 = 0.60;

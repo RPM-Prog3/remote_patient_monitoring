@@ -7,6 +7,8 @@ public class ECG {
     private double new_value;
     private int val_position, number_zeros;
     private int order = 10;
+    double counter = 0;
+
     /**
      * Constructor Class. Initialise ECG simulation parameters to default values
      */
@@ -54,15 +56,16 @@ public class ECG {
 
         if (ecg_type == 0)
             target_mean = 166 - n_points;
-            //ecg_type = 146;
         else if (ecg_type == 1)
             target_mean = 92 - n_points;
-            //ecg_type = 72;
         else if (ecg_type == -1)
             target_mean = 218 - n_points;
-            //ecg_type =218;
+        else if (ecg_type == -2)
+            target_mean = 244 - n_points;
+        else if (ecg_type == 2)
+            target_mean = 66 - n_points;
         else
-            throw new IllegalArgumentException("ECG type must be -1, 0 or 1");
+            throw new IllegalArgumentException("ECG type must be -2, -1, 0, 1, or 2");
 
         set_new_value(target_mean, n_points);
 
