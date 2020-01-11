@@ -1,6 +1,7 @@
 import Data.Patient;
 import Data.Patient_Value;
 import Data.User;
+import Messenger.Server_Messenger;
 import Setup.Read_server_properties;
 import com.google.gson.Gson;
 
@@ -36,14 +37,14 @@ public class Client_Manager {
         return get_post_messenger(url, pv_json_string);
     }
 
-    //public Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {
+    //public Messenger.Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {
     public Server_Messenger get_patients_from_patients_db() throws IOException {
         String need_to_login = "";
         String url = String.format("%s/request_patients", get_url());
         return get_post_messenger(url, need_to_login);
     }
 
-    //public Server_Messenger send_patient_to_add_patients_db(User login_user, String familyname, String givenname,
+    //public Messenger.Server_Messenger send_patient_to_add_patients_db(User login_user, String familyname, String givenname,
     public Server_Messenger send_patient_to_add_patients_db(String familyname, String givenname,
                                                             String dofbirth, String email,
                                                             String phonenumber) throws IOException {
@@ -51,7 +52,7 @@ public class Client_Manager {
         return send_patient_to_add_patients_db(p);
     }
 
-    //public Server_Messenger send_patient_to_add_patients_db(User login_user, Patient p) throws IOException {
+    //public Messenger.Server_Messenger send_patient_to_add_patients_db(User login_user, Patient p) throws IOException {
     public Server_Messenger send_patient_to_add_patients_db(Patient p) throws IOException {
         Gson p_gson = new Gson();
         String p_json_string = p_gson.toJson(p);
@@ -137,7 +138,6 @@ public class Client_Manager {
             bufferedReader = new BufferedReader(new
                     InputStreamReader(conn.getInputStream(), "utf-8"));
         } catch (Exception e){
-
             e.printStackTrace();
             conn.getErrorStream();
         }
