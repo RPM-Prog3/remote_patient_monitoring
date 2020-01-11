@@ -75,13 +75,14 @@ public class Sliding extends Slider {
     }
 
     private void setActionTimeWindow() {
+
         valueProperty().addListener((obs, oldval, newval) -> {
             if (oldval!=newval) {
-                if (oldval.intValue() < 13)
+                if (newval.intValue() < 13)
                     setValue(5);
-                else if (oldval.intValue() < 30)
+                else if (newval.intValue() < 30)
                     setValue(20);
-                else if (oldval.intValue() < 50)
+                else if (newval.intValue() < 50)
                     setValue(40);
                 else
                     setValue(60);
