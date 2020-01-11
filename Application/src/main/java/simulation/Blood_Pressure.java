@@ -7,21 +7,16 @@ public class Blood_Pressure {
     int counter;
     double t1, t2, t3;
 
-    public Blood_Pressure(){
-        t1 = 0.60;
-        t2 = 0.15;
-        t3 = 0.25;
-        counter = 0;
-        period = 100;
-    }
+    public Blood_Pressure(double t1, double t2, double t3, int period){
+        //t1 = 0.60;
+        //t2 = 0.15;
+        //t3 = 0.25;
+        this.t1 = t1;
+        this.t2 = t2;
+        this.t3 = t3;
+        this.period = period;
 
-    public Blood_Pressure(int array_size){
-        array = new double[array_size];
-        t1 = 0.60;
-        t2 = 0.15;
-        t3 = 0.25;
         counter = 0;
-        period = 100;
     }
 
     public double get_next_value(){
