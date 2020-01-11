@@ -169,7 +169,7 @@ public class PatientList {
                 Connection conn = connect_DB();
                 try {
                     Statement s = conn.createStatement();
-                    String sqlStr = String.format("insert into patient_info (familyname, givenname, dofbirth, email, phonenumber) values('%s', '%s', '%s', '%s', '%s');", new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum);
+                    String sqlStr = String.format("insert into patients (familyname, givenname, dofbirth, email, phonenumber) values('%s', '%s', '%s', '%s', '%s');", new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum);
                     s.executeUpdate(sqlStr);
                     success_message.showMessageDialog(new_patient, "Patient Successfully Added", "information", JOptionPane.INFORMATION_MESSAGE);
                     updateList();
@@ -208,14 +208,14 @@ public class PatientList {
         Connection conn = connect_DB();
         try {
             Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = s.executeQuery("SELECT * FROM patient_info");
-            ResultSet rs2 = s.executeQuery("SELECT * FROM patient_info");
-            rs = s.executeQuery("SELECT COUNT(*) FROM patient_info");
+            ResultSet rs = s.executeQuery("SELECT * FROM patients");
+            ResultSet rs2 = s.executeQuery("SELECT * FROM patients");
+            rs = s.executeQuery("SELECT COUNT(*) FROM patients");
             // Get the number of rows from the result set
             rs.next();
             nOfpatients = rs.getInt(1);
             System.out.println(status);
-            rs = s.executeQuery("SELECT givenname, familyname FROM patient_info WHERE id >= 1");
+            rs = s.executeQuery("SELECT givenname, familyname FROM patients WHERE id >= 1");
 
             while (rs.next()) {
                 if (status != true) {
@@ -238,8 +238,8 @@ public class PatientList {
         Connection conn = connect_DB();
         try {
             Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = s.executeQuery("SELECT * FROM patient_info");
-            rs = s.executeQuery("SELECT COUNT(*) FROM patient_info");
+            ResultSet rs = s.executeQuery("SELECT * FROM patients");
+            rs = s.executeQuery("SELECT COUNT(*) FROM patients");
             // Get the number of rows from the result set
             rs.next();
             nOfpatients = rs.getInt(1);

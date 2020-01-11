@@ -11,7 +11,7 @@ public class HR_Vitals extends Vital_Values_Display {
     public HR_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj){
         super(vitals_panel_dim, "label-Temperature");
         super.status_msg.setText("STABLE");
-        super.vital_type.setText("H\nR");
+        super.vital_type.setText("TEMP");
         super.vital_value.setText("VALUE");
 
         temp_val_counter = obj;
@@ -19,7 +19,7 @@ public class HR_Vitals extends Vital_Values_Display {
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf((int)(temp_val_counter.Double_Value())));
+            super.vital_value.setText(String.valueOf(Math.round(temp_val_counter.Double_Value() * 1000.0)/1000.0));
         });
     }
 }
