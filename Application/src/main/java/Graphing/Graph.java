@@ -170,17 +170,14 @@ public abstract class Graph extends JFXPanel {
 //        System.out.println("upper"+upperbound);
 //        System.out.println("rouned:                  " + ((int)(upperbound)-(int)(lowerbound)) + "\n");
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                if (numberOfPoints > pointsThreshold + pointsDeleted) {
-                    function.getData().remove(0, pointsDeleted);
-                    System.out.println(function.getData().size());
-                    numberOfPoints -= pointsDeleted;
-                    pointsDeleted = 30;
-                }
-            }
-        });
+        if (numberOfPoints > pointsThreshold + pointsDeleted) {
+            function.getData().remove(0, pointsDeleted);
+            System.out.println(function.getData().size());
+            numberOfPoints -= pointsDeleted;
+            pointsDeleted = 30;
+        }
+        else
+            scaling(function.getData().size(), yAxis, windowSize);
 
     }
 
@@ -218,6 +215,8 @@ public abstract class Graph extends JFXPanel {
     }
 
     public abstract void changeAbnormality (int newType);
+
+    protected abstract void scaling(int size, NumberAxis axis, int windowSize);
 
     protected abstract void Get_Next_Value();
 

@@ -56,7 +56,6 @@ public class Refresh implements Runnable{
     }
 
     public void switchRun(){
-        System.out.println("seeee");
         isUpdating = !isUpdating;
         haveToRestart = !whenToRestart;
         whenToRestart = !whenToRestart;

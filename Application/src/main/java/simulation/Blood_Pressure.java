@@ -17,21 +17,25 @@ public class Blood_Pressure {
         counter = 0;
     }
 
-    public double get_next_value(){
+    public double get_next_value(int bp_type){
+        int systolic_pressure_change = bp_type * 20;
+        int diastolic_pressure_change = 20*bp_type + Integer.signum(bp_type)*-10;
+
         double counter_period = counter % period;
         counter += 1;
         if (counter_period < (period * t1)){
             double start = counter_period;
-            return (-Math.cos(start/14)*20*amplitude+100);
+            return (-Math.cos(start/14)*20+100+systolic_pressure_change);
         } else if (counter_period < (period * (t1+t2))) {
             double start = counter_period - period * t1;
-            return -Math.sin(start/2)*amplitude+109;
+            return -Math.sin(start/2)+109+systolic_pressure_change;
         } else {
             double start = counter_period - period * (t1+t2);
-            return -Math.sin(start/15)*27*amplitude+107;
+            return -Math.sin(start/15)*27+107+diastolic_pressure_change;
         }
     }
 
+    /**
     private void fill_array(){
         for (int i = 0; i < array.length - 1; i++){
             array[i] = get_next_value();
@@ -42,4 +46,5 @@ public class Blood_Pressure {
         fill_array();
         return array;
     }
+     */
 }

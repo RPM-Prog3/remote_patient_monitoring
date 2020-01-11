@@ -24,6 +24,7 @@ public class Tuning_Panel{
     private GridPane gpane;
     private Scene tuning_scene;
 
+
     private Button switch_graph_motion, abnormalities_menu, patient_record;
     private Sliding timeWindow, BPMregulation, TempRegulation, BPRegulation, RRateRegulation;
 
@@ -60,6 +61,7 @@ public class Tuning_Panel{
 
 
         BPMregulation = new Sliding("abnormality", graphs_panel);
+
         TempRegulation = new Sliding("abnormality", graphs_panel);
         BPRegulation = new Sliding ("abnormality", graphs_panel);
         RRateRegulation = new Sliding("abnormality", graphs_panel);
@@ -91,9 +93,6 @@ public class Tuning_Panel{
         gpane.add(TempRegulation, 10,2);
         gpane.add(abnormalities_menu, 12,1);
         gpane.add(patient_record, 12,2);
-
-
-
 
         tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css");
         tuning_panel.setScene(tuning_scene);
