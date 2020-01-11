@@ -76,7 +76,7 @@ public class Sliding extends Slider {
 
     private void setActionTimeWindow() {
         valueProperty().addListener((obs, oldval, newval) -> {
-            //if (oldval!=newval) {
+            if (oldval!=newval) {
                 if (oldval.intValue() < 13)
                     setValue(5);
                 else if (oldval.intValue() < 30)
@@ -86,8 +86,10 @@ public class Sliding extends Slider {
                 else
                     setValue(60);
                 graphs_panel.changeTimeWindow((int) getValue());
-            //}
+            }
         });
+//        slider.setMinorTickCount(5);
+//        timeWindow.setBlockIncrement(10);
     }
 
     private void setActionAbnormality() {
