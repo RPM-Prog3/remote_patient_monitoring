@@ -28,7 +28,7 @@ public class Manage_db {
         search_for_sql_drivers();
     }
 
-    protected void init_table(String table_name, String sql_create_table) throws SQLException {
+    protected boolean init_table(String table_name, String sql_create_table) throws SQLException {
         Connection db_conn = get_db_connection();
         boolean table_exists = check_table_exists(db_conn, table_name);
         if (!table_exists){
@@ -36,6 +36,7 @@ public class Manage_db {
         }
         db_conn.close();
         this.table_init = true;
+        return table_exists;
     }
 
     protected Connection get_db_connection() throws SQLException {

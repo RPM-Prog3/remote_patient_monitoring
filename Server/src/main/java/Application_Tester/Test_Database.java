@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 
 public class Test_Database {
 
-
     public static void main(String[] args) throws IOException, SQLException {
 
         Client_Manager cm = new Client_Manager();
@@ -64,7 +63,6 @@ public class Test_Database {
         assert msg_test_4.get_success() : "Failed to send user to login";
 
         // Test 5
-
         LocalDateTime now = LocalDateTime.now();
         Patient_Value pv = new Patient_Value(1, now,
                 60, 20, 37.2,

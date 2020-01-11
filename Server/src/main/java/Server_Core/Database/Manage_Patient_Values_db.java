@@ -22,7 +22,7 @@ public class Manage_Patient_Values_db extends Manage_db{
                 "   blood_pressure_lower int,\n" +
                 "   abnormality varchar(256) NOT NULL\n" +
                 ");", table_name);
-        init_table(table_name, sql_create_table);
+        boolean table_exists_before = init_table(table_name, sql_create_table);
     }
 
     public void add_patient_value(Patient_Value pv) throws SQLException {

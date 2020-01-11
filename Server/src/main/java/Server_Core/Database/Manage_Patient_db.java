@@ -20,7 +20,7 @@ public class Manage_Patient_db extends Manage_db {
                 "   email varchar(128) NOT NULL,\n" +
                 "   phonenumber varchar(32)\n" +
                 ");", table_name);
-        init_table(table_name, sql_create_table);
+        boolean table_exists_before = init_table(table_name, sql_create_table);
     }
 
     public void add_patient(Patient p) throws SQLException {

@@ -21,7 +21,11 @@ public class Manage_User_db extends Manage_db {
                 "   email varchar(128) NOT NULL,\n" +
                 "   admin_status BOOLEAN NOT NULL\n" +
                 ");", table_name);
-        init_table(table_name, sql_create_table);
+        boolean table_exists_before = init_table(table_name, sql_create_table);
+        if (!table_exists_before){
+            // add admin user so that admin can setup the database. This user should be deleted as soon as another admin is made.
+            add_user("admin", "admin", "N.A.", true);
+        }
     }
 
     public void add_user(User u) throws SQLException {
