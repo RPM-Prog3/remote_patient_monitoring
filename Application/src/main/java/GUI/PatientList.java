@@ -1,4 +1,4 @@
-/*package GUI;
+package GUI;
 
 import com.google.gson.Gson;
 import server.Client_Manager;
@@ -76,6 +76,7 @@ public class PatientList {
         show_vitals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 for (int i = 1; i <= patient_counter; i++) {
                     Main_Frame GUI = new Main_Frame();
                 }
@@ -233,7 +234,6 @@ public class PatientList {
             e.printStackTrace();
             System.out.println("Unable to retrieve patient number");
         }
-
         return nOfpatients;
     }
 
@@ -281,17 +281,4 @@ public class PatientList {
         list.setResizable(false);
         list.setVisible(true);
     }
-
-
-    public void Test_DB_Connection() {
-        Server_Messenger messenger = new Server_Messenger();
-
-        try {
-            Client_Manager manager = new Client_Manager();
-            System.out.println("Connection Successful");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Unable to Connect");
-        }
-    }
-}*/
+}
