@@ -6,16 +6,18 @@ public class ECG {
     private double[] array; //array of one heartbeat
     private double new_value;
     private int val_position, number_zeros;
-    private int order = 10;
+    private int order;
     double counter = 0;
 
     /**
      * Constructor Class. Initialise ECG simulation parameters to default values
      */
-    public ECG() {
-        //int order = 10;
-        DaubechiesWavelet.SetOrder(order);
-        array = DaubechiesWavelet.ReturnDaub();
+    public ECG(int order, String ecg_type) {
+        this.order = order;
+        if (ecg_type.equals("normal")) {
+            DaubechiesWavelet.SetOrder(order);
+            array = DaubechiesWavelet.ReturnDaub();
+        }
         val_position = 0;
     }
 
@@ -50,26 +52,26 @@ public class ECG {
         return pos;
     }
 
-    public double get_next_value(int ecg_type){
+    public double get_next_value(int hr_speed){
         int n_points = order * 2;
         int target_mean;
 
-        if (ecg_type == 0)
+        if (hr_speed == 0)
             target_mean = 166 - n_points;
-        else if (ecg_type == 1)
+        else if (hr_speed == 1)
             target_mean = 92 - n_points;
-        else if (ecg_type == -1)
+        else if (hr_speed == -1)
             target_mean = 218 - n_points;
-        else if (ecg_type == -2)
+        else if (hr_speed == -2)
             target_mean = 244 - n_points;
-        else if (ecg_type == 2)
+        else if (hr_speed == 2)
             target_mean = 66 - n_points;
         else
-            throw new IllegalArgumentException("ECG type must be -2, -1, 0, 1, or 2");
+            throw new IllegalArgumentException("heart rate type must be -2, -1, 0, 1, or 2");
 
         set_new_value(target_mean, n_points);
 
-        return addNoise(new_value, 0, 0.001);
+        return addNoise(new_value, 0, 0.0001);
     }
 
     private void set_new_value(int target_mean, int n_pts){
