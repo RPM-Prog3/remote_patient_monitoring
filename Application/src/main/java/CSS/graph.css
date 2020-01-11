@@ -16,7 +16,7 @@
     -fx-stroke: #48fb47;
 }
 .chart-Respiratory .chart-series-line {
-    -fx-stroke: blue;
+    -fx-stroke: #00FFFF;
 }
 .chart-Temperature .chart-series-line {
     -fx-stroke: #ffff00;
