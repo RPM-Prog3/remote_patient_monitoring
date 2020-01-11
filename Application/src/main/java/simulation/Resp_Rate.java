@@ -32,17 +32,25 @@ public class Resp_Rate {
         r = new Random();
     }
 
-    public double get_next_value(){
+    public double get_next_value(int resp_speed){
 
-        counter += 1 + Math.abs(r.nextGaussian() * resp_variance);
-        double sin = Math.sin(counter / period) * 20;
-        if (sin < random_threshold){
-            counter -= Math.abs(r.nextGaussian() * resp_variance);
-            sin = Math.sin(counter / period) * 20;
+        if (Math.abs(resp_speed) > 2){
+            throw new IllegalArgumentException("respiratory rate type must be -2, -1, 0, 1, or 2");
         }
-        return sin + target_mean_resp_rate;
+        else {
+            double factor = Math.pow(2, -resp_speed);
+
+            counter += 1 + Math.abs(r.nextGaussian() * resp_variance);
+            double sin = Math.sin(counter / (period*factor)) * 20;
+            if (sin < random_threshold) {
+                counter -= Math.abs(r.nextGaussian() * resp_variance);
+                sin = Math.sin(counter / (period*factor)) * 20;
+            }
+            return sin + target_mean_resp_rate;
+        }
     }
 
+    /**
     private void fill_array(){
         for (int i = 0; i < array.length - 1; i++){
             array[i] = get_next_value();
@@ -53,4 +61,5 @@ public class Resp_Rate {
         fill_array();
         return array;
     }
+     */
 }
