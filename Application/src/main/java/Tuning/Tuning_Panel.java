@@ -1,4 +1,4 @@
-package GUI;
+package Tuning;
 
 import Graphing.Overall_Graph;
 import javafx.application.Platform;
@@ -23,12 +23,14 @@ public class Tuning_Panel{
     private GridPane gpane;
     private Scene tuning_scene;
     private Button switch_graph_motion;
-    private Slider timeWindow;
+    private Sliding timeWindow;
+//    private Slider timeWindow;
 
     private Overall_Graph graphs_panel;
 
     public Tuning_Panel(Overall_Graph obj){
         // Instantiating and setting the Grid pane that will contain all the tuning pieces
+        graphs_panel = obj;
         gpane = new GridPane();
         gpane.setPadding(new Insets(10, 10, 10, 10));  //this sets the distance from the borders of the grid we want to create
 
@@ -36,11 +38,10 @@ public class Tuning_Panel{
         tuning_scene = new Scene(gpane);
 
         switch_graph_motion = new Button("Stop Graph");
-        timeWindow = new Slider();
+//        timeWindow = new Slider();
+        timeWindow = new Sliding("time_window", graphs_panel);
         time_axis_label = new javafx.scene.control.Label();
         time_axis_label.setText("Time");
-
-        graphs_panel = obj;
 
         Platform.runLater (new Runnable() {
             @Override
@@ -51,42 +52,6 @@ public class Tuning_Panel{
     private void setPanel(){
         actionPerformed(switch_graph_motion, "stop_or_start_graph");
         switch_graph_motion.setVisible(true);
-
-        timeWindow.setMin(5);
-        timeWindow.setMax(60);
-        timeWindow.setValue(5);
-        timeWindow.setShowTickLabels(true);
-        timeWindow.setShowTickMarks(false);
-        timeWindow.setMajorTickUnit(1);
-        timeWindow.setLabelFormatter(new StringConverter<Double>() {
-            @Override
-            public String toString(Double aDouble) {
-                if (aDouble == 20 || aDouble == 40 || aDouble == 5 || aDouble == 60)
-                    return Integer.toString((int)aDouble.doubleValue()) ;
-                else
-                    return null;
-            }
-
-            @Override
-            public Double fromString(String s) {
-                return null;
-            }
-        });
-        timeWindow.valueProperty().addListener((obs, oldval, newval) -> {
-            if (oldval!=newval) {
-                if (oldval.intValue() < 13)
-                    timeWindow.setValue(5);
-                else if (oldval.intValue() < 30)
-                    timeWindow.setValue(20);
-                else if (oldval.intValue() < 50)
-                    timeWindow.setValue(40);
-                else
-                    timeWindow.setValue(60);
-                graphs_panel.changeTimeWindow((int) timeWindow.getValue());
-            }
-        });
-//        slider.setMinorTickCount(5);
-//        timeWindow.setBlockIncrement(10);
 
         gpane.add(switch_graph_motion, 0, 0);
         gpane.add(time_axis_label, 0,1);
