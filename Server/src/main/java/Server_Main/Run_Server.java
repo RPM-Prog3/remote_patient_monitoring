@@ -1,10 +1,12 @@
-import Data.Patient;
-import Data.Patient_Value;
-import Data.User;
-import Database.Manage_Patient_Values_db;
-import Database.Manage_Patient_db;
-import Database.Manage_User_db;
-import Messenger.Server_Messenger;
+package Server_Main;
+
+import Application_Tester.Data.Patient;
+import Application_Tester.Data.Patient_Value;
+import Application_Tester.Data.User;
+import Server_Main.Database.Manage_Patient_Values_db;
+import Server_Main.Database.Manage_Patient_db;
+import Server_Main.Database.Manage_User_db;
+import Application_Tester.Messenger.Server_Messenger;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;

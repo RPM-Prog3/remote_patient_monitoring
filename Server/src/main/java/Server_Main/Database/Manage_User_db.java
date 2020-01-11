@@ -1,6 +1,6 @@
-package Database;
+package Server_Main.Database;
 
-import Data.User;
+import Application_Tester.Data.User;
 
 import com.google.gson.Gson;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;

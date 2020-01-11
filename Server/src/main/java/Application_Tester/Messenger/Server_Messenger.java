@@ -1,4 +1,4 @@
-package Messenger;
+package Application_Tester.Messenger;
 
 import com.google.gson.Gson;
 

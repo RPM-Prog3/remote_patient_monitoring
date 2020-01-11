@@ -1,4 +1,4 @@
-package Data;
+package Application_Tester.Data;
 
 import java.io.Serializable;
 

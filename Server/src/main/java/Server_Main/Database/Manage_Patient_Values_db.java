@@ -1,11 +1,10 @@
-package Database;
+package Server_Main.Database;
 
-import Data.Patient_Value;
+import Application_Tester.Data.Patient_Value;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class Manage_Patient_Values_db extends Manage_db{
     private String table_name = "patient_values";

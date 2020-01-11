@@ -1,6 +1,8 @@
-import Data.Patient_Value;
-import Data.User;
-import Messenger.Server_Messenger;
+package Application_Tester;
+
+import Application_Tester.Data.Patient_Value;
+import Application_Tester.Data.User;
+import Application_Tester.Messenger.Server_Messenger;
 
 import java.io.IOException;
 import java.sql.SQLException;
