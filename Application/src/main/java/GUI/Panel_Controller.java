@@ -106,6 +106,9 @@ public class Panel_Controller {
         mainPanel.add(tuningPanel, BorderLayout.CENTER);
 
         ECG_panel.warning();
+        BP_panel.warning();
+        RR_panel.warning();
+        HR_panel.warning();
     }
 
     public JFXPanel getMainPanel() {

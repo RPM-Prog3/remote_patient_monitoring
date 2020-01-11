@@ -148,6 +148,7 @@ public abstract class Vital_Values_Display {
     }
 
     protected void warning(){
+        status_msg.setText("WARNING");
         blinking_status.start();
     }
 
