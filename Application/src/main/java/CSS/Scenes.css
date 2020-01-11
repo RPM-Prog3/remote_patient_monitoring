@@ -8,7 +8,7 @@
     -fx-text-fill: -colorOfVital;
 }
 .label-Respiratory {
-    -colorOfVital: blue;
+    -colorOfVital: #00FFFF;
     -fx-text-fill: -colorOfVital;
 }
 .label-Temperature {
