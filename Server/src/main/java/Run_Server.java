@@ -69,13 +69,13 @@ public class Run_Server extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         switch (uri) {
             case "/Server/rpm": {
-                writer.println("rpm page home page, redirect to here after login. If not logged in then redirect to login page.");
-                write_file("main_page.txt", writer);
+                //writer.println("rpm page home page, redirect to here after login. If not logged in then redirect to login page.");
+                write_file("landing.ejs", writer);
                 break;
             }
             case "/Server/rpm/login": {
-                writer.println("login page");
-                write_file("login_page.txt", writer);
+                //writer.println("login page");
+                write_file("login.ejs", writer);
                 break;
             }
         }
