@@ -189,8 +189,6 @@ public class Run_Server extends HttpServlet {
     }
 
     private boolean check_valid_user(User u){
-
-
         boolean valid_user = true;
         //boolean valid_user = false;
         try {
