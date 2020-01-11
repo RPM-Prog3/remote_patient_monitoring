@@ -34,17 +34,18 @@ public class Overall_Graph {
         temp_counting_obj = temp_counting_obj_input;
 
         // ECG
-        ecgdata = new ECG();
+        ecgdata = new ECG(10);
         ecg_vit = ecg_vit_input;
         bpm_obj = ecg_obj_input;
 
         //Pressure
-        pressuredata = new Blood_Pressure();
+        pressuredata = new Blood_Pressure(0.6, 0.15, 0.25, 100, 1);
         pressure_vit = pressure_vit_input;
         press_counting_obj = press_counting_obj_input;
 
         //Respiratory
-        respdata = new Resp_Rate(50, 2.0, -0.95, 20);
+        //Decrease the period to increase Respiratory Rate
+        respdata = new Resp_Rate(50, 4.0, -0.95, 100);
         resp_vit = resp_vit_input;
         resp_counting_obj = resp_counting_obj_input;
 
@@ -98,6 +99,10 @@ public class Overall_Graph {
         graphBPress.changeTimeWindow(val);
         graphResp.changeTimeWindow(val);
         graphTemp.changeTimeWindow(val);
+    }
+
+    public void changeECGAbnormality(int newType){
+        graphECG.changeAbnormality(newType);
     }
 
     public JFXPanel getGraphPanel() {

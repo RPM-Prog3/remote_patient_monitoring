@@ -1,5 +1,6 @@
 package Tuning;
 
+import GUI.BP_Vitals;
 import Graphing.Overall_Graph;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -22,9 +23,9 @@ public class Tuning_Panel{
     private javafx.scene.control.Label time_axis_label;
     private GridPane gpane;
     private Scene tuning_scene;
+
     private Button switch_graph_motion;
-    private Sliding timeWindow;
-//    private Slider timeWindow;
+    private Sliding timeWindow, BPMregulation;
 
     private Overall_Graph graphs_panel;
 
@@ -38,10 +39,14 @@ public class Tuning_Panel{
         tuning_scene = new Scene(gpane);
 
         switch_graph_motion = new Button("Stop Graph");
-//        timeWindow = new Slider();
+
         timeWindow = new Sliding("time_window", graphs_panel);
         time_axis_label = new javafx.scene.control.Label();
         time_axis_label.setText("Time");
+
+        BPMregulation = new Sliding("abnormality", graphs_panel);
+
+        tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Tune.css");
 
         Platform.runLater (new Runnable() {
             @Override
@@ -56,6 +61,7 @@ public class Tuning_Panel{
         gpane.add(switch_graph_motion, 0, 0);
         gpane.add(time_axis_label, 0,1);
         gpane.add(timeWindow, 0, 2);
+        gpane.add(BPMregulation, 2, 0);
         tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css");
         tuning_panel.setScene(tuning_scene);
     }

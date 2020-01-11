@@ -11,6 +11,10 @@ public class Graph_Pressure extends Graph {
         pressuredata = pressuredata_input;
     }
 
+    public void changeAbnormality(int newType) {
+
+    }
+
     protected void Get_Next_Value(){
         super.data_point = pressuredata.get_next_value();
     }

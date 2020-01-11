@@ -33,6 +33,7 @@ public class Resp_Rate {
     }
 
     public double get_next_value(){
+
         counter += 1 + Math.abs(r.nextGaussian() * resp_variance);
         double sin = Math.sin(counter / period) * 20;
         if (sin < random_threshold){

@@ -11,6 +11,10 @@ public class Graph_Respiration extends Graph {
         respdata = respdata_input;
     }
 
+    public void changeAbnormality(int newType) {
+
+    }
+
     protected void Get_Next_Value(){
         super.data_point = respdata.get_next_value();
     }
