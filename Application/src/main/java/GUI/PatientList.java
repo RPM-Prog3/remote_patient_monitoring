@@ -1,4 +1,4 @@
-package GUI;
+/*package GUI;
 
 import com.google.gson.Gson;
 import server.Client_Manager;
@@ -42,7 +42,7 @@ public class PatientList {
         // of the validity of the details inserted is inserted in the database
         add_patient = new JButton("Add Patient");
         add_patient.setVisible(true);
-        /*add_patient.addActionListener(new ActionListener() {
+        add_patient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
@@ -51,7 +51,7 @@ public class PatientList {
                     e.printStackTrace();
                 }
             }
-        });*/
+        });
 
         // Creating an array containing many JCheckBox objects each containing the information
         // i.e. first and last name of each patient in the database
@@ -283,4 +283,4 @@ public void Test_DB_Connection(){
         e.printStackTrace();
         System.out.println("Unable to Connect");
     }
-}
+}*/
