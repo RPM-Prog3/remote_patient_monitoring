@@ -18,20 +18,24 @@ public class Blood_Pressure {
     }
 
     public double get_next_value(int bp_type){
+        if (Math.abs(bp_type) > 2){
+            throw new IllegalArgumentException("Blood pressure type must be -2, -1, 0, 1, or 2");
+        }
+
         int systolic_pressure_change = bp_type * 20;
-        int diastolic_pressure_change = 20*bp_type + Integer.signum(bp_type)*-10;
+        int diastolic_pressure_change = 20 * bp_type + Integer.signum(bp_type) * -10;
 
         double counter_period = counter % period;
         counter += 1;
-        if (counter_period < (period * t1)){
+        if (counter_period < (period * t1)) {
             double start = counter_period;
-            return (-Math.cos(start/14)*20+100+systolic_pressure_change);
-        } else if (counter_period < (period * (t1+t2))) {
+            return (-Math.cos(start / 14) * 20 + 100 + systolic_pressure_change);
+        } else if (counter_period < (period * (t1 + t2))) {
             double start = counter_period - period * t1;
-            return -Math.sin(start/2)+109+systolic_pressure_change;
+            return -Math.sin(start / 2) + 109 + systolic_pressure_change;
         } else {
-            double start = counter_period - period * (t1+t2);
-            return -Math.sin(start/15)*27+107+diastolic_pressure_change;
+            double start = counter_period - period * (t1 + t2);
+            return -Math.sin(start / 15) * 27 + 107 + diastolic_pressure_change;
         }
     }
 
