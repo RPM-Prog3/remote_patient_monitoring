@@ -1,4 +1,4 @@
-package Application_Tester;
+package Application_Tester.Manager;
 
 import Application_Tester.Data.Patient;
 import Application_Tester.Data.Patient_Value;
@@ -19,9 +19,9 @@ public class Client_Manager {
     String server_port;
 
     public Client_Manager() throws IOException {
-        String user_dir = Read_server_properties.get_user_dir();
+        String user_dir = Read_server_properties.get_user_dir(false);
         System.out.println(user_dir);
-        String server_config_path = user_dir + "/Server/server_config.properties";
+        String server_config_path = user_dir + "/server_config.properties";
         System.out.println(server_config_path);
         Read_server_properties server_prop = new Read_server_properties(server_config_path);
         server_ip = server_prop.get_server_ip();
@@ -143,10 +143,6 @@ public class Client_Manager {
             e.printStackTrace();
             conn.getErrorStream();
         }
-        // Read the body of the response
-//        while ((response = bufferedReader.readLine()) != null) {
-//            System.out.println(response);
-//        }
         String response = bufferedReader.readLine();
         bufferedReader.close();
         return response;

@@ -30,5 +30,4 @@ public class Client_Messenger {
     private String get_user_login_gson(){
         return user_login;
     }
-
 }

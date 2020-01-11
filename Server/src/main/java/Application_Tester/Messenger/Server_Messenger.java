@@ -1,7 +1,5 @@
 package Application_Tester.Messenger;
 
-import com.google.gson.Gson;
-
 public class Server_Messenger {
     private boolean success;
     private String message;
@@ -28,6 +26,4 @@ public class Server_Messenger {
     public void set_success(Boolean success){
         this.success = success;
     }
-
-
 }

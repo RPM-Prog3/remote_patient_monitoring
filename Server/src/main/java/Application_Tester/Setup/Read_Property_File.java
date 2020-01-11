@@ -9,12 +9,16 @@ import java.util.Set;
 
 public class Read_Property_File {
     Properties prop;
-    String config_path;
+    private String config_path;
 
     public Read_Property_File(String config_path) throws IOException {
-        // Resource to setup properties: https://medium.com/@sonaldwivedi/how-to-read-config-properties-file-in-java-6a501dc96b25
+        // Resource accessed to setup properties: https://medium.com/@sonaldwivedi/how-to-read-config-properties-file-in-java-6a501dc96b25
         prop = new Properties();
         this.config_path = config_path;
+
+        // System.out.println("Reading property file: " + config_path);
+
+        // need to check the file path parent directory is remote_patient_monitoring
 
         check_file_exists();
         load_prop();
@@ -43,7 +47,15 @@ public class Read_Property_File {
         }
     }
 
-    public static String get_user_dir(){
-        return System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20");
+    public static String get_user_dir(boolean remove_server_or_application){
+        String path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20");
+        if( remove_server_or_application){
+            File f = new File(path);
+            String dir_name = f.getName();
+            if (dir_name.equals("Server") || dir_name.equals("Application")) {
+                path = f.getParent();
+            }
+        }
+        return path;
     }
 }

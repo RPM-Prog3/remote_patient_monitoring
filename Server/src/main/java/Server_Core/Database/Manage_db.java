@@ -15,10 +15,8 @@ public class Manage_db {
     private boolean table_init = false;
 
     public Manage_db() throws IOException, SQLException {
-        String user_dir = Read_db_properties.get_user_dir();
-        System.out.println(user_dir);
+        String user_dir = Read_db_properties.get_user_dir(true);
         String db_config_path = user_dir + "/db_config.properties";
-
         Read_db_properties rpf = new Read_db_properties(db_config_path);
 
         // variables for the users database

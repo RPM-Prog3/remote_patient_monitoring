@@ -2,6 +2,7 @@ package Application_Tester;
 
 import Application_Tester.Data.Patient_Value;
 import Application_Tester.Data.User;
+import Application_Tester.Manager.Client_Manager;
 import Application_Tester.Messenger.Server_Messenger;
 
 import java.io.IOException;
