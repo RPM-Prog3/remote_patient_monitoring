@@ -61,7 +61,6 @@ public class Tuning_Panel{
 
 
         BPMregulation = new Sliding("abnormality", graphs_panel);
-
         TempRegulation = new Sliding("abnormality", graphs_panel);
         BPRegulation = new Sliding ("abnormality", graphs_panel);
         RRateRegulation = new Sliding("abnormality", graphs_panel);

@@ -21,7 +21,18 @@ public class RR_Vitals extends Vital_Values_Display{
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf((int)(60/(resp_val_counter.Index_Difference()*0.006))) );
+            String value = String.valueOf((int)(60/(resp_val_counter.Index_Difference()*0.006)));
+            super.vital_value.setText(value);
+
+            /*int value_ = Integer.parseInt(value);
+            if (value_ > 100 || value_ < 60 ){
+                super.status_msg.setText("WARNING");
+            }
+            else if (value_ < 30 || value_ > 120) {
+                super.status_msg.setText("URGENT");
+
+            }*/
+
         });
     }
 }

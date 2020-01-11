@@ -27,7 +27,6 @@ public class Main_Frame {
         mainPage.getContentPane().addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 Component c = (Component) e.getSource();
-
                 if (mainPage.getExtendedState() == 6){
                     mainPage.setSize(default_dim);
                     controller.setPanelControllerSize(default_dim);
@@ -57,6 +56,5 @@ public class Main_Frame {
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         controller.startSimulation();
-
     }
 }
