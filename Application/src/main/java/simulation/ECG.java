@@ -6,14 +6,14 @@ public class ECG {
     private double[] array; //array of one heartbeat
     private double new_value;
     private int val_position, number_zeros;
-    private int order = 10;
+    private int order;
     double counter = 0;
 
     /**
      * Constructor Class. Initialise ECG simulation parameters to default values
      */
-    public ECG() {
-        //int order = 10;
+    public ECG(int order) {
+        this.order = order;
         DaubechiesWavelet.SetOrder(order);
         array = DaubechiesWavelet.ReturnDaub();
         val_position = 0;
