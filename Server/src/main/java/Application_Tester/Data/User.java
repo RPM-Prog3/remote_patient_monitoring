@@ -1,10 +1,10 @@
-package Data;
+package Application_Tester.Data;
 
-import java.io.Serializable;
+import java.io.Serializable; // Enables the class to be passed through a GSON
 
 public class User implements Serializable {
 
-    String username, password, email;
+    private String username, password, email;
 
     public User(String username, String password, String email){
         this.username = username;

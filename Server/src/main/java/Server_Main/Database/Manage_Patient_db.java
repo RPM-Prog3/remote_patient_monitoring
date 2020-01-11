@@ -1,6 +1,6 @@
-package Database;
+package Server_Main.Database;
 
-import Data.Patient;
+import Application_Tester.Data.Patient;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

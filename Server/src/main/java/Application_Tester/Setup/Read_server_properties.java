@@ -1,4 +1,4 @@
-package Setup;
+package Application_Tester.Setup;
 
 import java.io.IOException;
 

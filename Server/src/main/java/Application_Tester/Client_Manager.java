@@ -1,6 +1,10 @@
-import Data.Patient;
-import Data.User;
-import Setup.Read_server_properties;
+package Application_Tester;
+
+import Application_Tester.Data.Patient;
+import Application_Tester.Data.Patient_Value;
+import Application_Tester.Data.User;
+import Application_Tester.Messenger.Server_Messenger;
+import Application_Tester.Setup.Read_server_properties;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -28,14 +32,21 @@ public class Client_Manager {
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 
-    //public Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {
+    public Server_Messenger send_patient_value_to_pv_db(Patient_Value pv) throws IOException {
+        Gson pv_gson = new Gson();
+        String pv_json_string = pv_gson.toJson(pv);
+        String url = String.format("%s/add_patient_value", get_url());
+        return get_post_messenger(url, pv_json_string);
+    }
+
+    //public Application_Tester.Messenger.Server_Messenger get_patients_from_patients_db(User login_user) throws IOException {
     public Server_Messenger get_patients_from_patients_db() throws IOException {
         String need_to_login = "";
         String url = String.format("%s/request_patients", get_url());
         return get_post_messenger(url, need_to_login);
     }
 
-    //public Server_Messenger send_patient_to_add_patients_db(User login_user, String familyname, String givenname,
+    //public Application_Tester.Messenger.Server_Messenger send_patient_to_add_patients_db(User login_user, String familyname, String givenname,
     public Server_Messenger send_patient_to_add_patients_db(String familyname, String givenname,
                                                             String dofbirth, String email,
                                                             String phonenumber) throws IOException {
@@ -43,7 +54,7 @@ public class Client_Manager {
         return send_patient_to_add_patients_db(p);
     }
 
-    //public Server_Messenger send_patient_to_add_patients_db(User login_user, Patient p) throws IOException {
+    //public Application_Tester.Messenger.Server_Messenger send_patient_to_add_patients_db(User login_user, Patient p) throws IOException {
     public Server_Messenger send_patient_to_add_patients_db(Patient p) throws IOException {
         Gson p_gson = new Gson();
         String p_json_string = p_gson.toJson(p);
@@ -129,7 +140,6 @@ public class Client_Manager {
             bufferedReader = new BufferedReader(new
                     InputStreamReader(conn.getInputStream(), "utf-8"));
         } catch (Exception e){
-
             e.printStackTrace();
             conn.getErrorStream();
         }

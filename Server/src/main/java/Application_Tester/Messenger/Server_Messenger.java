@@ -1,3 +1,5 @@
+package Application_Tester.Messenger;
+
 import com.google.gson.Gson;
 
 public class Server_Messenger {

@@ -1,7 +1,12 @@
-import Data.User;
+package Application_Tester;
+
+import Application_Tester.Data.Patient_Value;
+import Application_Tester.Data.User;
+import Application_Tester.Messenger.Server_Messenger;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class Test_Database {
 
@@ -58,6 +63,16 @@ public class Test_Database {
         Server_Messenger msg_test_4;
         msg_test_4 = cm.send_user_to_login("Joe", "1234");
         System.out.println(msg_test_4.get_success());
+        System.out.println("-----------------");
+
+        System.out.println("Test 5");
+        Server_Messenger msg_test_5;
+        LocalDateTime now = LocalDateTime.now();
+        Patient_Value pv = new Patient_Value(1, now,
+                60, 20, 37.2,
+                180, 90, "");
+        msg_test_5 = cm.send_patient_value_to_pv_db(pv);
+        System.out.println(msg_test_5.get_success());
         System.out.println("-----------------");
 
         System.out.println("Done");

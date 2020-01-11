@@ -1,7 +1,12 @@
-import Data.Patient;
-import Data.User;
-import Database.Manage_Patient_db;
-import Database.Manage_User_db;
+package Server_Main;
+
+import Application_Tester.Data.Patient;
+import Application_Tester.Data.Patient_Value;
+import Application_Tester.Data.User;
+import Server_Main.Database.Manage_Patient_Values_db;
+import Server_Main.Database.Manage_Patient_db;
+import Server_Main.Database.Manage_User_db;
+import Application_Tester.Messenger.Server_Messenger;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -25,6 +30,7 @@ import java.util.stream.Collectors;
                 "/rpm",
                 "/rpm/login",
                 "/rpm/add_patient",
+                "/rpm/add_patient_value",
                 "/rpm/add_user",
                 "/rpm/request_patients",
                 "/rpm/request_users"
@@ -33,6 +39,7 @@ import java.util.stream.Collectors;
 public class Run_Server extends HttpServlet {
     Manage_User_db user_db;
     Manage_Patient_db patient_db;
+    Manage_Patient_Values_db patient_values_db;
     boolean debug = true;
 
 
@@ -40,6 +47,7 @@ public class Run_Server extends HttpServlet {
         print_datetime();
         user_db = new Manage_User_db();
         patient_db = new Manage_Patient_db();
+        patient_values_db = new Manage_Patient_Values_db();
         if (debug) {
             System.out.println("Starting server");
         }
@@ -70,7 +78,6 @@ public class Run_Server extends HttpServlet {
         System.out.println(String.format("reqBody: %s", reqBody));
         resp.setContentType("text/html");
 
-
         String server_path = req.getServletPath();
 
         Server_Messenger messenger = new Server_Messenger();
@@ -89,6 +96,18 @@ public class Run_Server extends HttpServlet {
                     messenger.set_success(false);
                 }
                 break;
+            }
+            case "/rpm/add_patient_value": {
+                Gson gson = new Gson();
+                Patient_Value pv = gson.fromJson(reqBody, Patient_Value.class);
+                pv.print_values();
+                try {
+                    patient_values_db.add_patient_value(pv);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("failed to add patient values");
+                    messenger.set_success(false);
+                }
             }
             case "/rpm/add_user": {
                 Gson gson = new Gson();
