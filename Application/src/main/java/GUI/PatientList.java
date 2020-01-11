@@ -1,4 +1,4 @@
-/*package GUI;
+package GUI;
 
 import com.google.gson.Gson;
 import server.Client_Manager;
@@ -30,7 +30,7 @@ public class PatientList {
     private JScrollPane scrollPane;
     private Client_Manager manager;
 
-    public PatientList() {
+    public PatientList() throws IOException {
         list = new JFrame("List of Patients", gc);
         list.setSize(1000, 700);
 
@@ -60,6 +60,7 @@ public class PatientList {
         // Setting up the panel that displays the patients such that it has as many rows as
         // the number of patients in the database
         nOfpatients = getnOfpatients();
+        System.out.println(nOfpatients);
         list_panel = new JPanel(new GridLayout(nOfpatients, 1));
         list_panel.setVisible(true);
 
@@ -75,6 +76,7 @@ public class PatientList {
         show_vitals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 for (int i = 1; i <= patient_counter; i++) {
                     Main_Frame GUI = new Main_Frame();
                 }
@@ -172,13 +174,11 @@ public class PatientList {
                 error_message = new JOptionPane();
                 success_message = new JOptionPane();
 
-                // Connecting to the Server:
+                Client_Manager manager = null;
                 try {
-                    Client_Manager manager = new Client_Manager();
-                    System.out.println("Connection Successful");
+                    manager = new Client_Manager();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("Unable to Connect");
                 }
 
                 try {
@@ -194,23 +194,33 @@ public class PatientList {
         });
     }
 
-    public ArrayList<JCheckBox> getPatientsInfo() {
+    public ArrayList<JCheckBox> getPatientsInfo() throws IOException {
         nOfpatients = 0;
+        Gson gson = new Gson();
         Server_Messenger messenger = new Server_Messenger();
+        Client_Manager manager = new Client_Manager();
         try {
             messenger = manager.get_patients_from_patients_db();
             boolean success = messenger.get_success();
             String output = messenger.get_message();
+            System.out.println(output);
+            String[][] patients = gson.fromJson(output, String[][].class);
+            for (int i = 0; i < patients.length; i++) {
+                String p_name = patients[i][0] + " " + patients[i][1];
+                patientlist.add(new JCheckBox(p_name));
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Unable to retrieve patient information");
         }
         return patientlist;
     }
 
-    public int getnOfpatients() {
+    public int getnOfpatients() throws IOException {
         int nOfpatients = 0;
         Gson gson = new Gson();
         Server_Messenger messenger = new Server_Messenger();
+        Client_Manager manager = new Client_Manager();
         try {
             messenger = manager.get_patients_from_patients_db();
             boolean success = messenger.get_success();
@@ -221,13 +231,13 @@ public class PatientList {
             nOfpatients = patients.length;
 
         } catch (Exception e) {
-            System.out.println("UUnable to retrieve patient number");
+            e.printStackTrace();
+            System.out.println("Unable to retrieve patient number");
         }
-
         return nOfpatients;
     }
 
-    public void createList() {
+    public void createList() throws IOException {
         status = false;
         patientlist = getPatientsInfo();
         for (int i = 0; i < patientlist.size(); i++) {
@@ -239,12 +249,12 @@ public class PatientList {
         }
     }
 
-    public void updateList() {
+    public void updateList() throws IOException {
         status = true;
         patientlist = getPatientsInfo();
         patientlist.get(patientlist.size() - 1).setVisible(true);
         list_panel.add(patientlist.get(patientlist.size() - 1));
-        selectPatient(patientlist.size()-1);
+        selectPatient(patientlist.size() - 1);
     }
 
     public void selectPatient(int select) {
@@ -256,15 +266,15 @@ public class PatientList {
                 if (selected) {
                     patient_counter++;
                     show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
-                }
-                else if (!selected && patient_counter > 0) {
+                } else if (!selected && patient_counter > 0) {
                     patient_counter--;
                     show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
                 }
             }
         });
     }
-    public void showList() {
+
+    public void showList() throws IOException {
         list_panel.setVisible(true);
         int rows = getnOfpatients();
         list_panel.setLayout(new GridLayout(rows, 1));
@@ -272,15 +282,3 @@ public class PatientList {
         list.setVisible(true);
     }
 }
-
-public void Test_DB_Connection(){
-    Server_Messenger messenger = new Server_Messenger();
-
-    try {
-        Client_Manager manager = new Client_Manager();
-        System.out.println("Connection Successful");
-    } catch (IOException e) {
-        e.printStackTrace();
-        System.out.println("Unable to Connect");
-    }
-}*/
