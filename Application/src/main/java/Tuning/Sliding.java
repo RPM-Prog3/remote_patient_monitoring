@@ -58,20 +58,20 @@ public class Sliding extends Slider {
         setMajorTickUnit(1);
 
         //Set up labels of slider
-//        setLabelFormatter(new StringConverter<Double>() {
-//            @Override
-//            public String toString(Double aDouble) {
-//                if (aDouble == 20 || aDouble == 40 || aDouble == 5 || aDouble == 60)
-//                    return Integer.toString((int)aDouble.doubleValue()) ;
-//                else
-//                    return null;
-//            }
-//
-//            @Override
-//            public Double fromString(String s) {
-//                return null;
-//            }
-//        });
+////        setLabelFormatter(new StringConverter<Double>() {
+////            @Override
+////            public String toString(Double aDouble) {
+////                if (aDouble == 20 || aDouble == 40 || aDouble == 5 || aDouble == 60)
+////                    return Integer.toString((int)aDouble.doubleValue()) ;
+////                else
+////                    return null;
+////            }
+////
+////            @Override
+////            public Double fromString(String s) {
+////                return null;
+////            }
+////        });
     }
 
     private void setActionTimeWindow() {

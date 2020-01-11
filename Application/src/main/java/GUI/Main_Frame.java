@@ -16,11 +16,13 @@ public class Main_Frame {
         // Setting up the main frame
         mainPage = new JFrame("Main Frame", gc);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        mainPage.setBounds(0, 0, screenSize.width, screenSize.height);
+        mainPage.setBounds(0, 0, screenSize.width+10, screenSize.height);
+        //System.out.println(screenSize);
+        //mainPage.setExtendedState(6);
+        Dimension default_dim = mainPage.getSize();
+        System.out.println(default_dim);
         mainPage.setVisible(true);
         mainPage.setResizable(true);
-
-        Dimension default_dim = new Dimension(screenSize.width, screenSize.height);
 
         mainPage.getContentPane().addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
@@ -28,7 +30,7 @@ public class Main_Frame {
 
                 if (mainPage.getExtendedState() == 6){
                     mainPage.setSize(default_dim);
-                    controller.setPanelControllerSize(mainPage.getSize());
+                    controller.setPanelControllerSize(default_dim);
                     mainPage.revalidate();
                     mainPage.repaint();
                     mainPage.setTitle("W: " + c.getWidth() + "H: " + c.getHeight());
