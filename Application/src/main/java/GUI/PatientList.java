@@ -26,6 +26,7 @@ public class PatientList {
     private boolean status;
     private int patient_counter, nOfpatients, start_idx;
     private ArrayList<JCheckBox> patientlist;
+    private ArrayList<Integer> patient_idx;
     private Border border;
     private JScrollPane scrollPane;
     private Client_Manager manager;
@@ -56,7 +57,7 @@ public class PatientList {
         // Creating an array containing many JCheckBox objects each containing the information
         // i.e. first and last name of each patient in the database
         patientlist = new ArrayList<JCheckBox>();
-
+        patient_idx = new ArrayList<Integer>();
         // Setting up the panel that displays the patients such that it has as many rows as
         // the number of patients in the database
         nOfpatients = getnOfpatients();
@@ -76,9 +77,9 @@ public class PatientList {
         show_vitals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                for (int i = 1; i <= patient_counter; i++) {
-                    Main_Frame GUI = new Main_Frame();
+                for (int i = 0; i <patient_counter; i++) {
+                    String name = patientlist.get(patient_idx.get(i)).getText();
+                    Main_Frame GUI = new Main_Frame(name);
                 }
             }
         });
@@ -265,9 +266,11 @@ public class PatientList {
                 boolean selected = abstractButton.getModel().isSelected();
                 if (selected) {
                     patient_counter++;
+                    patient_idx.add(select);
                     show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
                 } else if (!selected && patient_counter > 0) {
                     patient_counter--;
+                    patient_idx.remove(select);
                     show_vitals.setText("Show the selected " + patient_counter + " patients vitals");
                 }
             }

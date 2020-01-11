@@ -12,9 +12,9 @@ public class Main_Frame {
     private JFXPanel mainPanel;
     private Panel_Controller controller;
 
-    public Main_Frame() {
+    public Main_Frame(String P_name) {
         // Setting up the main frame
-        mainPage = new JFrame("Main Frame", gc);
+        mainPage = new JFrame(P_name, gc);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         mainPage.setBounds(0, 0, screenSize.width+10, screenSize.height);
         //System.out.println(screenSize);

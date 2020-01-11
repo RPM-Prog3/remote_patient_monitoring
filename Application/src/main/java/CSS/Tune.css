@@ -7,3 +7,7 @@
     /*-fx-fit-to-height: true;*/
     /*-fx-arc-width: true;*/
 }
+
+.label {
+    -fx-text-fill: white;
+}
