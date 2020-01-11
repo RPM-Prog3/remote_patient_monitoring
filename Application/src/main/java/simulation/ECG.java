@@ -50,31 +50,36 @@ public class ECG {
 
     public double get_next_value(int ecg_type){
         int n_points = order * 2;
+        int target_mean;
 
         if (ecg_type == 0)
-            ecg_type = 166 - n_points;
+            target_mean = 166 - n_points;
             //ecg_type = 146;
         else if (ecg_type == 1)
-            ecg_type = 92 - n_points;
+            target_mean = 92 - n_points;
             //ecg_type = 72;
         else if (ecg_type == -1)
-            ecg_type = 218 - n_points;
+            target_mean = 218 - n_points;
             //ecg_type =218;
         else
             throw new IllegalArgumentException("ECG type must be -1, 0 or 1");
 
-        if (val_position == 0)
-            number_zeros = PadZeros(ecg_type);
+        set_new_value(target_mean, n_points);
 
-        if (val_position < n_points)
+        return addNoise(new_value, 0, 0.001);
+    }
+
+    private void set_new_value(int target_mean, int n_pts){
+        if (val_position == 0)
+            number_zeros = PadZeros(target_mean);
+
+        if (val_position < n_pts)
             new_value = array[val_position];
-        else if (val_position < number_zeros+n_points)
+        else if (val_position < number_zeros+n_pts)
             new_value = 0;
 
         val_position += 1;
-        if (val_position ==  number_zeros+n_points)
+        if (val_position ==  number_zeros+n_pts)
             val_position = 0;
-
-        return addNoise(new_value, 0, 0.001);
     }
 }
