@@ -35,7 +35,7 @@ public abstract class Graph extends JFXPanel {
         numberOfPoints = 0; //How many points in the series
         points_added_whileStopped = 0;  //How many points added in the backend when the graph has stopped moving
 
-        pointsThreshold = (int)(60/sample_period);  //When to start deleting points
+        pointsThreshold = (int)(10/sample_period);  //When to start deleting points
         pointsDeleted = 1;  //After how many points to delete once the threshold has been passed
 
         delta = sample_period;
@@ -50,7 +50,7 @@ public abstract class Graph extends JFXPanel {
 
         graphpanel = new JFXPanel();
         xAxis = new NumberAxis("Time", lowerbound+ROUNDING_VALUE, tick+ROUNDING_VALUE, tick+ROUNDING_VALUE);   //creating the axes
-//        yAxis = new NumberAxis("Values for Y-Axis", -1, 1, 1);
+        //yAxis = new NumberAxis("Values for Y-Axis", -1, 1, 1);
         yAxis = new NumberAxis();
         yAxis.setForceZeroInRange(false);
 
