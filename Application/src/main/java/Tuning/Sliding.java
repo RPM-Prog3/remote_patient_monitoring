@@ -7,10 +7,12 @@ import javafx.util.StringConverter;
 public class Sliding extends Slider {
     Overall_Graph graphs_panel;
     String which;
+    int vital_selector;
 
-    public Sliding(String which, Overall_Graph graphs_panel){
+    public Sliding(String which, Overall_Graph graphs_panel, int which_vital){
         this.graphs_panel = graphs_panel;
         this.which = which;
+        vital_selector = which_vital;
 
         if (which.equals("time_window")) {
             setUpTimeWindow();
@@ -118,9 +120,13 @@ public class Sliding extends Slider {
                     setValue(50);
                     abnormalityValue = 2;
                 }
-                graphs_panel.changeECGAbnormality(abnormalityValue);
+                action(abnormalityValue);
             }
         });
+    }
+
+    private void action(int type){
+        graphs_panel.changeECGAbnormality(type, vital_selector);
     }
 
 }

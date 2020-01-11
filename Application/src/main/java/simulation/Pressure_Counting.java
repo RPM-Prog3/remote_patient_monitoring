@@ -21,8 +21,8 @@ public class Pressure_Counting extends Value_Counter {
         if (val_position == ecglength){
             max_min[0] = max;
             max_min[1] = min;
-            max = 0;
-            min = 150;
+            max = -10;
+            min = 1500;
             val_position = 0;
         }
     }
