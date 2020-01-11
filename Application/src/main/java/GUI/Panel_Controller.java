@@ -1,6 +1,7 @@
 package GUI;
 
 import Graphing.Overall_Graph;
+import Tuning.Tuning_Panel;
 import javafx.embed.swing.JFXPanel;
 import simulation.*;
 

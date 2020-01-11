@@ -170,12 +170,17 @@ public abstract class Graph extends JFXPanel {
 //        System.out.println("upper"+upperbound);
 //        System.out.println("rouned:                  " + ((int)(upperbound)-(int)(lowerbound)) + "\n");
 
-        if (numberOfPoints > pointsThreshold + pointsDeleted) {
-            function.getData().remove(0, pointsDeleted);
-            System.out.println(function.getData().size());
-            numberOfPoints -= pointsDeleted;
-            pointsDeleted = 30;
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (numberOfPoints > pointsThreshold + pointsDeleted) {
+                    function.getData().remove(0, pointsDeleted);
+                    System.out.println(function.getData().size());
+                    numberOfPoints -= pointsDeleted;
+                    pointsDeleted = 30;
+                }
+            }
+        });
 
     }
 
