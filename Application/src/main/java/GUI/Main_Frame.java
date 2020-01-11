@@ -8,7 +8,6 @@ import java.awt.event.*;
 public class Main_Frame {
 
     static GraphicsConfiguration gc; // Class field containing config info
-    //    private Thread refreshing;
     private JFrame mainPage;
     private JFXPanel mainPanel;
     private Panel_Controller controller;
@@ -21,14 +20,26 @@ public class Main_Frame {
         mainPage.setVisible(true);
         mainPage.setResizable(true);
 
+        Dimension default_dim = new Dimension(screenSize.width, screenSize.height);
+
         mainPage.getContentPane().addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 Component c = (Component) e.getSource();
-                mainPage.setSize(mainPage.getSize());
-                controller.setPanelControllerSize(mainPage.getSize());
-                mainPage.revalidate();
-                mainPage.repaint();
-                mainPage.setTitle("W: " + c.getWidth() + "H: " + c.getHeight());
+
+                if (mainPage.getExtendedState() == 6){
+                    mainPage.setSize(default_dim);
+                    controller.setPanelControllerSize(mainPage.getSize());
+                    mainPage.revalidate();
+                    mainPage.repaint();
+                    mainPage.setTitle("W: " + c.getWidth() + "H: " + c.getHeight());
+                }
+                else {
+                    mainPage.setSize(mainPage.getSize());
+                    controller.setPanelControllerSize(mainPage.getSize());
+                    mainPage.revalidate();
+                    mainPage.repaint();
+                    mainPage.setTitle("W: " + c.getWidth() + "H: " + c.getHeight());
+                }
             }
         });
 
