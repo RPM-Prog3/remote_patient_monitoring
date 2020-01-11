@@ -13,8 +13,7 @@ public class Graph_ECG extends Graph {
         ecg_type = 0;
     }
 
-    @Override
-    public void changeECGtype(int newType) {
+    public void changeAbnormality(int newType) {
         ecg_type = newType;
     }
 

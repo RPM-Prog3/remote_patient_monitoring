@@ -101,7 +101,7 @@ public class Overall_Graph {
     }
 
     public void changeECGAbnormality(int newType){
-        graphECG.changeECGtype(newType);
+        graphECG.changeAbnormality(newType);
     }
 
     public JFXPanel getGraphPanel() {

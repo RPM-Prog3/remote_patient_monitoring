@@ -12,6 +12,10 @@ public class Graph_Temperature extends Graph {
         tempdata = tempdata_input;
     }
 
+    public void changeAbnormality(int newType) {
+
+    }
+
     protected void Get_Next_Value(){
         super.data_point = tempdata.get_next_value();
     }
