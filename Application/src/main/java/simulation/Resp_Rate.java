@@ -33,7 +33,7 @@ public class Resp_Rate {
         r = new Random();
     }
     */
-    
+
     public double get_next_value(int resp_speed){
 
         if (Math.abs(resp_speed) > 2){
