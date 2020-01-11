@@ -39,7 +39,7 @@ public class Overall_Graph {
         bpm_obj = ecg_obj_input;
 
         //Pressure
-        pressuredata = new Blood_Pressure(0.6, 0.15, 0.25, 100);
+        pressuredata = new Blood_Pressure(0.6, 0.15, 0.25, 100, 1);
         pressure_vit = pressure_vit_input;
         press_counting_obj = press_counting_obj_input;
 
