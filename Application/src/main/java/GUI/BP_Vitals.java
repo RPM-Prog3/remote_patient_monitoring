@@ -1,6 +1,7 @@
 package GUI;
 
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import simulation.Pressure_Counting;
 
 import java.awt.*;
@@ -12,7 +13,8 @@ public class BP_Vitals extends Vital_Values_Display {
         super(vitals_panel_dim, "label-Pressure");
         super.status_msg.setText("STABLE");
         super.vital_type.setText("BP");
-        super.vital_value.setText("VALUE");
+        super.units_label.setText("mmHg");
+        super.units_label.setAlignment(Pos.CENTER_RIGHT);
 
         press_val_counter = obj;
     }

@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.util.StringConverter;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,6 @@ public class Tuning_Panel{
     private javafx.scene.control.Label time_axis_label;
     private GridPane gpane;
     private Scene tuning_scene;
-
     private Button switch_graph_motion;
     private Slider timeWindow;
 
@@ -38,7 +38,7 @@ public class Tuning_Panel{
         switch_graph_motion = new Button("Stop Graph");
         timeWindow = new Slider();
         time_axis_label = new javafx.scene.control.Label();
-        time_axis_label.setText("Slider to change window size");
+        time_axis_label.setText("Time");
 
         graphs_panel = obj;
 
@@ -46,7 +46,6 @@ public class Tuning_Panel{
             @Override
             public void run() { setPanel();}
         });
-
     }
 
     private void setPanel(){

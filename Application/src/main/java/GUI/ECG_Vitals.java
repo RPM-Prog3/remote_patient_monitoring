@@ -15,7 +15,6 @@ public class ECG_Vitals extends Vital_Values_Display {
         super(vitals_panel_dim, "label-ECG");
         super.status_msg.setText("STABLE");
         super.vital_type.setText("ECG");
-        super.vital_value.setText("VALUE");
         super.units_label.setText("BPM");
         super.units_label.setAlignment(Pos.CENTER_RIGHT);
 
@@ -24,7 +23,7 @@ public class ECG_Vitals extends Vital_Values_Display {
 
     public void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf((int)(60/(ecg_val_counter.Index_Difference()*0.006))) + " bpm");
+            super.vital_value.setText(String.valueOf((int)(60/(ecg_val_counter.Index_Difference()*0.006))));
         });
     }
 }

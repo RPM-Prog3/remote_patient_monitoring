@@ -4,7 +4,6 @@ import Graphing.Overall_Graph;
 import javafx.embed.swing.JFXPanel;
 import simulation.*;
 
-import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
@@ -17,7 +16,7 @@ public class Panel_Controller {
     private BP_Vitals BP_panel;
     private RR_Vitals RR_panel;
     private ECG_Vitals ECG_panel;
-    private HR_Vitals HR_panel;
+    private TEMP_Vitals HR_panel;
 
     private Border border;
     private int s_v_ratio_num, s_v_ratio_den, s_t_ratio_num, s_t_ratio_den;
@@ -48,9 +47,9 @@ public class Panel_Controller {
         s_t_ratio_den = 10; //simulation panel to tuning panel denominator value of ratio (in height)
 
         // Setting the layout of the main panel and of the several sub panels
-        mainPanel.setLayout(new BorderLayout());
-        simulationPanel.setLayout(new BorderLayout());
-        vitalsPanel.setLayout(new GridLayout(4, 1));
+        mainPanel.setLayout(new BorderLayout(0,0));
+        simulationPanel.setLayout(new BorderLayout(0,0));
+        vitalsPanel.setLayout(new GridLayout(4, 1, 0,0));
 
         // Making the various visible
         mainPanel.setVisible(true);
@@ -75,12 +74,12 @@ public class Panel_Controller {
         BP_panel = new BP_Vitals(sub_vitals_panel_dim, press_counter);
         RR_panel = new RR_Vitals(sub_vitals_panel_dim, resp_counter);
         ECG_panel = new ECG_Vitals(sub_vitals_panel_dim, bpm_counter);
-        HR_panel = new HR_Vitals(sub_vitals_panel_dim, temp_counter);
+        HR_panel = new TEMP_Vitals(sub_vitals_panel_dim, temp_counter);
 
         // Instantiating graphs and Setting graphPanel
         graphs = new Overall_Graph(bpm_counter, ECG_panel, temp_counter, HR_panel,press_counter, BP_panel, resp_counter, RR_panel);
         graphPanel = graphs.getGraphPanel();
-        graphPanel.setLayout(new GridLayout(4, 1));
+        graphPanel.setLayout(new GridLayout(4, 1,0,0));
         graphPanel.setVisible(true);
 
         // Instantiating tunings and Setting tuningPanel
@@ -104,7 +103,6 @@ public class Panel_Controller {
         // Adding simulationPanel and tuningPanel the main panel
         mainPanel.add(simulationPanel, BorderLayout.PAGE_START);
         mainPanel.add(tuningPanel, BorderLayout.CENTER);
-
     }
 
     public JFXPanel getMainPanel() {

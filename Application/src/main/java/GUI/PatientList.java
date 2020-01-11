@@ -1,5 +1,6 @@
 /*package GUI;
 
+import com.google.gson.Gson;
 import server.Client_Manager;
 import server.Server_Messenger;
 
@@ -196,41 +197,33 @@ public class PatientList {
     public ArrayList<JCheckBox> getPatientsInfo() {
         nOfpatients = 0;
         Server_Messenger messenger = new Server_Messenger();
-
-        // Connecting to the Server:
-        try {
-            Client_Manager manager = new Client_Manager();
-            System.out.println("Connection Successful");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Unable to Connect");
-        }
-
         try {
             messenger = manager.get_patients_from_patients_db();
             boolean success = messenger.get_success();
             String output = messenger.get_message();
-
         } catch (Exception e) {
-            System.out.println("NOT EXECUTED");
+            System.out.println("Unable to retrieve patient information");
         }
         return patientlist;
     }
 
     public int getnOfpatients() {
-        Connection conn = connect_DB();
+        int nOfpatients = 0;
+        Gson gson = new Gson();
+        Server_Messenger messenger = new Server_Messenger();
         try {
-            Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = s.executeQuery("SELECT * FROM patients");
-            rs = s.executeQuery("SELECT COUNT(*) FROM patients");
-            // Get the number of rows from the result set
-            rs.next();
-            nOfpatients = rs.getInt(1);
-            rs.close();
-            s.close();
-            conn.close();
+            messenger = manager.get_patients_from_patients_db();
+            boolean success = messenger.get_success();
+            System.out.println(success);
+            String output = messenger.get_message();
+            System.out.println(output);
+            String[][] patients = gson.fromJson(output, String[][].class);
+            nOfpatients = patients.length;
+
         } catch (Exception e) {
+            System.out.println("UUnable to retrieve patient number");
         }
+
         return nOfpatients;
     }
 
@@ -277,5 +270,17 @@ public class PatientList {
         list_panel.setLayout(new GridLayout(rows, 1));
         list.setResizable(false);
         list.setVisible(true);
+    }
+}
+
+public void Test_DB_Connection(){
+    Server_Messenger messenger = new Server_Messenger();
+
+    try {
+        Client_Manager manager = new Client_Manager();
+        System.out.println("Connection Successful");
+    } catch (IOException e) {
+        e.printStackTrace();
+        System.out.println("Unable to Connect");
     }
 }*/

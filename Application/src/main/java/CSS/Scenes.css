@@ -1,25 +1,36 @@
-.label {
-    /*-fx-font: monospace;*/
-    /*-fx-alignment: center;*/
-}
-
+/* Set colors of different vitals */
 .label-ECG {
-    -fx-text-fill: red;
+    -colorOfVital: red;
+    -fx-text-fill: -colorOfVital;
 }
 .label-Pressure {
-    -fx-text-fill: #48fb47;
+    -colorOfVital: #48fb47;
+    -fx-text-fill: -colorOfVital;
 }
 .label-Respiratory {
-    -fx-text-fill: blue;
+    -colorOfVital: blue;
+    -fx-text-fill: -colorOfVital;
 }
 .label-Temperature {
-    -fx-text-fill: #ffff00;
+    -colorOfVital: #ffff00;
+    -fx-text-fill: -colorOfVital;
 }
 
 .root {
     -fx-background-color: black;
-    -fx-border-color: black;
+    -fx-border-color: -colorOfVital;
+    -fx-border-width: 2;
     -fx-border-visible: false;
     -fx-fit-to-height: true;
     -fx-arc-width: true;
 }
+
+.label-value, .label-status {
+    -fx-alignment: center;
+}
+
+.label-units {
+    -fx-text-fill: black;
+    -fx-background-color: -colorOfVital;
+}
+

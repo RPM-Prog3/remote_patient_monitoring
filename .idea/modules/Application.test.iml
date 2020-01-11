@@ -15,7 +15,11 @@
 >>>>>>> be9b78e4d3c2a965e728e1470288510283dc2770:.idea/modules/Application.test.iml
 =======
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
+<<<<<<< HEAD
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:13" level="project" />
+=======
 >>>>>>> c579b0fde8cc4a3b6c15cdf2e70a201a542b48ec
+>>>>>>> 15cba9f768460349f07f062d0f96e836f2418a25
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:13" level="project" />

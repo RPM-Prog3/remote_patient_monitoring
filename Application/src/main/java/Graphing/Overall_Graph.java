@@ -1,7 +1,6 @@
 package Graphing;
 
 import GUI.*;
-import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import simulation.*;
 
@@ -19,7 +18,7 @@ public class Overall_Graph {
     private ECG_Vitals ecg_vit;
 
     private Body_Temp tempdata;
-    private HR_Vitals temp_vit; //HR is actually temperature
+    private TEMP_Vitals temp_vit; //HR is actually temperature
 
     private Blood_Pressure pressuredata;
     private BP_Vitals pressure_vit;
@@ -27,7 +26,7 @@ public class Overall_Graph {
     private Resp_Rate respdata;
     private RR_Vitals resp_vit;
 
-    public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input,Temperature_Counting temp_counting_obj_input, HR_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
+    public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input, Temperature_Counting temp_counting_obj_input, TEMP_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
 
         //Temperature
         tempdata = new Body_Temp(37, 0.01, 0.5);
