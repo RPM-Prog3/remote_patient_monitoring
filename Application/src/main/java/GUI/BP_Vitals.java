@@ -10,6 +10,7 @@ public class BP_Vitals extends Vital_Values_Display {
     private Pressure_Counting press_val_counter;
     private String s_value, d_value;
     private int s_pressure, d_pressure;
+    private boolean a;
 
     public BP_Vitals(Dimension vitals_panel_dim, Pressure_Counting obj){
         super(vitals_panel_dim, "label-Pressure");
@@ -19,6 +20,7 @@ public class BP_Vitals extends Vital_Values_Display {
         super.units_label.setAlignment(Pos.CENTER_RIGHT);
 
         press_val_counter = obj;
+        a = false;
     }
 
     public void Set_Displayed_Value(){
@@ -27,7 +29,10 @@ public class BP_Vitals extends Vital_Values_Display {
             d_value = String.valueOf(press_val_counter.Max_Min()[1]);
             s_pressure = Integer.parseInt(s_value);
             d_pressure = Integer.parseInt(d_value);
-            CheckStatus();
+            if (s_pressure != 0 && d_pressure != 0)
+                a = true;
+            if(a)
+                CheckStatus();
             super.vital_value.setText(s_value + "/" + d_value);
         });
     }
