@@ -13,13 +13,18 @@ public class ECG {
      * Constructor Class. Initialise ECG simulation parameters to default values
      */
     public ECG() {
+        setArray(ecg_type);
+        val_position = 0;
+    }
+
+    public void setArray(String ecg_type){
         if (ecg_type.equals("normal")) {
             DaubechiesWavelet.SetOrder(order);
             array = DaubechiesWavelet.ReturnDaub();
         }
         else if (ecg_type.equals("AIR")){
             array = new double[] {0, 0.04, 0.07, 0.09, 0.1, 0.1, 0.1, 0.3, 0.5, 0.6, 0.5, 0, -0.06, -0.08, -0.1, -0.14, -0.18,-0.14,-0.12,-0.1};
-            }
+        }
         else if (ecg_type.equals("AF")){
             DaubechiesWavelet.SetOrder(8);
             double[] array1 = DaubechiesWavelet.ReturnDaub();
@@ -30,19 +35,8 @@ public class ECG {
             System.arraycopy(array2, 0, temp_array, array1.length, array2.length);
 
             array = temp_array;
-            System.out.println(Arrays.toString(temp_array));
         }
-        val_position = 0;
     }
-
-    public void set_ECG_type(String new_type){
-        ecg_type = new_type;
-    }
-
-    public void set_order(int new_order){
-        order = new_order;
-    }
-
 
     public double addNoise(double input_val, double mean, double variance)
     {
