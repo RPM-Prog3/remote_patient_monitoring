@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server.iml" filepath="$PROJECT_DIR$/.idea/modules/Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Server.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Server.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/remote_patient_monitoring.Application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/remote_patient_monitoring.Application.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/remote_patient_monitoring.Application.test.iml" filepath="$PROJECT_DIR$/.idea/modules/remote_patient_monitoring.Application.test.iml" />
     </modules>
   </component>

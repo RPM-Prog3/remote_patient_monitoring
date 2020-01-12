@@ -1,8 +1,9 @@
 package GUI;
 
+import Application_Server_Interface.Data.User;
 import com.google.gson.Gson;
-import server.Client_Manager;
-import server.Server_Messenger;
+import Application_Server_Interface.Manager.Client_Manager;
+import Application_Server_Interface.Messenger.Server_Messenger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -182,8 +183,10 @@ public class PatientList {
                     e.printStackTrace();
                 }
 
+                User user = new User("Joe", "1234");
+
                 try {
-                    manager.send_patient_to_add_patients_db(new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum);
+                    manager.send_patient_to_add_patients_db(new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum, user);
                     success_message.showMessageDialog(new_patient, "Patient Successfully Added", "information", JOptionPane.INFORMATION_MESSAGE);
                     updateList();
                     showList();
@@ -200,8 +203,9 @@ public class PatientList {
         Gson gson = new Gson();
         Server_Messenger messenger = new Server_Messenger();
         Client_Manager manager = new Client_Manager();
+        User user = new User("Joe", "1234");
         try {
-            messenger = manager.get_patients_from_patients_db();
+            messenger = manager.get_patients_from_patients_db(user);
             boolean success = messenger.get_success();
             String output = messenger.get_message();
             System.out.println(output);
@@ -222,8 +226,9 @@ public class PatientList {
         Gson gson = new Gson();
         Server_Messenger messenger = new Server_Messenger();
         Client_Manager manager = new Client_Manager();
+        User user = new User("Joe", "1234");
         try {
-            messenger = manager.get_patients_from_patients_db();
+            messenger = manager.get_patients_from_patients_db(user);
             boolean success = messenger.get_success();
             System.out.println(success);
             String output = messenger.get_message();
