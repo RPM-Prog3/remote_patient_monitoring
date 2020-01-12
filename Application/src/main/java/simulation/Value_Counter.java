@@ -62,7 +62,7 @@ public abstract class Value_Counter {
         all_mean_array[1] = minuteMean_array[0];  //This is the mean for the max of the pressure
         all_mean_array[2] = minuteMean_array[1];  //This is the mean for the min of the pressure
         all_mean_array[4] = minuteMean_dou;  //This is the mean for the temp
-        
+
         return all_mean_array[index];
     }
 

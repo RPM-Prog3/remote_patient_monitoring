@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.HPos;
@@ -150,6 +151,11 @@ public abstract class Vital_Values_Display {
     protected void urgent(){
         status_msg.setText("URGENT");
         blinking_status.urgent_status();
+    }
+
+    protected void stable(){
+        status_msg.setText("STABLE");
+        blinking_status.stable_status();
     }
 
     abstract protected void Set_Displayed_Value();

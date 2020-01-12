@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class RR_Vitals extends Vital_Values_Display{
     private Respiration_Counting resp_val_counter;
+    private String value;
+    private int resp_rate_value;
 
     public RR_Vitals(Dimension vitals_panel_dim, Respiration_Counting obj){
         super(vitals_panel_dim, "label-Respiratory");
@@ -23,20 +25,20 @@ public class RR_Vitals extends Vital_Values_Display{
         Platform.runLater(() ->{
             String value = String.valueOf(resp_val_counter.breaths_number());
             super.vital_value.setText(value);
-
-            /*int value_ = Integer.parseInt(value);
-            if (value_ > 100 || value_ < 60 ){
-                super.status_msg.setText("WARNING");
-            }
-            else if (value_ < 30 || value_ > 120) {
-                super.status_msg.setText("URGENT");
-
-            }*/
-
+            resp_rate_value = Integer.parseInt(value);
+            CheckStatus();
         });
     }
 
     protected void CheckStatus() {
-
+        if ((resp_rate_value  > 25 && resp_rate_value  < 30) || (resp_rate_value  < 15 && resp_rate_value  > 10)){
+            warning();
+        }
+        else if ((resp_rate_value > 30) || (resp_rate_value < 10)){
+            urgent();
+        }
+        else{
+            stable();
+        }
     }
 }
