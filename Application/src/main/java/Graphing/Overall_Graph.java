@@ -26,6 +26,8 @@ public class Overall_Graph {
     private Resp_Rate respdata;
     private RR_Vitals resp_vit;
 
+    private String ecg_type = "normal";
+
     public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input, Temperature_Counting temp_counting_obj_input, TEMP_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
 
         //Temperature
@@ -34,7 +36,7 @@ public class Overall_Graph {
         temp_counting_obj = temp_counting_obj_input;
 
         // ECG
-        ecgdata = new ECG(10, "normal");
+        ecgdata = new ECG();
         ecg_vit = ecg_vit_input;
         bpm_obj = ecg_obj_input;
 
