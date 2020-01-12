@@ -6,13 +6,13 @@ public class ECG {
     private double[] array; //array of one heartbeat
     private double new_value;
     private int val_position, number_zeros;
-    private int order;
+    private int order = 10;
+    private String ecg_type = "normal";
 
     /**
      * Constructor Class. Initialise ECG simulation parameters to default values
      */
-    public ECG(int order, String ecg_type) {
-        this.order = order;
+    public ECG() {
         if (ecg_type.equals("normal")) {
             DaubechiesWavelet.SetOrder(order);
             array = DaubechiesWavelet.ReturnDaub();
@@ -34,6 +34,15 @@ public class ECG {
         }
         val_position = 0;
     }
+
+    public void set_ECG_type(String new_type){
+        ecg_type = new_type;
+    }
+
+    public void set_order(int new_order){
+        order = new_order;
+    }
+
 
     public double addNoise(double input_val, double mean, double variance)
     {

@@ -36,7 +36,7 @@ public class Overall_Graph {
         temp_counting_obj = temp_counting_obj_input;
 
         // ECG
-        ecgdata = new ECG(10, ecg_type);
+        ecgdata = new ECG();
         ecg_vit = ecg_vit_input;
         bpm_obj = ecg_obj_input;
 
@@ -118,7 +118,4 @@ public class Overall_Graph {
         return graph_panel;
     }
 
-    public void set_ecg_type(String new_type){
-        ecg_type = new_type;
-    }
 }
