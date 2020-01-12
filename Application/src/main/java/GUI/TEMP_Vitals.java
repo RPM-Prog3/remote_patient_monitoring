@@ -25,7 +25,7 @@ public class TEMP_Vitals extends Vital_Values_Display {
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            String value = String.valueOf(temp_val_counter.rounded_temperature());
+            value = String.valueOf(temp_val_counter.rounded_temperature());
             super.vital_value.setText(value);
             i_value = Double.parseDouble(value);
             CheckStatus();

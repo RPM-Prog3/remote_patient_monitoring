@@ -23,7 +23,7 @@ public class RR_Vitals extends Vital_Values_Display{
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            String value = String.valueOf(resp_val_counter.breaths_number());
+            value = String.valueOf(resp_val_counter.breaths_number());
             super.vital_value.setText(value);
             resp_rate_value = Integer.parseInt(value);
             CheckStatus();
