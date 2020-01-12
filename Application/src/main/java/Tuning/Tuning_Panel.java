@@ -38,9 +38,7 @@ public class Tuning_Panel{
     private int counter;
 
     private Overall_Graph graphs_panel;
-
     private ECG ecg;
-    private Overall_Graph obj;
 
     public Tuning_Panel(Overall_Graph obj){
         // Instantiating and setting the Grid pane that will contain all the tuning pieces
@@ -79,7 +77,7 @@ public class Tuning_Panel{
         padding_label.setText("\t \t \t \t \t \t \t ");
 
         abnormalities_pm = new JPopupMenu("ECG Abnormalities");
-        normal_ECG = new JMenuItem("Normal ECG");
+        normal_ECG = new JMenuItem("normal");
         AIR = new JMenuItem("AIR");
         AF = new JMenuItem("AF");
 
@@ -156,6 +154,9 @@ public class Tuning_Panel{
         ECG_type.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                ecg = new ECG();
+                ecg.setArray(ECG_type.getText());
+                System.out.println(ECG_type.getText());
             }
         });
     }
