@@ -30,6 +30,10 @@ public class RR_Vitals extends Vital_Values_Display{
         });
     }
 
+    public int getMean(){
+        return (int)resp_val_counter.getMean(0);
+    }
+
     protected void CheckStatus() {
         if ((resp_rate_value  > 25 && resp_rate_value  < 30) || (resp_rate_value  < 15 && resp_rate_value  > 10)){
             warning();

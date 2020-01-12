@@ -32,6 +32,10 @@ public class TEMP_Vitals extends Vital_Values_Display {
         });
     }
 
+    public double getMean(){
+        return temp_val_counter.getMean(3);
+    }
+
     protected void CheckStatus() {
         if ((i_value > 38.5 && i_value < 40) || (i_value < 36.5 && i_value > 35)) {
             warning();

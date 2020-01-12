@@ -32,6 +32,11 @@ public class BP_Vitals extends Vital_Values_Display {
         });
     }
 
+    public int[] getMean(){
+        int[] array = new int[] {(int)press_val_counter.getMean(1), (int)press_val_counter.getMean(2)};
+        return array;
+    }
+
     protected void CheckStatus(){
         if ((s_pressure > 120 && s_pressure < 130) || (d_pressure < 80 && d_pressure > 70)){
             warning();

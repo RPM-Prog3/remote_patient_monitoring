@@ -32,6 +32,10 @@ public class ECG_Vitals extends Vital_Values_Display {
         });
     }
 
+    public int getMean(){
+        return (int)ecg_val_counter.getMean(0);
+    }
+
     protected void CheckStatus(){
         if ((i_value > 80 && i_value < 100) || (i_value < 60 && i_value > 40)) {
             warning();
