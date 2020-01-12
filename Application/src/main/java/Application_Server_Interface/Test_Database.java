@@ -1,9 +1,9 @@
-package Application_Tester;
+package Application_Server_Interface;
 
-import Application_Tester.Data.Patient_Value;
-import Application_Tester.Data.User;
-import Application_Tester.Manager.Client_Manager;
-import Application_Tester.Messenger.Server_Messenger;
+import Application_Server_Interface.Data.Patient_Value;
+import Application_Server_Interface.Data.User;
+import Application_Server_Interface.Manager.Client_Manager;
+import Application_Server_Interface.Messenger.Server_Messenger;
 
 import java.io.IOException;
 import java.sql.SQLException;

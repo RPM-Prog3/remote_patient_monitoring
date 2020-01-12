@@ -1,4 +1,4 @@
-package Application_Tester.Setup;
+package Application_Server_Interface.Setup;
 
 import java.io.File;
 import java.io.FileInputStream;

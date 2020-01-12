@@ -1,11 +1,11 @@
-package Application_Tester.Manager;
+package Application_Server_Interface.Manager;
 
-import Application_Tester.Data.Patient;
-import Application_Tester.Data.Patient_Value;
-import Application_Tester.Data.User;
-import Application_Tester.Messenger.Client_Messenger;
-import Application_Tester.Messenger.Server_Messenger;
-import Application_Tester.Setup.Read_server_properties;
+import Application_Server_Interface.Data.Patient;
+import Application_Server_Interface.Data.Patient_Value;
+import Application_Server_Interface.Data.User;
+import Application_Server_Interface.Messenger.Client_Messenger;
+import Application_Server_Interface.Messenger.Server_Messenger;
+import Application_Server_Interface.Setup.Read_server_properties;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;

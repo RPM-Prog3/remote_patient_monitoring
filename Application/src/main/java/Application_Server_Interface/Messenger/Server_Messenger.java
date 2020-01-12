@@ -1,4 +1,4 @@
-package Application_Tester.Messenger;
+package Application_Server_Interface.Messenger;
 
 public class Server_Messenger {
     /* The message the servers send to the client saying if it

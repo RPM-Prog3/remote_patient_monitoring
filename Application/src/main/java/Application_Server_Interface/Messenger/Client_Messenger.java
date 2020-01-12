@@ -1,6 +1,6 @@
-package Application_Tester.Messenger;
+package Application_Server_Interface.Messenger;
 
-import Application_Tester.Data.User;
+import Application_Server_Interface.Data.User;
 import com.google.gson.Gson;
 
 public class Client_Messenger {

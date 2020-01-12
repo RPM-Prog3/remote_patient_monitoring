@@ -1,6 +1,6 @@
 package Server_Core.Database;
 
-import Application_Tester.Data.Patient_Value;
+import Application_Server_Interface.Data.Patient_Value;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;

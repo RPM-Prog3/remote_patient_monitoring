@@ -1,11 +1,11 @@
-import Application_Tester.Data.Patient;
-import Application_Tester.Data.Patient_Value;
-import Application_Tester.Data.User;
-import Application_Tester.Messenger.Client_Messenger;
+import Application_Server_Interface.Data.Patient;
+import Application_Server_Interface.Data.Patient_Value;
+import Application_Server_Interface.Data.User;
+import Application_Server_Interface.Messenger.Client_Messenger;
 import Server_Core.Database.Manage_Patient_Values_db;
 import Server_Core.Database.Manage_Patient_db;
 import Server_Core.Database.Manage_User_db;
-import Application_Tester.Messenger.Server_Messenger;
+import Application_Server_Interface.Messenger.Server_Messenger;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -42,7 +42,7 @@ public class Run_Server extends HttpServlet {
     Manage_User_db user_db;
     Manage_Patient_db patient_db;
     Manage_Patient_Values_db patient_values_db;
-    boolean debug = true;
+    boolean debug = false;
 
 
     public Run_Server() throws IOException, SQLException {

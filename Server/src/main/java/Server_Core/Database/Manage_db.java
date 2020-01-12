@@ -1,6 +1,6 @@
 package Server_Core.Database;
 
-import Application_Tester.Setup.Read_db_properties;
+import Application_Server_Interface.Setup.Read_db_properties;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

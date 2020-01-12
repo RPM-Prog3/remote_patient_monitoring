@@ -1,6 +1,6 @@
 package Server_Core.Database;
 
-import Application_Tester.Data.User;
+import Application_Server_Interface.Data.User;
 
 import Server_Core.Exception.InvalidUserException;
 import com.google.gson.Gson;
