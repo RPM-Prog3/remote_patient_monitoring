@@ -34,7 +34,22 @@
     -fx-background-color: -colorOfVital;
 }
 
+.label-status-urgent{
+    -fx-text-fill: black;
+    -fx-background-color: red;
+}
+
+.label-value-urgent{
+    -fx-text-fill: black;
+    -fx-background-color: red;
+}
+
 .label-status-stable{
+    -fx-text-fill: -colorOfVital;
+    -fx-background-color: black;
+}
+
+.label-value-stable{
     -fx-text-fill: -colorOfVital;
     -fx-background-color: black;
 }

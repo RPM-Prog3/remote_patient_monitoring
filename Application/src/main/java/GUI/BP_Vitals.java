@@ -38,7 +38,7 @@ public class BP_Vitals extends Vital_Values_Display {
         }
         else if ((s_pressure >= 130) || (d_pressure > 100 )){
             System.out.println("cacaaaaaaaaa");
-            blinking_status.warning_status();
+            urgent();
         }
         else {
             blinking_status.stable_status();

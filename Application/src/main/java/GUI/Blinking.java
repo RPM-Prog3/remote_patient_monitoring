@@ -4,11 +4,12 @@ package GUI;
 import javafx.scene.control.Label;
 
 public class Blinking implements Runnable {
-    Label status;
-    private int which_status;
+    private Label status, value;
+    private volatile int which_status;
 
-    public Blinking(Label status){
+    public Blinking(Label status, Label value){
         this.status = status;
+        this.value = value;
         which_status = 0;
     }
 
@@ -19,13 +20,16 @@ public class Blinking implements Runnable {
 
             while(1<2){
                 if (which_status == 0){
-                    if (remove_class)
+                    if (remove_class) {
                         status.getStyleClass().remove(4);
+                        value.getStyleClass().remove(4);
+                        status.getStyleClass().add("label-status-stable");
+                        value.getStyleClass().add("label-value-stable");
+                    }
                     remove_class = false;
                 }
 
                 if (which_status == 1) {
-                    System.out.println(which_status);
                     if (remove_class)
                         status.getStyleClass().remove(4);
                     status.getStyleClass().add("label-status-warning");
@@ -37,12 +41,17 @@ public class Blinking implements Runnable {
                 }
 
                 if (which_status == 2){
-                    if (remove_class)
+                    if (remove_class) {
                         status.getStyleClass().remove(4);
-                    status.getStyleClass().add("label-status-warning");
+                        value.getStyleClass().remove(4);
+                    }
+                    status.getStyleClass().add("label-status-urgent");
+                    value.getStyleClass().add("label-value-urgent");
                     Thread.sleep(1000);
                     status.getStyleClass().remove(4);
+                    value.getStyleClass().remove(4);
                     status.getStyleClass().add("label-status-stable");
+                    value.getStyleClass().add("label-value-stable");
                     Thread.sleep(1000);
                     remove_class = true;
                 }

@@ -85,7 +85,7 @@ public abstract class Vital_Values_Display {
         vitals_value_display.add(status, BorderLayout.PAGE_END);
 
         // Initialising thread
-        blinking_status = new Blinking(status_msg);
+        blinking_status = new Blinking(status_msg, vital_value);
         blinking_thread = new Thread(blinking_status);
         blinking_thread.start();
 
@@ -147,10 +147,9 @@ public abstract class Vital_Values_Display {
         blinking_status.warning_status();
     }
 
-    private void urgent(){
+    protected void urgent(){
         status_msg.setText("URGENT");
         blinking_status.urgent_status();
-        status_msg.getStyleClass().remove("label-status-warning");
     }
 
     abstract protected void Set_Displayed_Value();
