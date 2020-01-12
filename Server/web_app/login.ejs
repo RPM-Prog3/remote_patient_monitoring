@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -7,6 +8,7 @@
 
   </head>
   <body>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">Remote Patient Monitoring</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,18 +17,18 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item ">
-        <a class="nav-link" href="register.ejs">Register</a>
-      </li>
+<!--      <li class="nav-item ">-->
+<!--        <a class="nav-link" href="register.ejs">Register</a>-->
+<!--      </li>-->
 
       <li class="nav-item active">
-        <a class="nav-link disabled" href="login.ejs">Login</a>
+        <a class="nav-link disabled" href="#">Login</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+<!--    <form class="form-inline my-2 my-lg-0">-->
+<!--      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--    </form>-->
   </div>
 </nav>
    <div class="container">
@@ -34,26 +36,27 @@
 
 
      <h1>Login</h1>
-     <p>New to RPM? <a href="register.ejs">Register here!</a></p>
+       <p>New to RPM? Sorry, an admin has to log you in!</p>
+<!--     <p>New to RPM? <a href="register.ejs">Register here!</a></p>-->
      <form>
 
 
 
   </div>
+     <form name="login" method="post" action="rpm/login">
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="name" name="username" class="form-control" placeholder="Enter your username">
+    <input type="text" name="username" class="form-control" placeholder="Enter your username">
 
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password">
+    <input type="password" name="password" class="form-control"  placeholder="Enter Password">
   </div>
+       <input type="submit" value="Login" class="btn btn-danger btn-block" >
+     </form>
+<!--  <button type="submit" class="btn btn-danger btn-block"><a href="/Server/rpm/mypatients">Login</a></button>-->
 
-
-
-  <button type="submit" class="btn btn-danger btn-block"><a href="patientlist.ejs">Login</a></button>
-  </form>
 
 
  </div>
@@ -61,3 +64,4 @@
 
   </body>
 </html>
+
