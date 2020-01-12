@@ -119,9 +119,7 @@ public class Run_Server extends HttpServlet {
         if (server_path.equals("/rpm/login")){
             User login_user = msg.get_user_login();
             boolean valid_user = check_valid_user(login_user);
-            System.out.println("VAlid user in run server" + valid_user);
             messenger.set_valid_user(valid_user);
-            System.out.println(messenger.get_valid_user());
             if (!valid_user) {
                 req.setAttribute("error", "Unknown user, please try again.");
                 messenger.set_success(false);
