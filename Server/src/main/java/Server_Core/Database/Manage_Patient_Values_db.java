@@ -54,4 +54,25 @@ public class Manage_Patient_Values_db extends Manage_db{
     public void remove_patient_value(Patient_Value pv) {
         throw new NotImplementedException();
     }
+
+    public String get_patient_values() throws SQLException {
+        String sql_get_patients = String.format("SELECT * FROM %s WHERE id >= 1", table_name);
+        String exception_msg = String.format("Unable to get patient values for all patients from %s", table_name);
+        String[] rs_strings = {"id", "patient_id", "datetime",
+                "bpm", "resp_rate", "body_temp",
+                "blood_pressure_upper", "blood_pressure_lower",
+                "abnormality"};
+        return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
+    }
+
+    public String get_patient_value_by_id(String patient_id) throws SQLException {
+        String sql_get_patients = String.format("SELECT * FROM %s WHERE id = %s", table_name, patient_id);
+        String exception_msg = String.format("Unable to get patients values for patient %s from %s", table_name);
+        String[] rs_strings = {"id", "patient_id", "datetime",
+                "bpm", "resp_rate", "body_temp",
+                "blood_pressure_upper", "blood_pressure_lower",
+                "abnormality"};
+        return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
+    }
+
 }
