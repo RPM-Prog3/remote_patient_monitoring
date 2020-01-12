@@ -34,13 +34,13 @@ public class BP_Vitals extends Vital_Values_Display {
 
     protected void CheckStatus(){
         if ((s_pressure > 120 && s_pressure < 130) || (d_pressure < 80 && d_pressure > 70)){
-            blinking_status.warning_status();
+            warning();
         }
         else if ((s_pressure >= 130) || (d_pressure > 100 )){
             urgent();
         }
         else {
-            blinking_status.stable_status();
+            stable();
         }
     }
 }

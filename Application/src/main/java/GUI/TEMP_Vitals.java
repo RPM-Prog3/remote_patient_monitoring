@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class TEMP_Vitals extends Vital_Values_Display {
     private Temperature_Counting temp_val_counter;
+    private String value;
+    private double i_value;
 
     public TEMP_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj){
         super(vitals_panel_dim, "label-Temperature");
@@ -23,11 +25,22 @@ public class TEMP_Vitals extends Vital_Values_Display {
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf(Math.round(temp_val_counter.Double_Value() * 1000.0)/1000.0));
+            value = String.valueOf(Math.round(temp_val_counter.Double_Value() * 1000.0)/1000.0);
+            super.vital_value.setText(value);
+            i_value = Double.parseDouble(value);
+            CheckStatus();
         });
     }
 
     protected void CheckStatus() {
-
+        if ((i_value > 38.5 && i_value < 40) || (i_value < 36.5 && i_value > 35)) {
+            warning();
+        }
+        else if ((i_value >= 40) || (i_value <= 35)){
+            urgent();
+        }
+        else{
+            stable();
+        }
     }
 }

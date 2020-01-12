@@ -26,11 +26,22 @@ public class ECG_Vitals extends Vital_Values_Display {
 
     public void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf((int)(60/(ecg_val_counter.Index_Difference()*0.006))));
+            value = String.valueOf((int)(60/(ecg_val_counter.Index_Difference()*0.006)));
+            super.vital_value.setText(value);
+            i_value = Integer.parseInt(value);
+            CheckStatus();
         });
     }
 
     protected void CheckStatus(){
-
+        if ((i_value > 80 && i_value < 100) || (i_value < 60 && i_value > 40)) {
+            warning();
+        }
+        else if ((i_value <= 40) || (i_value >= 100)){
+            urgent();
+        }
+        else{
+            stable();
+        }
     }
 }
