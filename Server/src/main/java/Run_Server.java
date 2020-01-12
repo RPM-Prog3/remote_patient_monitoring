@@ -97,80 +97,93 @@ public class Run_Server extends HttpServlet {
         Server_Messenger messenger = new Server_Messenger();
         messenger.set_success(true);
 
-
         Gson gson = new Gson();
         Client_Messenger msg = gson.fromJson(reqBody, Client_Messenger.class);
-        User login_user = msg.get_user_login();
-        boolean valid_user = check_valid_user(login_user);
-        if (valid_user) {
-            switch (server_path) {
-                case "/rpm/add_patient": {
-                    Patient p = gson.fromJson(msg.get_request_message(), Patient.class);
-                    p.print_patient_details();
-                    try {
-                        patient_db.add_patient(p);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        System.out.println("failed to add patient");
-                        messenger.set_success(false);
-                    }
-                    break;
-                }
-                case "/rpm/add_patient_value": {
-                    Patient_Value pv = gson.fromJson(msg.get_request_message(), Patient_Value.class);
-                    pv.print_values();
-                    try {
-                        patient_values_db.add_patient_value(pv);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        System.out.println("failed to add patient values");
-                        messenger.set_success(false);
-                    }
-                }
-                case "/rpm/add_user": {
-                    User u = gson.fromJson(msg.get_request_message(), User.class);
-                    try {
-                        user_db.add_user(u);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        System.out.println("failed to add user");
-                        messenger.set_success(false);
-                    }
-                    break;
-                }
-                case "/rpm/request_users": {
-                    User u = gson.fromJson(msg.get_request_message(), User.class);
-                    try {
-                        String users_json = user_db.get_users();
-                        messenger.set_message(users_json);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        System.out.println("failed to get users");
-                        messenger.set_success(false);
-                    }
-                    break;
-                }
-                case "/rpm/request_patients": {
-                    User u = gson.fromJson(msg.get_request_message(), User.class);
-                    try {
-                        String patients_json = patient_db.get_patients();
-                        messenger.set_message(patients_json);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        messenger.set_success(false);
-                    }
-                    break;
-                }
-                default: {
-                    req.setAttribute("error", "Unknown page.");
-                    messenger.set_success(false);
-                }
-            }
-        } else {
-            System.out.println("Invalid user");
-            messenger.set_success(false);
-        }
 
+        if (server_path.equals("/rpm/login")){
+            User login_user = msg.get_user_login();
+            boolean valid_user = check_valid_user(login_user);
+            System.out.println("VAlid user in run server" + valid_user);
+            messenger.set_valid_user(valid_user);
+            System.out.println(messenger.get_valid_user());
+            if (!valid_user) {
+                req.setAttribute("error", "Unknown user, please try again.");
+                messenger.set_success(false);
+            }
+        }
+        else {
+            User login_user = msg.get_user_login();
+            boolean valid_user = check_valid_user(login_user);
+            messenger.set_valid_user(valid_user);
+            if (valid_user) {
+                switch (server_path) {
+                    case "/rpm/add_patient": {
+                        Patient p = gson.fromJson(msg.get_request_message(), Patient.class);
+                        p.print_patient_details();
+                        try {
+                            patient_db.add_patient(p);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            System.out.println("failed to add patient");
+                            messenger.set_success(false);
+                        }
+                        break;
+                    }
+                    case "/rpm/add_patient_value": {
+                        Patient_Value pv = gson.fromJson(msg.get_request_message(), Patient_Value.class);
+                        pv.print_values();
+                        try {
+                            patient_values_db.add_patient_value(pv);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            System.out.println("failed to add patient values");
+                            messenger.set_success(false);
+                        }
+                    }
+                    case "/rpm/add_user": {
+                        User u = gson.fromJson(msg.get_request_message(), User.class);
+                        try {
+                            user_db.add_user(u);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            System.out.println("failed to add user");
+                            messenger.set_success(false);
+                        }
+                        break;
+                    }
+                    case "/rpm/request_users": {
+                        User u = gson.fromJson(msg.get_request_message(), User.class);
+                        try {
+                            String users_json = user_db.get_users();
+                            messenger.set_message(users_json);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            System.out.println("failed to get users");
+                            messenger.set_success(false);
+                        }
+                        break;
+                    }
+                    case "/rpm/request_patients": {
+                        User u = gson.fromJson(msg.get_request_message(), User.class);
+                        try {
+                            String patients_json = patient_db.get_patients();
+                            messenger.set_message(patients_json);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            messenger.set_success(false);
+                        }
+                        break;
+                    }
+                    default: {
+                        req.setAttribute("error", "Unknown page.");
+                        messenger.set_success(false);
+                    }
+                }
+            } else {
+                System.out.println("Invalid user");
+                messenger.set_success(false);
+            }
+        }
         if (debug) {
             System.out.println(String.format("Success: %b", messenger.get_success()));
         }
