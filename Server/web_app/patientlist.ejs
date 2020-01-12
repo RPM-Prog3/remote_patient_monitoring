@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>RPM: My Patients</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Remote Patient Monitoring</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">My Patients</a>
+      </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+   <div class="container">
+     <div class="text-center">
+
+<br><br><br><br><br><br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href="summary.ejs">210291</a></th>
+      <td>Marc</td>
+      <td>Berbari</td>
+      <td>marcberbari@hotmail.com</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="summary.ejs">817299</a></th>
+      <td>Joonsu</td>
+      <td>Gha</td>
+      <td>jgha@hotmail.com</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="summary.ejs">181721</a></th>
+      <td>Pietro</td>
+      <td>Vitiello</td>
+      <td>pvitiello@hotmail.com</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="summary.ejs">918281</a></th>
+      <td>Joe</td>
+      <td>Arrowsmith</td>
+      <td>jarrowsmith@hotmail.com</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="summary.ejs">726199</a></th>
+      <td>Lapo</td>
+      <td>Rastrelli</td>
+      <td>lrastrelli@hotmail.com</td>
+    </tr>
+  </tbody>
+</table>
+
+ </div>
+<br><br><br><br>
+<CENTER>
+<label for="username">Press on the ID directly or, I want to know more about: </label>
+  <input type="text" name="username" value=""placeholder="Enter desired ID">
+  <button type="submit" name="submit"><a href="summary.ejs">Submit </a></button>
+</CENTER>
+  </body>
+</html>
