@@ -23,7 +23,7 @@ public class TEMP_Vitals extends Vital_Values_Display {
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf(Math.round(temp_val_counter.Double_Value() * 1000.0)/1000.0));
+            super.vital_value.setText(String.valueOf(temp_val_counter.rounded_temperature()));
         });
     }
 

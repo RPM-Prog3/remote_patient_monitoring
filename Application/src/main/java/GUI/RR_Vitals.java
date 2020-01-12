@@ -21,7 +21,7 @@ public class RR_Vitals extends Vital_Values_Display{
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            String value = String.valueOf((int)(60/(resp_val_counter.Index_Difference()*0.006)));
+            String value = String.valueOf(resp_val_counter.breaths_number());
             super.vital_value.setText(value);
 
             /*int value_ = Integer.parseInt(value);
