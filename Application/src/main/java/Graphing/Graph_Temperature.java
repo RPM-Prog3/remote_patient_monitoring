@@ -20,15 +20,15 @@ public class Graph_Temperature extends Graph {
         temp_type = newType;
     }
 
-    protected void scaling(int size, NumberAxis yAxis, int windowSize){
-          if ((size-2) <= windowSize/0.006)
-            yAxis.setAutoRanging(true);
-        else {
-            yAxis.setAutoRanging(false);
-            yAxis.setLowerBound(36.9);
-            yAxis.setUpperBound(37.1);
-        }
-    }
+//    protected void scaling(int size, NumberAxis yAxis, int windowSize){
+//          if ((size-2) <= windowSize/0.006)
+//            yAxis.setAutoRanging(true);
+//        else {
+//            yAxis.setAutoRanging(false);
+//            yAxis.setLowerBound(36.9);
+//            yAxis.setUpperBound(37.1);
+//        }
+//    }
 
     protected void Get_Next_Value(){
         super.data_point = tempdata.get_next_value(temp_type);

@@ -16,18 +16,18 @@ public class Graph_Respiration extends Graph {
     }
 
     public void changeAbnormality(int newType) {
-
+        resp_rate_type = newType;
     }
 
-    protected void scaling(int size, NumberAxis yAxis, int windowSize){
-        if ((size-2) <= windowSize/0.006)
-            yAxis.setAutoRanging(true);
-        else {
-            yAxis.setAutoRanging(false);
-            yAxis.setLowerBound(20);
-            yAxis.setUpperBound(80);
-        }
-    }
+//    protected void scaling(int size, NumberAxis yAxis, int windowSize){
+//        if ((size-2) <= windowSize/0.006)
+//            yAxis.setAutoRanging(true);
+//        else {
+//            yAxis.setAutoRanging(false);
+//            yAxis.setLowerBound(20);
+//            yAxis.setUpperBound(80);
+//        }
+//    }
 
     protected void Get_Next_Value(){
         super.data_point = respdata.get_next_value(resp_rate_type);

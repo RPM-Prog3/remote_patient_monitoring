@@ -27,6 +27,9 @@ public abstract class Graph extends JFXPanel {
     private double delta;
     protected double data_point;
 
+    private int where_zeros;
+    private boolean add_zeros; //used for the scaling
+
     protected Value_Counter val_counter;
 
 
@@ -45,6 +48,9 @@ public abstract class Graph extends JFXPanel {
         tick = windowSize/5;
 
         num_points_changed = 1;
+
+        where_zeros = 0;
+        add_zeros = false;
 
         val_counter = obj;
 
@@ -177,7 +183,7 @@ public abstract class Graph extends JFXPanel {
             pointsDeleted = 30;
         }
         else
-            scaling(function.getData().size(), yAxis, windowSize);
+            scaling();
 
     }
 
@@ -215,7 +221,20 @@ public abstract class Graph extends JFXPanel {
 
     public abstract void changeAbnormality (int newType);
 
-    protected abstract void scaling(int size, NumberAxis axis, int windowSize);
+    private void scaling(){
+        if (((function.getData().size() - 2) > windowSize/0.006) && !add_zeros) {
+            function.getData().remove(where_zeros, where_zeros + 2);
+            numberOfPoints -= 2;
+            add_zeros = true;
+        }
+        else if ((function.getData().size() <= windowSize/0.006) && add_zeros){
+            function.getData().add(new XYChart.Data<Number, Number>(-60, 0));
+            function.getData().add(new XYChart.Data<Number, Number>(5, 0));
+            where_zeros = function.getData().size()-2;
+            numberOfPoints += 2;
+            add_zeros = false;
+        }
+    }
 
     protected abstract void Get_Next_Value();
 

@@ -19,15 +19,15 @@ public class Graph_ECG extends Graph {
         heart_rate_type = newType;
     }
 
-    protected void scaling(int size, NumberAxis yAxis, int windowSize){
-        if ((size-2) <= windowSize/0.006)
-            yAxis.setAutoRanging(true);
-        else {
-            yAxis.setAutoRanging(false);
-            yAxis.setLowerBound(-0.5);
-            yAxis.setUpperBound(1);
-        }
-    }
+//    protected void scaling(int size, NumberAxis yAxis, int windowSize){
+//        if ((size-2) <= windowSize/0.006)
+//            yAxis.setAutoRanging(true);
+//        else {
+//            yAxis.setAutoRanging(false);
+//            yAxis.setLowerBound(-0.5);
+//            yAxis.setUpperBound(1);
+//        }
+//    }
 
     protected void Get_Next_Value(){
         data_point = ecgdata.get_next_value(heart_rate_type);
