@@ -49,7 +49,7 @@ public class Manage_Patient_db extends Manage_db {
     public String get_patients() throws SQLException {
         String sql_get_patients = String.format("SELECT * FROM %s WHERE id >= 1", table_name);
         String exception_msg = String.format("Unable to get patients from %s", table_name);
-        String[] rs_strings = {"familyname", "givenname", "dofbirth", "email", "phonenumber"};
+        String[] rs_strings = {"id","familyname", "givenname", "dofbirth", "email", "phonenumber"};
         return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
     }
 }

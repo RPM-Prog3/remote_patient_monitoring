@@ -1,6 +1,7 @@
 import Application_Server_Interface.Data.Patient;
 import Application_Server_Interface.Data.Patient_Value;
 import Application_Server_Interface.Data.User;
+import Application_Server_Interface.Manager.Client_Manager;
 import Application_Server_Interface.Messenger.Client_Messenger;
 import Server_Core.Database.Manage_Patient_Values_db;
 import Server_Core.Database.Manage_Patient_db;
@@ -70,27 +71,45 @@ public class Run_Server extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         switch (uri) {
             case "/Server/rpm": {
-                write_file("landing.ejs", writer);
+                write_file("landing.ejs", writer, false);
                 break;
             }
             case "/Server/rpm/login": {
                 //writer.println("login page");
-                write_file("login.ejs", writer);
+                write_file("login.ejs", writer, false);
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
+                if (username != null || password != null) {
+                    if (!username.equals("") || !password.equals("")) {
+                        System.out.println(username + " " + password);
+                        User login_user = new User(username, password);
+                        boolean valid_user = check_valid_user(login_user);
+                        System.out.println("valid user: " + valid_user);
+                        if (valid_user) {
+                            resp.sendRedirect("/Server/rpm/mypatients");
+                        } else {
 
-                System.out.println(username + " " + password);
-                User login_user = new User(username, password);
-                boolean valid_user = check_valid_user(login_user);
-                System.out.println("valid user: " + valid_user);
+                            resp.sendRedirect("/Server/rpm/login");
+//
+//                            String str = scan.nextLine();
+//                            if (str.equals("#error#")) {
+//                                writer.println("<p1><font color=\"red\">Credentials not recognized! Please try again. </font></p1>");
+////                                writer.println("<div scope=\"error\">ID</th>");
+////                            writer.println (htmlResponse);
+//                            }
+                        }
+                    }
+                }
                 break;
+
+
             }
             case "/Server/rpm/mypatients": {
-                write_file("patientlist.ejs", writer);
+                write_file("patientlist.ejs", writer, true);
                 break;
             }
             case "/Server/rpm/summary": {
-                write_file("summary.ejs", writer);
+                write_file("summary.ejs", writer, false);
                 break;
             }
         }
@@ -224,17 +243,45 @@ public class Run_Server extends HttpServlet {
         System.out.println("Current time: " + strDate);
     }
 
-    private void write_file(String file_name, PrintWriter writer){
+    private void write_file(String file_name, PrintWriter writer, boolean add_to_table){
         try {
             String file_path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/web_app/" + file_name;
 
             FileInputStream input_stream = new FileInputStream(file_path);
             Scanner scan = new Scanner(input_stream);
-            while(scan.hasNextLine()){
-                writer.println(scan.nextLine());
+                while(scan.hasNextLine()){
+                if (add_to_table) {
+                    String str = scan.nextLine();
+                    if (str.equals("#col#")) {
+                        writer.println("<th scope=\"col\">ID</th>");
+                        writer.println("<th scope=\"col\">First Name</th>");
+                        writer.println("<th scope=\"col\">Last Name</th>");
+                        writer.println("<th scope=\"col\">Birth of Date</th>");
+                        writer.println("<th scope=\"col\">Email</th>");
+                        writer.println("<th scope=\"col\">Phone Number</th>");
+                    } else if (str.equals("#row#")){
+                        String patients_json = patient_db.get_patients();
+                        Gson gson = new Gson();
+                        String[][] patients = gson.fromJson(patients_json, String[][].class);
+                        for (int i = 0; i < patients.length; i++) {
+                            writer.println("<tr>");
+                            writer.println(String.format("<th scope=\"row\"><a href=\"/Server/rpm/summary\">%s</a></th>", patients[i][0])); // the idx need to be retrieved from the database
+                            writer.println(String.format("<td>%s</td>", patients[i][2])); // First name
+                            writer.println(String.format("<td>%s</td>", patients[i][1])); // Last Name
+                            writer.println(String.format("<td>%s</td>", patients[i][3])); // Birth of Date
+                            writer.println(String.format("<td>%s</td>", patients[i][4])); // Email
+                            writer.println(String.format("<td>%s</td>", patients[i][5])); // Phone Number
+                            writer.println("</tr>");
+                        }
+                    } else {
+                        writer.println(str);
+                    }
+                } else {
+                    writer.println(scan.nextLine());
+                }
             }
             scan.close();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
