@@ -101,8 +101,6 @@ public class Run_Server extends HttpServlet {
                     }
                 }
                 break;
-
-
             }
             case "/Server/rpm/mypatients": {
                 write_file("patientlist.ejs", writer, true,false);
@@ -110,7 +108,11 @@ public class Run_Server extends HttpServlet {
             }
             case "/Server/rpm/summary": {
 
-                write_file("summary.ejs", writer, false,false);
+                String id = req.getParameter("id");
+                System.out.println(id);
+                // check id isnt null or empty
+
+                write_file("summary.ejs", writer, false,false); //add here get values
                 break;
             }
         }
@@ -244,7 +246,7 @@ public class Run_Server extends HttpServlet {
         System.out.println("Current time: " + strDate);
     }
 
-    private void write_file(String file_name, PrintWriter writer, boolean add_to_table, boolean error_login){
+    private void write_file(String file_name, PrintWriter writer, boolean add_to_table, boolean error_login, boolean get_values){
         try {
             String file_path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/web_app/" + file_name;
 
@@ -252,6 +254,7 @@ public class Run_Server extends HttpServlet {
             Scanner scan = new Scanner(input_stream);
                 while(scan.hasNextLine()){
                 if (add_to_table) {
+                    // assert orrect url
                     String str = scan.nextLine();
                     if (str.equals("#col#")) {
                         writer.println("<th scope=\"col\">ID</th>");
@@ -266,7 +269,7 @@ public class Run_Server extends HttpServlet {
                         String[][] patients = gson.fromJson(patients_json, String[][].class);
                         for (int i = 0; i < patients.length; i++) {
                             writer.println("<tr>");
-                            writer.println(String.format("<th scope=\"row\"><a href=\"/Server/rpm/summary\">%s</a></th>", patients[i][0])); // the idx need to be retrieved from the database
+                            writer.println(String.format("<th scope=\"row\"><a href=\"/Server/rpm/summary?id=%s\">%s</a></th>", patients[i][0], patients[i][0])); // the idx need to be retrieved from the database
                             writer.println(String.format("<td>%s</td>", patients[i][2])); // First name
                             writer.println(String.format("<td>%s</td>", patients[i][1])); // Last Name
                             writer.println(String.format("<td>%s</td>", patients[i][3])); // Birth of Date
@@ -279,12 +282,21 @@ public class Run_Server extends HttpServlet {
                         writer.println(str);
                     }
                 } else if (error_login) {
+                    // assert the url is correct
                     String str = scan.nextLine();
                     if (str.equals("#error#")) {
                         writer.println("<p1><font color=\"red\">Credentials not recognized! Please try again. </font></p1>");
                     }
                     else {
                         writer.println(str);
+                    }
+                } else if (get_values) {
+                    String str = scan.nextLine();
+                    if (str.equals("#temp#")){
+                        String pv_json = patient_values_db.get_patient_value_by_id(id);
+                        Gson gson = new Gson();
+                        String[][] patient_values = gson.fromJson(pv_json, String[][].class);
+                        
                     }
                 }
                 else {
