@@ -45,7 +45,7 @@ public class Overall_Graph {
 
         //Respiratory
         //Decrease the period to increase Respiratory Rate
-        respdata = new Resp_Rate(50, 4.0, -0.95, 100);
+        respdata = new Resp_Rate(50, 2.0, -0.95, 100);
         resp_vit = resp_vit_input;
         resp_counting_obj = resp_counting_obj_input;
 

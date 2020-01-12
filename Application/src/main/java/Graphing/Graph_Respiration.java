@@ -16,7 +16,7 @@ public class Graph_Respiration extends Graph {
     }
 
     public void changeAbnormality(int newType) {
-
+        resp_rate_type = newType;
     }
 
 //    protected void scaling(int size, NumberAxis yAxis, int windowSize){
