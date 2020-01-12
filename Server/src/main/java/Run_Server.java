@@ -31,6 +31,8 @@ import java.util.stream.Collectors;
         urlPatterns = {
                 "/rpm",
                 "/rpm/login",
+                "/rpm/mypatients",
+                "/rpm/summary",
                 "/rpm/add_patient",
                 "/rpm/add_patient_value",
                 "/rpm/add_user",
@@ -68,13 +70,27 @@ public class Run_Server extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         switch (uri) {
             case "/Server/rpm": {
-                //writer.println("rpm page home page, redirect to here after login. If not logged in then redirect to login page.");
                 write_file("landing.ejs", writer);
                 break;
             }
             case "/Server/rpm/login": {
                 //writer.println("login page");
                 write_file("login.ejs", writer);
+                String username = req.getParameter("username");
+                String password = req.getParameter("password");
+
+                System.out.println(username + " " + password);
+                User login_user = new User(username, password);
+                boolean valid_user = check_valid_user(login_user);
+                System.out.println("valid user: " + valid_user);
+                break;
+            }
+            case "/Server/rpm/mypatients": {
+                write_file("patientlist.ejs", writer);
+                break;
+            }
+            case "/Server/rpm/summary": {
+                write_file("summary.ejs", writer);
                 break;
             }
         }
