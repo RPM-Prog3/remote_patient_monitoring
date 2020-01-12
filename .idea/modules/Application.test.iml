@@ -6,7 +6,10 @@
     <content url="file://$MODULE_DIR$/../../Application/src/test" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="remote_patient_monitoring.main" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:13" level="project" />
     <orderEntry type="module" module-name="Application.main" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-swing:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:13" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:13" level="project" />

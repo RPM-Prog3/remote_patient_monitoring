@@ -3,6 +3,7 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.*;
 
 public class UserLogIn {
@@ -76,7 +77,11 @@ public class UserLogIn {
                 error_message = new JOptionPane();
                 if (userName.trim().equals("admin") && password.trim().equals("admin")) {
                     // Here we want to open the list of patients along with their details
-                    listOfPatients = new PatientList();
+                    try {
+                        listOfPatients = new PatientList();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     WelcomePage.setVisible(false);
                 }
                 else {

@@ -6,18 +6,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/../../Server/src/main/webapp" relative="/" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/META-INF" relative="/META-INF" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/META-INF/maven" relative="/META-INF/maven" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/META-INF/maven/com.google.code.gson" relative="/META-INF/maven/com.google.code.gson" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/META-INF/maven/com.google.code.gson/gson" relative="/META-INF/maven/com.google.code.gson/gson" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com" relative="/com" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google" relative="/com/google" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson" relative="/com/google/gson" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/annotations" relative="/com/google/gson/annotations" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/internal" relative="/com/google/gson/internal" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/internal/bind" relative="/com/google/gson/internal/bind" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/internal/bind/util" relative="/com/google/gson/internal/bind/util" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/reflect" relative="/com/google/gson/reflect" />
-          <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/gson-2.7.jar_1f64285cb80b7c64032ed85af9a90fec/com/google/gson/stream" relative="/com/google/gson/stream" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/META-INF" relative="/META-INF" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/META-INF/maven" relative="/META-INF/maven" />
           <root url="file://$MODULE_DIR$/../../Server/build/tmp/expandedArchives/javax.servlet-api-3.1.0.jar_784d7c0af51669c8bab3b8ad1eaa47b4/META-INF/maven/javax.servlet" relative="/META-INF/maven/javax.servlet" />

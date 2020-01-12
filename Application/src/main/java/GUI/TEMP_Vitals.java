@@ -1,18 +1,22 @@
 package GUI;
 
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import simulation.Temperature_Counting;
 
 import java.awt.*;
 
-public class HR_Vitals extends Vital_Values_Display {
+public class TEMP_Vitals extends Vital_Values_Display {
     private Temperature_Counting temp_val_counter;
 
-    public HR_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj){
+    public TEMP_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj){
         super(vitals_panel_dim, "label-Temperature");
         super.status_msg.setText("STABLE");
         super.vital_type.setText("TEMP");
-        super.vital_value.setText("VALUE");
+        String units = "C";
+
+        super.units_label.setText("\u00B0" + units);
+        super.units_label.setAlignment(Pos.CENTER_RIGHT);
 
         temp_val_counter = obj;
     }
@@ -21,5 +25,9 @@ public class HR_Vitals extends Vital_Values_Display {
         Platform.runLater(() ->{
             super.vital_value.setText(String.valueOf(Math.round(temp_val_counter.Double_Value() * 1000.0)/1000.0));
         });
+    }
+
+    protected void CheckStatus() {
+
     }
 }

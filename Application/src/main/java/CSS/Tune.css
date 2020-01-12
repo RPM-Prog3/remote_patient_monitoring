@@ -1,0 +1,13 @@
+.root {
+    -fx-background-color: black;
+    -fx-border-color: green;
+    /*-fx-border-width: 10;*/
+    /*-fx-border-image-insets: ;*/
+    -fx-border-visible: true;
+    /*-fx-fit-to-height: true;*/
+    /*-fx-arc-width: true;*/
+}
+
+.label {
+    -fx-text-fill: white;
+}
