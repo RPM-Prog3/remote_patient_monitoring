@@ -71,12 +71,20 @@ public class Run_Server extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         switch (uri) {
             case "/Server/rpm": {
-                write_file("landing.ejs", writer, false);
+                write_file("landing.ejs", writer, false, false);
                 break;
             }
             case "/Server/rpm/login": {
-                //writer.println("login page");
-                write_file("login.ejs", writer, false);
+
+                String error = req.getParameter("error");
+
+                boolean login_error = false;
+                if (error != null) {
+                    if (error.equals("true")){
+                        login_error = true;
+                    }
+                }
+                write_file("login.ejs", writer, false, login_error);
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
                 if (username != null || password != null) {
@@ -88,15 +96,7 @@ public class Run_Server extends HttpServlet {
                         if (valid_user) {
                             resp.sendRedirect("/Server/rpm/mypatients");
                         } else {
-
-                            resp.sendRedirect("/Server/rpm/login");
-//
-//                            String str = scan.nextLine();
-//                            if (str.equals("#error#")) {
-//                                writer.println("<p1><font color=\"red\">Credentials not recognized! Please try again. </font></p1>");
-////                                writer.println("<div scope=\"error\">ID</th>");
-////                            writer.println (htmlResponse);
-//                            }
+                            resp.sendRedirect("/Server/rpm/login?error=true");
                         }
                     }
                 }
@@ -105,11 +105,12 @@ public class Run_Server extends HttpServlet {
 
             }
             case "/Server/rpm/mypatients": {
-                write_file("patientlist.ejs", writer, true);
+                write_file("patientlist.ejs", writer, true,false);
                 break;
             }
             case "/Server/rpm/summary": {
-                write_file("summary.ejs", writer, false);
+
+                write_file("summary.ejs", writer, false,false);
                 break;
             }
         }
@@ -243,7 +244,7 @@ public class Run_Server extends HttpServlet {
         System.out.println("Current time: " + strDate);
     }
 
-    private void write_file(String file_name, PrintWriter writer, boolean add_to_table){
+    private void write_file(String file_name, PrintWriter writer, boolean add_to_table, boolean error_login){
         try {
             String file_path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/web_app/" + file_name;
 
@@ -259,7 +260,7 @@ public class Run_Server extends HttpServlet {
                         writer.println("<th scope=\"col\">Birth of Date</th>");
                         writer.println("<th scope=\"col\">Email</th>");
                         writer.println("<th scope=\"col\">Phone Number</th>");
-                    } else if (str.equals("#row#")){
+                    } else if (str.equals("#row#")) {
                         String patients_json = patient_db.get_patients();
                         Gson gson = new Gson();
                         String[][] patients = gson.fromJson(patients_json, String[][].class);
@@ -273,11 +274,27 @@ public class Run_Server extends HttpServlet {
                             writer.println(String.format("<td>%s</td>", patients[i][5])); // Phone Number
                             writer.println("</tr>");
                         }
+
                     } else {
                         writer.println(str);
                     }
-                } else {
-                    writer.println(scan.nextLine());
+                } else if (error_login) {
+                    String str = scan.nextLine();
+                    if (str.equals("#error#")) {
+                        writer.println("<p1><font color=\"red\">Credentials not recognized! Please try again. </font></p1>");
+                    }
+                    else {
+                        writer.println(str);
+                    }
+                }
+                else {
+                    String str = scan.nextLine();
+                    if (!str.equals("#error#")) {
+                        writer.println(str);
+                    }
+                    else {
+                        writer.println(scan.nextLine());
+                    }
                 }
             }
             scan.close();
