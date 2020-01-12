@@ -10,6 +10,7 @@ public class TEMP_Vitals extends Vital_Values_Display {
     private Temperature_Counting temp_val_counter;
     private String value;
     private double i_value;
+    private boolean a;
 
     public TEMP_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj){
         super(vitals_panel_dim, "label-Temperature");
@@ -21,14 +22,18 @@ public class TEMP_Vitals extends Vital_Values_Display {
         super.units_label.setAlignment(Pos.CENTER_RIGHT);
 
         temp_val_counter = obj;
+        a = false;
     }
 
     protected void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            String value = String.valueOf(temp_val_counter.rounded_temperature());
+            value = String.valueOf(temp_val_counter.rounded_temperature());
             super.vital_value.setText(value);
             i_value = Double.parseDouble(value);
-            CheckStatus();
+            if (i_value != 0)
+                a = true;
+            if(a)
+                CheckStatus();;
         });
     }
 

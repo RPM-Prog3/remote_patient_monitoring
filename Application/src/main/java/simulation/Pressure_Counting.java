@@ -5,8 +5,8 @@ public class Pressure_Counting extends Value_Counter {
     int[] max_min;
 
     public Pressure_Counting(){
-        max = 0;
-        min = 150;
+        max = -10;
+        min = 1500;
         val_position = 0;
         ecglength = 100;
         max_min = new int[2];

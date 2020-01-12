@@ -13,6 +13,7 @@ public class ECG_Vitals extends Vital_Values_Display {
     private String value;
     private int i_value;
     private Blinking blinking_state;
+    private boolean a;
 
     public ECG_Vitals(Dimension vitals_panel_dim, BPM obj){
         super(vitals_panel_dim, "label-ECG");
@@ -22,13 +23,17 @@ public class ECG_Vitals extends Vital_Values_Display {
         super.units_label.setAlignment(Pos.CENTER_RIGHT);
 
         ecg_val_counter = obj;
+        a = false;
     }
 
     public void Set_Displayed_Value(){
         Platform.runLater(() ->{
             super.vital_value.setText(String.valueOf(ecg_val_counter.BPM_number()));
             i_value = Integer.parseInt(value);
-            CheckStatus();
+            if (i_value != 0)
+                a = true;
+            if(a)
+                CheckStatus();
         });
     }
 
