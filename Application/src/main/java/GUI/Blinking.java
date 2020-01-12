@@ -25,6 +25,7 @@ public class Blinking implements Runnable {
                 }
 
                 if (which_status == 1) {
+                    System.out.println(which_status);
                     if (remove_class)
                         status.getStyleClass().remove(4);
                     status.getStyleClass().add("label-status-warning");

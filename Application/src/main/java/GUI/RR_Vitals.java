@@ -35,4 +35,8 @@ public class RR_Vitals extends Vital_Values_Display{
 
         });
     }
+
+    protected void CheckStatus() {
+
+    }
 }

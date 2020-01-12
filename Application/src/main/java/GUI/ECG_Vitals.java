@@ -10,6 +10,9 @@ import java.awt.*;
 
 public class ECG_Vitals extends Vital_Values_Display {
     private BPM ecg_val_counter;
+    private String value;
+    private int i_value;
+    private Blinking blinking_state;
 
     public ECG_Vitals(Dimension vitals_panel_dim, BPM obj){
         super(vitals_panel_dim, "label-ECG");
@@ -25,5 +28,9 @@ public class ECG_Vitals extends Vital_Values_Display {
         Platform.runLater(() ->{
             super.vital_value.setText(String.valueOf((int)(60/(ecg_val_counter.Index_Difference()*0.006))));
         });
+    }
+
+    protected void CheckStatus(){
+
     }
 }

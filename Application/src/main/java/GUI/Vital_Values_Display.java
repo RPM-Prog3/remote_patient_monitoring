@@ -22,7 +22,8 @@ public abstract class Vital_Values_Display {
     protected Scene status_scene, value_scene, type_scene, units_scene;
     protected javafx.scene.text.Font status_font, type_font, value_font, units_font;
 
-    protected Thread blinking_status;
+    protected Blinking blinking_status;
+    protected Thread blinking_thread;
 
     public Vital_Values_Display(Dimension vitals_panel_dim, String colorLabels){
         // Instantiating different panels;
@@ -65,7 +66,6 @@ public abstract class Vital_Values_Display {
         units_label.setVisible(true);
         units_label.setTextAlignment(TextAlignment.RIGHT);
 
-
         //Applying the css
         applyCSS(colorLabels);
 
@@ -85,7 +85,9 @@ public abstract class Vital_Values_Display {
         vitals_value_display.add(status, BorderLayout.PAGE_END);
 
         // Initialising thread
-        blinking_status = new Thread(new Blinking(status_msg));
+        blinking_status = new Blinking(status_msg);
+        blinking_thread = new Thread(blinking_status);
+        blinking_thread.start();
 
 
         Platform.runLater (new Runnable() {
@@ -140,21 +142,17 @@ public abstract class Vital_Values_Display {
         units_scene.getStylesheets().add(style_location);
     }
 
-    public void checkStatus(){
-        if(1 ==1 )
-            warning();
-        if(2 == 3)
-            urgent();
-    }
-
     protected void warning(){
         status_msg.setText("WARNING");
-        blinking_status.start();
+        blinking_status.warning_status();
     }
 
     private void urgent(){
+        status_msg.setText("URGENT");
+        blinking_status.urgent_status();
         status_msg.getStyleClass().remove("label-status-warning");
     }
 
     abstract protected void Set_Displayed_Value();
+    abstract protected void CheckStatus();
 }

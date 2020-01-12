@@ -104,11 +104,6 @@ public class Panel_Controller {
         // Adding simulationPanel and tuningPanel the main panel
         mainPanel.add(simulationPanel, BorderLayout.PAGE_START);
         mainPanel.add(tuningPanel, BorderLayout.CENTER);
-
-        ECG_panel.warning();
-        BP_panel.warning();
-        RR_panel.warning();
-        HR_panel.warning();
     }
 
     public JFXPanel getMainPanel() {
