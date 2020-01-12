@@ -1,9 +1,12 @@
 package GUI;
 
+import Application_Server_Interface.Data.User;
+import Application_Server_Interface.Manager.Client_Manager;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class Main_Frame {
 
@@ -11,8 +14,12 @@ public class Main_Frame {
     private JFrame mainPage;
     private JFXPanel mainPanel;
     private Panel_Controller controller;
+    private Client_Manager cm;
+    private User login_user;
 
-    public Main_Frame(String P_name) {
+    public Main_Frame(String P_name, User login_user) {
+        this.login_user = login_user;
+        //cm = new Client_Manager();
         // Setting up the main frame
         mainPage = new JFrame(P_name, gc);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

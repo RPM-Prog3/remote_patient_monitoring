@@ -1,5 +1,9 @@
 package GUI;
 
+import Application_Server_Interface.Data.User;
+import Application_Server_Interface.Manager.Client_Manager;
+import Application_Server_Interface.Messenger.Server_Messenger;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -75,19 +79,32 @@ public class UserLogIn {
                 String userName = user_name_input.getText();
                 String password = password_input.getText();
                 error_message = new JOptionPane();
-                if (userName.trim().equals("admin") && password.trim().equals("admin")) {
-                    // Here we want to open the list of patients along with their details
-                    try {
-                        listOfPatients = new PatientList();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                boolean valid_user = false;
+                User login_user;
+                try {
+                    Client_Manager cm = new Client_Manager();
+                    login_user = new User(userName.trim(), password.trim());
+                    Server_Messenger login_msg = cm.send_user_to_login(login_user);
+                    valid_user = login_msg.get_valid_user();
+                    System.out.println(valid_user);
+                    System.out.println(login_msg.get_success());
+                    if (valid_user) {
+                        // Here we want to open the list of patients along with their details
+                        try {
+                            listOfPatients = new PatientList(login_user);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        WelcomePage.setVisible(false);
                     }
-                    WelcomePage.setVisible(false);
-                }
-                else {
-                    error_message.showMessageDialog(WelcomePage,"Invalid username or password","Error Message", JOptionPane.ERROR_MESSAGE);
-                    user_name_input.setText("");
-                    password_input.setText("");
+                    else {
+                        error_message.showMessageDialog(WelcomePage,"Invalid username or password","Error Message", JOptionPane.ERROR_MESSAGE);
+                        user_name_input.setText("");
+                        password_input.setText("");
+                    }
+                } catch (IOException e){
+                    e.printStackTrace();
+                    valid_user = false;
                 }
             }
         });

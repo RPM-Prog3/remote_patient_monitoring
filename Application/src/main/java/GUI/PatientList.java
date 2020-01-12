@@ -31,8 +31,10 @@ public class PatientList {
     private Border border;
     private JScrollPane scrollPane;
     private Client_Manager manager;
+    private User login_user;
 
-    public PatientList() throws IOException {
+    public PatientList(User login_user) throws IOException {
+        this.login_user = login_user;
         list = new JFrame("List of Patients", gc);
         list.setSize(1000, 700);
 
@@ -80,7 +82,7 @@ public class PatientList {
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i <patient_counter; i++) {
                     String name = patientlist.get(patient_idx.get(i)).getText();
-                    Main_Frame GUI = new Main_Frame(name);
+                    Main_Frame GUI = new Main_Frame(name, login_user);
                 }
             }
         });
@@ -183,10 +185,8 @@ public class PatientList {
                     e.printStackTrace();
                 }
 
-                User user = new User("Joe", "1234");
-
                 try {
-                    manager.send_patient_to_add_patients_db(new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum, user);
+                    manager.send_patient_to_add_patients_db(new_name, new_lastname, new_dateOfbirth, new_email, new_cellnum, login_user);
                     success_message.showMessageDialog(new_patient, "Patient Successfully Added", "information", JOptionPane.INFORMATION_MESSAGE);
                     updateList();
                     showList();
@@ -203,9 +203,8 @@ public class PatientList {
         Gson gson = new Gson();
         Server_Messenger messenger = new Server_Messenger();
         Client_Manager manager = new Client_Manager();
-        User user = new User("Joe", "1234");
         try {
-            messenger = manager.get_patients_from_patients_db(user);
+            messenger = manager.get_patients_from_patients_db(login_user);
             boolean success = messenger.get_success();
             String output = messenger.get_message();
             System.out.println(output);
@@ -226,9 +225,8 @@ public class PatientList {
         Gson gson = new Gson();
         Server_Messenger messenger = new Server_Messenger();
         Client_Manager manager = new Client_Manager();
-        User user = new User("Joe", "1234");
         try {
-            messenger = manager.get_patients_from_patients_db(user);
+            messenger = manager.get_patients_from_patients_db(login_user);
             boolean success = messenger.get_success();
             System.out.println(success);
             String output = messenger.get_message();
