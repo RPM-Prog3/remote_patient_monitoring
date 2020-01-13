@@ -106,9 +106,9 @@ public class Tuning_Panel{
         switch_graph_motion.setVisible(true);
 
         gpane.add(switch_graph_motion, 0, 0);
-        gpane.add(abnormalities_menu, 0,1);
-        gpane.add(patient_record, 0,2);
-        gpane.add(padding_label, 0,3);
+        //gpane.add(abnormalities_menu, 0,1);
+        gpane.add(patient_record, 0,1);
+        gpane.add(padding_label, 0,2);
 
         gpane.add(time_axis_label, 2,0);
         gpane.add(timeWindow, 2, 2);
