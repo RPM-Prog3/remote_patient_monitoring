@@ -35,19 +35,23 @@ public class RR_Vitals extends Vital_Values_Display{
         });
     }
 
-    public int getMean(){
-        return (int)resp_val_counter.getMean(0);
+    public double getMean(){
+        return resp_val_counter.getMean(0);
     }
 
     protected void CheckStatus() {
-        if ((resp_rate_value  > 25 && resp_rate_value  < 30) || (resp_rate_value  < 15 && resp_rate_value  > 10)){
+        if ((resp_rate_value  >= 25 && resp_rate_value  <= 30) || (resp_rate_value  <= 12 && resp_rate_value  >= 8)){
             warning();
         }
-        else if ((resp_rate_value > 30) || (resp_rate_value < 10)){
+        else if ((resp_rate_value >= 30) || (resp_rate_value <= 10)){
             urgent();
         }
         else{
             stable();
         }
+    }
+
+    public int getRR_value(){
+        return resp_rate_value;
     }
 }

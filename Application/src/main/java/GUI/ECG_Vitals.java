@@ -28,7 +28,8 @@ public class ECG_Vitals extends Vital_Values_Display {
 
     public void Set_Displayed_Value(){
         Platform.runLater(() ->{
-            super.vital_value.setText(String.valueOf(ecg_val_counter.BPM_number()));
+            value = String.valueOf(ecg_val_counter.BPM_number());
+            super.vital_value.setText(value);
             i_value = Integer.parseInt(value);
             if (i_value != 0)
                 a = true;
@@ -37,19 +38,23 @@ public class ECG_Vitals extends Vital_Values_Display {
         });
     }
 
-    public int getMean(){
-        return (int)ecg_val_counter.getMean(0);
+    public double getMean(){
+        return ecg_val_counter.getMean(0);
     }
 
     protected void CheckStatus(){
-        if ((i_value > 80 && i_value < 100) || (i_value < 60 && i_value > 40)) {
+        if ((i_value > 80 && i_value < 120) || (i_value < 50 && i_value > 40)) {
             warning();
         }
-        else if ((i_value <= 40) || (i_value >= 100)){
+        else if ((i_value <= 40) || (i_value >= 120)){
             urgent();
         }
         else{
             stable();
         }
+    }
+
+    public int getBPM(){
+        return  i_value;
     }
 }

@@ -136,8 +136,26 @@ public class Panel_Controller {
 //        RR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
     }
 
+    public double[] getMeans(){
+        double[] array = new double[5];
+        array[0] = ECG_panel.getMean();
+        array[1] = BP_panel.getMean()[0];
+        array[2] = BP_panel.getMean()[1];
+        array[3] = RR_panel.getMean();
+        array[4] = HR_panel.getMean();
+        return array;
+    }
+
     public void startSimulation() {
         graphs.simulate();
 //        graphPanel = graphs.getGraphPanel();
+    }
+
+    public void closeProgram(){
+        graphs.stopTheThread();
+        ECG_panel.stopThread();
+        BP_panel.stopThread();
+        RR_panel.stopThread();
+        HR_panel.stopThread();
     }
 }

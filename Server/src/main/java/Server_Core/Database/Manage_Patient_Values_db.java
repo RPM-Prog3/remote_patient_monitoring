@@ -28,7 +28,7 @@ public class Manage_Patient_Values_db extends Manage_db{
     }
 
     public void add_patient_value(Patient_Value pv) throws SQLException {
-        int patient_id = pv.get_patient_id();
+        String patient_id = pv.get_patient_id();
         String time = pv.get_time();
         int bpm = pv.get_bpm();
         int resp_rate = pv.get_resp_rate();
@@ -41,7 +41,7 @@ public class Manage_Patient_Values_db extends Manage_db{
                 bp_upper, bp_lower, abnormality);
     }
 
-    private void add_patient_value(int patient_id, String time,
+    private void add_patient_value(String patient_id, String time,
                                    int bpm, int resp_rate, double body_temp,
                                    int bp_upper, int bp_lower, String abnormality) throws SQLException{
         String sql_add_pv = String.format("insert into %s " +

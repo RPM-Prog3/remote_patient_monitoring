@@ -63,8 +63,12 @@ public class Sliding extends Slider {
         setLabelFormatter(new StringConverter<Double>() {
             @Override
             public String toString(Double aDouble) {
-                if (aDouble == 20 || aDouble == 40 || aDouble == 5 || aDouble == 60)
-                    return Integer.toString((int)aDouble.doubleValue()) ;
+                if (aDouble == -50 || aDouble == 50)
+                    return "U";
+                else if (aDouble == -25 || aDouble == 25)
+                    return "W";
+                else if (aDouble == 0)
+                    return "S";
                 else
                     return null;
             }

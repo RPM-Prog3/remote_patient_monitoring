@@ -1,21 +1,30 @@
 package Tuning;
 
+import Application_Server_Interface.Manager.Client_Manager;
+import Application_Server_Interface.Messenger.Server_Messenger;
+import Application_Server_Interface.Setup.Read_server_properties;
 import GUI.BP_Vitals;
 import Graphing.Overall_Graph;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Insets;
 import javafx.util.StringConverter;
+import simulation.ECG;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URI;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Hashtable;
 
 public class Tuning_Panel{
@@ -24,11 +33,20 @@ public class Tuning_Panel{
     private GridPane gpane;
     private Scene tuning_scene;
 
-
     private Button switch_graph_motion, abnormalities_menu, patient_record;
     private Sliding timeWindow, BPMregulation, TempRegulation, BPRegulation, RRateRegulation;
 
+    private JPopupMenu abnormalities_pm;
+    private JMenuItem normal_ECG;
+    private JMenuItem AIR;
+    private JMenuItem AF;
+
+    private int counter;
+
     private Overall_Graph graphs_panel;
+    private ECG ecg;
+
+    private JOptionPane error_message;
 
     public Tuning_Panel(Overall_Graph obj){
         // Instantiating and setting the Grid pane that will contain all the tuning pieces
@@ -64,7 +82,16 @@ public class Tuning_Panel{
         TEMP_label.setText("\u00B0" + "C");
 
         padding_label = new javafx.scene.control.Label();
-        padding_label.setText("\t \t \t");
+        padding_label.setText("\t \t \t \t \t \t \t ");
+
+        abnormalities_pm = new JPopupMenu("ECG Abnormalities");
+        normal_ECG = new JMenuItem("normal");
+        AIR = new JMenuItem("AIR");
+        AF = new JMenuItem("AF");
+
+        abnormalities_pm.add(normal_ECG);
+        abnormalities_pm.add(AIR);
+        abnormalities_pm.add(AF);
 
         tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Tune.css");
 
@@ -79,7 +106,10 @@ public class Tuning_Panel{
         switch_graph_motion.setVisible(true);
 
         gpane.add(switch_graph_motion, 0, 0);
-        gpane.add(padding_label, 0,1);
+        gpane.add(abnormalities_menu, 0,1);
+        gpane.add(patient_record, 0,2);
+        gpane.add(padding_label, 0,3);
+
         gpane.add(time_axis_label, 2,0);
         gpane.add(timeWindow, 2, 2);
 
@@ -95,11 +125,39 @@ public class Tuning_Panel{
         gpane.add(TEMP_label, 10,0);
         gpane.add(TempRegulation, 10,2);
 
-        gpane.add(abnormalities_menu, 12,1);
-        gpane.add(patient_record, 12,2);
-
         tuning_scene.getStylesheets().add("file:" + System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/Application/src/main/java/CSS/Scenes.css");
         tuning_panel.setScene(tuning_scene);
+
+        counter = 0;
+
+        abnormalities_menu.setOnAction(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                if (counter == 0 || counter % 2 == 0){
+                    abnormalities_pm.setVisible(true);
+                }
+                else{
+                    abnormalities_pm.setVisible(false);
+                }
+                counter++;
+            }
+        });
+
+        patient_record.setOnAction(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                error_message = new JOptionPane();
+                try {
+                    Client_Manager cm = new Client_Manager();
+                    java.awt.Desktop.getDesktop().browse(new URI(cm.get_url()));
+                } catch (IOException | URISyntaxException e) {
+                    error_message.showMessageDialog(null,"Failed to open URL","Error Message", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
     }
 
     public void actionPerformed(Button butn, String command){
@@ -113,6 +171,17 @@ public class Tuning_Panel{
                     switch_graph_motion.setText("Stop");
             });
         }
+    }
+
+    public void ECG_type_sel(JMenuItem ECG_type){
+        ECG_type.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ecg = new ECG();
+                ecg.setArray(ECG_type.getText());
+                System.out.println(ECG_type.getText());
+            }
+        });
     }
 
     public JFXPanel getTuningPanel(){

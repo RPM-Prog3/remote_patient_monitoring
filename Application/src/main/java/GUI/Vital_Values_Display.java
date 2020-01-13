@@ -143,6 +143,10 @@ public abstract class Vital_Values_Display {
         units_scene.getStylesheets().add(style_location);
     }
 
+    public void stopThread(){
+        blinking_status.stopThread();
+    }
+
     protected void warning(){
         status_msg.setText("WARNING");
         blinking_status.warning_status();

@@ -1,5 +1,6 @@
 package GUI;
 
+import Application_Server_Interface.Data.Patient;
 import Application_Server_Interface.Data.User;
 import com.google.gson.Gson;
 import Application_Server_Interface.Manager.Client_Manager;
@@ -82,7 +83,8 @@ public class PatientList {
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i <patient_counter; i++) {
                     String name = patientlist.get(patient_idx.get(i)).getText();
-                    Main_Frame GUI = new Main_Frame(name, login_user);
+
+                    //Main_Frame GUI = new Main_Frame (login_user, new Patient("010101", "V", "P", "30/07/9898", "vv", "090"));
                 }
             }
         });

@@ -47,7 +47,7 @@ public class Overall_Graph {
 
         //Respiratory
         //Decrease the period to increase Respiratory Rate
-        respdata = new Resp_Rate(50, 2.0, -0.95, 100);
+        respdata = new Resp_Rate(50, 1.0, -0.95, 125);
         resp_vit = resp_vit_input;
         resp_counting_obj = resp_counting_obj_input;
 
@@ -94,6 +94,10 @@ public class Overall_Graph {
                 refreshing.switchRun();
 //            }
 //        });
+    }
+
+    public void stopTheThread(){
+        refreshing.stopThread();
     }
 
     public void changeTimeWindow(int val){
