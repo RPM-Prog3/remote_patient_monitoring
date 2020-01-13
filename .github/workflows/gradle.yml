@@ -15,5 +15,5 @@ jobs:
         java-version: 1.8
     - name: Build with App Gradle
       run: ./Application/gradlew build
-	- name: Build with Server Gradle
+    - name: Build with Server Gradle
       run: ./Server/gradlew build
