@@ -34,9 +34,9 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 ### Feature requirements:
 
 - [x] A display of each vital sign plotted over the last n records, where n is selectable and display of ECG
-- [ ] Visual alarms that indicate if the values are outside normal value
-  - [ ] Warning
-  - [ ] Urgent
+- [x] Visual alarms that indicate if the values are outside normal value
+  - [x] Warning
+  - [x] Urgent
 - [ ] A permanent record (database) to be kept of average values for every minute during a day and also instances when there have been abnormal signs
 - [x] A tunable simulation of the vital signs and ECG for the system to display:
   - [x] Simulate a normal patient
