@@ -1,6 +1,4 @@
 language: java
-services:
-  - postgresql
 jobs:
   include:
     - stage:
@@ -11,8 +9,6 @@ jobs:
         - echo "Completed App Build";
     - stage:
       name: "Test Server Build"
-      before_script:
-        - psql -c 'create database travis_test_db;' -U postgres
       script:
         - chmod +x Scripts/server_build.sh
         - bash ./Scripts/server_build.sh
