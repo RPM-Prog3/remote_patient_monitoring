@@ -4,10 +4,8 @@ import GUI.RR_Vitals;
 import GUI.TEMP_Vitals;
 import org.junit.Assert;
 import org.junit.Test;
-import simulation.BPM;
-import simulation.Pressure_Counting;
-import simulation.Respiration_Counting;
-import simulation.Temperature_Counting;
+import simulation.*;
+
 import java.util.concurrent.ExecutorService;
 
 import java.awt.*;
@@ -35,48 +33,120 @@ public class Test_Simulation {
 
     @Test
     public void Test_ECG(){
-        ecg_vitals = new ECG_Vitals(rand_dim, bpm,exe);
-        max_BPM = 250;
-        min_BPM = 0;
-        Assert.assertTrue("BPM should be lower than " + max_BPM, ecg_vitals.getBPM() < max_BPM);
-        Assert.assertTrue("BPM should be greater or equal to " + min_BPM, ecg_vitals.getBPM() >= min_BPM);
+        ECG ecg = new ECG();
+        int zeros_ = ecg.getPadZeros(166-20);
+        Assert.assertTrue("Wrong wave length for mean 166", zeros_ <= 152 && zeros_ >= 140);
+        zeros_ =  ecg.getPadZeros(92-20);
+        Assert.assertTrue("Wrong wave length for mean 92",zeros_ <= 78 && zeros_ >= 66);
+        zeros_ =  ecg.getPadZeros(218-20);
+        Assert.assertTrue("Wrong wave length for mean 218",zeros_ <= 204 && zeros_ >= 192);
+        zeros_ =  ecg.getPadZeros(244-20);
+        Assert.assertTrue("Wrong wave length for mean 244",zeros_ <= 230 && zeros_ >= 218);
+        zeros_ =  ecg.getPadZeros(66-20);
+        Assert.assertTrue("Wrong wave length for mean 66",zeros_ <= 52 && zeros_ >= 40);
+        System.out.println("**********Passed Test ECG**********");
     }
 
     @Test
     public void Test_BP(){
-        bp_vitals = new BP_Vitals(rand_dim, bp_counter,exe);
-        max_s_p = 250;
-        min_s_p = 0;
-        max_d_p = 200;
-        min_d_p = 0;
-        Assert.assertTrue("Systolic pressure should be lower than " + max_s_p, bp_vitals.get_s_pressure() < max_s_p);
-        Assert.assertTrue("Systolic pressure should be greater or equal to " + min_s_p, bp_vitals.get_s_pressure() >= min_s_p);
-        Assert.assertTrue("Diastolic pressure should be lower than " + max_d_p, bp_vitals.get_d_pressure() < max_d_p);
-        Assert.assertTrue("Systolic pressure should be greater or equal to " + max_s_p, bp_vitals.get_d_pressure() >= min_d_p);
-        if (bp_vitals.get_s_pressure() == 0 && bp_vitals.get_d_pressure() == 0){}
-        else {
-            Assert.assertTrue("Systolic pressure should be greater than Diastolic pressure", bp_vitals.get_s_pressure() > bp_vitals.get_d_pressure());
+        Blood_Pressure bp = new Blood_Pressure(0.6, 0.15, 0.25, 100, 1);
+        double val;
+        int max_p = -10;
+        int min_p = 1500;
+
+        for(int j=-2; j<=2; j+=1) {
+            for (int i = 0; i < 300; i++) {
+                val = bp.get_next_value(j);
+                if (max_p < val)
+                    max_p = (int)val;
+                if (min_p > val)
+                    min_p = (int)val;
+            }
+            if (j == -2) {
+                Assert.assertTrue("Wrong pressure for low urgent s: " + max_p, max_p <= 100);
+                Assert.assertTrue("Wrong pressure for low urgent d: " + min_p, min_p < 70);
+            }
+            if (j == -1) {
+                Assert.assertTrue("Wrong pressure for low warning s: " + max_p, max_p <= 110 && max_p > 100);
+                Assert.assertTrue("Wrong pressure for low warning d: " + min_p, min_p >= 70 && min_p < 77);
+            }
+            if (j == 0) {
+                Assert.assertTrue("Wrong pressure for stable s: " + max_p, max_p < 130 && max_p > 110);
+                Assert.assertTrue("Wrong pressure for stable d: " + min_p, min_p >= 77 && min_p <= 83);
+            }
+            if (j == 1) {
+                Assert.assertTrue("Wrong pressure for high warning s: " + max_p, max_p >= 130 && max_p < 139);
+                Assert.assertTrue("Wrong pressure for high warning d: " + min_p, min_p > 83 && min_p <= 90);
+            }
+            if (j == 2) {
+                Assert.assertTrue("Wrong pressure for high urgent s: " + max_p, max_p >= 139);
+                Assert.assertTrue("Wrong pressure for high urgent d: " + min_p, min_p > 90);
+            }
+            max_p = -10;
+            min_p = 1500;
         }
+        System.out.println("**********Passed Test Blood Pressure**********");
     }
 
     @Test
     public void Test_RR(){
-        rr_vitals = new RR_Vitals(rand_dim, rr_counter,exe);
-        max_rr = 200;
-        min_rr = 0;
-        Assert.assertTrue("The respiratory rate cannot be greater than " +  max_rr, rr_vitals.getRR_value() < max_rr );
-        Assert.assertTrue("The respiratory rate cannot be lower or equal than " +  min_rr, rr_vitals.getRR_value() >= min_rr );
+        Resp_Rate rr = new Resp_Rate(50, 1, -0.95, 125);
+        int breath_counter = 0;
+        int threshold = 60;
+        boolean over = false;
+        double val;
+
+        for(int j=-2; j<=2; j+=1) {
+            for (int i = 0; i < 10000; i++) {
+                val = rr.get_next_value(j);
+
+                if (val > 60 && !over) {
+                    breath_counter += 1;
+                    over = true;
+                }
+
+                if (val < 60 && over)
+                    over = false;
+            }
+            if (j == -2)
+                Assert.assertTrue("Wrong resp rate for low urgent: " + breath_counter, breath_counter < 9);
+            if (j == -1)
+                Assert.assertTrue("Wrong resp rate for low warning: " + breath_counter, breath_counter >= 9 && breath_counter <= 12);
+            if (j == 0)
+                Assert.assertTrue("Wrong resp rate for stable: " + breath_counter, breath_counter > 12 && breath_counter < 24);
+            if (j == 1)
+                Assert.assertTrue("Wrong resp rate for high warning: " + breath_counter, breath_counter >= 24 && breath_counter <= 30);
+            if (j == 2)
+                Assert.assertTrue("Wrong resp rate for high urgent: " + breath_counter, breath_counter > 30);
+            over = false;
+            breath_counter = 0;
+        }
+        System.out.println("**********Passed Test Respiratory Rate**********");
     }
 
     @Test
     public void Test_TEMP() {
-        temp_vitals = new TEMP_Vitals(rand_dim, temp_counter,exe);
-        max_tmp = 50;
-        min_tmp = 30;
-        Assert.assertTrue("Body temperature rate cannot be greater than " + max_tmp, temp_vitals.get_temp_val() < max_tmp);
-        if (temp_vitals.get_temp_val() == 0) { }
-        else {
-            Assert.assertTrue("Body temperature rate cannot be lower or equal than " + min_tmp, temp_vitals.get_temp_val() >= min_tmp);
+        Body_Temp temp = new Body_Temp(37, 0.01, 0.5);
+        double avg, sum = 0;
+
+        for(int j=-2; j<=2; j+=1) {
+            for (int i = 0; i < 50; i++)
+                sum += temp.get_next_value(j);
+
+            avg = sum/50;
+
+            if (j == -2)
+                Assert.assertTrue("Wrong temperature for low urgent: " + avg, avg < 34);
+            if (j == -1)
+                Assert.assertTrue("Wrong temperature for low warning: " + avg, avg >= 34 && avg < 36.5);
+            if (j == 0)
+                Assert.assertTrue("Wrong temperature for stable: " + avg, avg >= 36.5 && avg <= 38.5);
+            if (j == 1)
+                Assert.assertTrue("Wrong temperature for high warning: " + avg, avg > 38.5 && avg < 40);
+            if (j == 2)
+                Assert.assertTrue("Wrong temperature for high urgent: " + avg, avg >= 40);
+            sum = 0;
         }
+        System.out.println("**********Passed Test Temp**********");
     }
 }
