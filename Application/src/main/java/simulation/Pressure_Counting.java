@@ -30,7 +30,6 @@ public class Pressure_Counting extends Value_Counter {
             min = 1500;
             val_position = 0;
         }
-
         mean_counter(1, 1);
     }
 

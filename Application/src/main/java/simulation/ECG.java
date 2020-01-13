@@ -18,6 +18,7 @@ public class ECG {
     }
 
     public void setArray(String ecg_type){
+        array = new double[order];
         if (ecg_type.equals("normal")) {
             DaubechiesWavelet.SetOrder(order);
             array = DaubechiesWavelet.ReturnDaub();
