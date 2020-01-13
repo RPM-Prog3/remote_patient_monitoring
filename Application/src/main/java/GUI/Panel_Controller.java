@@ -154,6 +154,15 @@ public class Panel_Controller {
         return array;
     }
 
+    public int[] getStatus(){
+        int[] array = new int[4];
+        array[0] = ECG_panel.getMeanStatus();
+        array[1] = BP_panel.getMeanStatus();
+        array[2] = BP_panel.getMeanStatus();
+        array[3] = RR_panel.getMeanStatus();
+        return array;
+    }
+
     public void startSimulation() {
         graphs.simulate();
 //        graphPanel = graphs.getGraphPanel();

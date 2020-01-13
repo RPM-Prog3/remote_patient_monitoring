@@ -13,7 +13,6 @@ public class ECG_Vitals extends Vital_Values_Display {
     private BPM ecg_val_counter;
     private String value;
     private int i_value;
-    private Blinking blinking_state;
     private boolean a;
     private int status;
 
@@ -37,6 +36,8 @@ public class ECG_Vitals extends Vital_Values_Display {
                 a = true;
             if(a) {
                 CheckStatus();
+                statusInMinute(getStatus());
+                minuteClock(getMean());
             }
         });
     }
@@ -47,15 +48,15 @@ public class ECG_Vitals extends Vital_Values_Display {
 
     protected void CheckStatus() {
         if ((i_value > 80 && i_value < 120) || (i_value < 50 && i_value > 40)) {
-            status = 1;
+            status = 2;
             warning();
         }
         else if ((i_value <= 40) || (i_value >= 120)){
-            status = 2;
+            status = 3;
             urgent();
         }
         else{
-            status = 3;
+            status = 1;
             stable();
         }
     }

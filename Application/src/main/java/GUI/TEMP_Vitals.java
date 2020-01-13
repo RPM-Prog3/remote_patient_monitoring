@@ -12,6 +12,7 @@ public class TEMP_Vitals extends Vital_Values_Display {
     private String value;
     private double i_value;
     private boolean a;
+    private int status;
 
     public TEMP_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj, ExecutorService exe){
         super(vitals_panel_dim, "label-Temperature", exe);
@@ -35,8 +36,9 @@ public class TEMP_Vitals extends Vital_Values_Display {
                 a = true;
             if(a) {
                 CheckStatus();
+                statusInMinute(getStatus());
+                minuteClock(getMean());
             }
-            ;
         });
     }
 
@@ -47,13 +49,20 @@ public class TEMP_Vitals extends Vital_Values_Display {
     protected void CheckStatus() {
         if ((i_value > 38.5 && i_value < 40) || (i_value < 36.5 && i_value > 34)) {
             warning();
+            status = 2;
         }
         else if ((i_value >= 40) || (i_value <= 34)){
             urgent();
+            status = 3;
         }
         else{
             stable();
+            status = 1;
         }
+    }
+
+    public int getStatus(){
+        return status;
     }
 
     public double get_temp_val(){

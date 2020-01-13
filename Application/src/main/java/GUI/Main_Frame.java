@@ -98,7 +98,8 @@ public class Main_Frame {
                 try {
                     cm.send_patient_value_to_pv_db(new Patient_Value(patient.get_patient_id(), time_stamp,
                             getECGMean(), getRespMean(), getTempMean(),
-                            getBPMaxMean(), getBPMinMean()), login_user);
+                            getBPMaxMean(), getBPMinMean(),
+                            "ECG: " + getECGStatus() + ", BPressure: " + getBPStatus() + ", RespRate: " + getRespStatus() + ",Temp: " + getTempStatus()), login_user);
                 }catch (IOException e) {
                     e.printStackTrace();
                     JOptionPane failed_send_means = new JOptionPane();
@@ -128,5 +129,51 @@ public class Main_Frame {
     public double getTempMean(){
         return Math.round(controller.getMeans()[4] * 100.0)/100.0;
     }
+
+    public String getECGStatus(){
+        if (controller.getStatus()[0] == 2)
+            return "Warning";
+        if (controller.getStatus()[0] == 3)
+            return "Urgent";
+        if (controller.getStatus()[0] == 1)
+            return "Stable";
+        else
+            return null;
+    }
+
+    public String  getBPStatus(){
+        if (controller.getStatus()[1] == 2)
+            return "Warning";
+        if (controller.getStatus()[1] == 3)
+            return "Urgent";
+        if (controller.getStatus()[1] == 1)
+            return "Stable";
+        else
+            return null;
+    }
+
+    public String getRespStatus(){
+        if (controller.getStatus()[2] == 2)
+            return "Warning";
+        if (controller.getStatus()[2] == 3)
+            return "Urgent";
+        if (controller.getStatus()[2] == 1)
+            return "Stable";
+        else
+            return null;
+    }
+
+    public String getTempStatus(){
+        if (controller.getStatus()[3] == 2)
+            return "Warning";
+        if (controller.getStatus()[3] == 3)
+            return "Urgent";
+        if (controller.getStatus()[3] == 1)
+            return "Stable";
+        else
+            return null;
+    }
+
+
 
 }

@@ -28,6 +28,9 @@ public abstract class Vital_Values_Display {
     protected Thread blinking_thread;
     private ExecutorService exe;
 
+    private int minuteStatus, temp_status = 0;
+    private double previous_mean = 0;
+
     public Vital_Values_Display(Dimension vitals_panel_dim, String colorLabels, ExecutorService exe){
         // Instantiating different panels;
         vitals_value_display = new JFXPanel();
@@ -165,6 +168,22 @@ public abstract class Vital_Values_Display {
     protected void stable(){
         status_msg.setText("STABLE");
         blinking_status.stable_status();
+    }
+
+    protected void minuteClock(double new_mean){
+        if (new_mean != previous_mean){
+            previous_mean = new_mean;
+            minuteStatus = temp_status;
+        }
+    }
+
+    protected void statusInMinute(int status){
+        if (status > temp_status)
+            temp_status = status;
+    }
+
+    public int getMeanStatus(){
+        return minuteStatus;
     }
 
     abstract protected void Set_Displayed_Value();
