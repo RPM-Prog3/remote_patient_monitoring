@@ -27,7 +27,7 @@ public class Client_Manager {
         server_port = server_prop.get_server_port();
     }
 
-    private String get_url(){
+    public String get_url(){
         return String.format("http://%s:%s/Server/rpm", server_ip, server_port);
     }
 

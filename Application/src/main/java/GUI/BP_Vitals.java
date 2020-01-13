@@ -48,11 +48,11 @@ public class BP_Vitals extends Vital_Values_Display {
     }
 
     protected void CheckStatus(){
-        if ((s_pressure >= 130 && s_pressure < 139) || (d_pressure > 80 && d_pressure <= 90)){
+        if ((s_pressure >= 130 && s_pressure < 139) || (d_pressure > 83 && d_pressure <= 90)){
             warning();
             status = 2;
         }
-        else if ((s_pressure > 100 && s_pressure < 110) || (d_pressure > 70 && d_pressure < 80)){
+        else if ((s_pressure > 100 && s_pressure <= 110) || (d_pressure >= 70 && d_pressure < 77)){
             warning();
             status = 2;
         }
@@ -60,7 +60,7 @@ public class BP_Vitals extends Vital_Values_Display {
             urgent();
             status = 3;
         }
-        else if ((s_pressure <= 100) || (d_pressure <= 70 )){
+        else if ((s_pressure <= 100) || (d_pressure < 70 )){
             urgent();
             status = 3;
         }

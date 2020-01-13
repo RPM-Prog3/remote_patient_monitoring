@@ -45,11 +45,11 @@ public class RR_Vitals extends Vital_Values_Display{
     }
 
     protected void CheckStatus() {
-        if ((resp_rate_value  >= 25 && resp_rate_value  <= 30) || (resp_rate_value  <= 12 && resp_rate_value  >= 8)){
+        if ((resp_rate_value  >= 25 && resp_rate_value  <= 30) || (resp_rate_value  <= 12 && resp_rate_value  >= 9)){
             warning();
             status = 2;
         }
-        else if ((resp_rate_value >= 30) || (resp_rate_value <= 10)){
+        else if ((resp_rate_value > 30) || (resp_rate_value < 9)){
             urgent();
             status = 3;
         }

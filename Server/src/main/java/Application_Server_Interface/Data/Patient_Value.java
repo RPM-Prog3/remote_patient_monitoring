@@ -104,4 +104,7 @@ public class Patient_Value {
         return abnormality;
     }
 
+    public static LocalDateTime iso_string_to_datetime(String time){
+        return LocalDateTime.parse(time, formatter);
+    }
 }
