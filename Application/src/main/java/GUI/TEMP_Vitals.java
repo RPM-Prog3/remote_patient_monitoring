@@ -32,8 +32,10 @@ public class TEMP_Vitals extends Vital_Values_Display {
             i_value = Double.parseDouble(value);
             if (i_value != 0)
                 a = true;
-            if(a)
-                CheckStatus();;
+            if(a) {
+                CheckStatus();
+            }
+            ;
         });
     }
 

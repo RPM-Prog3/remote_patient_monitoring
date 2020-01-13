@@ -3,7 +3,6 @@ import Application_Server_Interface.Data.User;
 import GUI.Main_Frame;
 import GUI.UserLogIn;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class Application_Main {
