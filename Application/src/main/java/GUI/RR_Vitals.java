@@ -35,8 +35,8 @@ public class RR_Vitals extends Vital_Values_Display{
         });
     }
 
-    public int getMean(){
-        return (int)resp_val_counter.getMean(0);
+    public double getMean(){
+        return resp_val_counter.getMean(0);
     }
 
     protected void CheckStatus() {

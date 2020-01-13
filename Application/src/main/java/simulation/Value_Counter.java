@@ -26,7 +26,6 @@ public abstract class Value_Counter {
             minuteMean_int = minuteSum_int / counter_values;
             minuteSum_int = 0;
             counter_values = 0;
-            System.out.println(minuteMean_int);
         }
 
         return minuteMean_int;
@@ -37,7 +36,6 @@ public abstract class Value_Counter {
             minuteMean_dou = minuteSum_dou / counter_values;
             minuteSum_dou = 0;
             counter_values = 0;
-            System.out.println( Math.round((minuteMean_dou/166) * 1000.0)/1000.0);
         }
 
         return minuteMean_dou;
@@ -50,8 +48,6 @@ public abstract class Value_Counter {
             minuteSum_int = 0;
             minuteSum_int2 = 0;
             counter_values = 0;
-            System.out.println(minuteMean_array[0]);
-            System.out.println(minuteMean_array[1]);
         }
 
         return minuteMean_array;
@@ -61,7 +57,7 @@ public abstract class Value_Counter {
         all_mean_array[0] = minuteMean_int;  //This is the mean for bpm and resp
         all_mean_array[1] = minuteMean_array[0];  //This is the mean for the max of the pressure
         all_mean_array[2] = minuteMean_array[1];  //This is the mean for the min of the pressure
-        all_mean_array[4] = minuteMean_dou;  //This is the mean for the temp
+        all_mean_array[3] = minuteMean_dou;  //This is the mean for the temp
 
         return all_mean_array[index];
     }
