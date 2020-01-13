@@ -1,7 +1,6 @@
 package Graphing;
 
 import GUI.*;
-import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import simulation.*;
 
@@ -10,14 +9,16 @@ import java.awt.*;
 public class Overall_Graph {
     private JFXPanel graph_panel;  //Overall panel with the four graphs
     private Graph graphECG, graphBPress, graphResp, graphTemp;  //These are the four different graphs
-    private Thread refreshing1,refreshing2, refreshing3, refreshing4;  //These creates four different threads
     private Value_Counter bpm_obj, press_counting_obj, resp_counting_obj, temp_counting_obj;
+
+    private Refresh refreshing;
+    private Thread thread_graphs;  //These creates a different thread for the graphs
 
     private ECG ecgdata;
     private ECG_Vitals ecg_vit;
 
     private Body_Temp tempdata;
-    private HR_Vitals temp_vit; //HR is actually temperature
+    private TEMP_Vitals temp_vit; //HR is actually temperature
 
     private Blood_Pressure pressuredata;
     private BP_Vitals pressure_vit;
@@ -25,7 +26,10 @@ public class Overall_Graph {
     private Resp_Rate respdata;
     private RR_Vitals resp_vit;
 
-    public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input,Temperature_Counting temp_counting_obj_input, HR_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
+    private String ecg_type = "normal";
+
+    public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input, Temperature_Counting temp_counting_obj_input, TEMP_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
+
         //Temperature
         tempdata = new Body_Temp(37, 0.01, 0.5);
         temp_vit = temp_vit_input;
@@ -37,22 +41,15 @@ public class Overall_Graph {
         bpm_obj = ecg_obj_input;
 
         //Pressure
-        pressuredata = new Blood_Pressure();
+        pressuredata = new Blood_Pressure(0.6, 0.15, 0.25, 100, 1);
         pressure_vit = pressure_vit_input;
         press_counting_obj = press_counting_obj_input;
 
         //Respiratory
-        respdata = new Resp_Rate(50, 2.0, -0.95, 20);
+        //Decrease the period to increase Respiratory Rate
+        respdata = new Resp_Rate(50, 1.0, -0.95, 125);
         resp_vit = resp_vit_input;
         resp_counting_obj = resp_counting_obj_input;
-
-        //Just a sine used for check up and debugging, don't need it
-//        double[] sin_array = new double[13000];
-//        int index_counter = 0;
-//        for (double i = 0; i < 1299.9; i += 0.1) {
-//            sin_array[index_counter] = Math.sin(i);
-//            index_counter += 1;
-//        }
 
         graph_panel = new JFXPanel();
         graph_panel.setLayout(new GridLayout(4, 1));
@@ -71,27 +68,54 @@ public class Overall_Graph {
         graphBPress.setGraph();
         graphResp.setGraph();
         graphTemp.setGraph();
-        //System.out.println(Arrays.toString(respdata.get_array()));
+
+        //Instantiating the thread sub-class
+        refreshing = new Refresh (graphECG, graphBPress, graphResp, graphTemp, ecg_vit, pressure_vit, resp_vit, temp_vit);
 
     }
 
-    public void updatePanel() {
-        //Running four separate threads, one for each graph
-        refreshing1 = new Thread (new Refresh(graphECG, ecg_vit));
-        refreshing2 = new Thread (new Refresh (graphBPress, pressure_vit));
-        refreshing3 = new Thread (new Refresh (graphResp, resp_vit));
-        refreshing4 = new Thread (new Refresh (graphTemp, temp_vit));
+    public void simulate() {
+        //Running the four graphs on a separate thread
+        thread_graphs = new Thread(refreshing);
 
         //This makes sure that the program doesn't have to wait for each thread to be run
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run () {
-                refreshing1.start();
-                refreshing2.start();
-                refreshing3.start();
-                refreshing4.start();
-            }
-        });
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run () {
+                thread_graphs.start();
+//            }
+//        });
+    }
+
+    public void switchStopStart(){
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run () {
+                refreshing.switchRun();
+//            }
+//        });
+    }
+
+    public void stopTheThread(){
+        refreshing.stopThread();
+    }
+
+    public void changeTimeWindow(int val){
+        graphECG.changeTimeWindow(val);
+        graphBPress.changeTimeWindow(val);
+        graphResp.changeTimeWindow(val);
+        graphTemp.changeTimeWindow(val);
+    }
+
+    public void changeECGAbnormality(int newType, int which_vital){
+        if (which_vital == 1)
+            graphECG.changeAbnormality(newType);
+        if (which_vital == 2)
+            graphBPress.changeAbnormality(newType);
+        if (which_vital == 3)
+            graphResp.changeAbnormality(newType);
+        if (which_vital == 4)
+            graphTemp.changeAbnormality(newType);
     }
 
     public JFXPanel getGraphPanel() {

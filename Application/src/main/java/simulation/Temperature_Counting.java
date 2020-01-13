@@ -13,23 +13,30 @@ public class Temperature_Counting extends Value_Counter {
     }
 
     public void Current_Temp(double val){
+        super.counter_time += 1;
+
+        temp_counter += 1;
         if (temp_counter <= 166)
             avrg_temp += val;
         if (temp_counter == 167){
-            temp_displayed = avrg_temp;
-            temp_counter = -1;
-            avrg_temp = 0;
+            temp_displayed = avrg_temp/166;
+            super.minuteSum_dou += rounded_temperature();
+            super.counter_values += 1;
+            temp_counter = 1;
+            avrg_temp = val;
         }
-        temp_counter += 1;
+
+        mean_counter(1.0);
+    }
+
+    public double rounded_temperature(){
+        return Math.round(temp_displayed * 1000.0)/1000.0;
     }
 
     public void Count_bpm(double val, int index){}
 
-    public int Index_Difference(){ return 0; }
+//    public double Double_Value(){
+//        return temp_displayed/166;
+//    }
 
-    public double Double_Value(){
-        return temp_displayed/166;
-    }
-
-    public int[] Max_Min(){ return null;}
 }
