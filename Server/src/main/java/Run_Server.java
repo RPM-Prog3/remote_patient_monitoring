@@ -21,6 +21,8 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -71,7 +73,7 @@ public class Run_Server extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         switch (uri) {
             case "/Server/rpm": {
-                write_file("landing.ejs", writer, false, false, "");
+                write_file("landing.ejs", writer, false, false);
                 break;
             }
             case "/Server/rpm/login": {
@@ -84,7 +86,7 @@ public class Run_Server extends HttpServlet {
                         login_error = true;
                     }
                 }
-                write_file("login.ejs", writer, false, login_error, "");
+                write_file("login.ejs", writer, false, login_error);
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
                 if (username != null || password != null) {
@@ -103,16 +105,12 @@ public class Run_Server extends HttpServlet {
                 break;
             }
             case "/Server/rpm/mypatients": {
-                write_file("patientlist.ejs", writer, true,false, "");
+                write_file("patientlist.ejs", writer, true,false);
                 break;
             }
             case "/Server/rpm/summary": {
-
                 String id = req.getParameter("id");
-
-                // check id isnt null or empty
-
-                write_file("summary.ejs", writer, false,false, id); //add here get values
+                write_patients_summary("summary.ejs", writer, id); //add here get values
                 break;
             }
         }
@@ -246,7 +244,78 @@ public class Run_Server extends HttpServlet {
         System.out.println("Current time: " + strDate);
     }
 
-    private void write_file(String file_name, PrintWriter writer, boolean add_to_table, boolean error_login, String id){
+    private void write_patients_summary(String file_name, PrintWriter writer, String id) throws FileNotFoundException {
+        if (id != null) {
+            if (!id.isEmpty()) {
+                try {
+                    String pv_json = patient_values_db.get_patient_value_by_id(id);
+                    Gson gson = new Gson();
+                    String[][] patient_values = gson.fromJson(pv_json, String[][].class);
+                    if (patient_values.length > 0) {
+                        String file_path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/web_app/" + file_name;
+                        FileInputStream input_stream = new FileInputStream(file_path);
+                        Scanner scan = new Scanner(input_stream);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                        while (scan.hasNextLine()) {
+                            String str = scan.nextLine();
+                            if (str.equals("#temperature#")) {
+                                for (int i = 0; i < patient_values.length; i++) {
+                                    LocalDateTime time = Patient_Value.iso_string_to_datetime(patient_values[i][2]);
+                                    writer.println(String.format("['%s',%s],", time.format(formatter), patient_values[i][5])); // Datetime and corresponding temperature
+                                }
+                            } else if (str.equals("#resprate#")) {
+                                for (int i = 0; i < patient_values.length; i++) {
+                                    LocalDateTime time = Patient_Value.iso_string_to_datetime(patient_values[i][2]);
+                                    writer.println(String.format("['%s',%s],", time.format(formatter), patient_values[i][4])); // Datetime and corresponding respiratory rate
+                                }
+                            } else if (str.equals("#heartrate#")) {
+                                for (int i = 0; i < patient_values.length; i++) {
+                                    LocalDateTime time = Patient_Value.iso_string_to_datetime(patient_values[i][2]);
+                                    writer.println(String.format("['%s',%s],", time.format(formatter), patient_values[i][3])); // Datetime and corresponding heart rate
+                                }
+                            } else if (str.equals("#pressurevalues#")) {
+                                for (int i = 0; i < patient_values.length; i++) {
+                                    LocalDateTime time = Patient_Value.iso_string_to_datetime(patient_values[i][2]);
+                                    writer.println(String.format("['%s',%s,%s],", time.format(formatter), patient_values[i][6], patient_values[i][7])); // Datetime and corresponding pressure values
+                                }
+                            } else if (str.equals("#col#")) {
+                                writer.println("<th scope=\"col\">ID</th>");
+                                writer.println("<th scope=\"col\">First Name</th>");
+                                writer.println("<th scope=\"col\">Last Name</th>");
+                                writer.println("<th scope=\"col\">Birth of Date</th>");
+                                writer.println("<th scope=\"col\">Email</th>");
+                                writer.println("<th scope=\"col\">Phone Number</th>");
+                            } else if (str.equals("#row#")) {
+                                String patients_json = patient_db.get_patient_by_id(id);
+                                String[][] patients = gson.fromJson(patients_json, String[][].class);
+                                assert patients.length == 1 : "Only one patient can be retrieved from the patients db";
+                                writer.println("<tr>");
+                                writer.println(String.format("<td>%s</td>", patients[0][0])); // the idx need to be retrieved from the database
+                                writer.println(String.format("<td>%s</td>", patients[0][2])); // First name
+                                writer.println(String.format("<td>%s</td>", patients[0][1])); // Last Name
+                                writer.println(String.format("<td>%s</td>", patients[0][3])); // Birth of Date
+                                writer.println(String.format("<td>%s</td>", patients[0][4])); // Email
+                                writer.println(String.format("<td>%s</td>", patients[0][5])); // Phone Number
+                                writer.println("</tr>");
+
+                            }
+
+                            else {
+                                writer.println(str);
+                            }
+                        }
+                    }
+                } catch (SQLException sql_e){
+                    sql_e.printStackTrace();
+                    System.out.println("Invalid user");
+                }
+
+
+            }
+        }
+    }
+
+    private void write_file(String file_name, PrintWriter writer, boolean add_to_table, boolean error_login){
         try {
             String file_path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/web_app/" + file_name;
 
@@ -277,7 +346,6 @@ public class Run_Server extends HttpServlet {
                             writer.println(String.format("<td>%s</td>", patients[i][5])); // Phone Number
                             writer.println("</tr>");
                         }
-
                     } else {
                         writer.println(str);
                     }
@@ -286,71 +354,14 @@ public class Run_Server extends HttpServlet {
                     String str = scan.nextLine();
                     if (str.equals("#error#")) {
                         writer.println("<p1><font color=\"red\">Credentials not recognized! Please try again. </font></p1>");
-                    }
-                    else {
+                    } else {
                         writer.println(str);
                     }
-                } else if (!id.isEmpty()) {
-                    String str = scan.nextLine();
-                    System.out.println(str);
-
-                    String pv_json = patient_values_db.get_patient_value_by_id(id);
-                    System.out.println(pv_json);
-                    Gson gson = new Gson();
-                    String[][] patient_values = gson.fromJson(pv_json, String[][].class);
-
-
-                    if (str.equals("#temperature#")) {
-
-                        for (int i = 0; i < patient_values.length; i++) {
-
-                            writer.println(String.format("[%s,%s],", patient_values[i][2], patient_values[i][5])); // Datetime and corresponding temperature
-                        }
-
-                    }
-//                     else if (str.equals("#resprate#")){
-
-//                    for (int i = 0; i < patient_values.length; i++) {
-//
-//                        writer.println(String.format("[%s,%s],", patient_values[i][2], patient_values[i][4])); // Datetime and corresponding respiratory rate
-//                    }
-
-//                    }
-//
-//                    else if (str.equals("#heartrate#")) {
-
-//                    for (int i = 0; i < patient_values.length; i++) {
-//
-//                        writer.println(String.format("[%s,%s],", patient_values[i][2], patient_values[i][3])); // Datetime and corresponding heart rate
-                    }
-//
-//
-//                    }
-//
-//                    else if (str.equals("#pressurevalues#")){
-//
-//                    for (int i = 0; i < patient_values.length; i++) {
-//
-//                        writer.println(String.format("[%s,%s,%s],", patient_values[i][2], patient_values[i][6], patient_values[i][7])); // Datetime and corresponding pressure values
-//                    }
-//
-//                    }
-
-                    else {
-                        writer.println(str);
-                    }
-
-
-
-
-
-                }
-                else {
+                } else {
                     String str = scan.nextLine();
                     if (!str.equals("#error#")) {
                         writer.println(str);
-                    }
-                    else {
+                    } else {
                         writer.println(scan.nextLine());
                     }
                 }

@@ -8,7 +8,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Remote Patient Monitoring</a>
+  <a class="navbar-brand" href="/Server/rpm/mypatients">Remote Patient Monitoring</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -38,45 +38,21 @@
         function drawChart() {
           var data1 = google.visualization.arrayToDataTable([
             ['Time', 'HeartRate (bpm)'],
-            ['8',  65],
-            ['9',  70],
-            ['10',  75],
-            ['11',  62],
-            ['12',  88],
-            ['13',  71],
-            ['14',  77],
 #heartrate#
           ]);
 
           var data2 = google.visualization.arrayToDataTable([
             ['Time', 'Respiratory Rate (breaths/min)'],
-            ['8', 16],
-            ['9', 15],
-            ['10', 17],
-            ['11',18],
-            ['12',16],
-            ['13',12],
-            ['14',15],
 #resprate#
-
           ]);
 
           var data3 = google.visualization.arrayToDataTable([
             ['Time (hours)', 'Temperature (*C)'],
-            ['14',15],
-            ['15',16],
 #temperature#
           ]);
 
           var data4 = google.visualization.arrayToDataTable([
             ['Time (hours)', 'Systolic Pressure (mmHg)', 'Diastolic Pressure (mmHg)'],
-            ['8', 120,80],
-            ['9',  122, 82],
-            ['10',  116, 77],
-            ['11',  119, 80],
-            ['12',  120, 84],
-            ['13', 121,86],
-            ['14', 130, 89],
 #pressurevalues#
           ]);
 
@@ -180,30 +156,15 @@
     <table class="table">
       <thead class="thead-dark">
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Warning/Remarks</th>
+#col#
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <th scope="row">210291</th>
-        <td>Marc</td>
-        <td>Berbari</td>
-        <td>marcberbari@hotmail.com</td>
-      </tr>
-      <tr>
-      </tr>
+#row#
       </tbody>
     </table>
-
       </div>
-
     </body>
     </html>
-
-
   </body>
 </html>
