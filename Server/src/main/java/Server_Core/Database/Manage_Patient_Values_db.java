@@ -94,4 +94,11 @@ public class Manage_Patient_Values_db extends Manage_db{
         return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
     }
 
+    public String get_abnormalities_by_id(String id) throws SQLException {
+        String sql_get_patients = String.format("SELECT * FROM %s WHERE patient_id = %s AND abnormality <> '';", table_name, id);
+        String exception_msg = String.format("Unable to get patient abnormality %s from %s", id, table_name);
+        String[] rs_strings = {"datetime", "abnormality"};
+        return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
+    }
+
 }
