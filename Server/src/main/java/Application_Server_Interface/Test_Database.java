@@ -75,11 +75,7 @@ public class Test_Database {
         now = LocalDateTime.now();
         pv = new Patient_Value("1", now,
                 62, 21, 37.3,
-<<<<<<< HEAD
-                179, 91, "");
-=======
                 179, 91, "warning ecg;");
->>>>>>> 1eb06465563a44e98644d30bbc7fe5282ba76591
         Server_Messenger msg_test_5b = cm.send_patient_value_to_pv_db(pv, login_user);
         System.out.println("test5: " + msg_test_5b.get_valid_user() + " - " + msg_test_5b.get_message());
         assert msg_test_5b.get_success() : "Failed to add patient value to patient values database";

@@ -59,8 +59,4 @@ public class Manage_Patient_db extends Manage_db {
         String[] rs_strings = {"id", "familyname", "givenname", "dofbirth", "email", "phonenumber"};
         return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1eb06465563a44e98644d30bbc7fe5282ba76591

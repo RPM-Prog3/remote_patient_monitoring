@@ -297,12 +297,6 @@ public class Run_Server extends HttpServlet {
                                 writer.println(String.format("<td>%s</td>", patients[0][4])); // Email
                                 writer.println(String.format("<td>%s</td>", patients[0][5])); // Phone Number
                                 writer.println("</tr>");
-<<<<<<< HEAD
-
-                            }
-
-                            else {
-=======
                             } else if (str.equals("#col-abnorm#")){
                                 writer.println("<th scope=\"col\">Time</th>");
                                 writer.println("<th scope=\"col\">Abnormality</th>");
@@ -317,7 +311,6 @@ public class Run_Server extends HttpServlet {
                                     writer.println("</tr>");
                                 }
                             } else {
->>>>>>> 1eb06465563a44e98644d30bbc7fe5282ba76591
                                 writer.println(str);
                             }
                         }
@@ -338,11 +331,7 @@ public class Run_Server extends HttpServlet {
 
             FileInputStream input_stream = new FileInputStream(file_path);
             Scanner scan = new Scanner(input_stream);
-<<<<<<< HEAD
             while(scan.hasNextLine()){
-=======
-                while(scan.hasNextLine()){
->>>>>>> 1eb06465563a44e98644d30bbc7fe5282ba76591
                 if (add_to_table) {
                     // assert orrect url
                     String str = scan.nextLine();
