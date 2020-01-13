@@ -1,4 +1,4 @@
-import GUI.BP_Vitals;
+/*import GUI.BP_Vitals;
 import GUI.ECG_Vitals;
 import GUI.RR_Vitals;
 import GUI.TEMP_Vitals;
@@ -79,4 +79,4 @@ public class Test_Simulation {
             Assert.assertTrue("Body temperature rate cannot be lower or equal than " + min_tmp, temp_vitals.get_temp_val() >= min_tmp);
         }
     }
-}
+}*/

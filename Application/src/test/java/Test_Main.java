@@ -1,4 +1,4 @@
-public class Test_Main {
+/*public class Test_Main {
     public static void main(String[] args){
         Test_Simulation test1 =  new Test_Simulation();
         test1.Test_ECG();
@@ -13,3 +13,4 @@ public class Test_Main {
     }
 
 }
+*/
