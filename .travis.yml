@@ -14,6 +14,8 @@ jobs:
       before_script:
         - psql -c 'create database travis_test_db;' -U postgres
       script:
+	- chmod +x Scripts/server_config.sh
+	- bash ./Scripts/server_config.sh
         - chmod +x Scripts/server_build.sh
         - bash ./Scripts/server_build.sh
         - echo "Completed Server Build"
