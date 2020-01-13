@@ -28,20 +28,20 @@ public class Test_Status {
     int stable_status, warning_status, urgent_status;
 
     /**
-    @Test
-    public void Stable_Status_Test(){
-        ecg_vitals = new ECG_Vitals(rand_dim, bpm,exe);
-        bp_vitals = new BP_Vitals(rand_dim, bp_counter,exe);
-        rr_vitals = new RR_Vitals(rand_dim, rr_counter,exe);
-        temp_vitals = new TEMP_Vitals(rand_dim, temp_counter,exe);
-        warning_status = 1;
-        urgent_status = 2;
-        stable_status = 3;
-        if (ecg_vitals.getBPM() == 0 && (bp_vitals.get_d_pressure() == 0 && bp_vitals.get_s_pressure() == 0) && rr_vitals.getRR_value() == 0 && temp_vitals.get_temp_val() == 0){}
-        else {
-            Assert.assertTrue("The status should be STABLE if the values are within normal range.", ecg_vitals.getStatus() == 3 && ecg_vitals.getStatus_msg().getText().equals("STABLE"));
-        }
-    }
+     @Test
+     public void Stable_Status_Test(){
+     ecg_vitals = new ECG_Vitals(rand_dim, bpm,exe);
+     bp_vitals = new BP_Vitals(rand_dim, bp_counter,exe);
+     rr_vitals = new RR_Vitals(rand_dim, rr_counter,exe);
+     temp_vitals = new TEMP_Vitals(rand_dim, temp_counter,exe);
+     warning_status = 1;
+     urgent_status = 2;
+     stable_status = 3;
+     if (ecg_vitals.getBPM() == 0 && (bp_vitals.get_d_pressure() == 0 && bp_vitals.get_s_pressure() == 0) && rr_vitals.getRR_value() == 0 && temp_vitals.get_temp_val() == 0){}
+     else {
+     Assert.assertTrue("The status should be STABLE if the values are within normal range.", ecg_vitals.getStatus() == 3 && ecg_vitals.getStatus_msg().getText().equals("STABLE"));
+     }
+     }
      */
 
     @Test
