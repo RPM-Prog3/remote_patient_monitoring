@@ -19,7 +19,7 @@ public class Temperature_Counting extends Value_Counter {
         if (temp_counter <= 166)
             avrg_temp += val;
         if (temp_counter == 167){
-            temp_displayed = avrg_temp;
+            temp_displayed = avrg_temp/166;
             super.minuteSum_dou += rounded_temperature();
             super.counter_values += 1;
             temp_counter = 1;
@@ -30,7 +30,7 @@ public class Temperature_Counting extends Value_Counter {
     }
 
     public double rounded_temperature(){
-        return Math.round((temp_displayed/166) * 1000.0)/1000.0;
+        return Math.round(temp_displayed * 1000.0)/1000.0;
     }
 
     public void Count_bpm(double val, int index){}

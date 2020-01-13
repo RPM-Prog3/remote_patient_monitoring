@@ -37,8 +37,8 @@ public class BP_Vitals extends Vital_Values_Display {
         });
     }
 
-    public int[] getMean(){
-        int[] array = new int[] {(int)press_val_counter.getMean(1), (int)press_val_counter.getMean(2)};
+    public double[] getMean(){
+        double[] array = new double[] {press_val_counter.getMean(1), press_val_counter.getMean(2)};
         return array;
     }
 
