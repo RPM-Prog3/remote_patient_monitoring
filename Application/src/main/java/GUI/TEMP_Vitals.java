@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import simulation.Temperature_Counting;
 
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
 
 public class TEMP_Vitals extends Vital_Values_Display {
     private Temperature_Counting temp_val_counter;
@@ -12,8 +13,8 @@ public class TEMP_Vitals extends Vital_Values_Display {
     private double i_value;
     private boolean a;
 
-    public TEMP_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj){
-        super(vitals_panel_dim, "label-Temperature");
+    public TEMP_Vitals(Dimension vitals_panel_dim, Temperature_Counting obj, ExecutorService exe){
+        super(vitals_panel_dim, "label-Temperature", exe);
         super.status_msg.setText("STABLE");
         super.vital_type.setText("TEMP");
         String units = "C";
@@ -32,8 +33,10 @@ public class TEMP_Vitals extends Vital_Values_Display {
             i_value = Double.parseDouble(value);
             if (i_value != 0)
                 a = true;
-            if(a)
-                CheckStatus();;
+            if(a) {
+                CheckStatus();
+            }
+            ;
         });
     }
 

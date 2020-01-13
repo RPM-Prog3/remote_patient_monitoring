@@ -7,6 +7,7 @@ import simulation.Value_Counter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
 
 public class ECG_Vitals extends Vital_Values_Display {
     private BPM ecg_val_counter;
@@ -14,9 +15,10 @@ public class ECG_Vitals extends Vital_Values_Display {
     private int i_value;
     private Blinking blinking_state;
     private boolean a;
+    private int status;
 
-    public ECG_Vitals(Dimension vitals_panel_dim, BPM obj){
-        super(vitals_panel_dim, "label-ECG");
+    public ECG_Vitals(Dimension vitals_panel_dim, BPM obj, ExecutorService exe){
+        super(vitals_panel_dim, "label-ECG", exe);
         super.status_msg.setText("STABLE");
         super.vital_type.setText("ECG");
         super.units_label.setText("BPM");
@@ -33,8 +35,9 @@ public class ECG_Vitals extends Vital_Values_Display {
             i_value = Integer.parseInt(value);
             if (i_value != 0)
                 a = true;
-            if(a)
+            if(a) {
                 CheckStatus();
+            }
         });
     }
 
@@ -42,14 +45,17 @@ public class ECG_Vitals extends Vital_Values_Display {
         return ecg_val_counter.getMean(0);
     }
 
-    protected void CheckStatus(){
+    protected void CheckStatus() {
         if ((i_value > 80 && i_value < 120) || (i_value < 50 && i_value > 40)) {
+            status = 1;
             warning();
         }
         else if ((i_value <= 40) || (i_value >= 120)){
+            status = 2;
             urgent();
         }
         else{
+            status = 3;
             stable();
         }
     }
@@ -57,4 +63,9 @@ public class ECG_Vitals extends Vital_Values_Display {
     public int getBPM(){
         return  i_value;
     }
+
+    public int getStatus(){
+        return status;
+    }
+
 }
