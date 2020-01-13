@@ -1,21 +1,27 @@
 package GUI;
 
 import Graphing.Overall_Graph;
+import Tuning.Tuning_Panel;
 import javafx.embed.swing.JFXPanel;
 import simulation.*;
 
-import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Panel_Controller {
     private JFXPanel mainPanel, simulationPanel, tuningPanel, vitalsPanel;
     private JFXPanel graphPanel;
     private Overall_Graph graphs;
+    private Tuning_Panel tunings;
+
     private BP_Vitals BP_panel;
     private RR_Vitals RR_panel;
     private ECG_Vitals ECG_panel;
-    private HR_Vitals HR_panel;
+    private TEMP_Vitals HR_panel;
+
     private Border border;
     private int s_v_ratio_num, s_v_ratio_den, s_t_ratio_num, s_t_ratio_den;
     private Dimension graph_panel_dim, simulation_panel_dim, main_panel_dim_, sub_vitals_panel_dim;
@@ -25,7 +31,12 @@ public class Panel_Controller {
     private Respiration_Counting resp_counter;
     private Temperature_Counting temp_counter;
 
+    private ExecutorService exe;
+
     public Panel_Controller(Dimension main_panel_dim) {
+        // Instatiating executor which will contain refresh and blinking runnables
+        exe = Executors.newFixedThreadPool(5);
+
         // Instantiating objects to display value
         bpm_counter = new BPM();
         press_counter = new Pressure_Counting();
@@ -45,9 +56,9 @@ public class Panel_Controller {
         s_t_ratio_den = 10; //simulation panel to tuning panel denominator value of ratio (in height)
 
         // Setting the layout of the main panel and of the several sub panels
-        mainPanel.setLayout(new BorderLayout());
-        simulationPanel.setLayout(new BorderLayout());
-        vitalsPanel.setLayout(new GridLayout(4, 1));
+        mainPanel.setLayout(new BorderLayout(0,0));
+        simulationPanel.setLayout(new BorderLayout(0,0));
+        vitalsPanel.setLayout(new GridLayout(4, 1, 0,0));
 
         // Making the various visible
         mainPanel.setVisible(true);
@@ -56,12 +67,12 @@ public class Panel_Controller {
         vitalsPanel.setVisible(true);
 
         // Instantiating border object(s)
-        border = BorderFactory.createLineBorder(Color.black);
+        //border = BorderFactory.createLineBorder(Color.black);
 
         // Setting contours of the different panels
-        simulationPanel.setBorder(border);
-        tuningPanel.setBorder(border);
-        vitalsPanel.setBorder(border);
+        //simulationPanel.setBorder(border);
+        //tuningPanel.setBorder(border);
+        //vitalsPanel.setBorder(border);
 
         // Calculating the size of the sub panels of vitals panel that will contain the values
         // of the vital signs. This is then fed into the constructor of the various vital signs classes.
@@ -69,16 +80,20 @@ public class Panel_Controller {
         sub_vitals_panel_dim.width = (int)((main_panel_dim_.width*(s_v_ratio_den - s_v_ratio_num))/(s_v_ratio_den));
         sub_vitals_panel_dim.height = (int)((main_panel_dim_.height*s_t_ratio_num)/(s_v_ratio_den*4));
 
-        BP_panel = new BP_Vitals(sub_vitals_panel_dim, press_counter);
-        RR_panel = new RR_Vitals(sub_vitals_panel_dim, resp_counter);
-        ECG_panel = new ECG_Vitals(sub_vitals_panel_dim, bpm_counter);
-        HR_panel = new HR_Vitals(sub_vitals_panel_dim, temp_counter);
+        BP_panel = new BP_Vitals(sub_vitals_panel_dim, press_counter, exe);
+        RR_panel = new RR_Vitals(sub_vitals_panel_dim, resp_counter, exe);
+        ECG_panel = new ECG_Vitals(sub_vitals_panel_dim, bpm_counter, exe);
+        HR_panel = new TEMP_Vitals(sub_vitals_panel_dim, temp_counter, exe);
 
-        // Instantiating graph panel
-        graphs = new Overall_Graph(bpm_counter, ECG_panel, temp_counter, HR_panel,press_counter, BP_panel, resp_counter, RR_panel);
+        // Instantiating graphs and Setting graphPanel
+        graphs = new Overall_Graph(bpm_counter, ECG_panel, temp_counter, HR_panel,press_counter, BP_panel, resp_counter, RR_panel, exe);
         graphPanel = graphs.getGraphPanel();
-        graphPanel.setLayout(new GridLayout(4, 1));
+        graphPanel.setLayout(new GridLayout(4, 1,0,0));
         graphPanel.setVisible(true);
+
+        // Instantiating tunings and Setting tuningPanel
+        tunings = new Tuning_Panel(graphs);
+        tuningPanel = tunings.getTuningPanel();
 
         // Adding vital sign (BP, RR, HR, ECG) panels to vitalsPanel
         vitalsPanel.add(ECG_panel.getVitalsPanel());
@@ -96,8 +111,7 @@ public class Panel_Controller {
 
         // Adding simulationPanel and tuningPanel the main panel
         mainPanel.add(simulationPanel, BorderLayout.PAGE_START);
-        mainPanel.add(tuningPanel, BorderLayout.PAGE_END);
-
+        mainPanel.add(tuningPanel, BorderLayout.CENTER);
     }
 
     public JFXPanel getMainPanel() {
@@ -130,8 +144,37 @@ public class Panel_Controller {
 //        RR_panel.setVitals_value_displaySize(sub_vitals_panel_dim);
     }
 
-    public void updateController() {
-        graphs.updatePanel();
-        graphPanel = graphs.getGraphPanel();
+    public double[] getMeans(){
+        double[] array = new double[5];
+        array[0] = ECG_panel.getMean();
+        array[1] = BP_panel.getMean()[0];
+        array[2] = BP_panel.getMean()[1];
+        array[3] = RR_panel.getMean();
+        array[4] = HR_panel.getMean();
+        return array;
+    }
+
+    public void startSimulation() {
+        graphs.simulate();
+//        graphPanel = graphs.getGraphPanel();
+    }
+
+    public void closeProgram(){
+        graphs.stopTheThread();
+        ECG_panel.stopThread();
+        BP_panel.stopThread();
+        RR_panel.stopThread();
+        HR_panel.stopThread();
+        System.out.println("yepsi depsi");
+        exe.shutdown();
+        try {
+            exe.awaitTermination(10, TimeUnit.MINUTES);
+            exe.shutdownNow();
+        }catch (InterruptedException e){
+        };
+        if (exe.isShutdown()) {
+            System.out.println("tarantella");
+            System.exit(0);
+        }
     }
 }

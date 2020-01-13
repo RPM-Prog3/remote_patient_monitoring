@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>RPM: Detailed Summary</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/Server/rpm/mypatients">Remote Patient Monitoring</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Detailed Summary</a>
+      </li>
+
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+    <head>
+
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var data1 = google.visualization.arrayToDataTable([
+            ['Time', 'HeartRate (bpm)'],
+#heartrate#
+          ]);
+
+          var data2 = google.visualization.arrayToDataTable([
+            ['Time', 'Respiratory Rate (breaths/min)'],
+#resprate#
+          ]);
+
+          var data3 = google.visualization.arrayToDataTable([
+            ['Time (hours)', 'Temperature (*C)'],
+#temperature#
+          ]);
+
+          var data4 = google.visualization.arrayToDataTable([
+            ['Time (hours)', 'Systolic Pressure (mmHg)', 'Diastolic Pressure (mmHg)'],
+#pressurevalues#
+          ]);
+
+
+          var options1 = {
+            title: ' My Health Performance regarding my Heart Rate',
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            colors: ['#d6e00e']
+          };
+
+          var options2 = {
+            title: ' My Health Performance regarding my Respiratory Rate',
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            colors: ['#2ae00e']
+          };
+
+          var options3 = {
+            title: ' My Health Performance regarding my Body Temperature',
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            colors: ['#e00ed6']
+          };
+
+          var options4 = {
+            title: ' My Health Performance regarding my Blood Pressure',
+            curveType: 'function',
+            legend: { position: 'bottom' },
+
+          };
+
+          var chart1 = new google.visualization.LineChart(document.getElementById('curve_chart1'));
+          var chart2 = new google.visualization.LineChart(document.getElementById('curve_chart2'));
+          var chart3 = new google.visualization.LineChart(document.getElementById('curve_chart3'));
+          var chart4 = new google.visualization.LineChart(document.getElementById('curve_chart4'));
+          chart1.draw(data1, options1);
+          chart2.draw(data2,options2);
+          chart3.draw(data3,options3);
+          chart4.draw(data4,options4);
+        }
+      </script>
+
+    </head>
+<!--    <body>-->
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .column {
+        float: left;
+        width: 50%;
+        padding: 5px;
+      }
+
+      /* Clearfix (clear floats) */
+      .row1::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      .row2::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+    </style>
+
+    <div class="row1">
+      <div class="column">
+        <div div id="curve_chart1" style="width:100%"; style="color: chartreuse" ></div>
+    </div>
+      <div class="column">
+        <div  div id="curve_chart2" style="width:100%"; style="color: darkorange"></div>
+    </div>
+    </div>
+
+    <div class="row2">
+      <div class="column">
+        <div id="curve_chart3" style="width:100%"; style="color: gold"></div>
+      </div>
+      <div class="column">
+        <div id="curve_chart4" style="width:100%" ></div>
+      </div>
+
+    </div>
+
+<!--    <div id="curve_chart1" style="top:35px;left:5px;width: 700px; height: 300px"></div>-->
+<!--    <div id="curve_chart2" style="top:35px;left: 715px;width: 700px; height: 300px"></div>-->
+<!--    <div id="curve_chart3" style="top:35px;left: 1415px;width: 700px; height: 300px"></div>-->
+<!--    <div id="curve_chart4" style="top:35px;left: 2115px;width: 700px; height: 300px"></div>-->
+<!--    </body>-->
+
+    <div class="container">
+      <div class="text-center">
+
+        <br><br><br><br><br><br>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+#col#
+      </tr>
+      </thead>
+      <tbody>
+#row#
+      </tbody>
+    </table>
+      </div>
+    </body>
+    </html>
+  </body>
+</html>

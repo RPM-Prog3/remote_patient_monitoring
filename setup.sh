@@ -6,7 +6,6 @@ echo "-----------------------------------------------"
 
 echo "Adding server_config.properties file, please add server details here."
 
-cd Server
 >server_config.properties
 
 read -p "Is this computer hosting the server or a client (regular app)? [Write y for hosting]:" hosting
