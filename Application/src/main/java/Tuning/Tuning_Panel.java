@@ -22,7 +22,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URI;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Hashtable;
 
 public class Tuning_Panel{
@@ -147,8 +149,8 @@ public class Tuning_Panel{
                 error_message = new JOptionPane();
                 try {
                     Client_Manager cm = new Client_Manager();
-                    //java.awt.Desktop.getDesktop().browse(cm.get_url());
-                } catch (IOException e) {
+                    java.awt.Desktop.getDesktop().browse(new URI(cm.get_url()));
+                } catch (IOException | URISyntaxException e) {
                     error_message.showMessageDialog(null,"Failed to open URL","Error Message", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();
                 }

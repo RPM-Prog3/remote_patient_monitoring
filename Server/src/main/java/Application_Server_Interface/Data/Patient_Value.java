@@ -107,4 +107,8 @@ public class Patient_Value {
     public static LocalDateTime iso_string_to_datetime(String time){
         return LocalDateTime.parse(time, formatter);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1eb06465563a44e98644d30bbc7fe5282ba76591
