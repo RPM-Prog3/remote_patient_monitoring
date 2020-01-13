@@ -6,11 +6,13 @@ import javafx.scene.control.Label;
 public class Blinking implements Runnable {
     private Label status, value;
     private volatile int which_status;
+    private volatile boolean running;
 
     public Blinking(Label status, Label value){
         this.status = status;
         this.value = value;
         which_status = 0;
+        running = true;
     }
 
     public void run(){
@@ -19,7 +21,7 @@ public class Blinking implements Runnable {
             boolean remove_class = false;
             boolean stable = false;
 
-            while(1<2){
+            while(running){
                 if (which_status == 0){
                     if (remove_class && !stable) {
                         status.getStyleClass().remove(4);
@@ -61,6 +63,10 @@ public class Blinking implements Runnable {
             }
 
         }catch (Exception e) {};
+    }
+
+    public void stopThread(){
+        running = false;
     }
 
     public void stable_status(){

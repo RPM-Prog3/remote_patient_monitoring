@@ -15,6 +15,7 @@ public class Application_Main {
             Main_Frame summary = new Main_Frame(login_test, patient);
             summary.sendMeanValues();
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("oops");
         };
     }

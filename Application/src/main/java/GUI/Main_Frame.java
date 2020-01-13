@@ -37,7 +37,6 @@ public class Main_Frame {
         //System.out.println(screenSize);
         //mainPage.setExtendedState(6);
         Dimension default_dim = mainPage.getSize();
-        System.out.println(default_dim);
         mainPage.setVisible(true);
         mainPage.setResizable(true);
 
@@ -49,14 +48,13 @@ public class Main_Frame {
                     controller.setPanelControllerSize(default_dim);
                     mainPage.revalidate();
                     mainPage.repaint();
-                    mainPage.setTitle("W: " + c.getWidth() + "H: " + c.getHeight());
+
                 }
                 else {
                     mainPage.setSize(mainPage.getSize());
                     controller.setPanelControllerSize(mainPage.getSize());
                     mainPage.revalidate();
                     mainPage.repaint();
-                    mainPage.setTitle("W: " + c.getWidth() + "H: " + c.getHeight());
                 }
             }
         });
@@ -71,6 +69,11 @@ public class Main_Frame {
 
         // Closing program when when main frame is closed
         mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        if (!mainPage.isActive()) {
+            System.out.println("whwbwhdjbdjerb");
+            controller.closeProgram();
+        }
 
         controller.startSimulation();
     }

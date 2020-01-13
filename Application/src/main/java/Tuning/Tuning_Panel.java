@@ -1,5 +1,8 @@
 package Tuning;
 
+import Application_Server_Interface.Manager.Client_Manager;
+import Application_Server_Interface.Messenger.Server_Messenger;
+import Application_Server_Interface.Setup.Read_server_properties;
 import GUI.BP_Vitals;
 import Graphing.Overall_Graph;
 import javafx.application.Platform;
@@ -19,6 +22,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Hashtable;
 
 public class Tuning_Panel{
@@ -39,6 +43,8 @@ public class Tuning_Panel{
 
     private Overall_Graph graphs_panel;
     private ECG ecg;
+
+    private JOptionPane error_message;
 
     public Tuning_Panel(Overall_Graph obj){
         // Instantiating and setting the Grid pane that will contain all the tuning pieces
@@ -132,6 +138,21 @@ public class Tuning_Panel{
                     abnormalities_pm.setVisible(false);
                 }
                 counter++;
+            }
+        });
+
+        patient_record.setOnAction(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                error_message = new JOptionPane();
+                try {
+                    Client_Manager cm = new Client_Manager();
+                    java.awt.Desktop.getDesktop().browse(cm.get_url());
+                } catch (IOException e) {
+                    error_message.showMessageDialog(null,"Failed to open URL","Error Message", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
+
             }
         });
 
