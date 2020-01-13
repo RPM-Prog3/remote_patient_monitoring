@@ -53,4 +53,8 @@ public class ECG_Vitals extends Vital_Values_Display {
             stable();
         }
     }
+
+    public int getBPM(){
+        return  i_value;
+    }
 }
