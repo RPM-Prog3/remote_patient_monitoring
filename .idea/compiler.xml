@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="Application.main" target="11" />
       <module name="Application.test" target="11" />
+      <module name="remote_patient_monitoring.Application.main" target="11" />
+      <module name="remote_patient_monitoring.Application.test" target="11" />
       <module name="remote_patient_monitoring.main" target="1.8" />
       <module name="remote_patient_monitoring.test" target="1.8" />
       <module name="Server.main" target="1.8" />

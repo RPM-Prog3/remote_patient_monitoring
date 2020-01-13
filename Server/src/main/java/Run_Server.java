@@ -71,7 +71,7 @@ public class Run_Server extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         switch (uri) {
             case "/Server/rpm": {
-                write_file("landing.ejs", writer, false, false);
+                write_file("landing.ejs", writer, false, false, "");
                 break;
             }
             case "/Server/rpm/login": {
@@ -84,7 +84,7 @@ public class Run_Server extends HttpServlet {
                         login_error = true;
                     }
                 }
-                write_file("login.ejs", writer, false, login_error);
+                write_file("login.ejs", writer, false, login_error, "");
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
                 if (username != null || password != null) {
@@ -103,16 +103,16 @@ public class Run_Server extends HttpServlet {
                 break;
             }
             case "/Server/rpm/mypatients": {
-                write_file("patientlist.ejs", writer, true,false);
+                write_file("patientlist.ejs", writer, true,false, "");
                 break;
             }
             case "/Server/rpm/summary": {
 
                 String id = req.getParameter("id");
-                System.out.println(id);
+
                 // check id isnt null or empty
 
-                write_file("summary.ejs", writer, false,false); //add here get values
+                write_file("summary.ejs", writer, false,false, id); //add here get values
                 break;
             }
         }
@@ -246,7 +246,7 @@ public class Run_Server extends HttpServlet {
         System.out.println("Current time: " + strDate);
     }
 
-    private void write_file(String file_name, PrintWriter writer, boolean add_to_table, boolean error_login, boolean get_values){
+    private void write_file(String file_name, PrintWriter writer, boolean add_to_table, boolean error_login, String id){
         try {
             String file_path = System.getProperty("user.dir").toString().replace("\\", "/").replace(" ", "%20") + "/web_app/" + file_name;
 
@@ -290,14 +290,60 @@ public class Run_Server extends HttpServlet {
                     else {
                         writer.println(str);
                     }
-                } else if (get_values) {
+                } else if (!id.isEmpty()) {
                     String str = scan.nextLine();
-                    if (str.equals("#temp#")){
-                        String pv_json = patient_values_db.get_patient_value_by_id(id);
-                        Gson gson = new Gson();
-                        String[][] patient_values = gson.fromJson(pv_json, String[][].class);
-                        
+                    System.out.println(str);
+
+                    String pv_json = patient_values_db.get_patient_value_by_id(id);
+                    System.out.println(pv_json);
+                    Gson gson = new Gson();
+                    String[][] patient_values = gson.fromJson(pv_json, String[][].class);
+
+
+                    if (str.equals("#temperature#")) {
+
+                        for (int i = 0; i < patient_values.length; i++) {
+
+                            writer.println(String.format("[%s,%s],", patient_values[i][2], patient_values[i][5])); // Datetime and corresponding temperature
+                        }
+
                     }
+//                     else if (str.equals("#resprate#")){
+
+//                    for (int i = 0; i < patient_values.length; i++) {
+//
+//                        writer.println(String.format("[%s,%s],", patient_values[i][2], patient_values[i][4])); // Datetime and corresponding respiratory rate
+//                    }
+
+//                    }
+//
+//                    else if (str.equals("#heartrate#")) {
+
+//                    for (int i = 0; i < patient_values.length; i++) {
+//
+//                        writer.println(String.format("[%s,%s],", patient_values[i][2], patient_values[i][3])); // Datetime and corresponding heart rate
+                    }
+//
+//
+//                    }
+//
+//                    else if (str.equals("#pressurevalues#")){
+//
+//                    for (int i = 0; i < patient_values.length; i++) {
+//
+//                        writer.println(String.format("[%s,%s,%s],", patient_values[i][2], patient_values[i][6], patient_values[i][7])); // Datetime and corresponding pressure values
+//                    }
+//
+//                    }
+
+                    else {
+                        writer.println(str);
+                    }
+
+
+
+
+
                 }
                 else {
                     String str = scan.nextLine();

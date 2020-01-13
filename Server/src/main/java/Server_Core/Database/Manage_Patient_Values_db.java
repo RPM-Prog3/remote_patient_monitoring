@@ -1,10 +1,12 @@
 package Server_Core.Database;
 
+import Application_Server_Interface.Data.Patient;
 import Application_Server_Interface.Data.Patient_Value;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class Manage_Patient_Values_db extends Manage_db{
     private String table_name = "patient_values";
@@ -51,7 +53,45 @@ public class Manage_Patient_Values_db extends Manage_db{
         execute_update(sql_add_pv, exception_msg);
     }
 
+    private void add_patient_value(int patient_id,
+                                   int bpm, int resp_rate, double body_temp,
+                                   int bp_upper, int bp_lower, String abnormality) throws SQLException{
+        String time = LocalDateTime.now().toString();
+        String sql_add_pv = String.format("insert into %s " +
+                        "(patient_id, datetime, bpm, resp_rate, body_temp, blood_pressure_upper, blood_pressure_lower, abnormality) " +
+                        "values('%s','%s','%s','%s','%s','%s','%s','%s');",
+                table_name, patient_id, time, bpm, resp_rate, body_temp, bp_upper, bp_lower, abnormality);
+        String exception_msg = String.format("Unable to add patient value to database - table: %s - %s",
+                db_url, table_name);
+        execute_update(sql_add_pv, exception_msg);
+    }
+
     public void remove_patient_value(Patient_Value pv) {
         throw new NotImplementedException();
     }
+
+    public String get_patient_values() throws SQLException {
+        String sql_get_patients = String.format("SELECT * FROM %s WHERE id >= 1", table_name);
+        String exception_msg = String.format("Unable to get patient values for all patients from %s", table_name);
+        String[] rs_strings = {"id", "patient_id", "datetime",
+                "bpm", "resp_rate", "body_temp",
+                "blood_pressure_upper", "blood_pressure_lower",
+                "abnormality"};
+        return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
+    }
+
+    public String get_patient_value_by_id(Patient patient) throws SQLException{
+        return get_patient_value_by_id(patient.get_patient_id());
+    }
+
+    public String get_patient_value_by_id(String patient_id) throws SQLException {
+        String sql_get_patients = String.format("SELECT * FROM %s WHERE id = %s", table_name, patient_id);
+        String exception_msg = String.format("Unable to get patients values for patient %s from %s", table_name);
+        String[] rs_strings = {"id", "patient_id", "datetime",
+                "bpm", "resp_rate", "body_temp",
+                "blood_pressure_upper", "blood_pressure_lower",
+                "abnormality"};
+        return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
+    }
+
 }

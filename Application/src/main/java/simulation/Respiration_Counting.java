@@ -18,6 +18,8 @@ public class Respiration_Counting extends Value_Counter{
     public void Current_Temp(double val){}
 
     public void Count_bpm(double val, int index){
+        super.counter_time += 1;
+
         if (!if_ok && val>=60) {
             peak_idx[which] = index;
             if_ok = true;
@@ -28,16 +30,21 @@ public class Respiration_Counting extends Value_Counter{
 
         if (which == 2){
             diff_samples = peak_idx[1] - peak_idx[0];
+            super.minuteSum_int += breaths_number();
+            super.counter_values += 1;
             peak_idx[0] = peak_idx[1];
             which = 1;
         }
+
+        mean_counter(1);
     }
 
-    public int Index_Difference(){
-        return diff_samples;
+    public int breaths_number(){
+        return (int)(60/(diff_samples*0.006));
     }
 
-    public double Double_Value(){ return 0; }
+//    public int Index_Difference(){
+//        return diff_samples;
+//    }
 
-    public int[] Max_Min(){ return null;}
 }

@@ -4,7 +4,18 @@ import java.io.Serializable;
 
 public class Patient implements Serializable {
 
-    String familyname, givenname, dofbirth, email, phonenumber;
+    private String patient_id, familyname, givenname, dofbirth, email, phonenumber;
+
+    public Patient(String patient_id, String familyname, String givenname,
+                   String dofbirth, String email,
+                   String phonenumber){
+        this.patient_id = patient_id;
+        this.familyname = familyname;
+        this.givenname = givenname;
+        this.dofbirth = dofbirth;
+        this.email = email;
+        this.phonenumber = phonenumber;
+    }
 
     public Patient(String familyname, String givenname,
                    String dofbirth, String email,
@@ -17,7 +28,11 @@ public class Patient implements Serializable {
     }
 
     public void print_patient_details(){
-        System.out.println(String.format("%s, %s, %s, %s, %s", familyname, givenname, dofbirth, email, phonenumber));
+        System.out.println(String.format("%s, %s, %s, %s, %s, %s", patient_id, familyname, givenname, dofbirth, email, phonenumber));
+    }
+
+    public String get_patient_id() {
+        return patient_id;
     }
 
     public String get_familyname(){
