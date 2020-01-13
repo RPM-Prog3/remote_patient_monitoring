@@ -62,14 +62,23 @@ public class Test_Database {
         System.out.println("test4: " + msg_test_4.get_valid_user() + " - " + msg_test_4.get_message());
         assert msg_test_4.get_success() : "Failed to send user to login";
 
-        // Test 5
+        // Test 5a
         LocalDateTime now = LocalDateTime.now();
-        Patient_Value pv = new Patient_Value(1, now,
+        Patient_Value pv = new Patient_Value("1", now,
                 60, 20, 37.2,
                 180, 90, "");
-        Server_Messenger msg_test_5 = cm.send_patient_value_to_pv_db(pv, login_user);
-        System.out.println("test5: " + msg_test_5.get_valid_user() + " - " + msg_test_5.get_message());
-        assert msg_test_5.get_success() : "Failed to add patient value to patient values database";
+        Server_Messenger msg_test_5a = cm.send_patient_value_to_pv_db(pv, login_user);
+        System.out.println("test5: " + msg_test_5a.get_valid_user() + " - " + msg_test_5a.get_message());
+        assert msg_test_5a.get_success() : "Failed to add patient value to patient values database";
+
+        // Test 5b
+        now = LocalDateTime.now();
+        pv = new Patient_Value("1", now,
+                62, 21, 37.3,
+                179, 91, "");
+        Server_Messenger msg_test_5b = cm.send_patient_value_to_pv_db(pv, login_user);
+        System.out.println("test5: " + msg_test_5b.get_valid_user() + " - " + msg_test_5b.get_message());
+        assert msg_test_5b.get_success() : "Failed to add patient value to patient values database";
 
         // need to add some failure cases such as adding patient value for a non-existent user.
 

@@ -28,7 +28,7 @@ public class Manage_Patient_Values_db extends Manage_db{
     }
 
     public void add_patient_value(Patient_Value pv) throws SQLException {
-        int patient_id = pv.get_patient_id();
+        String patient_id = pv.get_patient_id();
         String time = pv.get_time();
         int bpm = pv.get_bpm();
         int resp_rate = pv.get_resp_rate();
@@ -41,12 +41,12 @@ public class Manage_Patient_Values_db extends Manage_db{
                 bp_upper, bp_lower, abnormality);
     }
 
-    private void add_patient_value(int patient_id, String time,
+    private void add_patient_value(String patient_id, String time,
                                    int bpm, int resp_rate, double body_temp,
                                    int bp_upper, int bp_lower, String abnormality) throws SQLException{
         String sql_add_pv = String.format("insert into %s " +
-                "(patient_id, datetime, bpm, resp_rate, body_temp, blood_pressure_upper, blood_pressure_lower, abnormality) " +
-                "values('%s','%s','%s','%s','%s','%s','%s','%s');",
+                        "(patient_id, datetime, bpm, resp_rate, body_temp, blood_pressure_upper, blood_pressure_lower, abnormality) " +
+                        "values('%s','%s','%s','%s','%s','%s','%s','%s');",
                 table_name, patient_id, time, bpm, resp_rate, body_temp, bp_upper, bp_lower, abnormality);
         String exception_msg = String.format("Unable to add patient value to database - table: %s - %s",
                 db_url, table_name);
@@ -85,8 +85,8 @@ public class Manage_Patient_Values_db extends Manage_db{
     }
 
     public String get_patient_value_by_id(String patient_id) throws SQLException {
-        String sql_get_patients = String.format("SELECT * FROM %s WHERE id = %s", table_name, patient_id);
-        String exception_msg = String.format("Unable to get patients values for patient %s from %s", table_name);
+        String sql_get_patients = String.format("SELECT * FROM %s WHERE patient_id = %s", table_name, patient_id);
+        String exception_msg = String.format("Unable to get patients values for patient %s from %s", patient_id, table_name);
         String[] rs_strings = {"id", "patient_id", "datetime",
                 "bpm", "resp_rate", "body_temp",
                 "blood_pressure_upper", "blood_pressure_lower",
