@@ -105,4 +105,8 @@ public class ECG {
         if (val_position ==  number_zeros+n_pts)
             val_position = 0;
     }
+
+    public int getPadZeros(int target_mean){
+        return PadZeros(target_mean);
+    }
 }

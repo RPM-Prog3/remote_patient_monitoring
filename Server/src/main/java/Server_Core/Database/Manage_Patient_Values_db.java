@@ -45,8 +45,8 @@ public class Manage_Patient_Values_db extends Manage_db{
                                    int bpm, int resp_rate, double body_temp,
                                    int bp_upper, int bp_lower, String abnormality) throws SQLException{
         String sql_add_pv = String.format("insert into %s " +
-                "(patient_id, datetime, bpm, resp_rate, body_temp, blood_pressure_upper, blood_pressure_lower, abnormality) " +
-                "values('%s','%s','%s','%s','%s','%s','%s','%s');",
+                        "(patient_id, datetime, bpm, resp_rate, body_temp, blood_pressure_upper, blood_pressure_lower, abnormality) " +
+                        "values('%s','%s','%s','%s','%s','%s','%s','%s');",
                 table_name, patient_id, time, bpm, resp_rate, body_temp, bp_upper, bp_lower, abnormality);
         String exception_msg = String.format("Unable to add patient value to database - table: %s - %s",
                 db_url, table_name);
@@ -91,6 +91,13 @@ public class Manage_Patient_Values_db extends Manage_db{
                 "bpm", "resp_rate", "body_temp",
                 "blood_pressure_upper", "blood_pressure_lower",
                 "abnormality"};
+        return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
+    }
+
+    public String get_abnormalities_by_id(String id) throws SQLException {
+        String sql_get_patients = String.format("SELECT * FROM %s WHERE patient_id = %s AND abnormality <> '';", table_name, id);
+        String exception_msg = String.format("Unable to get patient abnormality %s from %s", id, table_name);
+        String[] rs_strings = {"datetime", "abnormality"};
         return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
     }
 

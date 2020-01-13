@@ -12,6 +12,7 @@ public class RR_Vitals extends Vital_Values_Display{
     private String value;
     private int resp_rate_value;
     private boolean a;
+    private int status;
 
     public RR_Vitals(Dimension vitals_panel_dim, Respiration_Counting obj, ExecutorService exe){
         super(vitals_panel_dim, "label-Respiratory", exe);
@@ -31,8 +32,11 @@ public class RR_Vitals extends Vital_Values_Display{
             resp_rate_value = Integer.parseInt(value);
             if (resp_rate_value != 0)
                 a = true;
-            if(a)
+            if(a) {
                 CheckStatus();
+                statusInMinute(getStatus());
+                minuteClock(getMean());
+            }
         });
     }
 
@@ -41,15 +45,22 @@ public class RR_Vitals extends Vital_Values_Display{
     }
 
     protected void CheckStatus() {
-        if ((resp_rate_value  >= 25 && resp_rate_value  <= 30) || (resp_rate_value  <= 12 && resp_rate_value  >= 8)){
+        if ((resp_rate_value  >= 25 && resp_rate_value  <= 30) || (resp_rate_value  <= 12 && resp_rate_value  >= 9)){
             warning();
+            status = 2;
         }
-        else if ((resp_rate_value >= 30) || (resp_rate_value <= 10)){
+        else if ((resp_rate_value > 30) || (resp_rate_value < 9)){
             urgent();
+            status = 3;
         }
         else{
             stable();
+            status = 1;
         }
+    }
+
+    public int getStatus(){
+        return status;
     }
 
     public int getRR_value(){

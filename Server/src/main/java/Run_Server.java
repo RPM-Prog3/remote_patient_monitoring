@@ -41,8 +41,8 @@ import java.util.stream.Collectors;
                 "/rpm/add_user",
                 "/rpm/request_patients",
                 "/rpm/request_users"
-                }
-        )
+        }
+)
 public class Run_Server extends HttpServlet {
     Manage_User_db user_db;
     Manage_Patient_db patient_db;
@@ -297,10 +297,20 @@ public class Run_Server extends HttpServlet {
                                 writer.println(String.format("<td>%s</td>", patients[0][4])); // Email
                                 writer.println(String.format("<td>%s</td>", patients[0][5])); // Phone Number
                                 writer.println("</tr>");
-
-                            }
-
-                            else {
+                            } else if (str.equals("#col-abnorm#")){
+                                writer.println("<th scope=\"col\">Time</th>");
+                                writer.println("<th scope=\"col\">Abnormality</th>");
+                            } else if (str.equals("#row-abnorm#")){
+                                String abnormal_json = patient_values_db.get_abnormalities_by_id(id);
+                                System.out.println(abnormal_json);
+                                String[][] abnormal = gson.fromJson(abnormal_json, String[][].class);
+                                for (int i = 0; i < abnormal.length; i++) {
+                                    writer.println("<tr>");
+                                    writer.println(String.format("<td>%s</td>", abnormal[i][0])); // Time
+                                    writer.println(String.format("<td>%s</td>", abnormal[i][1])); // Abnormality
+                                    writer.println("</tr>");
+                                }
+                            } else {
                                 writer.println(str);
                             }
                         }
@@ -321,7 +331,7 @@ public class Run_Server extends HttpServlet {
 
             FileInputStream input_stream = new FileInputStream(file_path);
             Scanner scan = new Scanner(input_stream);
-                while(scan.hasNextLine()){
+            while(scan.hasNextLine()){
                 if (add_to_table) {
                     // assert orrect url
                     String str = scan.nextLine();
@@ -372,4 +382,3 @@ public class Run_Server extends HttpServlet {
         }
     }
 }
-

@@ -58,7 +58,7 @@ public class Tuning_Panel{
         tuning_scene = new Scene(gpane);
 
         switch_graph_motion = new Button("Stop");
-        abnormalities_menu = new Button("Select Abnormalities");
+        //abnormalities_menu = new Button("Select Abnormalities");
         patient_record = new Button("View Patient record");
 
         timeWindow = new Sliding("time_window", graphs_panel, 0);
@@ -82,7 +82,7 @@ public class Tuning_Panel{
         TEMP_label.setText("\u00B0" + "C");
 
         padding_label = new javafx.scene.control.Label();
-        padding_label.setText("\t \t \t \t \t \t \t ");
+        padding_label.setText("\t \t \t \t \t \t ");
 
         abnormalities_pm = new JPopupMenu("ECG Abnormalities");
         normal_ECG = new JMenuItem("normal");

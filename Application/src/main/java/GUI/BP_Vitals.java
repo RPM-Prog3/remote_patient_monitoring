@@ -12,6 +12,7 @@ public class BP_Vitals extends Vital_Values_Display {
     private String s_value, d_value;
     private int s_pressure, d_pressure;
     private boolean a;
+    private int status;
 
     public BP_Vitals(Dimension vitals_panel_dim, Pressure_Counting obj, ExecutorService exe){
         super(vitals_panel_dim, "label-Pressure", exe);
@@ -32,8 +33,11 @@ public class BP_Vitals extends Vital_Values_Display {
             d_pressure = Integer.parseInt(d_value);
             if (s_pressure != 0 && d_pressure != 0)
                 a = true;
-            if(a)
+            if(a) {
                 CheckStatus();
+                statusInMinute(getStatus());
+                minuteClock(getMean()[0]);
+            }
             super.vital_value.setText(s_value + "/" + d_value);
         });
     }
@@ -44,20 +48,25 @@ public class BP_Vitals extends Vital_Values_Display {
     }
 
     protected void CheckStatus(){
-        if ((s_pressure >= 130 && s_pressure < 139) || (d_pressure > 80 && d_pressure <= 90)){
+        if ((s_pressure >= 130 && s_pressure < 139) || (d_pressure > 83 && d_pressure <= 90)){
             warning();
+            status = 2;
         }
-        else if ((s_pressure > 100 && s_pressure < 110) || (d_pressure > 70 && d_pressure < 80)){
+        else if ((s_pressure > 100 && s_pressure <= 110) || (d_pressure >= 70 && d_pressure < 77)){
             warning();
+            status = 2;
         }
         else if ((s_pressure >= 139) || (d_pressure > 90 )){
             urgent();
+            status = 3;
         }
-        else if ((s_pressure <= 100) || (d_pressure <= 70 )){
+        else if ((s_pressure <= 100) || (d_pressure < 70 )){
             urgent();
+            status = 3;
         }
         else {
             stable();
+            status = 1;
         }
     }
 
@@ -70,4 +79,9 @@ public class BP_Vitals extends Vital_Values_Display {
         if (a) { }
         return d_pressure;
     }
+
+    public int getStatus(){
+        return status;
+    }
+
 }
