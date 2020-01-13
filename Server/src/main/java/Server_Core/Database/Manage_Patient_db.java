@@ -52,4 +52,11 @@ public class Manage_Patient_db extends Manage_db {
         String[] rs_strings = {"id", "familyname", "givenname", "dofbirth", "email", "phonenumber"};
         return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
     }
+
+    public String get_patient_by_id(String id) throws SQLException {
+        String sql_get_patients = String.format("SELECT * FROM %s WHERE id = %s", table_name, id);
+        String exception_msg = String.format("Unable to get patient %s from %s", id, table_name);
+        String[] rs_strings = {"id", "familyname", "givenname", "dofbirth", "email", "phonenumber"};
+        return execute_query_with_gson(sql_get_patients, exception_msg, rs_strings);
+    }
 }
