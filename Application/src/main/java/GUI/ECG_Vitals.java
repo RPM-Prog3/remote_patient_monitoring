@@ -7,6 +7,7 @@ import simulation.Value_Counter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
 
 public class ECG_Vitals extends Vital_Values_Display {
     private BPM ecg_val_counter;
@@ -16,8 +17,8 @@ public class ECG_Vitals extends Vital_Values_Display {
     private boolean a;
     private int status;
 
-    public ECG_Vitals(Dimension vitals_panel_dim, BPM obj){
-        super(vitals_panel_dim, "label-ECG");
+    public ECG_Vitals(Dimension vitals_panel_dim, BPM obj, ExecutorService exe){
+        super(vitals_panel_dim, "label-ECG", exe);
         super.status_msg.setText("STABLE");
         super.vital_type.setText("ECG");
         super.units_label.setText("BPM");

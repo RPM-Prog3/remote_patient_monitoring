@@ -54,7 +54,9 @@ public class Refresh implements Runnable{
                     Thread.sleep(6);
                 }
             } catch (Exception e) {
-//                System.out.println("closed thread");
+                System.out.println("failed Refresh runnable");
+                e.printStackTrace();
+
             };
     }
 
