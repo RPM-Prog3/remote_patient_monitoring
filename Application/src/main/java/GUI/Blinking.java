@@ -17,16 +17,17 @@ public class Blinking implements Runnable {
         try{
             int i = 0;
             boolean remove_class = false;
+            boolean stable = false;
 
             while(1<2){
                 if (which_status == 0){
-                    if (remove_class) {
+                    if (remove_class && !stable) {
                         status.getStyleClass().remove(4);
                         value.getStyleClass().remove(4);
                         status.getStyleClass().add("label-status-stable");
                         value.getStyleClass().add("label-value-stable");
                     }
-                    remove_class = false;
+                    stable = true;
                 }
 
                 if (which_status == 1) {
@@ -38,6 +39,7 @@ public class Blinking implements Runnable {
                     status.getStyleClass().add("label-status-stable");
                     Thread.sleep(1000);
                     remove_class = true;
+                    stable = false;
                 }
 
                 if (which_status == 2){
@@ -54,6 +56,7 @@ public class Blinking implements Runnable {
                     value.getStyleClass().add("label-value-stable");
                     Thread.sleep(1000);
                     remove_class = true;
+                    stable = false;
                 }
             }
 
