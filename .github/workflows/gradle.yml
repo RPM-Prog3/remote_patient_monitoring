@@ -13,7 +13,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with App Gradle
-      run: ./Application/gradlew build
+    - name: Build with App Gradle 
+      run: |
+        chmod +x ./Application/gradlew 
+        ./Application/gradlew build
     - name: Build with Server Gradle
-      run: ./Server/gradlew build
+      run: |
+        chmod +x ./Server/gradlew 
+        ./Server/gradlew build
