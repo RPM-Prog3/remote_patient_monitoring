@@ -5,11 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Patient_Value {
     static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-    private int patient_id, bpm, resp_rate, blood_pressure_upper, blood_pressure_lower;
+    private int bpm, resp_rate, blood_pressure_upper, blood_pressure_lower;
     private double body_temp;
-    private String time, abnormality;
+    private String patient_id, time, abnormality;
 
-    public Patient_Value(int patient_id, LocalDateTime time,
+    public Patient_Value(String patient_id, LocalDateTime time,
                          int bpm, int resp_rate, double body_temp,
                          int blood_pressure_upper, int blood_pressure_lower,
                          String abnormality){
@@ -23,7 +23,7 @@ public class Patient_Value {
         this.abnormality = abnormality;
     }
 
-    public Patient_Value(int patient_id, LocalDateTime time,
+    public Patient_Value(String patient_id, LocalDateTime time,
                          int bpm, int resp_rate, double body_temp,
                          int blood_pressure_upper, int blood_pressure_lower){
         this.patient_id = patient_id;
@@ -36,7 +36,7 @@ public class Patient_Value {
         this.abnormality = "";
     }
 
-    public Patient_Value(int patient_id, String time,
+    public Patient_Value(String patient_id, String time,
                          int bpm, int resp_rate, double body_temp,
                          int blood_pressure_upper, int blood_pressure_lower,
                          String abnormality){
@@ -50,7 +50,7 @@ public class Patient_Value {
         this.abnormality = abnormality;
     }
 
-    public Patient_Value(int patient_id, String time,
+    public Patient_Value(String patient_id, String time,
                          int bpm, int resp_rate, double body_temp,
                          int blood_pressure_upper, int blood_pressure_lower){
         this.patient_id = patient_id;
@@ -68,7 +68,7 @@ public class Patient_Value {
                 patient_id, time, bpm, resp_rate, body_temp, blood_pressure_upper, blood_pressure_lower, abnormality));
     }
 
-    public int get_patient_id(){
+    public String get_patient_id(){
         return patient_id;
     }
 
