@@ -28,11 +28,13 @@ public class PatientList {
     private boolean status;
     private int patient_counter, nOfpatients, start_idx;
     private ArrayList<JCheckBox> patientlist;
+    private ArrayList<Patient> patientlist_patient_objs;
     private ArrayList<Integer> patient_idx;
     private Border border;
-    private JScrollPane scrollPane;
     private Client_Manager manager;
     private User login_user;
+    private JOptionPane error;
+
 
     public PatientList(User login_user) throws IOException {
         this.login_user = login_user;
@@ -61,6 +63,7 @@ public class PatientList {
         // Creating an array containing many JCheckBox objects each containing the information
         // i.e. first and last name of each patient in the database
         patientlist = new ArrayList<JCheckBox>();
+        patientlist_patient_objs = new ArrayList<Patient>();
         patient_idx = new ArrayList<Integer>();
         // Setting up the panel that displays the patients such that it has as many rows as
         // the number of patients in the database
@@ -81,15 +84,18 @@ public class PatientList {
         show_vitals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i < patient_counter; i++) {
-                    String name = patientlist.get(patient_idx.get(i)).getText();
-                    try {
+                System.out.println(patientlist);
+                System.out.println(patientlist_patient_objs);
 
-                        Main_Frame GUI = new Main_Frame(login_user, new Patient("010101", "V", "P", "30/07/9898", "vv", "090"));
-                    } catch (IOException patient_mainframe_e) {
-                        patient_mainframe_e.printStackTrace();
-                        error_message.showMessageDialog(null,"Failed to send values to database","Error Message", JOptionPane.ERROR_MESSAGE);
-                    }
+                for (int i = 0; i <patient_counter; i++) {
+                    Patient patient = patientlist_patient_objs.get(patient_idx.get(i));
+                    try {
+                        Main_Frame GUI = new Main_Frame (login_user, patient);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        error = new JOptionPane();
+                        error_message.showMessageDialog(null,"Failed to retrieve patient","Error Message", JOptionPane.ERROR_MESSAGE);
+                    };
                 }
             }
         });
@@ -217,8 +223,10 @@ public class PatientList {
             System.out.println(output);
             String[][] patients = gson.fromJson(output, String[][].class);
             for (int i = 0; i < patients.length; i++) {
-                String p_name = patients[i][0] + " " + patients[i][1];
+                String p_name = patients[i][0] + " " + patients[i][1] + " " + patients[i][2];
+                Patient patient = new Patient(patients[i][0], patients[i][1], patients[i][2], patients[i][3], patients[i][4]);
                 patientlist.add(new JCheckBox(p_name));
+                patientlist_patient_objs.add(patient);
             }
         } catch (Exception e) {
             e.printStackTrace();

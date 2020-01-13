@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Application_Main {
     public static void main(String[] args) {
-//        UserLogIn welcome = new UserLogIn();
+        //UserLogIn welcome = new UserLogIn();
         User login_test = new User("admin", "admin");
         Patient patient = new Patient("010101", "V", "P", "30/07/9898", "vv", "090");
         try {
