@@ -45,10 +45,10 @@ public class TEMP_Vitals extends Vital_Values_Display {
     }
 
     protected void CheckStatus() {
-        if ((i_value > 38.5 && i_value < 40) || (i_value < 36.5 && i_value > 35)) {
+        if ((i_value > 38.5 && i_value < 40) || (i_value < 36.5 && i_value >= 34)) {
             warning();
         }
-        else if ((i_value >= 40) || (i_value <= 35)){
+        else if ((i_value >= 40) || (i_value < 34)){
             urgent();
         }
         else{

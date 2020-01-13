@@ -44,16 +44,16 @@ public class BP_Vitals extends Vital_Values_Display {
     }
 
     protected void CheckStatus(){
-        if ((s_pressure >= 130 && s_pressure < 139) || (d_pressure > 80 && d_pressure <= 90)){
+        if ((s_pressure >= 130 && s_pressure < 139) || (d_pressure > 83 && d_pressure <= 90)){
             warning();
         }
-        else if ((s_pressure > 100 && s_pressure < 110) || (d_pressure > 70 && d_pressure < 80)){
+        else if ((s_pressure > 100 && s_pressure <= 110) || (d_pressure >= 70 && d_pressure < 77)){
             warning();
         }
         else if ((s_pressure >= 139) || (d_pressure > 90 )){
             urgent();
         }
-        else if ((s_pressure <= 100) || (d_pressure <= 70 )){
+        else if ((s_pressure <= 100) || (d_pressure < 70 )){
             urgent();
         }
         else {
