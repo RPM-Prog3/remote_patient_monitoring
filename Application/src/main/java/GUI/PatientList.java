@@ -81,9 +81,15 @@ public class PatientList {
         show_vitals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (int i = 0; i <patient_counter; i++) {
+                for (int i = 0; i < patient_counter; i++) {
                     String name = patientlist.get(patient_idx.get(i)).getText();
-//                    Main_Frame GUI = new Main_Frame (login_user, new Patient("010101", "V", "P", "30/07/9898", "vv", "090"));
+                    try {
+
+                        Main_Frame GUI = new Main_Frame(login_user, new Patient("010101", "V", "P", "30/07/9898", "vv", "090"));
+                    } catch (IOException patient_mainframe_e) {
+                        patient_mainframe_e.printStackTrace();
+                        error_message.showMessageDialog(null,"Failed to send values to database","Error Message", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });

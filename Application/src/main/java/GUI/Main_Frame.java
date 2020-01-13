@@ -70,12 +70,14 @@ public class Main_Frame {
         mainPage.add(mainPanel);
 
         // Closing program when when main frame is closed
-        mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        if (!mainPage.isActive()) {
-            System.out.println("whwbwhdjbdjerb");
-            controller.closeProgram();
-        }
+        //mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainPage.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                System.out.println("whwbwhdjbdjerb");
+                controller.closeProgram();
+            }
+        });
 
         controller.startSimulation();
     }
@@ -103,7 +105,7 @@ public class Main_Frame {
                 }catch (IOException e) {
                     e.printStackTrace();
                     JOptionPane failed_send_means = new JOptionPane();
-                    failed_send_means.showMessageDialog(null,"Invalid username or password","Error Message", JOptionPane.ERROR_MESSAGE);
+                    failed_send_means.showMessageDialog(null,"Failed to send values to database","Error Message", JOptionPane.ERROR_MESSAGE);
                 }
                 counter_of_recordings += 1;
             }

@@ -5,6 +5,7 @@ import javafx.embed.swing.JFXPanel;
 import simulation.*;
 
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
 
 public class Overall_Graph {
     private JFXPanel graph_panel;  //Overall panel with the four graphs
@@ -13,6 +14,7 @@ public class Overall_Graph {
 
     private Refresh refreshing;
     private Thread thread_graphs;  //These creates a different thread for the graphs
+    private ExecutorService exe;
 
     private ECG ecgdata;
     private ECG_Vitals ecg_vit;
@@ -28,7 +30,7 @@ public class Overall_Graph {
 
     private String ecg_type = "normal";
 
-    public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input, Temperature_Counting temp_counting_obj_input, TEMP_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input) {
+    public Overall_Graph(BPM ecg_obj_input, ECG_Vitals ecg_vit_input, Temperature_Counting temp_counting_obj_input, TEMP_Vitals temp_vit_input, Pressure_Counting press_counting_obj_input, BP_Vitals pressure_vit_input, Respiration_Counting resp_counting_obj_input, RR_Vitals resp_vit_input, ExecutorService exe) {
 
         //Temperature
         tempdata = new Body_Temp(37, 0.01, 0.5);
@@ -71,18 +73,19 @@ public class Overall_Graph {
 
         //Instantiating the thread sub-class
         refreshing = new Refresh (graphECG, graphBPress, graphResp, graphTemp, ecg_vit, pressure_vit, resp_vit, temp_vit);
+        this.exe = exe;
 
     }
 
     public void simulate() {
         //Running the four graphs on a separate thread
-        thread_graphs = new Thread(refreshing);
-
+//        thread_graphs = new Thread(refreshing);
+        exe.submit(refreshing);
         //This makes sure that the program doesn't have to wait for each thread to be run
 //        Platform.runLater(new Runnable() {
 //            @Override
 //            public void run () {
-                thread_graphs.start();
+//                thread_graphs.start();
 //            }
 //        });
     }
