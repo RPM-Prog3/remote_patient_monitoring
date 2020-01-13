@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Patient_Value {
     static DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-    private int  bpm, resp_rate, blood_pressure_upper, blood_pressure_lower;
+    private int bpm, resp_rate, blood_pressure_upper, blood_pressure_lower;
     private double body_temp;
     private String patient_id, time, abnormality;
 

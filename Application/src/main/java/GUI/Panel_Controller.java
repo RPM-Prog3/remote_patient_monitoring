@@ -7,6 +7,9 @@ import simulation.*;
 
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Panel_Controller {
     private JFXPanel mainPanel, simulationPanel, tuningPanel, vitalsPanel;
@@ -28,7 +31,12 @@ public class Panel_Controller {
     private Respiration_Counting resp_counter;
     private Temperature_Counting temp_counter;
 
+    private ExecutorService exe;
+
     public Panel_Controller(Dimension main_panel_dim) {
+        // Instatiating executor which will contain refresh and blinking runnables
+        exe = Executors.newFixedThreadPool(5);
+
         // Instantiating objects to display value
         bpm_counter = new BPM();
         press_counter = new Pressure_Counting();
@@ -72,13 +80,13 @@ public class Panel_Controller {
         sub_vitals_panel_dim.width = (int)((main_panel_dim_.width*(s_v_ratio_den - s_v_ratio_num))/(s_v_ratio_den));
         sub_vitals_panel_dim.height = (int)((main_panel_dim_.height*s_t_ratio_num)/(s_v_ratio_den*4));
 
-        BP_panel = new BP_Vitals(sub_vitals_panel_dim, press_counter);
-        RR_panel = new RR_Vitals(sub_vitals_panel_dim, resp_counter);
-        ECG_panel = new ECG_Vitals(sub_vitals_panel_dim, bpm_counter);
-        HR_panel = new TEMP_Vitals(sub_vitals_panel_dim, temp_counter);
+        BP_panel = new BP_Vitals(sub_vitals_panel_dim, press_counter, exe);
+        RR_panel = new RR_Vitals(sub_vitals_panel_dim, resp_counter, exe);
+        ECG_panel = new ECG_Vitals(sub_vitals_panel_dim, bpm_counter, exe);
+        HR_panel = new TEMP_Vitals(sub_vitals_panel_dim, temp_counter, exe);
 
         // Instantiating graphs and Setting graphPanel
-        graphs = new Overall_Graph(bpm_counter, ECG_panel, temp_counter, HR_panel,press_counter, BP_panel, resp_counter, RR_panel);
+        graphs = new Overall_Graph(bpm_counter, ECG_panel, temp_counter, HR_panel,press_counter, BP_panel, resp_counter, RR_panel, exe);
         graphPanel = graphs.getGraphPanel();
         graphPanel.setLayout(new GridLayout(4, 1,0,0));
         graphPanel.setVisible(true);
@@ -157,5 +165,16 @@ public class Panel_Controller {
         BP_panel.stopThread();
         RR_panel.stopThread();
         HR_panel.stopThread();
+        System.out.println("yepsi depsi");
+        exe.shutdown();
+        try {
+            exe.awaitTermination(10, TimeUnit.MINUTES);
+            exe.shutdownNow();
+        }catch (InterruptedException e){
+        };
+        if (exe.isShutdown()) {
+            System.out.println("tarantella");
+            System.exit(0);
+        }
     }
 }
