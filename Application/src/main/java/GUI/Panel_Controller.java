@@ -165,16 +165,16 @@ public class Panel_Controller {
         BP_panel.stopThread();
         RR_panel.stopThread();
         HR_panel.stopThread();
-//        exe.shutdownNow();
-//        try {
-//            exe.awaitTermination(5, TimeUnit.SECONDS);
-//        }catch (InterruptedException e){
-//            System.out.println("not waiting");
-//        };
-        System.out.println("debugging");
-        //if (exe.isTerminated()) {
-            System.out.println("allooooraaa");
+        System.out.println("yepsi depsi");
+        exe.shutdown();
+        try {
+            exe.awaitTermination(10, TimeUnit.MINUTES);
+            exe.shutdownNow();
+        }catch (InterruptedException e){
+        };
+        if (exe.isShutdown()) {
+            System.out.println("tarantella");
             System.exit(0);
-        //}
+        }
     }
 }

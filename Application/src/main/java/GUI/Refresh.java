@@ -58,8 +58,6 @@ public class Refresh implements Runnable{
                 e.printStackTrace();
 
             };
-
-            //System.out.println("stop refresh");
     }
 
     public void switchRun(){
