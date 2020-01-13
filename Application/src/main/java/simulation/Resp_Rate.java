@@ -40,7 +40,7 @@ public class Resp_Rate {
             throw new IllegalArgumentException("respiratory rate type must be -2, -1, 0, 1, or 2");
         }
         else {
-            double factor = Math.pow(2, -resp_speed);
+            double factor = Math.pow(1.5, -resp_speed);
 
             counter += 1 + Math.abs(r.nextGaussian() * resp_variance);
             double sin = Math.sin(counter / (period*factor)) * 20;
