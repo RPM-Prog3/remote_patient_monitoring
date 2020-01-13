@@ -10,6 +10,7 @@ import simulation.Respiration_Counting;
 import simulation.Temperature_Counting;
 
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
 
 public class Test_Simulation {
     Dimension rand_dim = new Dimension(100,100);;
@@ -29,10 +30,12 @@ public class Test_Simulation {
     Temperature_Counting temp_counter;
     double max_tmp, min_tmp;
 
+    ExecutorService exe;
+
 
     @Test
     public void Test_ECG(){
-        ecg_vitals = new ECG_Vitals(rand_dim, bpm);
+        ecg_vitals = new ECG_Vitals(rand_dim, bpm, exe);
         max_BPM = 250;
         min_BPM = 0;
         Assert.assertTrue("BPM should be lower than " + max_BPM, ecg_vitals.getBPM() < max_BPM);
@@ -41,7 +44,7 @@ public class Test_Simulation {
 
     @Test
     public void Test_BP(){
-        bp_vitals = new BP_Vitals(rand_dim, bp_counter);
+        bp_vitals = new BP_Vitals(rand_dim, bp_counter, exe);
         max_s_p = 250;
         min_s_p = 0;
         max_d_p = 200;
@@ -58,7 +61,7 @@ public class Test_Simulation {
 
     @Test
     public void Test_RR(){
-        rr_vitals = new RR_Vitals(rand_dim, rr_counter);
+        rr_vitals = new RR_Vitals(rand_dim, rr_counter, exe);
         max_rr = 200;
         min_rr = 0;
         Assert.assertTrue("The respiratory rate cannot be greater than " +  max_rr, rr_vitals.getRR_value() < max_rr );
@@ -67,11 +70,11 @@ public class Test_Simulation {
 
     @Test
     public void Test_TEMP() {
-        temp_vitals = new TEMP_Vitals(rand_dim, temp_counter);
+        temp_vitals = new TEMP_Vitals(rand_dim, temp_counter, exe);
         max_tmp = 50;
         min_tmp = 30;
         Assert.assertTrue("Body temperature rate cannot be greater than " + max_tmp, temp_vitals.get_temp_val() < max_tmp);
-        if (temp_vitals.get_temp_val() == 0) { }
+        if (temp_vitals.get_temp_val() == 0) {}
         else {
             Assert.assertTrue("Body temperature rate cannot be lower or equal than " + min_tmp, temp_vitals.get_temp_val() >= min_tmp);
         }
