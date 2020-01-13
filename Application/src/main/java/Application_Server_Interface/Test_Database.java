@@ -64,7 +64,7 @@ public class Test_Database {
 
         // Test 5
         LocalDateTime now = LocalDateTime.now();
-        Patient_Value pv = new Patient_Value(1, now,
+        Patient_Value pv = new Patient_Value("1", now,
                 60, 20, 37.2,
                 180, 90, "");
         Server_Messenger msg_test_5 = cm.send_patient_value_to_pv_db(pv, login_user);
