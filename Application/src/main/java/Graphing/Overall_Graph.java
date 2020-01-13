@@ -96,6 +96,10 @@ public class Overall_Graph {
 //        });
     }
 
+    public void stopTheThread(){
+        refreshing.stopThread();
+    }
+
     public void changeTimeWindow(int val){
         graphECG.changeTimeWindow(val);
         graphBPress.changeTimeWindow(val);

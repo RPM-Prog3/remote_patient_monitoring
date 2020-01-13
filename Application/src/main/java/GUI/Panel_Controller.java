@@ -150,4 +150,12 @@ public class Panel_Controller {
         graphs.simulate();
 //        graphPanel = graphs.getGraphPanel();
     }
+
+    public void closeProgram(){
+        graphs.stopTheThread();
+        ECG_panel.stopThread();
+        BP_panel.stopThread();
+        RR_panel.stopThread();
+        HR_panel.stopThread();
+    }
 }

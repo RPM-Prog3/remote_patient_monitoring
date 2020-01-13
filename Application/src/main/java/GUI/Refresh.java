@@ -5,7 +5,7 @@ import Graphing.Graph;
 public class Refresh implements Runnable{
     private Graph graph_ecg, graph_press, graph_resp, graph_temp;
     private Vital_Values_Display vital_ecg, vital_press, vital_resp, vital_temp;
-    private volatile boolean isUpdating, haveToRestart, whenToRestart;
+    private volatile boolean isUpdating, haveToRestart, whenToRestart, running;
 
     public Refresh(Graph graph1, Graph graph2, Graph graph3, Graph graph4, Vital_Values_Display vital1, Vital_Values_Display vital2, Vital_Values_Display vital3, Vital_Values_Display vital4) {
         this.graph_ecg = graph1;
@@ -19,12 +19,13 @@ public class Refresh implements Runnable{
         isUpdating = true;
         haveToRestart = false;
         whenToRestart = true;
+        running = true;
     }
 
     public void run(){
 
             try {
-                while (1 < 2) {
+                while (running) {
                     if (haveToRestart){
                         graph_ecg.restartUpdating();
                         graph_press.restartUpdating();
@@ -52,12 +53,18 @@ public class Refresh implements Runnable{
                     }
                     Thread.sleep(6);
                 }
-            } catch (Exception e) {};
+            } catch (Exception e) {
+//                System.out.println("closed thread");
+            };
     }
 
     public void switchRun(){
         isUpdating = !isUpdating;
         haveToRestart = !whenToRestart;
         whenToRestart = !whenToRestart;
+    }
+
+    public void stopThread(){
+        running = false;
     }
 }

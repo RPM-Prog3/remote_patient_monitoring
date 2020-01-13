@@ -84,7 +84,6 @@ public class PatientList {
                 for (int i = 0; i <patient_counter; i++) {
                     String name = patientlist.get(patient_idx.get(i)).getText();
                     //Main_Frame GUI = new Main_Frame (login_user, new Patient("010101", "V", "P", "30/07/9898", "vv", "090"));
-                }
             }
         });
 
