@@ -14,6 +14,7 @@ public class ECG_Vitals extends Vital_Values_Display {
     private int i_value;
     private Blinking blinking_state;
     private boolean a;
+    private int status;
 
     public ECG_Vitals(Dimension vitals_panel_dim, BPM obj){
         super(vitals_panel_dim, "label-ECG");
@@ -44,12 +45,15 @@ public class ECG_Vitals extends Vital_Values_Display {
 
     protected void CheckStatus(){
         if ((i_value > 80 && i_value < 120) || (i_value < 50 && i_value > 40)) {
+            status = 1;
             warning();
         }
         else if ((i_value <= 40) || (i_value >= 120)){
+            status = 2;
             urgent();
         }
         else{
+            status = 3;
             stable();
         }
     }
@@ -57,4 +61,9 @@ public class ECG_Vitals extends Vital_Values_Display {
     public int getBPM(){
         return  i_value;
     }
+
+    public int getStatus(){
+        return status;
+    }
+
 }

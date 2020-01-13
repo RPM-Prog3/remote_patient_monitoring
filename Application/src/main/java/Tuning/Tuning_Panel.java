@@ -147,7 +147,7 @@ public class Tuning_Panel{
                 error_message = new JOptionPane();
                 try {
                     Client_Manager cm = new Client_Manager();
-                    java.awt.Desktop.getDesktop().browse(cm.get_url());
+                    //java.awt.Desktop.getDesktop().browse(cm.get_url());
                 } catch (IOException e) {
                     error_message.showMessageDialog(null,"Failed to open URL","Error Message", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();

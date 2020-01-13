@@ -164,4 +164,8 @@ public abstract class Vital_Values_Display {
 
     abstract protected void Set_Displayed_Value();
     abstract protected void CheckStatus();
+
+    public Label getStatus_msg(){
+        return status_msg;
+    }
 }
