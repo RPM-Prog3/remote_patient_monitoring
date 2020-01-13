@@ -13,6 +13,7 @@ import javafx.scene.text.TextAlignment;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
 
 public abstract class Vital_Values_Display {
     protected JFXPanel status, type, value, vitals_value_display, units, top_panel;
@@ -25,8 +26,9 @@ public abstract class Vital_Values_Display {
 
     protected Blinking blinking_status;
     protected Thread blinking_thread;
+    private ExecutorService exe;
 
-    public Vital_Values_Display(Dimension vitals_panel_dim, String colorLabels){
+    public Vital_Values_Display(Dimension vitals_panel_dim, String colorLabels, ExecutorService exe){
         // Instantiating different panels;
         vitals_value_display = new JFXPanel();
         status = new JFXPanel();
@@ -87,8 +89,10 @@ public abstract class Vital_Values_Display {
 
         // Initialising thread
         blinking_status = new Blinking(status_msg, vital_value);
-        blinking_thread = new Thread(blinking_status);
-        blinking_thread.start();
+        this.exe = exe;
+        exe.submit(blinking_status);
+        //blinking_thread = new Thread(blinking_status);
+        //blinking_thread.start();
 
 
         Platform.runLater (new Runnable() {
@@ -152,9 +156,10 @@ public abstract class Vital_Values_Display {
         blinking_status.warning_status();
     }
 
-    protected void urgent(){
+    protected void urgent() {
         status_msg.setText("URGENT");
         blinking_status.urgent_status();
+        //run_audio();
     }
 
     protected void stable(){
@@ -163,7 +168,7 @@ public abstract class Vital_Values_Display {
     }
 
     abstract protected void Set_Displayed_Value();
-    abstract protected void CheckStatus();
+    abstract protected void CheckStatus() throws Exception;
 
     public Label getStatus_msg(){
         return status_msg;
