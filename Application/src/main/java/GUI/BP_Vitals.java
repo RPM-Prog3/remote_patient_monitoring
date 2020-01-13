@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import simulation.Pressure_Counting;
 
 import java.awt.*;
+import java.util.concurrent.ExecutorService;
 
 public class BP_Vitals extends Vital_Values_Display {
     private Pressure_Counting press_val_counter;
@@ -12,8 +13,8 @@ public class BP_Vitals extends Vital_Values_Display {
     private int s_pressure, d_pressure;
     private boolean a;
 
-    public BP_Vitals(Dimension vitals_panel_dim, Pressure_Counting obj){
-        super(vitals_panel_dim, "label-Pressure");
+    public BP_Vitals(Dimension vitals_panel_dim, Pressure_Counting obj, ExecutorService exe){
+        super(vitals_panel_dim, "label-Pressure", exe);
         super.status_msg.setText("STABLE");
         super.vital_type.setText("BP");
         super.units_label.setText("mmHg");

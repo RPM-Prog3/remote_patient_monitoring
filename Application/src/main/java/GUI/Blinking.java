@@ -62,7 +62,11 @@ public class Blinking implements Runnable {
                 }
             }
 
-        }catch (Exception e) {};
+        }catch (Exception e) {
+            System.out.println("failed blinking runnable");
+            e.printStackTrace();
+
+        };
     }
 
     public void stopThread(){
