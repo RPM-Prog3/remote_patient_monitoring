@@ -37,7 +37,7 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
 - [x] Visual alarms that indicate if the values are outside normal value
   - [x] Warning
   - [x] Urgent
-- [ ] A permanent record (database) to be kept of average values for every minute during a day and also instances when there have been abnormal signs
+- [x] A permanent record (database) to be kept of average values for every minute during a day and also instances when there have been abnormal signs
 - [x] A tunable simulation of the vital signs and ECG for the system to display:
   - [x] Simulate a normal patient
   - [x] Simulate a patient who has abnormal vital signs
@@ -45,14 +45,14 @@ Real-time patient visualisation of vital signs with a simple easy to read UI.
   
 ### Feature desirables:
 
-- [ ] The ability to monitor multiple patients at the same time - records to be kept of each patient's identity details
+- [x] The ability to monitor multiple patients at the same time - records to be kept of each patient's identity details
 - [ ] Audio and email alarms
 - [ ] Audio indication of heart beat
-- [ ] A report generated of the average values recorded during a day, and when any abnormal signs happened
+- [x] A report generated of the average values recorded during a day, and when any abnormal signs happened
 
 ### Initial Feedback Suggestions:
 
-- [ ] Add server to be able to remotely monitor patients.
+- [x] Add server to be able to remotely monitor patients.
 
 ---
 
