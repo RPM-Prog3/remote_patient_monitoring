@@ -68,11 +68,10 @@ public class Main_Frame {
         mainPage.add(mainPanel);
 
         // Closing program when when main frame is closed
-        //mainPage.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainPage.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         mainPage.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                System.out.println("whwbwhdjbdjerb");
                 controller.closeProgram();
             }
         });

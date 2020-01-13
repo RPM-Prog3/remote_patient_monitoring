@@ -18,37 +18,39 @@ public class Blinking implements Runnable {
     public void run(){
         try{
             int i = 0;
-            boolean remove_class = false;
-            boolean stable = false;
+//            boolean remove_class = true;
+//            boolean stable = false;
+            status.getStyleClass().add("label-status-stable");
+            value.getStyleClass().add("label-value-stable");
 
             while(running){
                 if (which_status == 0){
-                    if (remove_class && !stable) {
-                        status.getStyleClass().remove(4);
-                        value.getStyleClass().remove(4);
-                        status.getStyleClass().add("label-status-stable");
-                        value.getStyleClass().add("label-value-stable");
-                    }
-                    stable = true;
+//                    if (remove_class && !stable) {
+//                        status.getStyleClass().remove(4);
+//                        value.getStyleClass().remove(4);
+//                        status.getStyleClass().add("label-status-stable");
+//                        value.getStyleClass().add("label-value-stable");
+//                    }
+//                    stable = true;
                 }
 
                 if (which_status == 1) {
-                    if (remove_class)
+                    //if (remove_class)
                         status.getStyleClass().remove(4);
                     status.getStyleClass().add("label-status-warning");
                     Thread.sleep(1000);
                     status.getStyleClass().remove(4);
                     status.getStyleClass().add("label-status-stable");
                     Thread.sleep(1000);
-                    remove_class = true;
-                    stable = false;
+//                    remove_class = true;
+//                    stable = false;
                 }
 
                 if (which_status == 2){
-                    if (remove_class) {
+                    //if (remove_class) {
                         status.getStyleClass().remove(4);
                         value.getStyleClass().remove(4);
-                    }
+                    //}
                     status.getStyleClass().add("label-status-urgent");
                     value.getStyleClass().add("label-value-urgent");
                     Thread.sleep(1000);
@@ -57,8 +59,8 @@ public class Blinking implements Runnable {
                     status.getStyleClass().add("label-status-stable");
                     value.getStyleClass().add("label-value-stable");
                     Thread.sleep(1000);
-                    remove_class = true;
-                    stable = false;
+//                    remove_class = true;
+//                    stable = false;
                 }
             }
 
