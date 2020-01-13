@@ -59,4 +59,14 @@ public class BP_Vitals extends Vital_Values_Display {
             stable();
         }
     }
+
+    public int get_s_pressure(){
+        if (a){ }
+        return s_pressure;
+    }
+
+    public int get_d_pressure(){
+        if (a) { }
+        return d_pressure;
+    }
 }

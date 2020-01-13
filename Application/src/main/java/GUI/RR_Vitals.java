@@ -50,4 +50,8 @@ public class RR_Vitals extends Vital_Values_Display{
             stable();
         }
     }
+
+    public int getRR_value(){
+        return resp_rate_value;
+    }
 }

@@ -52,4 +52,9 @@ public class TEMP_Vitals extends Vital_Values_Display {
             stable();
         }
     }
+
+    public double get_temp_val(){
+        return i_value;
+    }
+
 }
