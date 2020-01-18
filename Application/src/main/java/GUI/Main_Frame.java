@@ -105,7 +105,6 @@ public class Main_Frame {
                     JOptionPane failed_send_means = new JOptionPane();
                     failed_send_means.showMessageDialog(null,"Failed to send values to database","Error Message", JOptionPane.ERROR_MESSAGE);
                 }
-//                System.out.println("ECG: " + getECGStatus() + " || BPressure: " + getBPStatus() + " || RespRate: " + getRespStatus() + " || Temp: " + getTempStatus());
                 counter_of_recordings += 1;
             }
         }
