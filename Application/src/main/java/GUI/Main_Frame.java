@@ -99,7 +99,7 @@ public class Main_Frame {
                     cm.send_patient_value_to_pv_db(new Patient_Value(patient.get_patient_id(), time_stamp,
                             getECGMean(), getRespMean(), getTempMean(),
                             getBPMaxMean(), getBPMinMean(),
-                            "ECG: " + getECGStatus() + ", BPressure: " + getBPStatus() + ", RespRate: " + getRespStatus() + ",Temp: " + getTempStatus()), login_user);
+                            "ECG: " + getECGStatus() + ", BPressure: " + getBPStatus() + ", RespRate: " + getRespStatus() + ", Temp: " + getTempStatus()), login_user);
                 }catch (IOException e) {
                     e.printStackTrace();
                     JOptionPane failed_send_means = new JOptionPane();

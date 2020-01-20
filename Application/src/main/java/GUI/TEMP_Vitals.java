@@ -65,8 +65,4 @@ public class TEMP_Vitals extends Vital_Values_Display {
         return status;
     }
 
-    public double get_temp_val(){
-        return i_value;
-    }
-
 }

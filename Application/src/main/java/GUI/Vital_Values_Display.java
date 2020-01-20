@@ -174,6 +174,7 @@ public abstract class Vital_Values_Display {
         if (new_mean != previous_mean){
             previous_mean = new_mean;
             minuteStatus = temp_status;
+            temp_status = 0;
         }
     }
 

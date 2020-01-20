@@ -158,8 +158,8 @@ public class Panel_Controller {
         int[] array = new int[4];
         array[0] = ECG_panel.getMeanStatus();
         array[1] = BP_panel.getMeanStatus();
-        array[2] = BP_panel.getMeanStatus();
-        array[3] = RR_panel.getMeanStatus();
+        array[2] = RR_panel.getMeanStatus();
+        array[3] = HR_panel.getMeanStatus();
         return array;
     }
 
